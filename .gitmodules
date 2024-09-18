@@ -1,0 +1,3 @@
+[submodule "numactl"]
+	path = numactl
+	url = https://github.com/numactl/numactl.git
