@@ -1,10 +1,13 @@
 mod setup_kernel;
 mod setup_wkspc;
 
+use clap::{arg};
+
 const KERNEL_PATH: &str = "kernel/";
 
 fn run() -> Result<(), failure::Error> {
     let matches = clap::Command::new("runner")
+        .arg(arg!(--print_results_path "Obselete"))
         .subcommand(crate::setup_wkspc::cli_options())
         .subcommand(crate::setup_kernel::cli_options())
         .subcommand_required(true)

@@ -33,14 +33,14 @@ pub fn cli_options() -> clap::Command {
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let login  = Login {
-        username: sub_m.get_one::<&str>("username").unwrap(),
-        hostname: sub_m.get_one::<&str>("hostname").unwrap(),
-        host: sub_m.get_one::<&str>("hostname").unwrap(),
+        username: sub_m.get_one::<String>("username").unwrap(),
+        hostname: sub_m.get_one::<String>("hostname").unwrap(),
+        host: sub_m.get_one::<String>("hostname").unwrap(),
     };
 
-    let repo = sub_m.get_one::<&str>("repo").unwrap();
-    let branch = sub_m.get_one::<&str>("branch").map_or("main", |v| v);
-    let git_user = sub_m.get_one::<&str>("git_user");
+    let repo = sub_m.get_one::<String>("repo").unwrap().as_str();
+    let branch = sub_m.get_one::<String>("branch").map_or("main", |v| v);
+    let git_user = sub_m.get_one::<String>("git_user");
     let secret = sub_m.get_one::<String>("secret").map(|s| s.as_str());
     let install_perf = sub_m.get_flag("install_perf");
 
@@ -115,7 +115,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
         // Put the new perf in place
         ushell.run(cmd!("sudo rm -f /usr/bin/perf"))?;
-        ushell.run(cmd!("sudo ln -s {}/perf /user/bin/perf", &perf_path))?;
+        ushell.run(cmd!("sudo ln -s {}/perf /usr/bin/perf", &perf_path))?;
     }
 
     Ok(())

@@ -67,9 +67,9 @@ where
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let login = Login {
-        username: sub_m.get_one::<&str>("username").unwrap(),
-        hostname: sub_m.get_one::<&str>("hostname").unwrap(),
-        host: sub_m.get_one::<&str>("hostname").unwrap(),
+        username: sub_m.get_one::<String>("username").unwrap(),
+        hostname: sub_m.get_one::<String>("hostname").unwrap(),
+        host: sub_m.get_one::<String>("hostname").unwrap(),
     };
 
     let host_dep = sub_m.get_flag("host_dep");
@@ -176,6 +176,7 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "libtraceevent-dev",
             "libpfm4-dev",
             "cgroup-tools",
+            "gnuplot",
         ]),
     };
 
@@ -199,7 +200,11 @@ where
     let user = &cfg.git_user.unwrap_or("");
     let branch = cfg.wkspc_branch.unwrap_or("main");
     let wkspc_repo = GitRepo::HttpsPrivate {
-        repo: "https://github.com/BijanT/cipp-workspace.git",
+        repo: "github.com/BijanT/cipp-workspace.git",
+        username: user,
+    };
+    let damo_repo = GitRepo::HttpsPrivate {
+        repo: "github.com/BijanT/cipp_damo.git",
         username: user,
     };
 
@@ -210,6 +215,15 @@ where
         Some(branch),
         cfg.secret,
         SUBMODULES,
+    )?;
+
+    clone_git_repo(
+        ushell,
+        damo_repo,
+        Some("damo"),
+        Some("main"),
+        cfg.secret,
+        &[]
     )?;
 
     Ok(())
