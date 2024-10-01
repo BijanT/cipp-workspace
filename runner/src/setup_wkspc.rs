@@ -184,7 +184,7 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
     let flamegraph_repo = GitRepo::HttpsPublic {
         repo: "github.com/brendangregg/FlameGraph.git",
     };
-    clone_git_repo(ushell, flamegraph_repo, None, None, None, &[])?;
+    clone_git_repo(ushell, flamegraph_repo, None, None, &[])?;
 
     Ok(())
 }
@@ -198,14 +198,17 @@ where
 {
     const SUBMODULES: &[&str] = &["libscail"];
     let user = &cfg.git_user.unwrap_or("");
+    let secret = cfg.secret.unwrap();
     let branch = cfg.wkspc_branch.unwrap_or("main");
     let wkspc_repo = GitRepo::HttpsPrivate {
         repo: "github.com/BijanT/cipp-workspace.git",
         username: user,
+        secret,
     };
     let damo_repo = GitRepo::HttpsPrivate {
         repo: "github.com/BijanT/cipp_damo.git",
         username: user,
+        secret,
     };
 
     clone_git_repo(
@@ -213,7 +216,6 @@ where
         wkspc_repo,
         Some("research-workspace"),
         Some(branch),
-        cfg.secret,
         SUBMODULES,
     )?;
 
@@ -222,7 +224,6 @@ where
         damo_repo,
         Some("damo"),
         Some("main"),
-        cfg.secret,
         &[]
     )?;
 

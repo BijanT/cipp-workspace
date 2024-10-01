@@ -46,8 +46,9 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
     let git_repo = if let Some(_secret) = &secret {
         GitRepo::HttpsPrivate {
-            username: git_user.unwrap(),
             repo,
+            username: git_user.unwrap(),
+            secret: secret.unwrap(),
         }
     } else {
         GitRepo::HttpsPublic { repo }
@@ -73,7 +74,6 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         git_repo,
         Some(&kernel_path),
         Some(branch),
-        secret,
         &[],
     )?;
 
