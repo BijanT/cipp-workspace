@@ -149,6 +149,7 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "redis-server",
             "python2",
             "python3",
+            "python3-pip",
             "cmake",
             "gfortran",
             "curl",
