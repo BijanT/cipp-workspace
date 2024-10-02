@@ -4,6 +4,7 @@ mod setup_wkspc;
 use clap::{arg};
 
 const KERNEL_PATH: &str = "kernel/";
+const WKSPC_PATH: &str = "research-workspace/";
 
 fn run() -> Result<(), failure::Error> {
     let matches = clap::Command::new("runner")

@@ -1,4 +1,5 @@
 /// Configure the freshly acquired cloudlab machine and install dependencies
+use crate::WKSPC_PATH;
 use clap::{arg, ArgAction};
 
 use libscail::{clone_git_repo, with_shell, GitRepo, Login, get_user_home_dir};
@@ -198,6 +199,8 @@ where
     A: std::net::ToSocketAddrs + std::fmt::Display + std::fmt::Debug + Clone,
 {
     const SUBMODULES: &[&str] = &["libscail"];
+    let user_home = get_user_home_dir(ushell)?;
+    let wkspc_dir = format!("{}/{}", user_home, WKSPC_PATH);
     let user = &cfg.git_user.unwrap_or("");
     let secret = cfg.secret.unwrap();
     let branch = cfg.wkspc_branch.unwrap_or("main");
@@ -218,7 +221,7 @@ where
     clone_git_repo(
         ushell,
         wkspc_repo,
-        Some("research-workspace"),
+        Some(WKSPC_PATH),
         Some(branch),
         SUBMODULES,
     )?;
@@ -238,6 +241,10 @@ where
         Some("main"),
         &[]
     )?;
+
+    // Build the workspace tools
+    ushell.run(cmd!("cd tools/; make;").cwd(&wkspc_dir))?;
+    ushell.run(cmd!("cd numactl; ./autogen.sh; ./configure; make").cwd(&wkspc_dir))?;
 
     Ok(())
 }
