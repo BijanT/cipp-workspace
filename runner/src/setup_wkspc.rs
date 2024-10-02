@@ -1,7 +1,7 @@
 /// Configure the freshly acquired cloudlab machine and install dependencies
 use clap::{arg, ArgAction};
 
-use libscail::{clone_git_repo, with_shell, GitRepo, Login};
+use libscail::{clone_git_repo, with_shell, GitRepo, Login, get_user_home_dir};
 
 use spurs::{cmd, Execute, SshShell};
 
@@ -211,6 +211,9 @@ where
         username: user,
         secret,
     };
+    let workloads_repo = GitRepo::HttpsPublic {
+        repo: "github.com/BijanT/scail_workloads.git"
+    };
 
     clone_git_repo(
         ushell,
@@ -228,11 +231,22 @@ where
         &[]
     )?;
 
+    clone_git_repo(
+        ushell,
+        workloads_repo,
+        Some("workloads"),
+        Some("main"),
+        &[]
+    )?;
+
     Ok(())
 }
 
 fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
-    ushell.run(cmd!("echo \"Nothing for build_host_benchmarks yet\""))?;
+    let user_home = get_user_home_dir(&ushell)?;
+    let merci_dir = format!("{}/workloads/MERCI", user_home);
+
+    ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
 
     Ok(())
 }
