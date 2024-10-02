@@ -179,6 +179,7 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "libpfm4-dev",
             "cgroup-tools",
             "gnuplot",
+            "intel-cmt-cat",
         ]),
     };
 
