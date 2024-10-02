@@ -56,8 +56,8 @@ void get_perf_info(std::vector<uint32_t> &types, std::vector<uint64_t> &rd_confi
     uint64_t rd_config;
     uint64_t wr_config;
 
-    // I've seen the uncore_imc_ values go from 0 to 9 with gaps, so try all of them
-    for (int i = 0; i < 10; i++) {
+    // I've seen the uncore_imc_ values go from 0 to 11 with gaps, so try all of them
+    for (int i = 0; i < 12; i++) {
         std::stringstream type_path;
         std::stringstream read_event_path;
         std::stringstream write_event_path;
