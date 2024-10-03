@@ -1,9 +1,12 @@
 mod setup_kernel;
 mod setup_wkspc;
+mod cipp_exp;
 
 use clap::{arg};
 
+const RESULTS_PATH: &str = "results/";
 const KERNEL_PATH: &str = "kernel/";
+const WORKLOADS_PATH: &str = "workloads/";
 const WKSPC_PATH: &str = "research-workspace/";
 
 fn run() -> Result<(), failure::Error> {
@@ -11,6 +14,7 @@ fn run() -> Result<(), failure::Error> {
         .arg(arg!(--print_results_path "Obselete"))
         .subcommand(crate::setup_wkspc::cli_options())
         .subcommand(crate::setup_kernel::cli_options())
+        .subcommand(crate::cipp_exp::cli_options())
         .subcommand_required(true)
         .disable_version_flag(true)
         .get_matches();
@@ -18,6 +22,7 @@ fn run() -> Result<(), failure::Error> {
     match matches.subcommand() {
         Some(("setup_wkspc", sub_m)) => crate::setup_wkspc::run(sub_m),
         Some(("setup_kernel", sub_m)) => crate::setup_kernel::run(sub_m),
+        Some(("cipp_exp", sub_m)) => crate::cipp_exp::run(sub_m),
         _ => {
             unreachable!();
         }
