@@ -2,7 +2,7 @@
 use crate::WKSPC_PATH;
 use clap::{arg, ArgAction};
 
-use libscail::{clone_git_repo, with_shell, GitRepo, Login, get_user_home_dir};
+use libscail::{clone_git_repo, get_user_home_dir, with_shell, GitRepo, Login};
 
 use spurs::{cmd, Execute, SshShell};
 
@@ -45,7 +45,7 @@ where
     A: std::net::ToSocketAddrs + std::fmt::Display + std::fmt::Debug + Clone,
 {
     /// Login credentials for the host.
-    login:  Login<'a, 'a, A>,
+    login: Login<'a, 'a, A>,
 
     /// Install the host dependencies, rename poweroff
     host_dep: bool,
@@ -216,7 +216,7 @@ where
         secret,
     };
     let workloads_repo = GitRepo::HttpsPublic {
-        repo: "github.com/BijanT/scail_workloads.git"
+        repo: "github.com/BijanT/scail_workloads.git",
     };
 
     clone_git_repo(
@@ -227,21 +227,9 @@ where
         SUBMODULES,
     )?;
 
-    clone_git_repo(
-        ushell,
-        damo_repo,
-        Some("damo"),
-        Some("main"),
-        &[]
-    )?;
+    clone_git_repo(ushell, damo_repo, Some("damo"), Some("main"), &[])?;
 
-    clone_git_repo(
-        ushell,
-        workloads_repo,
-        Some("workloads"),
-        Some("main"),
-        &[]
-    )?;
+    clone_git_repo(ushell, workloads_repo, Some("workloads"), Some("main"), &[])?;
 
     // Build the workspace tools
     ushell.run(cmd!("cd tools/; make;").cwd(&wkspc_dir))?;
@@ -259,8 +247,7 @@ fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     Ok(())
 }
 
-fn set_up_host_devices(ushell: &SshShell) -> Result<(), failure::Error>
-{
+fn set_up_host_devices(ushell: &SshShell) -> Result<(), failure::Error> {
     // Remove any existing swap partitions from /etc/fstab because we plan to do all of our own
     // mounting and useounting. Moreover, if fstab contains a swap partition that we destroy during
     // setup, systemd will sit around trying to find it and adding minutes to every reboot.a

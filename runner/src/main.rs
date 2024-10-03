@@ -1,8 +1,8 @@
+mod cipp_exp;
 mod setup_kernel;
 mod setup_wkspc;
-mod cipp_exp;
 
-use clap::{arg};
+use clap::arg;
 
 const RESULTS_PATH: &str = "results/";
 const KERNEL_PATH: &str = "kernel/";

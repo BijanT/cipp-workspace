@@ -1,9 +1,13 @@
 use clap::{arg, ArgAction};
 
 use libscail::{
-    Login, get_user_home_dir, output::{Parametrize, Timestamp},
-    set_kernel_printk_level, dump_sys_info, dir,
-//    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
+    dir,
+    //    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
+    dump_sys_info,
+    get_user_home_dir,
+    output::{Parametrize, Timestamp},
+    set_kernel_printk_level,
+    Login,
 };
 
 use serde::{Deserialize, Serialize};
@@ -14,9 +18,7 @@ use std::time::Instant;
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 enum Workload {
-    Merci {
-        runs: u64,
-    },
+    Merci { runs: u64 },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Parametrize)]
@@ -42,17 +44,21 @@ pub fn cli_options() -> clap::Command {
         .disable_version_flag(true)
         .arg(arg!(<hostname> "The domain name of the remote"))
         .arg(arg!(<username> "The username on the remote"))
-        .arg(arg!(--disable_thp "Disable THP completely.")
-            .action(ArgAction::SetTrue))
-        .arg(arg!(--disable_aslr "Disable ASLR.")
-            .action(ArgAction::SetTrue))
-        .arg(arg!(--flame_graph "Generate a flame graph of the workload.")
-            .action(ArgAction::SetTrue))
-        .subcommand(clap::Command::new("merci")
-            .about("Run the MERCI workload")
-            .arg(arg!([runs]
+        .arg(arg!(--disable_thp "Disable THP completely.").action(ArgAction::SetTrue))
+        .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
+        .arg(
+            arg!(--flame_graph "Generate a flame graph of the workload.")
+                .action(ArgAction::SetTrue),
+        )
+        .subcommand(
+            clap::Command::new("merci")
+                .about("Run the MERCI workload")
+                .arg(
+                    arg!([runs]
             "The number of iterations of MERCI to run. Default: 10")
-                .value_parser(clap::value_parser!(u64))))
+                    .value_parser(clap::value_parser!(u64)),
+                ),
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -104,7 +110,11 @@ where
     let runtime_file = dir!(&results_dir, cfg.gen_file_name("runtime"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
 
-    let merci_dir = dir!(&user_home, crate::WORKLOADS_PATH, "MERCI/4_performance_evaluation/");
+    let merci_dir = dir!(
+        &user_home,
+        crate::WORKLOADS_PATH,
+        "MERCI/4_performance_evaluation/"
+    );
 
     ushell.run(cmd!(
         "echo {} > {}",
@@ -237,7 +247,9 @@ fn run_merci(
     ushell.run(
         cmd!(
             "{} ./bin/eval_baseline -d amazon_Books -r {} | sudo tee {}",
-            cmd_prefix, runs, merci_file
+            cmd_prefix,
+            runs,
+            merci_file
         )
         .cwd(merci_dir),
     )?;

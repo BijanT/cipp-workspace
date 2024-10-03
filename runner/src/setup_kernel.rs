@@ -1,8 +1,8 @@
 use clap::{arg, ArgAction};
 
 use libscail::{
-    dir, get_git_hash, get_user_home_dir, GitRepo, KernelBaseConfigSource,
-    KernelConfig, KernelPkgType, KernelSrc, Login,
+    dir, get_git_hash, get_user_home_dir, GitRepo, KernelBaseConfigSource, KernelConfig,
+    KernelPkgType, KernelSrc, Login,
 };
 
 use spurs::{cmd, Execute, SshShell};
@@ -14,25 +14,27 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(<hostname>
          "The domain name and ssh port of the remote (e.g. c240g2-031321.wisc.cloudlab.us:22)"))
         .arg(arg!(<username> "The username of the remote (e.g. bijan)"))
-        .arg(arg!(--repo <REPO> "The git repo where the kernel is stored.")
-            .required(true))
+        .arg(arg!(--repo <REPO> "The git repo where the kernel is stored.").required(true))
         .arg(arg!(--branch <BRANCH> "The branch of the repo to clone. Defaults to \"main\""))
         .arg(arg!(--git_user <GIT_USER>
          "The username of the GitHub account to use to clone the kernel"))
-        .arg(arg!(--secret <SECRET> "The GitHub access token to use")
-            .requires("git_user"))
-        .arg(arg!(--install_perf "(Optional) Install the perf corresponding to this kernel")
-            .action(ArgAction::SetTrue))
-        .arg(arg!([configs] ...
+        .arg(arg!(--secret <SECRET> "The GitHub access token to use").requires("git_user"))
+        .arg(
+            arg!(--install_perf "(Optional) Install the perf corresponding to this kernel")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(
+            arg!([configs] ...
          "Space separated list of Linux kernel configuration options, prefixed by \
          + to enable and - to disable. For example, +CONFIG_ZSWAP or \
          -CONFIG_PAGE_TABLE_ISOLATION")
             .allow_hyphen_values(true)
-            .trailing_var_arg(true))
+            .trailing_var_arg(true),
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
-    let login  = Login {
+    let login = Login {
         username: sub_m.get_one::<String>("username").unwrap(),
         hostname: sub_m.get_one::<String>("hostname").unwrap(),
         host: sub_m.get_one::<String>("hostname").unwrap(),
@@ -69,13 +71,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let kernel_path = dir!(&user_home, crate::KERNEL_PATH);
     let perf_path = dir!(&kernel_path, "tools/perf/");
 
-    libscail::clone_git_repo(
-        &ushell,
-        git_repo,
-        Some(&kernel_path),
-        Some(branch),
-        &[],
-    )?;
+    libscail::clone_git_repo(&ushell, git_repo, Some(&kernel_path), Some(branch), &[])?;
 
     // Get the base config
     let config = ushell
@@ -120,7 +116,6 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
     Ok(())
 }
-
 
 fn parse_config_option(opt: &str) -> Result<(&str, bool), failure::Error> {
     fn check(s: &str) -> Result<&str, failure::Error> {
