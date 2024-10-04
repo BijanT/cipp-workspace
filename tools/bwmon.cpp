@@ -130,6 +130,7 @@ int main(int argc, char* argv[])
     std::vector<uint64_t> wr_configs;
     std::vector<int> rd_fds;
     std::vector<int> wr_fds;
+    std::streambuf *buf;
     std::ofstream out_file;
     int sample_interval_ms;
     uint64_t rd_count, wr_count;
@@ -137,38 +138,49 @@ int main(int argc, char* argv[])
     uint64_t count;
     pid_t pid;
 
-    if (argc < 4) {
-        std::cerr << "Usage: ./bwmon <out file> <Sample Interval (ms)> <cmd> <args>" << std::endl;
+    if (argc != 2 && argc < 4) {
+        std::cerr << "Usage: ./bwmon <Sample Interval (ms)> <out file> <cmd> <args>" << std::endl;
         return -1;
     }
 
-    out_file.open(argv[1]);
-    if (!out_file.is_open()) {
-        std::cerr << "Could not open " << argv[1] << " for writting" << std::endl;
-        return -1;
-    }
-
-    sample_interval_ms = atoi(argv[2]);
+    sample_interval_ms = atoi(argv[1]);
     if (!sample_interval_ms) {
-        std::cout << "Invalid sample interval: " << argv[2] << std::endl;
+        std::cout << "Invalid sample interval: " << argv[1] << std::endl;
         return -1;
     }
+
+    if (argc == 2) {
+        buf = std::cout.rdbuf();
+    } else {
+        out_file.open(argv[2]);
+        if (!out_file.is_open()) {
+            std::cerr << "Could not open " << argv[2] << " for writting" << std::endl;
+            return -1;
+        }
+        buf = out_file.rdbuf();
+    }
+    std::ostream out(buf);
 
     get_perf_info(types, rd_configs, wr_configs);
 
     open_perf_events(types, rd_configs, rd_fds);
     open_perf_events(types, wr_configs, wr_fds);
 
-    pid = fork();
-    if (pid == -1) {
-        std::cerr << "Error forking proc: " << errno << std::endl;
-    } else if (pid == 0) {
-        execvp(argv[3], &argv[3]);
-        std::cerr << "Error execing file!" << std::endl;
-        return -1;
+    if (argc == 2) {
+        pid = -1;
+    } else {
+        pid = fork();
+        if (pid == -1) {
+            std::cerr << "Error forking proc: " << errno << std::endl;
+            return -1;
+        } else if (pid == 0) {
+            execvp(argv[3], &argv[3]);
+            std::cerr << "Error execing file!" << std::endl;
+            return -1;
+        }
     }
 
-    while (!waitpid(pid, nullptr, WNOHANG)) {
+    while (!waitpid(pid, nullptr, WNOHANG) || pid == -1) {
         rd_count = wr_count = 0;
 
         apply_ioctl(PERF_EVENT_IOC_RESET, rd_fds);
@@ -195,7 +207,7 @@ int main(int argc, char* argv[])
         rd_bw = (rd_count * 64) / (sample_interval_ms * 1000);
         wr_bw = (wr_count * 64) / (sample_interval_ms * 1000);
 
-        out_file << "Read " << rd_bw << " Write " << wr_bw << " Total "
+        out << "Read " << rd_bw << " Write " << wr_bw << " Total "
             << rd_bw + wr_bw << " MB/s" << std::endl;
     }
 
