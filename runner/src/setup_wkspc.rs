@@ -199,7 +199,7 @@ fn clone_research_workspace<A>(
 where
     A: std::net::ToSocketAddrs + std::fmt::Display + std::fmt::Debug + Clone,
 {
-    const SUBMODULES: &[&str] = &["libscail"];
+    const SUBMODULES: &[&str] = &["libscail", "numactl"];
     let user_home = get_user_home_dir(ushell)?;
     let wkspc_dir = format!("{}/{}", user_home, WKSPC_PATH);
     let user = &cfg.git_user.unwrap_or("");
