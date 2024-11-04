@@ -4,4 +4,6 @@
 *.swp
 *.swo
 
+*.o
 tools/bwmon
+tools/cipp
