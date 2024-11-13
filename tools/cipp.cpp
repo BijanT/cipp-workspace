@@ -16,10 +16,10 @@ constexpr int BW_PERCENTILE = 80;
 constexpr int MAX_STEP = 10;
 constexpr int MIN_STEP = 2;
 
-uint64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
+int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
     uint64_t count;
-    uint64_t rd_bw, wr_bw;
+    int64_t rd_bw, wr_bw;
     uint64_t rd_count = 0;
     uint64_t wr_count = 0;
 
@@ -58,13 +58,13 @@ uint64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fd
     return rd_bw + wr_bw;
 }
 
-int adjust_interleave_ratio(std::list<uint64_t> &bw_history, int ratio, uint64_t bw_cutoff)
+int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t bw_cutoff)
 {
     static int correct_count = 0;
-    static int last_bw = 0;
+    static int64_t last_bw = 0;
     static int last_ratio = 100;
     static int last_step = -MAX_STEP;
-    uint64_t cur_bw;
+    int64_t cur_bw;
     int nth_percentile_index;
     int bw_change, interleave_change;
     int cur_step;
@@ -123,6 +123,7 @@ int adjust_interleave_ratio(std::list<uint64_t> &bw_history, int ratio, uint64_t
     }
 
     ratio += cur_step;
+    last_step = cur_step;
 
     if (ratio > 100)
         ratio = 100;
@@ -162,12 +163,12 @@ int main(int argc, char *argv[])
     std::vector<uint64_t> wr_configs;
     std::vector<int> rd_fds;
     std::vector<int> wr_fds;
-    std::list<uint64_t> bw_history;
+    std::list<int64_t> bw_history;
     int sample_interval_ms;
     int adjust_interval_ms;
     uint64_t max_list_size;
-    uint64_t cur_bw;
-    uint64_t bw_saturation_cutoff;
+    int64_t cur_bw;
+    int64_t bw_saturation_cutoff;
     int interleave_ratio = 100;
 
     if (argc < 4) {
