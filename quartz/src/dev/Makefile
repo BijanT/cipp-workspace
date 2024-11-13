@@ -3,7 +3,8 @@ obj-m = nvmemul.o
 nvmemul-objs = pmc.o
 
 # use the kernel build system
-KERNEL_SOURCE := /users/bijan/kernel/kbuild
+KERNEL_VERSION := `uname -r`
+KERNEL_SOURCE := /lib/modules/$(KERNEL_VERSION)/build
 
 SRCDIR=`pwd`
 OBJDIR=`pwd`
