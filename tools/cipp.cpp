@@ -157,6 +157,7 @@ int adjust_interleave_ratio(std::list<uint64_t> &bw_history, int ratio, uint64_t
 int main(int argc, char *argv[])
 {
     std::vector<uint32_t> types;
+    std::vector<int> cpus;
     std::vector<uint64_t> rd_configs;
     std::vector<uint64_t> wr_configs;
     std::vector<int> rd_fds;
@@ -185,7 +186,7 @@ int main(int argc, char *argv[])
         << "\tAdjust interval: " << adjust_interval_ms << " ms" << std::endl
         << "\tBandwidth saturation cutoff: " << bw_saturation_cutoff << " MB/s" << std::endl;
 
-    get_perf_uncore_info(types, rd_configs, wr_configs);
+    get_perf_uncore_info(types, cpus, rd_configs, wr_configs);
 
     // What to put in the cpu to read from each socket can be found by reading
     // /sys/devices/uncore_imc_0/cpumask - we only care about socket 0, which

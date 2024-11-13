@@ -46,13 +46,14 @@ uint64_t read_perf_event(std::ifstream &file)
     return (umask << 8) | event;
 }
 
-void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<uint64_t> &rd_configs,
-    std::vector<uint64_t> &wr_configs)
+void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
+    std::vector<uint64_t> &rd_configs, std::vector<uint64_t> &wr_configs)
 {
     const std::string BASE_DIR = "/sys/devices/uncore_imc_";
     uint32_t type;
     uint64_t rd_config;
     uint64_t wr_config;
+    int valid_uncore = -1;
 
     // I've seen the uncore_imc_ values go from 0 to 11 with gaps, so try all of them
     for (int i = 0; i < 12; i++) {
@@ -83,6 +84,36 @@ void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<uint64_t> &r
         types.push_back(type);
         rd_configs.push_back(rd_config);
         wr_configs.push_back(wr_config);
+
+        valid_uncore = i;
+    }
+
+    // Get what "cpu" values correspond to different NUMA nodes
+    if (valid_uncore != -1) {
+        std::stringstream cpumask_path;
+        std::ifstream cpumask_file;
+        std::string cpumask_str;
+        size_t pos = 0;
+
+        cpumask_path << BASE_DIR << valid_uncore << "/cpumask";
+
+        cpumask_file.open(cpumask_path.str().c_str());
+
+        if (!cpumask_file.is_open())
+            return;
+
+        cpumask_file >> cpumask_str;
+
+        // The format of cpumask is CPU indices delimited by ","
+        while (pos != std::string::npos) {
+            pos = cpumask_str.find(",");
+            std::string token = cpumask_str.substr(0, pos);
+            int cpu = std::stoi(token);
+            cpus.push_back(cpu);
+            // + 1 for the length of the delimiter
+            cpumask_str.erase(0, pos + 1);
+            std::cout << cpu << std::endl;
+        }
     }
 }
 
