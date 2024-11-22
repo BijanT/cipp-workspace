@@ -18,6 +18,7 @@ use spurs_util::escape_for_bash;
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 enum Workload {
     Merci { runs: u64 },
+    GapbsTc { runs: u64 },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Parametrize)]
@@ -58,6 +59,15 @@ pub fn cli_options() -> clap::Command {
                     .value_parser(clap::value_parser!(u64)),
                 ),
         )
+        .subcommand(
+            clap::Command::new("gapbs_tc")
+                .about("Run the GAPBS tc workload")
+                .arg(
+                    arg!([runs]
+            "The number of iterations of tc to run. Default: 10")
+                    .value_parser(clap::value_parser!(u64)),
+                ),
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -77,6 +87,10 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("merci", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             vec![Workload::Merci { runs }]
+        }
+        Some(("gapbs_tc", sub_m)) => {
+            let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
+            vec![Workload::GapbsTc { runs }]
         }
         _ => unreachable!(),
     };
@@ -107,12 +121,14 @@ where
     let perf_record_file = "/tmp/perf.data";
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
+    let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
 
     let merci_dir = dir!(
         &user_home,
         crate::WORKLOADS_PATH,
         "MERCI/4_performance_evaluation/"
     );
+    let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
 
     ushell.run(cmd!("mkdir -p {}", results_dir))?;
     ushell.run(cmd!(
@@ -130,6 +146,7 @@ where
         .iter()
         .map(|&wkld| match wkld {
             Workload::Merci { .. } => "eval_baseline",
+            Workload::GapbsTc { .. } => "tc",
         })
         .collect();
 
@@ -171,6 +188,9 @@ where
         .map(|(i, &wkld)| match wkld {
             Workload::Merci { runs } => {
                 run_merci(&ushell, &merci_dir, runs, &cmd_prefixes[i], &merci_file)
+            }
+            Workload::GapbsTc { runs } => {
+                run_gapbs_tc(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
             }
         })
         .collect();
@@ -262,6 +282,26 @@ fn run_merci(
             merci_file
         )
         .cwd(merci_dir),
+    )?;
+
+    Ok(handle)
+}
+
+fn run_gapbs_tc(
+    ushell: &SshShell,
+    gapbs_dir: &str,
+    runs: u64,
+    cmd_prefix: &str,
+    gapbs_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
+        cmd!(
+            "{} ./tc -f benchmark/graphs/twitterU.sg -n {} | sudo tee {}",
+            cmd_prefix,
+            runs,
+            gapbs_file
+        )
+        .cwd(gapbs_dir),
     )?;
 
     Ok(handle)
