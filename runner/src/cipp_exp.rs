@@ -12,9 +12,8 @@ use libscail::{
 
 use serde::{Deserialize, Serialize};
 
-use spurs::{cmd, Execute, SshShell};
+use spurs::{cmd, Execute, SshShell, SshSpawnHandle};
 use spurs_util::escape_for_bash;
-use std::time::Instant;
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 enum Workload {
@@ -27,7 +26,7 @@ struct Config {
     exp: String,
 
     #[name]
-    workload: Workload,
+    workloads: Vec<Workload>,
 
     disable_thp: bool,
     disable_aslr: bool,
@@ -74,17 +73,17 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let flame_graph = sub_m.get_flag("flame_graph");
 
-    let workload = match sub_m.subcommand() {
+    let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
-            Workload::Merci { runs }
+            vec![Workload::Merci { runs }]
         }
         _ => unreachable!(),
     };
 
     let cfg = Config {
         exp: "cipp_exp".into(),
-        workload,
+        workloads,
         disable_thp,
         disable_aslr,
         flame_graph,
@@ -107,7 +106,6 @@ where
     let (_output_file, params_file, _time_file, _sim_file) = cfg.gen_standard_names();
     let perf_record_file = "/tmp/perf.data";
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
-    let runtime_file = dir!(&results_dir, cfg.gen_file_name("runtime"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
 
     let merci_dir = dir!(
@@ -116,19 +114,24 @@ where
         "MERCI/4_performance_evaluation/"
     );
 
+    ushell.run(cmd!("mkdir -p {}", results_dir))?;
     ushell.run(cmd!(
         "echo {} > {}",
         escape_for_bash(&serde_json::to_string(&cfg)?),
         dir!(&results_dir, params_file)
     ))?;
 
-    let mut cmd_prefix = String::new();
     // For now, always initially pin memory to local NUMA node
-    cmd_prefix.push_str("numactl --membind=0 ");
+    let mut cmd_prefixes: Vec<String> =
+        vec![String::from("numactl --membind=0"); cfg.workloads.len()];
 
-    let _proc_name = match &cfg.workload {
-        Workload::Merci { .. } => "eval_baseline",
-    };
+    let proc_names: Vec<&str> = cfg
+        .workloads
+        .iter()
+        .map(|&wkld| match wkld {
+            Workload::Merci { .. } => "eval_baseline",
+        })
+        .collect();
 
     let (
         transparent_hugepage_enabled,
@@ -155,23 +158,32 @@ where
     }
 
     if cfg.flame_graph {
-        cmd_prefix.push_str(&format!(
+        cmd_prefixes[0].push_str(&format!(
             "sudo perf record -a -g -F 1999 -o {} ",
             &perf_record_file
         ));
     }
 
-    match cfg.workload {
-        Workload::Merci { runs } => {
-            run_merci(
-                &ushell,
-                &merci_dir,
-                runs,
-                &cmd_prefix,
-                &merci_file,
-                &runtime_file,
-            )?;
+    let handles: Vec<_> = cfg
+        .workloads
+        .iter()
+        .enumerate()
+        .map(|(i, &wkld)| match wkld {
+            Workload::Merci { runs } => {
+                run_merci(&ushell, &merci_dir, runs, &cmd_prefixes[i], &merci_file)
+            }
+        })
+        .collect();
+
+    // Wait for the first workload to finish then kill the rest
+    for (i, handle) in handles.into_iter().enumerate() {
+        if i != 0 {
+            ushell.run(cmd!("sudo pkill {}", proc_names[i]))?;
         }
+        match handle {
+            Ok(h) => h.join().1?,
+            Err(e) => return Err(e),
+        };
     }
 
     if cfg.flame_graph {
@@ -241,10 +253,8 @@ fn run_merci(
     runs: u64,
     cmd_prefix: &str,
     merci_file: &str,
-    runtime_file: &str,
-) -> Result<(), failure::Error> {
-    let start = Instant::now();
-    ushell.run(
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
         cmd!(
             "{} ./bin/eval_baseline -d amazon_Books -r {} | sudo tee {}",
             cmd_prefix,
@@ -253,8 +263,6 @@ fn run_merci(
         )
         .cwd(merci_dir),
     )?;
-    let duration = Instant::now() - start;
 
-    ushell.run(cmd!("echo {} > {}", duration.as_millis(), runtime_file))?;
-    Ok(())
+    Ok(handle)
 }
