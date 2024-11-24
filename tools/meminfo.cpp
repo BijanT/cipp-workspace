@@ -165,7 +165,5 @@ int main(int argc, char *argv[])
     local_start = std::stoul(argv[2], nullptr, 16) >> PAGE_SHIFT;
     local_end = std::stoul(argv[3], nullptr, 16) >> PAGE_SHIFT;
 
-    std::cout << std::hex << " " << local_start << "-" << local_end << std::dec << std::endl;
-
     return read_maps(pid, local_start, local_end);
 }
