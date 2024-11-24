@@ -2,12 +2,10 @@ use clap::{arg, ArgAction};
 
 use libscail::{
     background::{BackgroundContext, BackgroundTask},
-    dir,
-    //    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
-    dump_sys_info,
-    get_user_home_dir,
+    dir, dump_sys_info, get_user_home_dir,
     output::{Parametrize, Timestamp},
     set_kernel_printk_level,
+    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
     Login,
 };
 
@@ -148,6 +146,12 @@ where
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
 
+    let mut tctx = TasksetCtxBuilder::from_lscpu(&ushell)?
+        .numa_interleaving(TasksetCtxInterleaving::Sequential)
+        .skip_hyperthreads(false)
+        .build();
+    let num_threads = tctx.num_threads_on_socket(0);
+
     ushell.run(cmd!("mkdir -p {}", results_dir))?;
     ushell.run(cmd!(
         "echo {} > {}",
@@ -156,8 +160,30 @@ where
     ))?;
 
     // For now, always initially pin memory to local NUMA node
-    let mut cmd_prefixes: Vec<String> =
-        vec![String::from("numactl --membind=0 "); cfg.workloads.len()];
+    let mut cmd_prefixes: Vec<String> = vec![String::new(); cfg.workloads.len()];
+
+    let mut pin_cores: Vec<Vec<usize>> = vec![Vec::new(); cfg.workloads.len()];
+    for pc in &mut pin_cores {
+        let num_pin_cores = num_threads / cfg.workloads.len();
+        for _ in 0..num_pin_cores {
+            if let Ok(new_core) = tctx.next() {
+                pc.push(new_core);
+            } else {
+                return Err(std::fmt::Error.into());
+            }
+        }
+    }
+
+    let pin_cores_strs: Vec<String> = pin_cores
+        .iter()
+        .map(|cores| {
+            cores
+                .iter()
+                .map(ToString::to_string)
+                .collect::<Vec<_>>()
+                .join(",")
+        })
+        .collect();
 
     let proc_names: Vec<&str> = cfg
         .workloads
@@ -190,6 +216,10 @@ where
         libscail::disable_aslr(&ushell)?;
     } else {
         libscail::enable_aslr(&ushell)?;
+    }
+
+    for (i, cores_str) in pin_cores_strs.iter().enumerate() {
+        cmd_prefixes[i].push_str(&format!("numactl --membind=0 --physcpubind={} ", cores_str));
     }
 
     if cfg.bwmon {
