@@ -151,6 +151,7 @@ where
         .skip_hyperthreads(false)
         .build();
     let num_threads = tctx.num_threads_on_socket(0);
+    let cores_per_wkld = num_threads / cfg.workloads.len();
 
     ushell.run(cmd!("mkdir -p {}", results_dir))?;
     ushell.run(cmd!(
@@ -164,8 +165,7 @@ where
 
     let mut pin_cores: Vec<Vec<usize>> = vec![Vec::new(); cfg.workloads.len()];
     for pc in &mut pin_cores {
-        let num_pin_cores = num_threads / cfg.workloads.len();
-        for _ in 0..num_pin_cores {
+        for _ in 0..cores_per_wkld {
             if let Ok(new_core) = tctx.next() {
                 pc.push(new_core);
             } else {
@@ -256,9 +256,14 @@ where
         .iter()
         .enumerate()
         .map(|(i, &wkld)| match wkld {
-            Workload::Merci { runs } => {
-                run_merci(&ushell, &merci_dir, runs, &cmd_prefixes[i], &merci_file)
-            }
+            Workload::Merci { runs } => run_merci(
+                &ushell,
+                &merci_dir,
+                runs,
+                cores_per_wkld,
+                &cmd_prefixes[i],
+                &merci_file,
+            ),
             Workload::GapbsTc { runs } => {
                 run_gapbs_tc(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
             }
@@ -343,14 +348,16 @@ fn run_merci(
     ushell: &SshShell,
     merci_dir: &str,
     runs: u64,
+    cores: usize,
     cmd_prefix: &str,
     merci_file: &str,
 ) -> Result<SshSpawnHandle, failure::Error> {
     let handle = ushell.spawn(
         cmd!(
-            "{} ./bin/eval_baseline -d amazon_Books -r {} | sudo tee {}",
+            "{} ./bin/eval_baseline -d amazon_Books -r {} -c {} | sudo tee {}",
             cmd_prefix,
             runs,
+            cores,
             merci_file
         )
         .cwd(merci_dir),
