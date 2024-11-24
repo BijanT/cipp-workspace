@@ -32,6 +32,7 @@ struct Config {
     disable_thp: bool,
     disable_aslr: bool,
     flame_graph: bool,
+    bwmon: bool,
 
     #[timestamp]
     timestamp: Timestamp,
@@ -48,6 +49,10 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(
+            arg!(--bwmon "Record memory bandwidth during the experiment")
                 .action(ArgAction::SetTrue),
         )
         .subcommand(
@@ -82,6 +87,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_thp = sub_m.get_flag("disable_thp");
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let flame_graph = sub_m.get_flag("flame_graph");
+    let bwmon = sub_m.get_flag("bwmon");
 
     let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
@@ -101,6 +107,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         disable_thp,
         disable_aslr,
         flame_graph,
+        bwmon,
         timestamp: Timestamp::now(),
     };
 
@@ -120,9 +127,11 @@ where
     let (_output_file, params_file, _time_file, _sim_file) = cfg.gen_standard_names();
     let perf_record_file = "/tmp/perf.data";
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
+    let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
 
+    let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
     let merci_dir = dir!(
         &user_home,
         crate::WORKLOADS_PATH,
@@ -139,7 +148,7 @@ where
 
     // For now, always initially pin memory to local NUMA node
     let mut cmd_prefixes: Vec<String> =
-        vec![String::from("numactl --membind=0"); cfg.workloads.len()];
+        vec![String::from("numactl --membind=0 "); cfg.workloads.len()];
 
     let proc_names: Vec<&str> = cfg
         .workloads
@@ -172,6 +181,12 @@ where
         libscail::disable_aslr(&ushell)?;
     } else {
         libscail::enable_aslr(&ushell)?;
+    }
+
+    if cfg.bwmon {
+        // Attach bwmon to only the first workload since it will track bw for the
+        // whole system.
+        cmd_prefixes[0].push_str(&format!("sudo {}/bwmon 200 {} ", tools_dir, bwmon_file));
     }
 
     if cfg.flame_graph {
