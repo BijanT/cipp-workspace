@@ -1,6 +1,7 @@
 use clap::{arg, ArgAction};
 
 use libscail::{
+    background::{BackgroundContext, BackgroundTask},
     dir,
     //    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
     dump_sys_info,
@@ -33,6 +34,7 @@ struct Config {
     disable_aslr: bool,
     flame_graph: bool,
     bwmon: bool,
+    meminfo: bool,
 
     #[timestamp]
     timestamp: Timestamp,
@@ -53,6 +55,10 @@ pub fn cli_options() -> clap::Command {
         )
         .arg(
             arg!(--bwmon "Record memory bandwidth during the experiment")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(
+            arg!(--meminfo "Periodically print the local/remote memory breakdown")
                 .action(ArgAction::SetTrue),
         )
         .subcommand(
@@ -88,6 +94,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
+    let meminfo = sub_m.get_flag("meminfo");
 
     let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
@@ -108,6 +115,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         disable_aslr,
         flame_graph,
         bwmon,
+        meminfo,
         timestamp: Timestamp::now(),
     };
 
@@ -130,6 +138,7 @@ where
     let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
+    let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
 
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
     let merci_dir = dir!(
@@ -189,6 +198,22 @@ where
         cmd_prefixes[0].push_str(&format!("sudo {}/bwmon 200 {} ", tools_dir, bwmon_file));
     }
 
+    let mut bgctx = BackgroundContext::new(&ushell);
+    if cfg.meminfo {
+        for name in &proc_names {
+            let meminfo_file = format!("{}.{}", meminfo_file_stub, name);
+            bgctx.spawn(BackgroundTask {
+                name: "meminfo",
+                period: 10, // Seconds
+                cmd: format!(
+                    "sudo {}/meminfo $(pgrep -x {} | sort -n | head -n1) 0x100000000 0x1500000000 >> {}",
+                    tools_dir, name, &meminfo_file
+                ),
+                ensure_started: meminfo_file,
+            })?;
+        }
+    }
+
     if cfg.flame_graph {
         cmd_prefixes[0].push_str(&format!(
             "sudo perf record -a -g -F 1999 -o {} ",
@@ -231,6 +256,8 @@ where
             &flame_graph_file
         ))?;
     }
+
+    bgctx.notify_and_join_all()?;
 
     println!("RESULTS: {}", dir!(&results_dir, cfg.gen_file_name("")));
     Ok(())
