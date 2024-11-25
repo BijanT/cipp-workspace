@@ -301,6 +301,8 @@ where
             bgctx.spawn(BackgroundTask {
                 name: "meminfo",
                 period: 10, // Seconds
+                // TODO: Below is currently hardcoded local memory range for c220g2.
+                // We should make this more general
                 cmd: format!(
                     "sudo {}/meminfo $(pgrep -x {} | sort -n | head -n1) 0x100000000 0x1500000000 >> {}",
                     tools_dir, name, &meminfo_file
