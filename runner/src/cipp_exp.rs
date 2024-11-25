@@ -174,6 +174,7 @@ where
     let (_output_file, params_file, _time_file, _sim_file) = cfg.gen_standard_names();
     let perf_record_file = "/tmp/perf.data";
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
+    let colloid_lat_file = dir!(&results_dir, cfg.gen_file_name("colloid.lat"));
     let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
@@ -195,6 +196,8 @@ where
         .build();
     let num_threads = tctx.num_threads_on_socket(0);
     let cores_per_wkld = num_threads / cfg.workloads.len();
+
+    let mut bgctx = BackgroundContext::new(&ushell);
 
     ushell.run(cmd!("mkdir -p {}", results_dir))?;
     ushell.run(cmd!(
@@ -329,6 +332,13 @@ where
                 cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
                 cmd!("echo 6 | sudo tee /proc/sys/kernel/numa_balancing"),
             }
+
+            bgctx.spawn(BackgroundTask {
+                name: "colloid_latency",
+                period: 10, // Seconds
+                cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
+                ensure_started: colloid_lat_file,
+            })?;
         }
         Strategy::Linux => {
             for prefix in &mut cmd_prefixes {
@@ -347,7 +357,6 @@ where
         cmd_prefixes[0].push_str(&format!("sudo {}/bwmon 200 {} ", tools_dir, bwmon_file));
     }
 
-    let mut bgctx = BackgroundContext::new(&ushell);
     if cfg.meminfo {
         for name in &proc_names {
             let meminfo_file = format!("{}.{}", meminfo_file_stub, name);
