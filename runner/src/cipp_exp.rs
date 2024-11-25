@@ -226,6 +226,10 @@ where
         libscail::enable_aslr(&ushell)?;
     }
 
+    ushell.run(cmd!(
+        "echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
+    ))?;
+
     if let Some(bw) = cfg.quartz_bw {
         let nvmemul_ini = dir!(&quartz_dir, "nvmemul.ini");
         let tmp_nvmemul_ini = "/tmp/nvmemul.ini";
