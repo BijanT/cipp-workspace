@@ -1,4 +1,4 @@
-use clap::{arg, value_parser, ArgAction};
+use clap::{arg, ArgAction};
 
 use libscail::{
     background::{BackgroundContext, BackgroundTask},
@@ -62,7 +62,7 @@ pub fn cli_options() -> clap::Command {
         )
         .arg(
             arg!(--quartz <QUARTZ_BW> "Use Quartz to limit the memory bandwidth (MB/s)")
-                .value_parser(value_parser!(usize)),
+                .value_parser(clap::value_parser!(usize)),
         )
         .subcommand(
             clap::Command::new("merci")
