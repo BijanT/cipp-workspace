@@ -4,7 +4,7 @@ use libscail::{
     background::{BackgroundContext, BackgroundTask},
     dir, dump_sys_info, get_user_home_dir,
     output::{Parametrize, Timestamp},
-    set_kernel_printk_level,
+    set_kernel_printk_level, with_shell,
     workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
     Login,
 };
@@ -20,6 +20,12 @@ enum Workload {
     GapbsTc { runs: u64 },
 }
 
+#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+enum Strategy {
+    Colloid,
+    Linux,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Parametrize)]
 struct Config {
     #[name]
@@ -27,6 +33,8 @@ struct Config {
 
     #[name]
     workloads: Vec<Workload>,
+    #[name]
+    strategy: Strategy,
 
     disable_thp: bool,
     disable_aslr: bool,
@@ -48,6 +56,7 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(<username> "The username on the remote"))
         .arg(arg!(--disable_thp "Disable THP completely.").action(ArgAction::SetTrue))
         .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
+        .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -104,6 +113,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
     let disable_thp = sub_m.get_flag("disable_thp");
     let disable_aslr = sub_m.get_flag("disable_aslr");
+    let colloid = sub_m.get_flag("colloid");
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
@@ -129,9 +139,16 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         _ => unreachable!(),
     };
 
+    let strategy = if colloid {
+        Strategy::Colloid
+    } else {
+        Strategy::Linux
+    };
+
     let cfg = Config {
         exp: "cipp_exp".into(),
         workloads,
+        strategy,
         disable_thp,
         disable_aslr,
         flame_graph,
@@ -162,6 +179,7 @@ where
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
 
+    let colloid_dir = dir!(&user_home, "colloid/tpp/");
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
     let quartz_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/");
     let merci_dir = dir!(
@@ -301,8 +319,26 @@ where
         cmd_prefixes[0].push_str(&quartz_envs);
     }
 
+    // Use whatever tiering strategy specified
+    match cfg.strategy {
+        Strategy::Colloid => {
+            with_shell! { ushell =>
+                cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
+                cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir),
+                cmd!("swapoff -a"),
+                cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
+                cmd!("echo 6 | sudo tee /proc/sys/kernel/numa_balancing"),
+            }
+        }
+        Strategy::Linux => {
+            for prefix in &mut cmd_prefixes {
+                prefix.push_str("numactl --membind=0 ");
+            }
+        }
+    }
+
     for (i, cores_str) in pin_cores_strs.iter().enumerate() {
-        cmd_prefixes[i].push_str(&format!("numactl --membind=0 --physcpubind={} ", cores_str));
+        cmd_prefixes[i].push_str(&format!("taskset -c {} ", cores_str));
     }
 
     if cfg.bwmon {
