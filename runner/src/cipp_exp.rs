@@ -82,6 +82,15 @@ pub fn cli_options() -> clap::Command {
                     .value_parser(clap::value_parser!(u64)),
                 ),
         )
+        .subcommand(
+            clap::Command::new("merci_tc")
+                .about("Run the MERCI and GAPBS tc workload together")
+                .arg(
+                    arg!([runs]
+            "The number of iterations of tc to run. Default: 10")
+                    .value_parser(clap::value_parser!(u64)),
+                ),
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -108,6 +117,14 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("gapbs_tc", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             vec![Workload::GapbsTc { runs }]
+        }
+        Some(("merci_tc", sub_m)) => {
+            let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
+            let merci_runs = 100 * tc_runs;
+            vec![
+                Workload::GapbsTc { runs: tc_runs },
+                Workload::Merci { runs: merci_runs },
+            ]
         }
         _ => unreachable!(),
     };
