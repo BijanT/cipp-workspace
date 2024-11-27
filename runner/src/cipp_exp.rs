@@ -5,7 +5,7 @@ use libscail::{
     dir, dump_sys_info, get_user_home_dir,
     output::{Parametrize, Timestamp},
     set_kernel_printk_level, with_shell,
-    workloads::{TasksetCtxBuilder, TasksetCtxInterleaving},
+    workloads::{gen_perf_command_prefix, TasksetCtxBuilder, TasksetCtxInterleaving},
     Login,
 };
 
@@ -43,6 +43,8 @@ struct Config {
     #[name]
     strategy: Strategy,
 
+    perf_stat: bool,
+    perf_counters: Vec<String>,
     disable_thp: bool,
     disable_aslr: bool,
     flame_graph: bool,
@@ -61,6 +63,12 @@ pub fn cli_options() -> clap::Command {
         .disable_version_flag(true)
         .arg(arg!(<hostname> "The domain name of the remote"))
         .arg(arg!(<username> "The username on the remote"))
+        .arg(arg!(--perf_stat "Record counters with perf stat").action(ArgAction::SetTrue))
+        .arg(
+            arg!(--perf_counter "Which counters to record with perf stat")
+                .action(ArgAction::Append)
+                .requires("perf_stat"),
+        )
         .arg(arg!(--disable_thp "Disable THP completely.").action(ArgAction::SetTrue))
         .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
         .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue))
@@ -124,6 +132,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         host: host.as_str(),
     };
 
+    let perf_stat = sub_m.get_flag("perf_stat");
+    let perf_counters = sub_m.get_many("perf_counter").map_or(
+        Vec::new(),
+        |counters: clap::parser::ValuesRef<'_, String>| counters.map(Into::into).collect(),
+    );
     let disable_thp = sub_m.get_flag("disable_thp");
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let colloid = sub_m.get_flag("colloid");
@@ -171,6 +184,8 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         exp: "cipp_exp".into(),
         workloads,
         strategy,
+        perf_stat,
+        perf_counters,
         disable_thp,
         disable_aslr,
         flame_graph,
@@ -195,6 +210,7 @@ where
 
     let (_output_file, params_file, _time_file, _sim_file) = cfg.gen_standard_names();
     let perf_record_file = "/tmp/perf.data";
+    let perf_stat_file = dir!(&results_dir, cfg.gen_file_name("perf_stat"));
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
     let colloid_lat_file = dir!(&results_dir, cfg.gen_file_name("colloid.lat"));
     let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
@@ -405,6 +421,15 @@ where
                 ensure_started: meminfo_file,
             })?;
         }
+    }
+
+    if cfg.perf_stat {
+        // TODO: Have this be per workload, like meminfo
+        cmd_prefixes[0].push_str(&gen_perf_command_prefix(
+            perf_stat_file,
+            &cfg.perf_counters,
+            "",
+        ));
     }
 
     if cfg.flame_graph {
