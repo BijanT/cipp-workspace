@@ -26,6 +26,13 @@ enum Strategy {
     Linux,
 }
 
+#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+enum ThrottleType {
+    Quartz { bw: u64 },
+    Msr,
+    Native,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Parametrize)]
 struct Config {
     #[name]
@@ -41,7 +48,7 @@ struct Config {
     flame_graph: bool,
     bwmon: bool,
     meminfo: bool,
-    quartz_bw: Option<usize>,
+    throttle: ThrottleType,
 
     #[timestamp]
     timestamp: Timestamp,
@@ -71,7 +78,13 @@ pub fn cli_options() -> clap::Command {
         )
         .arg(
             arg!(--quartz <QUARTZ_BW> "Use Quartz to limit the memory bandwidth (MB/s)")
-                .value_parser(clap::value_parser!(usize)),
+                .value_parser(clap::value_parser!(u64))
+                .conflicts_with("msr_throttle"),
+        )
+        .arg(
+            arg!(--msr_throttle <REGISTER_VAL> "Write to the MSR_UNCORE_RATIO_LIMIT register to lower uncore frequency")
+                .action(ArgAction::SetTrue)
+                .conflicts_with("quartz"),
         )
         .subcommand(
             clap::Command::new("merci")
@@ -117,7 +130,8 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
-    let quartz_bw = sub_m.get_one::<usize>("quartz").copied();
+    let quartz_bw = sub_m.get_one::<u64>("quartz").copied();
+    let msr_throttle = sub_m.get_flag("msr_throttle");
 
     let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
@@ -145,6 +159,14 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Strategy::Linux
     };
 
+    let throttle = if let Some(bw) = quartz_bw {
+        ThrottleType::Quartz { bw }
+    } else if msr_throttle {
+        ThrottleType::Msr
+    } else {
+        ThrottleType::Native
+    };
+
     let cfg = Config {
         exp: "cipp_exp".into(),
         workloads,
@@ -154,7 +176,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         flame_graph,
         bwmon,
         meminfo,
-        quartz_bw,
+        throttle,
         timestamp: Timestamp::now(),
     };
 
@@ -268,58 +290,69 @@ where
         "echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
     ))?;
 
-    if let Some(bw) = cfg.quartz_bw {
-        let nvmemul_ini = dir!(&quartz_dir, "nvmemul.ini");
-        let tmp_nvmemul_ini = "/tmp/nvmemul.ini";
-        let quartz_lib_path = format!("{}/build/src/lib/libnvmemul.so", &quartz_dir);
-        let quartz_envs = format!(
-            "LD_PRELOAD={} NVMEMUL_INI={} ",
-            &quartz_lib_path, tmp_nvmemul_ini
-        );
+    match cfg.throttle {
+        ThrottleType::Quartz { bw } => {
+            let nvmemul_ini = dir!(&quartz_dir, "nvmemul.ini");
+            let tmp_nvmemul_ini = "/tmp/nvmemul.ini";
+            let quartz_lib_path = format!("{}/build/src/lib/libnvmemul.so", &quartz_dir);
+            let quartz_envs = format!(
+                "LD_PRELOAD={} NVMEMUL_INI={} ",
+                &quartz_lib_path, tmp_nvmemul_ini
+            );
 
-        // Need to escaped the slashes for sed
-        let escaped_user_home = user_home.replace("/", "\\/");
+            // Need to escaped the slashes for sed
+            let escaped_user_home = user_home.replace("/", "\\/");
 
-        ushell.run(cmd!("cp {} {}", nvmemul_ini, tmp_nvmemul_ini))?;
-        ushell.run(cmd!(
-            "sed -i 's/read = .*/read = {}/' {}",
-            bw,
-            &tmp_nvmemul_ini
-        ))?;
-        ushell.run(cmd!(
-            "sed -i 's/write = .*/write = {}/' {}",
-            bw,
-            &tmp_nvmemul_ini
-        ))?;
-        // Quartz caches the throttle register to bandwidth map and register
-        // addresses in the below files, so put them somewhere they will persist
-        // between reboots
-        ushell.run(cmd!(
-            "sed -i 's/model = .*/model = \\\"{}\\/bandwidth_model\\\"/' {}",
-            &escaped_user_home,
-            &tmp_nvmemul_ini
-        ))?;
-        ushell.run(cmd!(
-            "sed -i 's/mc_pci = .*/mc_pci = \\\"{}\\/mc_pci_bus\\\"/' {}",
-            &escaped_user_home,
-            &tmp_nvmemul_ini
-        ))?;
+            ushell.run(cmd!("cp {} {}", nvmemul_ini, tmp_nvmemul_ini))?;
+            ushell.run(cmd!(
+                "sed -i 's/read = .*/read = {}/' {}",
+                bw,
+                &tmp_nvmemul_ini
+            ))?;
+            ushell.run(cmd!(
+                "sed -i 's/write = .*/write = {}/' {}",
+                bw,
+                &tmp_nvmemul_ini
+            ))?;
+            // Quartz caches the throttle register to bandwidth map and register
+            // addresses in the below files, so put them somewhere they will persist
+            // between reboots
+            ushell.run(cmd!(
+                "sed -i 's/model = .*/model = \\\"{}\\/bandwidth_model\\\"/' {}",
+                &escaped_user_home,
+                &tmp_nvmemul_ini
+            ))?;
+            ushell.run(cmd!(
+                "sed -i 's/mc_pci = .*/mc_pci = \\\"{}\\/mc_pci_bus\\\"/' {}",
+                &escaped_user_home,
+                &tmp_nvmemul_ini
+            ))?;
 
-        // Log that we set up the ini file correctly
-        ushell.run(cmd!("cat {}", &tmp_nvmemul_ini))?;
+            // Log that we set up the ini file correctly
+            ushell.run(cmd!("cat {}", &tmp_nvmemul_ini))?;
 
-        // Load the kernel module
-        ushell.run(cmd!("sudo {}/scripts/setupdev.sh load", &quartz_dir))?;
-        // Gotta do some permission stuff
-        ushell.run(cmd!("echo 2 | sudo tee /sys/devices/cpu/rdpmc"))?;
+            // Load the kernel module
+            ushell.run(cmd!("sudo {}/scripts/setupdev.sh load", &quartz_dir))?;
+            // Gotta do some permission stuff
+            ushell.run(cmd!("echo 2 | sudo tee /sys/devices/cpu/rdpmc"))?;
 
-        // Have to prerun Quartz twice to make sure the register and bandwidth
-        // map files are populated
-        ushell.run(cmd!("{} sleep 1", quartz_envs))?;
-        ushell.run(cmd!("{} sleep 1", quartz_envs))?;
+            // Have to prerun Quartz twice to make sure the register and bandwidth
+            // map files are populated
+            ushell.run(cmd!("{} sleep 1", quartz_envs))?;
+            ushell.run(cmd!("{} sleep 1", quartz_envs))?;
 
-        // We only need to add the env variable to one of the workloads
-        cmd_prefixes[0].push_str(&quartz_envs);
+            // We only need to add the env variable to one of the workloads
+            cmd_prefixes[0].push_str(&quartz_envs);
+        }
+        ThrottleType::Msr => {
+            // TODO: This is specific to c220g2. Make it generic
+            with_shell! { ushell =>
+                cmd!("sudo modprobe msr"),
+                cmd!("sudo wrmsr -p 0 0x620 0x1010"),
+                cmd!("sudo wrmsr -p 10 0x620 0x707"),
+            }
+        }
+        ThrottleType::Native => (),
     }
 
     // Use whatever tiering strategy specified
