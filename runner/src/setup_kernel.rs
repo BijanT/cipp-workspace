@@ -1,4 +1,4 @@
-use clap::{arg, ArgAction};
+use clap::{arg, ArgAction, ArgGroup};
 
 use libscail::{
     dir, get_git_hash, get_user_home_dir, GitRepo, KernelBaseConfigSource, KernelConfig,
@@ -14,10 +14,20 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(<hostname>
          "The domain name and ssh port of the remote (e.g. c240g2-031321.wisc.cloudlab.us:22)"))
         .arg(arg!(<username> "The username of the remote (e.g. bijan)"))
-        .arg(arg!(--repo <REPO> "The git repo where the kernel is stored.").required(true))
-        .arg(arg!(--branch <BRANCH> "The branch of the repo to clone. Defaults to \"main\""))
-        .arg(arg!(--git_user <GIT_USER>
-         "The username of the GitHub account to use to clone the kernel"))
+        .arg(
+            arg!(--colloid "Build the colloid kernel coloned in setup_wkspc.")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(arg!(--repo <REPO> "The git repo where the kernel is stored."))
+        .arg(
+            arg!(--branch <BRANCH> "The branch of the repo to clone. Defaults to \"main\"")
+                .requires("repo"),
+        )
+        .arg(
+            arg!(--git_user <GIT_USER>
+         "The username of the GitHub account to use to clone the kernel")
+            .requires("repo"),
+        )
         .arg(arg!(--secret <SECRET> "The GitHub access token to use").requires("git_user"))
         .arg(
             arg!(--install_perf "(Optional) Install the perf corresponding to this kernel")
@@ -31,6 +41,11 @@ pub fn cli_options() -> clap::Command {
             .allow_hyphen_values(true)
             .trailing_var_arg(true),
         )
+        .group(
+            ArgGroup::new("RepoType")
+                .args(["colloid", "repo"])
+                .required(true),
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -40,21 +55,13 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         host: sub_m.get_one::<String>("hostname").unwrap(),
     };
 
-    let repo = sub_m.get_one::<String>("repo").unwrap().as_str();
-    let branch = sub_m.get_one::<String>("branch").map_or("main", |v| v);
+    let colloid = sub_m.get_flag("colloid");
+    let repo = sub_m.get_one::<String>("repo").map(|s| s.as_str());
+    let def_branch = if colloid { "master" } else { "main" };
+    let branch = sub_m.get_one::<String>("branch").map_or(def_branch, |v| v);
     let git_user = sub_m.get_one::<String>("git_user");
     let secret = sub_m.get_one::<String>("secret").map(|s| s.as_str());
     let install_perf = sub_m.get_flag("install_perf");
-
-    let git_repo = if let Some(_secret) = &secret {
-        GitRepo::HttpsPrivate {
-            repo,
-            username: git_user.unwrap(),
-            secret: secret.unwrap(),
-        }
-    } else {
-        GitRepo::HttpsPublic { repo }
-    };
 
     let kernel_config: Vec<_> = sub_m
         .get_many::<String>("configs")
@@ -71,7 +78,25 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let kernel_path = dir!(&user_home, crate::KERNEL_PATH);
     let perf_path = dir!(&kernel_path, "tools/perf/");
 
-    libscail::clone_git_repo(&ushell, git_repo, Some(&kernel_path), Some(branch), &[])?;
+    if let Some(repo) = repo {
+        let git_repo = if let Some(_secret) = &secret {
+            GitRepo::HttpsPrivate {
+                repo,
+                username: git_user.unwrap(),
+                secret: secret.unwrap(),
+            }
+        } else {
+            GitRepo::HttpsPublic { repo }
+        };
+
+        libscail::clone_git_repo(&ushell, git_repo, Some(&kernel_path), Some(branch), &[])?;
+    } else if colloid {
+        let colloid_kern_dir = dir!(&user_home, "colloid/tpp/linux-6.3");
+
+        // Symlink the kernel directory in the colloid directory to kernel_path
+        // ln doesn't like the last "/" in kernel_path, so get rid of it
+        ushell.run(cmd!("ln -s {} {}", &colloid_kern_dir, &kernel_path[0..kernel_path.len()-1]))?;
+    }
 
     // Get the base config
     let config = ushell

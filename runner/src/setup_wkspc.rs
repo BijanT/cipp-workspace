@@ -180,6 +180,8 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "cgroup-tools",
             "gnuplot",
             "intel-cmt-cat",
+            "htop",
+            "msr-tools",
         ]),
     };
 
@@ -218,6 +220,9 @@ where
     let workloads_repo = GitRepo::HttpsPublic {
         repo: "github.com/BijanT/scail_workloads.git",
     };
+    let colloid_repo = GitRepo::HttpsPublic {
+        repo: "github.com/host-architecture/colloid.git",
+    };
 
     clone_git_repo(
         ushell,
@@ -230,6 +235,8 @@ where
     clone_git_repo(ushell, damo_repo, Some("damo"), Some("main"), &[])?;
 
     clone_git_repo(ushell, workloads_repo, Some("workloads"), Some("main"), &[])?;
+
+    clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
 
     // Build the workspace tools
     ushell.run(cmd!("cd tools/; make;").cwd(&wkspc_dir))?;
