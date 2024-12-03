@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	fclose(file);
 
 	// execute the intended program
-	execv(program_name, &argv[2]);
+	execvp(program_name, &argv[2]);
 
 	// We only get here if execv fails
 	fprintf(stderr, "Failed to execute %s: %s\n", program_name, strerror(errno));
