@@ -257,6 +257,7 @@ where
     let mut tctx = TasksetCtxBuilder::from_lscpu(&ushell)?
         .numa_interleaving(TasksetCtxInterleaving::Sequential)
         .skip_hyperthreads(false)
+        .group_hyperthreads(true)
         .build();
     let num_threads = tctx.num_threads_on_socket(0);
     let cores_per_wkld = num_threads / cfg.workloads.len();
