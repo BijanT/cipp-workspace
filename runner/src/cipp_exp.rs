@@ -20,9 +20,10 @@ enum Workload {
     GapbsTc { runs: u64 },
 }
 
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 enum Strategy {
     Colloid,
+    Bwmfs { ratios: Vec<(usize, usize)>},
     Linux,
 }
 
@@ -72,6 +73,8 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--disable_thp "Disable THP completely.").action(ArgAction::SetTrue))
         .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
         .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue))
+        .arg(arg!(--bwmfs <RATIO> "Use BWMFS with the specified local:remote ratio")
+            .action(ArgAction::Append).conflicts_with("colloid"))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -140,6 +143,21 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_thp = sub_m.get_flag("disable_thp");
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let colloid = sub_m.get_flag("colloid");
+    let bwmfs_ratios = sub_m.get_many("bwmfs").map_or(
+        Vec::new(),
+        |ratios: clap::parser::ValuesRef<'_, String>| ratios.map(|r| {
+            let expect_msg = "--bwmfs should be of the format <local weight>:<remote weight>";
+            let mut split = r.split(":");
+            let local = split.next().expect(expect_msg).parse::<usize>().expect(expect_msg);
+            let remote = split.next().expect(expect_msg).parse::<usize>().expect(expect_msg);
+
+            if split.count() != 0 {
+                panic!("{}", expect_msg);
+            }
+
+            (local, remote)
+        }).collect(),
+    );
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
@@ -168,6 +186,13 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
     let strategy = if colloid {
         Strategy::Colloid
+    } else if bwmfs_ratios.len() != 0 {
+        // Must have one ratio for each workload
+        if bwmfs_ratios.len() != workloads.len() {
+            panic!("Must have exactly one BWMFS ratio for each workload ({})", workloads.len());
+        }
+
+        Strategy::Bwmfs { ratios: bwmfs_ratios }
     } else {
         Strategy::Linux
     };
@@ -227,6 +252,7 @@ where
         "MERCI/4_performance_evaluation/"
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
+    let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
     let mut tctx = TasksetCtxBuilder::from_lscpu(&ushell)?
         .numa_interleaving(TasksetCtxInterleaving::Sequential)
@@ -372,8 +398,11 @@ where
     }
 
     // Use whatever tiering strategy specified
-    match cfg.strategy {
+    match &cfg.strategy {
         Strategy::Colloid => {
+            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
+            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
+
             with_shell! { ushell =>
                 cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
                 cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir),
@@ -388,6 +417,26 @@ where
                 cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
                 ensure_started: colloid_lat_file,
             })?;
+        }
+        Strategy::Bwmfs { ratios } => {
+            let bandwidthmfs_dir = dir!(kernel_dir, "BandwidthMMFS");
+
+            ushell.run(cmd!("make").cwd(&bandwidthmfs_dir))?;
+            ushell.run(cmd!("sudo insmod {}/bandwidth.ko", &bandwidthmfs_dir))?;
+            ushell.run(cmd!("echo 1 | sudo tee /sys/kernel/mm/fbmm/state"))?;
+
+            for (i, (local, remote)) in ratios.iter().enumerate() {
+                let mount_dir = dir!(&user_home, format!("bwmfs{}", i+1));
+
+                ushell.run(cmd!("mkdir -p {}", mount_dir))?;
+                ushell.run(cmd!("sudo mount -t BandwidthMMFS BandwidthMMFS {}", mount_dir))?;
+                ushell.run(cmd!("sudo chown -R $USER {}", mount_dir))?;
+
+                ushell.run(cmd!("echo {} | sudo tee /sys/fs/bwmmfs{}/node0/weight", local, i+1))?;
+                ushell.run(cmd!("echo {} | sudo tee /sys/fs/bwmmfs{}/node1/weight", remote, i+1))?;
+
+                cmd_prefixes[i].push_str(&format!("{}/fbmm_wrapper {} ", &tools_dir, mount_dir));
+            }
         }
         Strategy::Linux => {
             for prefix in &mut cmd_prefixes {
@@ -461,7 +510,7 @@ where
     // Wait for the first workload to finish then kill the rest
     for (i, handle) in handles.into_iter().enumerate() {
         if i != 0 {
-            ushell.run(cmd!("sudo pkill {}", proc_names[i]))?;
+            ushell.run(cmd!("sudo pkill {}", proc_names[i]).allow_error())?;
         }
         match handle {
             Ok(h) => h.join().1?,

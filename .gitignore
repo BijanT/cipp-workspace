@@ -7,4 +7,5 @@
 *.o
 tools/bwmon
 tools/cipp
+tools/fbmm_wrapper
 tools/meminfo
