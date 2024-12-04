@@ -2,7 +2,7 @@
 use crate::WKSPC_PATH;
 use clap::{arg, ArgAction};
 
-use libscail::{clone_git_repo, get_user_home_dir, with_shell, GitRepo, Login};
+use libscail::{clone_git_repo, dir, get_user_home_dir, with_shell, GitRepo, Login};
 
 use spurs::{cmd, Execute, SshShell};
 
@@ -234,7 +234,7 @@ where
 
     clone_git_repo(ushell, damo_repo, Some("damo"), Some("main"), &[])?;
 
-    clone_git_repo(ushell, workloads_repo, Some("workloads"), Some("main"), &[])?;
+    clone_git_repo(ushell, workloads_repo, Some("workloads"), Some("main"), &["gapbs"])?;
 
     clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
 
@@ -247,9 +247,12 @@ where
 
 fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     let user_home = get_user_home_dir(&ushell)?;
-    let merci_dir = format!("{}/workloads/MERCI", user_home);
+    let workloads_dir = dir!(&user_home, crate::WORKLOADS_PATH);
+    let merci_dir = dir!(&workloads_dir, "MERCI");
+    let gapbs_dir = dir!(&workloads_dir, "gapbs");
 
     ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
+    ushell.run(cmd!("make; make bench-graphs").cwd(&gapbs_dir))?;
 
     Ok(())
 }
