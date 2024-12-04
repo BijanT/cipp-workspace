@@ -14,7 +14,6 @@ constexpr int PAGE_SHIFT = 12;
 constexpr int PME_SIZE = 8;
 constexpr uint64_t PM_PRESENT = ((uint64_t)1 << 63);
 constexpr uint64_t PM_SWAPPED = ((uint64_t)1 << 62);
-constexpr uint64_t PM_FILEPAGE = ((uint64_t)1 << 61);
 constexpr uint64_t PM_EXCLUSIVE = ((uint64_t)1 << 56);
 constexpr uint64_t PM_SOFTDIRTY = ((uint64_t)1 << 55);
 constexpr uint64_t PM_PFN_MASK (((uint64_t)1 << 54) - 1);
@@ -104,10 +103,6 @@ int read_maps(pid_t pid, uint64_t local_start, uint64_t local_end)
                 continue;
             }
             if (pm_entry & PM_SWAPPED) {
-                addr += PAGE_SIZE;
-                continue;
-            }
-            if (pm_entry & PM_FILEPAGE) {
                 addr += PAGE_SIZE;
                 continue;
             }
