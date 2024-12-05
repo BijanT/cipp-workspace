@@ -221,7 +221,7 @@ where
         repo: "github.com/BijanT/scail_workloads.git",
     };
     let colloid_repo = GitRepo::HttpsPublic {
-        repo: "github.com/host-architecture/colloid.git",
+        repo: "github.com/BijanT/colloid.git",
     };
 
     clone_git_repo(
