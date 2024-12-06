@@ -95,7 +95,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
         // Symlink the kernel directory in the colloid directory to kernel_path
         // ln doesn't like the last "/" in kernel_path, so get rid of it
-        ushell.run(cmd!("ln -s {} {}", &colloid_kern_dir, &kernel_path[0..kernel_path.len()-1]))?;
+        ushell.run(cmd!(
+            "ln -s {} {}",
+            &colloid_kern_dir,
+            &kernel_path[0..kernel_path.len() - 1]
+        ))?;
     }
 
     // Get the base config

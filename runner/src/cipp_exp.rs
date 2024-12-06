@@ -23,7 +23,7 @@ enum Workload {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 enum Strategy {
     Colloid,
-    Bwmfs { ratios: Vec<(usize, usize)>},
+    Bwmfs { ratios: Vec<(usize, usize)> },
     Linux,
 }
 
@@ -145,18 +145,31 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let colloid = sub_m.get_flag("colloid");
     let bwmfs_ratios = sub_m.get_many("bwmfs").map_or(
         Vec::new(),
-        |ratios: clap::parser::ValuesRef<'_, String>| ratios.map(|r| {
-            let expect_msg = "--bwmfs should be of the format <local weight>:<remote weight>";
-            let mut split = r.split(":");
-            let local = split.next().expect(expect_msg).parse::<usize>().expect(expect_msg);
-            let remote = split.next().expect(expect_msg).parse::<usize>().expect(expect_msg);
+        |ratios: clap::parser::ValuesRef<'_, String>| {
+            ratios
+                .map(|r| {
+                    let expect_msg =
+                        "--bwmfs should be of the format <local weight>:<remote weight>";
+                    let mut split = r.split(":");
+                    let local = split
+                        .next()
+                        .expect(expect_msg)
+                        .parse::<usize>()
+                        .expect(expect_msg);
+                    let remote = split
+                        .next()
+                        .expect(expect_msg)
+                        .parse::<usize>()
+                        .expect(expect_msg);
 
-            if split.count() != 0 {
-                panic!("{}", expect_msg);
-            }
+                    if split.count() != 0 {
+                        panic!("{}", expect_msg);
+                    }
 
-            (local, remote)
-        }).collect(),
+                    (local, remote)
+                })
+                .collect()
+        },
     );
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
@@ -189,10 +202,15 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     } else if bwmfs_ratios.len() != 0 {
         // Must have one ratio for each workload
         if bwmfs_ratios.len() != workloads.len() {
-            panic!("Must have exactly one BWMFS ratio for each workload ({})", workloads.len());
+            panic!(
+                "Must have exactly one BWMFS ratio for each workload ({})",
+                workloads.len()
+            );
         }
 
-        Strategy::Bwmfs { ratios: bwmfs_ratios }
+        Strategy::Bwmfs {
+            ratios: bwmfs_ratios,
+        }
     } else {
         Strategy::Linux
     };
@@ -432,14 +450,25 @@ where
             ushell.run(cmd!("echo 1 | sudo tee /sys/kernel/mm/fbmm/state"))?;
 
             for (i, (local, remote)) in ratios.iter().enumerate() {
-                let mount_dir = dir!(&user_home, format!("bwmfs{}", i+1));
+                let mount_dir = dir!(&user_home, format!("bwmfs{}", i + 1));
 
                 ushell.run(cmd!("mkdir -p {}", mount_dir))?;
-                ushell.run(cmd!("sudo mount -t BandwidthMMFS BandwidthMMFS {}", mount_dir))?;
+                ushell.run(cmd!(
+                    "sudo mount -t BandwidthMMFS BandwidthMMFS {}",
+                    mount_dir
+                ))?;
                 ushell.run(cmd!("sudo chown -R $USER {}", mount_dir))?;
 
-                ushell.run(cmd!("echo {} | sudo tee /sys/fs/bwmmfs{}/node0/weight", local, i+1))?;
-                ushell.run(cmd!("echo {} | sudo tee /sys/fs/bwmmfs{}/node1/weight", remote, i+1))?;
+                ushell.run(cmd!(
+                    "echo {} | sudo tee /sys/fs/bwmmfs{}/node0/weight",
+                    local,
+                    i + 1
+                ))?;
+                ushell.run(cmd!(
+                    "echo {} | sudo tee /sys/fs/bwmmfs{}/node1/weight",
+                    remote,
+                    i + 1
+                ))?;
 
                 cmd_prefixes[i].push_str(&format!("{}/fbmm_wrapper {} ", &tools_dir, mount_dir));
             }

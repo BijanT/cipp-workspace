@@ -236,7 +236,13 @@ where
 
     clone_git_repo(ushell, damo_repo, Some("damo"), Some("main"), &[])?;
 
-    clone_git_repo(ushell, workloads_repo, Some("workloads"), Some("main"), &["gapbs"])?;
+    clone_git_repo(
+        ushell,
+        workloads_repo,
+        Some("workloads"),
+        Some("main"),
+        &["gapbs"],
+    )?;
 
     clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
 
