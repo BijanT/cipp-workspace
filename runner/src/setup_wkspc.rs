@@ -182,6 +182,8 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "intel-cmt-cat",
             "htop",
             "msr-tools",
+            "libconfig-dev",
+            "uthash-dev",
         ]),
     };
 
@@ -248,11 +250,15 @@ where
 fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     let user_home = get_user_home_dir(&ushell)?;
     let workloads_dir = dir!(&user_home, crate::WORKLOADS_PATH);
+    let quartz_build_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/build");
     let merci_dir = dir!(&workloads_dir, "MERCI");
     let gapbs_dir = dir!(&workloads_dir, "gapbs");
 
     ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
     ushell.run(cmd!("make; make bench-graphs").cwd(&gapbs_dir))?;
+
+    ushell.run(cmd!("mkdir -p {}", &quartz_build_dir))?;
+    ushell.run(cmd!("cmake ..").cwd(&quartz_build_dir))?;
 
     Ok(())
 }

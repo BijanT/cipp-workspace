@@ -335,6 +335,7 @@ where
 
     match cfg.throttle {
         ThrottleType::Quartz { bw } => {
+            let quartz_build_dir = dir!(&quartz_dir, "build");
             let nvmemul_ini = dir!(&quartz_dir, "nvmemul.ini");
             let tmp_nvmemul_ini = "/tmp/nvmemul.ini";
             let quartz_lib_path = format!("{}/build/src/lib/libnvmemul.so", &quartz_dir);
@@ -342,6 +343,10 @@ where
                 "LD_PRELOAD={} NVMEMUL_INI={} ",
                 &quartz_lib_path, tmp_nvmemul_ini
             );
+
+            // Make sure Quartz is built.
+            // We can't do this in setup_wkspc because it requires the kernel being installed
+            ushell.run(cmd!("make all").cwd(&quartz_build_dir))?;
 
             // Need to escaped the slashes for sed
             let escaped_user_home = user_home.replace("/", "\\/");
