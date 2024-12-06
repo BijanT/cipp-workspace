@@ -455,12 +455,6 @@ where
         cmd_prefixes[i].push_str(&format!("taskset -c {} ", cores_str));
     }
 
-    if cfg.bwmon {
-        // Attach bwmon to only the first workload since it will track bw for the
-        // whole system.
-        cmd_prefixes[0].push_str(&format!("sudo {}/bwmon 200 {} ", tools_dir, bwmon_file));
-    }
-
     if cfg.meminfo {
         for name in &proc_names {
             let meminfo_file = format!("{}.{}", meminfo_file_stub, name);
@@ -512,6 +506,17 @@ where
             }
         })
         .collect();
+
+    if cfg.bwmon {
+        // Attach bwmon to only the first workload since it will track bw for the
+        // whole system.
+        ushell.spawn(cmd!(
+            "sudo {}/bwmon 200 {} $(pgrep -x {})",
+            tools_dir,
+            bwmon_file,
+            proc_names[0]
+        ))?;
+    }
 
     // Wait for the first workload to finish then kill the rest
     for (i, handle) in handles.into_iter().enumerate() {

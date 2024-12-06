@@ -13,9 +13,18 @@
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
+#include <poll.h>
 #include <unistd.h>
 
 #include "perf.h"
+
+#ifndef __NR_pidfd_open
+#define __NR_pidfd_open 434
+#endif
+
+int pidfd_open(pid_t pid, unsigned int flags) {
+    return syscall(__NR_pidfd_open, pid, flags);
+}
 
 int main(int argc, char* argv[])
 {
@@ -33,10 +42,12 @@ int main(int argc, char* argv[])
     uint64_t total_bw;
     uint64_t count;
     long unsigned int i;
+    struct pollfd pollfd;
     pid_t pid;
+    int pidfd;
 
     if (argc != 2 && argc < 4) {
-        std::cerr << "Usage: ./bwmon <Sample Interval (ms)> <out file> <cmd> <args>" << std::endl;
+        std::cerr << "Usage: ./bwmon <Sample Interval (ms)> <out file> <pid>" << std::endl;
         return -1;
     }
 
@@ -70,19 +81,26 @@ int main(int argc, char* argv[])
     if (argc == 2) {
         pid = -1;
     } else {
-        pid = fork();
-        if (pid == -1) {
-            std::cerr << "Error forking proc: " << errno << std::endl;
-            return -1;
-        } else if (pid == 0) {
-            execvp(argv[3], &argv[3]);
-            std::cerr << "Error execing file!" << std::endl;
+        pid = atoi(argv[3]);
+
+        pidfd = pidfd_open(pid, 0);
+        if (pidfd < 0) {
+            std::cerr << "Could not open pidfd for " << pid << std::endl;
             return -1;
         }
+
+        pollfd.fd = pidfd;
+        pollfd.events = POLLIN;
     }
 
-    while (!waitpid(pid, nullptr, WNOHANG) || pid == -1) {
+    while (true) {
         total_bw = 0;
+
+        // If tracking a proccess, see if it has exited
+        if (pid != -1) {
+            if (poll(&pollfd, 1, 0) != 0)
+                break;
+        }
 
         for (i = 0; i < cpus.size(); i++) {
             apply_ioctl(PERF_EVENT_IOC_RESET, rd_fds[i]);
