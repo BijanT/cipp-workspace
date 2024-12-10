@@ -407,8 +407,9 @@ where
             ushell.run(cmd!("{} sleep 1", quartz_envs))?;
             ushell.run(cmd!("{} sleep 1", quartz_envs))?;
 
-            // We only need to add the env variable to one of the workloads
-            cmd_prefixes[0].push_str(&quartz_envs);
+            // Throttle bandwidth with quartz for 2 hours
+            // This should be enough for our workloads.
+            ushell.spawn(cmd!("{} sleep 7200", quartz_envs))?;
         }
         ThrottleType::Msr => {
             // TODO: This is specific to c220g2. Make it generic
