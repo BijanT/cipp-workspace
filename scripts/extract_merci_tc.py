@@ -8,11 +8,15 @@ import re
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-def get_max_bandwidth(bwmon_file):
-    max_bandwidth = 0
-    max_local_bw = 0
-    max_remote_bw = 0
+def get_bandwidth(bwmon_file, percentile=95):
+    local_bws = []
+    remote_bws = []
+    total_bws = []
     node_bw_pattern = re.compile("Total (\d+) MB/s")
+
+    if percentile < 0 or percentile > 100:
+        eprint("Invalid percentile " + str(percentile))
+        sys.exit()
 
     f = open(bwmon_file, "r")
     while True:
@@ -27,15 +31,18 @@ def get_max_bandwidth(bwmon_file):
         remote_bw = int(node_bw_pattern.findall(remote_str)[0])
         total_bw = int(total_str.split(":")[1])
 
-        if total_bw > max_bandwidth:
-            max_bandwidth = total_bw
-            max_local_bandwidth = local_bw
-            max_remote_bandwidth = remote_bw
+        local_bws.append(local_bw)
+        remote_bws.append(remote_bw)
+        total_bws.append(total_bw)
 
         # Read past the line break between entries
         f.readline()
 
-    return (max_bandwidth, max_local_bandwidth, max_remote_bandwidth)
+    sorted_bws = sorted(total_bws)
+    percentile_ind = int(len(sorted_bws) * percentile / 100) - 1;
+    i = total_bws.index(sorted_bws[percentile_ind])
+
+    return (total_bws[i], local_bws[i], remote_bws[i])
 
 def get_avg_merci_time(merci_file):
     time_sum = 0.0
@@ -114,7 +121,7 @@ use_bwmon = "--bwmon" in cmd
 
 max_bandwidth = 0
 if use_bwmon:
-    max_bandwidth, _, _ = get_max_bandwidth(bwmon_file)
+    max_bandwidth, _, _ = get_bandwidth(bwmon_file)
 
 merci_time = get_avg_merci_time(merci_file)
 tc_time = get_avg_tc_time(tc_file)
@@ -127,7 +134,7 @@ outdata = {
     "Throttle": throttle,
     "Merci (ms)": str(merci_time),
     "GAPBS TC (s)": str(tc_time),
-    "Max Bandwidth (MB/s)": str(max_bandwidth),
+    "Bandwidth (MB/s)": str(max_bandwidth),
 }
 
 if strategy == "BandwidthMFS":
