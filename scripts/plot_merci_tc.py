@@ -9,23 +9,28 @@ tc_ratio = "TC Ratio"
 merci_ratio = "MERCI Ratio"
 tc_time = "TC Time"
 merci_time = "MERCI Time"
+time_geomean = "Geomean"
 bandwidth = "Bandwidth"
-data_cols = [tc_ratio, merci_ratio, tc_time, merci_time, bandwidth]
+local_bw = "Local BW"
+remote_bw = "Remote BW"
+data_cols = [tc_ratio, merci_ratio, tc_time, merci_time,
+            bandwidth, local_bw, remote_bw]
 
-def build_data_grid(data, unique_tc_ratios, unique_merci_ratios, column):
+def build_data_grid(data, unique_tc_ratios, unique_merci_ratios, column, norm=None):
     num_tc_ratios = len(unique_tc_ratios)
     num_merci_ratios = len(unique_merci_ratios)
     num_data_points = len(data[column])
     grid = np.zeros((num_tc_ratios, num_merci_ratios))
 
-    min_val = min(data[column])
+    if norm is None:
+        norm = min(data[column])
 
     for i in range(num_data_points):
         # Find the point in the grid to put this data point
         tc_ind = unique_tc_ratios.index(data[tc_ratio][i])
         merci_ind = unique_merci_ratios.index(data[merci_ratio][i])
 
-        grid[tc_ind][merci_ind] = "{:.2f}".format(data[column][i] / min_val)
+        grid[tc_ind][merci_ind] = "{:.2f}".format(data[column][i] / norm)
 
     return grid
 
@@ -37,6 +42,8 @@ data = {
     tc_time: [],
     merci_time: [],
     bandwidth: [],
+    local_bw: [],
+    remote_bw: [],
 }
 
 with open(filename, "r") as csvfile:
@@ -50,14 +57,33 @@ with open(filename, "r") as csvfile:
 unique_tc_ratios = sorted(set(data[tc_ratio]))
 unique_merci_ratios = sorted(set(data[merci_ratio]))
 
-# The data points we want to plot
-plotted_cols = [tc_time, merci_time, bandwidth]
-plot_titles = ["Normalized TC Runtime", "Normalized MERCI Runtime", "Normalized Bandwidth Utilization"]
+grids = {}
+# Build the simple grids that are normalized to themselves
+for col in [tc_time, merci_time, bandwidth]:
+    grids[col] = build_data_grid(data, unique_tc_ratios, unique_merci_ratios, col)
 
-fig, ax = plt.subplots(1, len(plotted_cols))
+# The local and remote bandwidth plots are normalized to the min of total bw
+min_tot_bw = min(data[bandwidth])
+for col in [local_bw, remote_bw]:
+    grids[col] = build_data_grid(data, unique_tc_ratios, unique_merci_ratios, col, min_tot_bw)
+
+# The time sum plot is the geomean of the TC and MERCI normalized runtimes
+grids[time_geomean] = np.zeros((len(unique_tc_ratios), len(unique_merci_ratios)))
+for i in range(len(unique_tc_ratios)):
+    for j in range(len(unique_merci_ratios)):
+        geo = np.sqrt(grids[tc_time][i][j] * grids[merci_time][i][j])
+        grids[time_geomean][i][j] = "{:.2f}".format(geo)
+
+# The data points we want to plot
+plotted_cols = [tc_time, merci_time, time_geomean, bandwidth, local_bw, remote_bw]
+plot_titles = ["Normalized TC Runtime", "Normalized MERCI Runtime", "Normalized Runtime Geomean",
+               "Normalized Bandwidth Utilization", "Normalized Local Bandwidth", "Normalized Remote Bandwidth"]
+
+fig, ax = plt.subplots(2, 3)
+ax = ax.flatten()
 
 for (i, col) in enumerate(plotted_cols):
-    grid = build_data_grid(data, unique_tc_ratios, unique_merci_ratios, col)
+    grid = grids[col]
     im = ax[i].imshow(grid, origin="lower")
     ax[i].set_title(plot_titles[i])
 

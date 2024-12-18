@@ -120,8 +120,10 @@ else:
 use_bwmon = "--bwmon" in cmd
 
 max_bandwidth = 0
+local_bw = 0
+remote_bw = 0
 if use_bwmon:
-    max_bandwidth, _, _ = get_bandwidth(bwmon_file)
+    max_bandwidth, local_bw, remote_bw = get_bandwidth(bwmon_file)
 
 merci_time = get_avg_merci_time(merci_file)
 tc_time = get_avg_tc_time(tc_file)
@@ -134,6 +136,8 @@ outdata = {
     "Throttle": throttle,
     "Merci (ms)": str(merci_time),
     "GAPBS TC (s)": str(tc_time),
+    "Local BW (MB/s)": str(local_bw),
+    "Remote BW (MB/s)": str(remote_bw),
     "Bandwidth (MB/s)": str(max_bandwidth),
 }
 
