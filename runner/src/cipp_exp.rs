@@ -51,6 +51,7 @@ struct Config {
     flame_graph: bool,
     bwmon: bool,
     meminfo: bool,
+    time: bool,
     throttle: ThrottleType,
 
     #[timestamp]
@@ -86,6 +87,10 @@ pub fn cli_options() -> clap::Command {
         .arg(
             arg!(--meminfo "Periodically print the local/remote memory breakdown")
                 .action(ArgAction::SetTrue),
+        )
+        .arg(
+            arg!(--time "Run the workloads with GNU time")
+                .action(ArgAction::SetTrue)
         )
         .arg(
             arg!(--quartz <QUARTZ_BW> "Use Quartz to limit the memory bandwidth (MB/s)")
@@ -174,6 +179,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
+    let time = sub_m.get_flag("time");
     let quartz_bw = sub_m.get_one::<u64>("quartz").copied();
     let msr_throttle = sub_m.get_flag("msr_throttle");
 
@@ -234,6 +240,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         flame_graph,
         bwmon,
         meminfo,
+        time,
         throttle,
         timestamp: Timestamp::now(),
     };
@@ -260,6 +267,7 @@ where
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
+    let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
 
     let colloid_dir = dir!(&user_home, "colloid/tpp/");
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
@@ -420,6 +428,15 @@ where
             }
         }
         ThrottleType::Native => (),
+    }
+
+    if cfg.time {
+        for (i, name) in proc_names.iter().enumerate() {
+            let time_file = format!("{}.{}", time_file_stub, name);
+            // Have to use full path because "time" is also a shell
+            // command, which takes priority
+            cmd_prefixes[i].push_str(&format!("/usr/bin/time -o {} ", time_file));
+        }
     }
 
     // Use whatever tiering strategy specified
