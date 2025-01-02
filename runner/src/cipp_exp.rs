@@ -22,6 +22,7 @@ enum Workload {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 enum Strategy {
+    Tpp,
     Colloid,
     Bwmfs { ratios: Vec<(usize, usize)> },
     Linux,
@@ -73,9 +74,10 @@ pub fn cli_options() -> clap::Command {
         )
         .arg(arg!(--disable_thp "Disable THP completely.").action(ArgAction::SetTrue))
         .arg(arg!(--disable_aslr "Disable ASLR.").action(ArgAction::SetTrue))
-        .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue))
+        .arg(arg!(--tpp "Use TPP").action(ArgAction::SetTrue))
+        .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue).conflicts_with("tpp"))
         .arg(arg!(--bwmfs <RATIO> "Use BWMFS with the specified local:remote ratio")
-            .action(ArgAction::Append).conflicts_with("colloid"))
+            .action(ArgAction::Append).conflicts_with("colloid").conflicts_with("tpp"))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -147,6 +149,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     );
     let disable_thp = sub_m.get_flag("disable_thp");
     let disable_aslr = sub_m.get_flag("disable_aslr");
+    let tpp = sub_m.get_flag("tpp");
     let colloid = sub_m.get_flag("colloid");
     let bwmfs_ratios = sub_m.get_many("bwmfs").map_or(
         Vec::new(),
@@ -203,7 +206,9 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         _ => unreachable!(),
     };
 
-    let strategy = if colloid {
+    let strategy = if tpp {
+        Strategy::Tpp
+    } else if colloid {
         Strategy::Colloid
     } else if bwmfs_ratios.len() != 0 {
         // Must have one ratio for each workload
@@ -446,6 +451,13 @@ where
 
     // Use whatever tiering strategy specified
     match &cfg.strategy {
+        Strategy::Tpp => {
+            with_shell! { ushell =>
+                cmd!("swapoff -a"),
+                cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
+                cmd!("echo 2 | sudo tee /proc/sys/kernel/numa_balancing"),
+            }
+        }
         Strategy::Colloid => {
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
