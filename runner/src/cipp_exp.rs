@@ -252,7 +252,7 @@ fn run_inner<A>(login: &Login<A>, cfg: &Config) -> Result<(), failure::Error>
 where
     A: std::net::ToSocketAddrs + std::fmt::Display + std::fmt::Debug + Clone,
 {
-    let ushell = connect_and_setup_host(login)?;
+    let ushell = SshShell::with_any_key(login.username, &login.host)?;
     let user_home = get_user_home_dir(&ushell)?;
 
     // Setup the output filename
@@ -279,6 +279,11 @@ where
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
+
+    isolate_remote_cores(&ushell)?;
+
+    // Reboot to use new grubcfg with isolated cores
+    let ushell = connect_and_setup_host(login)?;
 
     let mut tctx = TasksetCtxBuilder::from_lscpu(&ushell)?
         .numa_interleaving(TasksetCtxInterleaving::Sequential)
@@ -637,6 +642,69 @@ where
     set_kernel_printk_level(&ushell, 5)?;
 
     Ok(ushell)
+}
+
+fn isolate_remote_cores(ushell: &SshShell) -> Result<(), failure::Error> {
+    let remote_threads = get_socket_threads(ushell, 1)?;
+    let disable_cores_str = remote_threads
+        .iter()
+        .map(ToString::to_string)
+        .collect::<Vec<_>>()
+        .join(",");
+
+    ushell.run(cmd!("cat /etc/default/grub"))?;
+    // Remote the old isolcpus
+    ushell.run(cmd!(
+        r#"sed -E 's/ isolcpus=[0-9]+(,[0-9]+)*//g' \
+        /etc/default/grub | tee /tmp/grub"#
+    ))?;
+    // Add new isolcpus
+    ushell.run(cmd!(
+        r#"sed 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 isolcpus={}"/' \
+    /tmp/grub | tee /tmp/grub2"#,
+        disable_cores_str
+    ))?;
+
+    ushell.run(cmd!("sudo mv /tmp/grub2 /etc/default/grub"))?;
+    ushell.run(cmd!("sudo update-grub2"))?;
+
+    Ok(())
+}
+
+fn get_socket_threads(
+    ushell: &SshShell,
+    target_socket: usize,
+) -> Result<Vec<usize>, failure::Error> {
+    let mut threads: Vec<usize> = Vec::new();
+    let lscpu_output = ushell.run(cmd!("lscpu -p"))?.stdout;
+
+    for line in lscpu_output.lines() {
+        if line.contains('#') {
+            continue;
+        }
+        let mut split = line.trim().split(",");
+        let thread = split
+            .next()
+            .unwrap()
+            .parse::<usize>()
+            .expect("Expected integer");
+        let _core = split
+            .next()
+            .unwrap()
+            .parse::<usize>()
+            .expect("Expected integer");
+        let socket = split
+            .next()
+            .unwrap()
+            .parse::<usize>()
+            .expect("Expected integer");
+
+        if socket == target_socket {
+            threads.push(thread);
+        }
+    }
+
+    Ok(threads)
 }
 
 fn run_merci(
