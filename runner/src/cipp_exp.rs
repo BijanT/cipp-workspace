@@ -25,6 +25,7 @@ enum Strategy {
     Tpp,
     Colloid,
     Bwmfs { ratios: Vec<(usize, usize)> },
+    Cipp,
     Linux,
 }
 
@@ -78,6 +79,8 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue).conflicts_with("tpp"))
         .arg(arg!(--bwmfs <RATIO> "Use BWMFS with the specified local:remote ratio")
             .action(ArgAction::Append).conflicts_with("colloid").conflicts_with("tpp"))
+        .arg(arg!(--cipp "Use CIPP")
+            .action(ArgAction::SetTrue).conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs"))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -179,6 +182,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
                 .collect()
         },
     );
+    let cipp = sub_m.get_flag("cipp");
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
@@ -222,6 +226,8 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Strategy::Bwmfs {
             ratios: bwmfs_ratios,
         }
+    } else if cipp {
+        Strategy::Cipp
     } else {
         Strategy::Linux
     };
@@ -268,6 +274,7 @@ where
     let perf_stat_file = dir!(&results_dir, cfg.gen_file_name("perf_stat"));
     let flame_graph_file = dir!(&results_dir, cfg.gen_file_name("flamegraph.svg"));
     let colloid_lat_file = dir!(&results_dir, cfg.gen_file_name("colloid.lat"));
+    let cipp_file = dir!(&results_dir, cfg.gen_file_name("cipp"));
     let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
@@ -276,6 +283,7 @@ where
 
     let colloid_dir = dir!(&user_home, "colloid/tpp/");
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
+    let numactl_dir = dir!(&user_home, crate::WKSPC_PATH, "numactl/");
     let quartz_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/");
     let merci_dir = dir!(
         &user_home,
@@ -506,6 +514,34 @@ where
                 ))?;
 
                 cmd_prefixes[i].push_str(&format!("{}/fbmm_wrapper {} ", &tools_dir, mount_dir));
+            }
+        }
+        Strategy::Cipp => {
+            let damo_dir = dir!(&user_home, "damo");
+            let damo_yaml_file = dir!(&user_home, "cipp.yaml");
+
+            ushell.run(cmd!(
+                "sudo {}/gen_interleave.py -o {}",
+                &damo_dir,
+                &damo_yaml_file
+            ))?;
+            ushell.run(cmd!("sudo {}/damo start {}", &damo_dir, &damo_yaml_file))?;
+
+            ushell.run(cmd!(
+                "echo 255 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node0"
+            ))?;
+            ushell.run(cmd!(
+                "echo 1 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node1"
+            ))?;
+
+            ushell.spawn(cmd!(
+                "sudo {}/cipp 200 10000 10000 > {}",
+                &tools_dir,
+                &cipp_file
+            ))?;
+
+            for prefix in &mut cmd_prefixes {
+                prefix.push_str(&format!("{}/numactl -w 0,1 ", &numactl_dir));
             }
         }
         Strategy::Linux => {
