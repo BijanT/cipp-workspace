@@ -460,7 +460,10 @@ where
     // Use whatever tiering strategy specified
     match &cfg.strategy {
         Strategy::Tpp => {
+            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
+
             with_shell! { ushell =>
+                cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
                 cmd!("swapoff -a"),
                 cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
                 cmd!("echo 2 | sudo tee /proc/sys/kernel/numa_balancing"),
