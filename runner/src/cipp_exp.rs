@@ -339,6 +339,7 @@ where
                 .join(",")
         })
         .collect();
+    let all_cores_str = pin_cores_strs.join(",");
 
     let proc_names: Vec<&str> = cfg
         .workloads
@@ -529,6 +530,7 @@ where
                 &damo_yaml_file
             ))?;
             ushell.run(cmd!("sudo {}/damo start {}", &damo_dir, &damo_yaml_file))?;
+            ushell.run(cmd!("sudo taskset -cp {} $(pgrep kdamond)", &all_cores_str))?;
 
             ushell.run(cmd!(
                 "echo 255 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node0"
