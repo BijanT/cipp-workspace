@@ -40,6 +40,7 @@ time_s = [5 * i for i in range(len(local_lat))]
 
 plt.plot(time_s, local_lat, label="Local")
 plt.plot(time_s, remote_lat, label="Remote")
+plt.ylim(0, None)
 
 plt.legend()
 plt.xlabel("Time (s)", fontsize=14)
