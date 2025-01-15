@@ -540,7 +540,7 @@ where
             ))?;
 
             ushell.spawn(cmd!(
-                "sudo {}/cipp 200 10000 10000 > {}",
+                "sudo {}/cipp 200 15000 10000 > {}",
                 &tools_dir,
                 &cipp_file
             ))?;
