@@ -70,9 +70,15 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     int cur_step;
     std::stringstream shell_cmd;
     std::multiset<uint64_t> sorted_bw;
+    long unsigned int i = 0;
 
     // Sort the bandwidths to get the Nth percentile
     for (uint64_t bw : bw_history) {
+        i++;
+        // Throw away the earlist half of the samples to account for DAMON
+        // not migrating the pages immediately
+        if (i < bw_history.size() / 2)
+            continue;
         sorted_bw.insert(bw);
     }
     nth_percentile_index = (sorted_bw.size() * BW_PERCENTILE / 100) - 1;
