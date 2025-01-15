@@ -104,7 +104,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     } else if (last_ratio == 100) {
         // Probe downward to see if we can make use of more bandwidth
         cur_step = -abs(last_step);
-    } else if (bw_change < interleave_change) {
+    } else if (bw_change < interleave_change / 2) {
         // The last step was good, keep going
         correct_count++;
         if (correct_count >= 3) {
