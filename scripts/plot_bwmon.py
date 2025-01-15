@@ -7,6 +7,14 @@ import matplotlib.pyplot as plt
 
 from helpers import eprint
 
+def add_record(bw_list, data_point):
+    # We see big drops in BW between merci iterations, that makes the graph
+    # hard to read. Smooth those over.
+    if len(bw_list) != 0 and data_point <= bw_list[-1] / 4:
+        bw_list.append(bw_list[-1])
+    else:
+        bw_list.append(data_point)
+
 def read_bw(bwmon_file):
     local_bws = []
     remote_bws = []
@@ -22,12 +30,12 @@ def read_bw(bwmon_file):
         (node, bw) = matches[0]
         # Convert from MB/s to GB/s
         node = int(node)
-        bw = int(bw) / 1024
+        bw = float(bw) / 1024
 
         if node == 0:
-            local_bws.append(bw)
+            add_record(local_bws, bw)
         elif node == 1:
-            remote_bws.append(bw)
+            add_record(remote_bws, bw)
         else:
             eprint("Invalid node " + str(node) + " from line " + line)
             sys.exit(1)
