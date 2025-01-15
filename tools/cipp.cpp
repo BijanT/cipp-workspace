@@ -12,7 +12,7 @@
 
 #include "perf.h"
 
-constexpr int BW_PERCENTILE = 80;
+constexpr int BW_PERCENTILE = 50;
 constexpr int MAX_STEP = 10;
 constexpr int MIN_STEP = 2;
 
