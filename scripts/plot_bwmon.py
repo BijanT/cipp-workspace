@@ -48,6 +48,7 @@ def read_bw(bwmon_file):
 
 filename = sys.argv[1]
 workload = sys.argv[2]
+outfile = None
 if len(sys.argv) >= 4:
     outfile = sys.argv[3]
 

@@ -35,6 +35,9 @@ def build_data_grid(data, unique_tc_ratios, unique_merci_ratios, column, norm=No
     return grid
 
 filename = sys.argv[1]
+outfile = None
+if len(sys.argv) >= 3:
+    outfile = sys.argv[2]
 
 data = {
     tc_ratio: [],
@@ -76,26 +79,31 @@ for i in range(len(unique_tc_ratios)):
 
 # The data points we want to plot
 plotted_cols = [tc_time, merci_time, time_geomean, bandwidth, local_bw, remote_bw]
-plot_titles = ["Normalized TC Runtime", "Normalized MERCI Runtime", "Normalized Runtime Geomean",
+plot_titles = ["Normalized TC Runtime", "Normalized ER Runtime", "Normalized Runtime Geomean",
                "Normalized Bandwidth Utilization", "Normalized Local Bandwidth", "Normalized Remote Bandwidth"]
 
+plt.figure(figsize=(192, 100))
 fig, ax = plt.subplots(2, 3)
 ax = ax.flatten()
 
 for (i, col) in enumerate(plotted_cols):
     grid = grids[col]
     im = ax[i].imshow(grid, origin="lower")
-    ax[i].set_title(plot_titles[i])
+    ax[i].set_title(plot_titles[i], fontsize=16)
 
     # Set the axis ticks to be the interleave ratios
-    ax[i].set_xticks(np.arange(len(unique_merci_ratios)), labels=unique_merci_ratios)
-    ax[i].set_yticks(np.arange(len(unique_tc_ratios)), labels=unique_tc_ratios)
-    ax[i].set_xlabel("Percent of MERCI data in local memory")
-    ax[i].set_ylabel("Percent of TC data in local memory")
+    ax[i].set_xticks(np.arange(len(unique_merci_ratios)), labels=unique_merci_ratios, fontsize=12)
+    ax[i].set_yticks(np.arange(len(unique_tc_ratios)), labels=unique_tc_ratios, fontsize=12)
+    ax[i].set_xlabel("Percent of ER data in local memory", fontsize=14)
+    ax[i].set_ylabel("Percent of TC data in local memory", fontsize=14)
 
     # Label each cell with the values
     for j in range(len(unique_tc_ratios)):
         for k in range(len(unique_merci_ratios)):
-            ax[i].text(k, j, grid[j, k], ha="center", va="center", color="w")
+            ax[i].text(k, j, grid[j, k], ha="center", va="center", color="w",
+                fontsize=12, weight="bold")
 
-plt.show()
+if outfile is not None:
+    plt.savefig(outfile)
+else:
+    plt.show()
