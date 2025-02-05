@@ -615,6 +615,7 @@ where
     if cfg.bwmon {
         // Attach bwmon to only the first workload since it will track bw for the
         // whole system.
+        ushell.run(cmd!("sleep 1"))?;
         ushell.spawn(cmd!(
             "sudo {}/bwmon 200 {} $(pgrep -x {})",
             tools_dir,
