@@ -14,7 +14,7 @@
 
 constexpr int BW_PERCENTILE = 50;
 constexpr int MAX_STEP = 10;
-constexpr int MIN_STEP = 2;
+constexpr int MIN_STEP = 0;
 
 int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
@@ -83,15 +83,18 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     }
     nth_percentile_index = (sorted_bw.size() * BW_PERCENTILE / 100) - 1;
     cur_bw = *std::next(sorted_bw.begin(), nth_percentile_index);
+    if (cur_bw == 0)
+	    cur_bw = 1;
 
     // Calculate the relative change in BW and interleave ratio
     if (last_bw == 0)
         last_bw = cur_bw;
+    if (last_ratio == 0)
+        last_ratio = 1;
     // Multiple by 10000 instead of 100 to get more resolution
     bw_change = (10000 * (last_bw - cur_bw)) / last_bw;
-    interleave_change = (10000 * (last_ratio - ratio)) / last_ratio;
+    interleave_change = last_step * -100;//(10000 * (last_ratio - ratio)) / last_ratio;
 
-    last_bw = cur_bw;
     last_ratio = ratio;
 
     // Adjust the interleave ratio
@@ -104,6 +107,13 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     } else if (last_ratio == 100) {
         // Probe downward to see if we can make use of more bandwidth
         cur_step = -abs(last_step);
+    } else if (last_step == 0) {
+        // If we have stopped moving, see if the bandwidth has changed
+        // enough due to application changes to search again.
+        // Divide by 100 because bw_change is in houndreths of a percent
+        cur_step = bw_change / 100;
+        if (abs(cur_step) < 2)
+            cur_step = 0;
     } else if (bw_change < interleave_change / 2) {
         // The last step was good, keep going
         correct_count++;
@@ -130,6 +140,9 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
 
     ratio += cur_step;
     last_step = cur_step;
+
+    if (cur_step != 0)
+        last_bw = cur_bw;
 
     if (ratio > 100)
         ratio = 100;
