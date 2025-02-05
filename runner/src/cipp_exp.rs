@@ -16,8 +16,14 @@ use spurs_util::escape_for_bash;
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 enum Workload {
-    Merci { runs: u64 },
-    GapbsTc { runs: u64 },
+    Merci {
+        runs: u64,
+        cores: Option<usize>,
+        delay: Option<u64>,
+    },
+    GapbsTc {
+        runs: u64,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -46,6 +52,7 @@ struct Config {
     #[name]
     strategy: Strategy,
 
+    kill_after_first_done: bool,
     perf_stat: bool,
     perf_counters: Vec<String>,
     disable_thp: bool,
@@ -134,6 +141,24 @@ pub fn cli_options() -> clap::Command {
                     .value_parser(clap::value_parser!(u64)),
                 ),
         )
+        .subcommand(
+            clap::Command::new("double_merci")
+                .about("Run two instances of the MERCI workload together, with one offset before the other")
+                .arg(
+                    arg!([runs]
+            "The number of iterations of MERCI to run. Default: 10")
+                    .value_parser(clap::value_parser!(u64))
+                )
+                .arg(
+                    arg!([cores]
+            "The number of cores to run each instance of MERCI.")
+                    .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--delay <DELAY> "The delay, in seconds, to start the second instance after the first")
+                    .value_parser(clap::value_parser!(u64))
+                )
+        )
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -182,6 +207,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
                 .collect()
         },
     );
+    let mut kill_after_first_done = true;
     let cipp = sub_m.get_flag("cipp");
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
@@ -193,7 +219,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
-            vec![Workload::Merci { runs }]
+            vec![Workload::Merci {
+                runs,
+                cores: None,
+                delay: None,
+            }]
         }
         Some(("gapbs_tc", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
@@ -204,7 +234,25 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
             let merci_runs = 100 * tc_runs;
             vec![
                 Workload::GapbsTc { runs: tc_runs },
-                Workload::Merci { runs: merci_runs },
+                Workload::Merci {
+                    runs: merci_runs,
+                    cores: None,
+                    delay: None,
+                },
+            ]
+        }
+        Some(("double_merci", sub_m)) => {
+            let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
+            let cores = sub_m.get_one::<usize>("cores").copied();
+            let delay = sub_m.get_one::<u64>("delay").copied();
+            kill_after_first_done = false;
+            vec![
+                Workload::Merci {
+                    runs,
+                    cores,
+                    delay: None,
+                },
+                Workload::Merci { runs, cores, delay },
             ]
         }
         _ => unreachable!(),
@@ -244,6 +292,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         exp: "cipp_exp".into(),
         workloads,
         strategy,
+        kill_after_first_done,
         perf_stat,
         perf_counters,
         disable_thp,
@@ -598,14 +647,18 @@ where
         .iter()
         .enumerate()
         .map(|(i, &wkld)| match wkld {
-            Workload::Merci { runs } => run_merci(
-                &ushell,
-                &merci_dir,
-                runs,
-                cores_per_wkld,
-                &cmd_prefixes[i],
-                &merci_file,
-            ),
+            Workload::Merci { runs, cores, delay } => {
+                let cores = cores.unwrap_or(cores_per_wkld);
+                run_merci(
+                    &ushell,
+                    &merci_dir,
+                    runs,
+                    cores,
+                    delay,
+                    &cmd_prefixes[i],
+                    &merci_file,
+                )
+            }
             Workload::GapbsTc { runs } => {
                 run_gapbs_tc(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
             }
@@ -626,7 +679,7 @@ where
 
     // Wait for the first workload to finish then kill the rest
     for (i, handle) in handles.into_iter().enumerate() {
-        if i != 0 {
+        if cfg.kill_after_first_done && i != 0 {
             ushell.run(cmd!("sudo pkill {}", proc_names[i]).allow_error())?;
         }
         match handle {
@@ -766,12 +819,20 @@ fn run_merci(
     merci_dir: &str,
     runs: u64,
     cores: usize,
+    delay: Option<u64>,
     cmd_prefix: &str,
     merci_file: &str,
 ) -> Result<SshSpawnHandle, failure::Error> {
+    let sleep = if let Some(d) = delay {
+        format!("sleep {};", d)
+    } else {
+        String::new()
+    };
+
     let handle = ushell.spawn(
         cmd!(
-            "{} ./bin/eval_baseline -d amazon_Books -r {} -c {} | sudo tee {}",
+            "{} {} ./bin/eval_baseline -d amazon_Books -r {} -c {} | sudo tee -a {}",
+            sleep,
             cmd_prefix,
             runs,
             cores,
