@@ -31,6 +31,7 @@ enum Strategy {
     Tpp,
     Colloid,
     Bwmfs { ratios: Vec<(usize, usize)> },
+    Numactl { local: usize, remote: usize },
     Cipp,
     Linux,
 }
@@ -86,8 +87,10 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--colloid "Use Colloid").action(ArgAction::SetTrue).conflicts_with("tpp"))
         .arg(arg!(--bwmfs <RATIO> "Use BWMFS with the specified local:remote ratio")
             .action(ArgAction::Append).conflicts_with("colloid").conflicts_with("tpp"))
+        .arg(arg!(--numactl <RATIO> "Use numactl weighted interleave with the specified local:remote ratio")
+            .conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs"))
         .arg(arg!(--cipp "Use CIPP")
-            .action(ArgAction::SetTrue).conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs"))
+            .action(ArgAction::SetTrue).conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs").conflicts_with("numactl"))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -179,34 +182,33 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let tpp = sub_m.get_flag("tpp");
     let colloid = sub_m.get_flag("colloid");
-    let bwmfs_ratios = sub_m.get_many("bwmfs").map_or(
-        Vec::new(),
-        |ratios: clap::parser::ValuesRef<'_, String>| {
-            ratios
-                .map(|r| {
-                    let expect_msg =
-                        "--bwmfs should be of the format <local weight>:<remote weight>";
-                    let mut split = r.split(":");
-                    let local = split
-                        .next()
-                        .expect(expect_msg)
-                        .parse::<usize>()
-                        .expect(expect_msg);
-                    let remote = split
-                        .next()
-                        .expect(expect_msg)
-                        .parse::<usize>()
-                        .expect(expect_msg);
+    let parse_ratio = |r: &String| {
+        let expect_msg =
+            "--bwmfs or --numactl should be of the format <local weight>:<remote weight>";
+        let mut split = r.split(":");
+        let local = split
+            .next()
+            .expect(expect_msg)
+            .parse::<usize>()
+            .expect(expect_msg);
+        let remote = split
+            .next()
+            .expect(expect_msg)
+            .parse::<usize>()
+            .expect(expect_msg);
 
-                    if split.count() != 0 {
-                        panic!("{}", expect_msg);
-                    }
+        if split.count() != 0 {
+            panic!("{}", expect_msg);
+        }
 
-                    (local, remote)
-                })
-                .collect()
-        },
-    );
+        (local, remote)
+    };
+    let bwmfs_ratios = sub_m
+        .get_many("bwmfs")
+        .map_or(Vec::new(), |ratios: clap::parser::ValuesRef<'_, String>| {
+            ratios.map(parse_ratio).collect()
+        });
+    let numactl_ratio = sub_m.get_one("numactl").map(parse_ratio);
     let mut kill_after_first_done = true;
     let cipp = sub_m.get_flag("cipp");
     let flame_graph = sub_m.get_flag("flame_graph");
@@ -274,6 +276,8 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Strategy::Bwmfs {
             ratios: bwmfs_ratios,
         }
+    } else if let Some((local, remote)) = numactl_ratio {
+        Strategy::Numactl { local, remote }
     } else if cipp {
         Strategy::Cipp
     } else {
@@ -567,6 +571,20 @@ where
                 ))?;
 
                 cmd_prefixes[i].push_str(&format!("{}/fbmm_wrapper {} ", &tools_dir, mount_dir));
+            }
+        }
+        Strategy::Numactl { local, remote } => {
+            ushell.run(cmd!(
+                "echo {} | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node0",
+                local,
+            ))?;
+            ushell.run(cmd!(
+                "echo {} | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node1",
+                remote,
+            ))?;
+
+            for prefix in &mut cmd_prefixes {
+                prefix.push_str(&format!("{}/numactl -w 0,1 ", &numactl_dir));
             }
         }
         Strategy::Cipp => {
