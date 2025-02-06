@@ -14,7 +14,7 @@
 
 constexpr int BW_PERCENTILE = 50;
 constexpr int MAX_STEP = 10;
-constexpr int MIN_STEP = 0;
+constexpr int MIN_STEP = 2;
 
 int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
@@ -112,7 +112,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         // enough due to application changes to search again.
         // Divide by 100 because bw_change is in houndreths of a percent
         cur_step = bw_change / 100;
-        if (abs(cur_step) < 2)
+        if (abs(cur_step) < 4)
             cur_step = 0;
     } else if (bw_change < interleave_change / 2) {
         // The last step was good, keep going
@@ -133,7 +133,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
 
     // Make sure the step stays in bounds
     if (abs(cur_step) < MIN_STEP) {
-        cur_step = cur_step < 0 ? -MIN_STEP : MIN_STEP;
+        cur_step = 0;
     } else if (abs(cur_step) > MAX_STEP) {
         cur_step = cur_step < 0 ? -MAX_STEP : MAX_STEP;
     }
