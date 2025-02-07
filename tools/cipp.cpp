@@ -138,11 +138,11 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         cur_step = cur_step < 0 ? -MAX_STEP : MAX_STEP;
     }
 
+    if (last_step != 0 || cur_step != 0)
+        last_bw = cur_bw;
+
     ratio += cur_step;
     last_step = cur_step;
-
-    if (cur_step != 0)
-        last_bw = cur_bw;
 
     if (ratio > 100)
         ratio = 100;
