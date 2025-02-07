@@ -7,7 +7,7 @@ fbmm_wrapper: fbmm_wrapper.c
 	gcc fbmm_wrapper.c -o fbmm_wrapper
 
 cipp: cipp.o perf.o
-	g++ $^ -o $@
+	g++ $^ -lnuma -o $@
 
 bwmon: bwmon.o perf.o
 	g++ $^ -o $@
