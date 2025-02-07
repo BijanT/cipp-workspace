@@ -100,13 +100,17 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     // Adjust the interleave ratio
     if (cur_bw < bw_cutoff) {
         // The bandwidth is clearly unsaturated, so increase the local ratio
-        if (last_step < 0)
-            cur_step = abs(last_step) / 2;
-        else
+        if (last_step <= 0) {
+            cur_step = std::max(abs(last_step) / 2, MIN_STEP);
+            correct_count = 0;
+        } else {
             cur_step = last_step;
+            correct_count++;
+        }
     } else if (last_ratio == 100) {
         // Probe downward to see if we can make use of more bandwidth
         cur_step = -abs(last_step);
+        correct_count = 0;
     } else if (last_step == 0) {
         // If we have stopped moving, see if the bandwidth has changed
         // enough due to application changes to search again.
@@ -114,21 +118,22 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         cur_step = bw_change / 100;
         if (abs(cur_step) < 4)
             cur_step = 0;
+        correct_count = 0;
     } else if (bw_change < interleave_change / 2) {
         // The last step was good, keep going
         correct_count++;
-        if (correct_count >= 3) {
-            // If we've been correct multiple times in a row, we might be far
-            // away from the ideal, so pick up the pace!
-            cur_step = last_step * 2;
-            correct_count = 0;
-        } else {
-            cur_step = last_step;
-        }
+        cur_step = last_step;
     } else {
         // The last step was bad, reverse
         correct_count = 0;
         cur_step = -last_step / 2;
+    }
+
+    // If we've been correct multiple times in a row, we might be far
+    // away from the ideal, so pick up the pace!
+    if (correct_count >= 3) {
+        cur_step = cur_step * 2;
+        correct_count = 0;
     }
 
     // Make sure the step stays in bounds
