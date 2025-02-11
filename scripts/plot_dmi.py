@@ -33,7 +33,7 @@ if len(sys.argv) >= 4:
 
 ratios = read_dmi(filename)
 # CIPP updates every 15 seconds
-time_s = [15 * i for i in range(len(ratios))]
+time_s = [8 * i for i in range(len(ratios))]
 
 plt.plot(time_s, ratios)
 plt.ylim(0, 105)
