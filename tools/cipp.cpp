@@ -38,6 +38,7 @@ struct page_info {
 };
 
 std::atomic_int global_int_ratio = 100;
+std::atomic_bool pause_migration = false;
 
 int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
@@ -246,6 +247,7 @@ void migrate_pages(pid_t pid, std::map<uint64_t, page_info> &page_infos,
         }
 
         pages_to_move -= count;
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 }
 
@@ -300,10 +302,8 @@ void migrator_thread(int migrate_interval_ms)
         // Every so often, migrate the pages
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time);
-        if (duration.count() >= migrate_interval_ms) {
+        if (duration.count() >= migrate_interval_ms && !pause_migration) {
             apply_ioctl(PERF_EVENT_IOC_DISABLE, fds);
-
-            // TODO
 
             for (auto& [pid, proc_pages] : pages_list) {
                 migrate_pages(pid, proc_pages, pages.data(), nodes.data(), status.data(), MAX_MIGRATE);
@@ -449,10 +449,13 @@ int main(int argc, char *argv[])
 
         bw_history.push_back(cur_bw);
 
+        if (bw_history.size() > max_list_size / 2)
+            pause_migration = true;
         // Have we reached an adjustment interval?
         if (bw_history.size() >= max_list_size) {
             global_int_ratio = adjust_interleave_ratio(bw_history, global_int_ratio, bw_saturation_cutoff);
             bw_history.clear();
+            pause_migration = false;
         }
     }
 }
