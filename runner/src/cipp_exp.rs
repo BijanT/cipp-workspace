@@ -24,6 +24,12 @@ enum Workload {
     GapbsTc {
         runs: u64,
     },
+    Gups {
+        threads: usize,
+        exp: usize,
+        hot_exp: usize,
+        num_updates: usize,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -136,6 +142,27 @@ pub fn cli_options() -> clap::Command {
                 ),
         )
         .subcommand(
+            clap::Command::new("gups")
+                .about("Run the GUPS workload")
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                        .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--exp <exp> "The log of the size of the workload")
+                        .value_parser(clap::value_parser!(usize))
+                        .required(true)
+                )
+                .arg(
+                    arg!(--hot_exp <hot_exp> "The log of the size of the hot region, if there is one")
+                        .value_parser(clap::value_parser!(usize))
+                        .required(true)
+                )
+                .arg(
+                    arg!(--updates <updates> "The number of updates to do. Default is 2^exp / 8")
+                )
+        )
+        .subcommand(
             clap::Command::new("merci_tc")
                 .about("Run the MERCI and GAPBS tc workload together")
                 .arg(
@@ -230,6 +257,14 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("gapbs_tc", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             vec![Workload::GapbsTc { runs }]
+        }
+        Some(("gups", sub_m)) => {
+            let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&1);
+            let exp = *sub_m.get_one::<usize>("exp").unwrap();
+            let hot_exp = *sub_m.get_one::<usize>("hot_exp").unwrap();
+            let num_updates = sub_m.get_one::<usize>("updates").copied().unwrap_or((1 << exp) / 8);
+
+            vec![Workload::Gups {threads, exp, hot_exp, num_updates}]
         }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
@@ -331,6 +366,7 @@ where
     let bwmon_file = dir!(&results_dir, cfg.gen_file_name("bwmon"));
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
+    let gups_file = dir!(&results_dir, cfg.gen_file_name("gups"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
     let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
 
@@ -344,6 +380,7 @@ where
         "MERCI/4_performance_evaluation/"
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
+    let gups_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gups_hemem/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
     isolate_remote_cores(&ushell)?;
@@ -400,6 +437,7 @@ where
         .map(|&wkld| match wkld {
             Workload::Merci { .. } => "eval_baseline",
             Workload::GapbsTc { .. } => "tc",
+            Workload::Gups { .. } => "gups-hotset-mov",
         })
         .collect();
 
@@ -680,6 +718,18 @@ where
             Workload::GapbsTc { runs } => {
                 run_gapbs_tc(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
             }
+            Workload::Gups { threads, exp, hot_exp, num_updates } => {
+                run_gups(
+                    &ushell,
+                    &gups_dir,
+                    threads,
+                    exp,
+                    hot_exp,
+                    num_updates,
+                    &cmd_prefixes[i],
+                    &gups_file,
+                )
+            }
         })
         .collect();
 
@@ -877,6 +927,32 @@ fn run_gapbs_tc(
             gapbs_file
         )
         .cwd(gapbs_dir),
+    )?;
+
+    Ok(handle)
+}
+
+fn run_gups(
+    ushell: &SshShell,
+    gups_dir: &str,
+    threads: usize,
+    exp: usize,
+    hot_exp: usize,
+    num_updates: usize,
+    cmd_prefix: &str,
+    gups_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
+        cmd!(
+            "{} ./gups-hotset-move {} {} {} 8 {} n | tee {}",
+            cmd_prefix,
+            threads,
+            num_updates,
+            exp,
+            hot_exp,
+            gups_file
+        )
+        .cwd(gups_dir)
     )?;
 
     Ok(handle)

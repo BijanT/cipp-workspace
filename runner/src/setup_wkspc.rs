@@ -259,9 +259,11 @@ fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     let quartz_build_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/build");
     let merci_dir = dir!(&workloads_dir, "MERCI");
     let gapbs_dir = dir!(&workloads_dir, "gapbs");
+    let gups_dir = dir!(&workloads_dir, "gups_hemem");
 
     ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
     ushell.run(cmd!("make; make bench-graphs").cwd(&gapbs_dir))?;
+    ushell.run(cmd!("make").cwd(&gups_dir))?;
 
     ushell.run(cmd!("mkdir -p {}", &quartz_build_dir))?;
     ushell.run(cmd!("cmake ..").cwd(&quartz_build_dir))?;
