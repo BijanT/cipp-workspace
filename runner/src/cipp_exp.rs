@@ -191,6 +191,49 @@ pub fn cli_options() -> clap::Command {
         )
 }
 
+#[derive(Debug)]
+struct SimpleError {
+    error: String,
+}
+
+impl std::fmt::Display for SimpleError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
+        write!(f, "{}", self.error)
+    }
+}
+
+impl std::error::Error for SimpleError {}
+
+fn get_remote_start_addr(ushell: &SshShell) -> Result<usize, failure::Error> {
+    let mut found_node1 = false;
+    let zoneinfo_output = ushell.run(cmd!("cat /proc/zoneinfo"))?.stdout;
+    for line in zoneinfo_output.lines() {
+        if line == "Node 1, zone   Normal" {
+            found_node1 = true;
+            continue;
+        }
+        if !found_node1 {
+            continue;
+        }
+
+        if line.contains("start_pfn:") {
+            let mut split = line.trim().split(':');
+            split.next();
+            let pfn = split
+                .next()
+                .unwrap()
+                .trim()
+                .parse::<usize>()
+                .expect("Expected integer");
+
+            // Convert pfn to address
+            return Ok(pfn * 4096);
+        }
+    }
+
+    Err(SimpleError {error: "Could not find remote memory start".to_string()}.into())
+}
+
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let username = sub_m.get_one::<String>("username").unwrap().clone();
     let host = sub_m.get_one::<String>("hostname").unwrap().clone();
@@ -628,11 +671,13 @@ where
         Strategy::Cipp => {
             let damo_dir = dir!(&user_home, "damo");
             let damo_yaml_file = dir!(&user_home, "cipp.yaml");
+            let remote_mem_start = get_remote_start_addr(&ushell)?;
 
             ushell.run(cmd!(
-                "sudo {}/gen_interleave.py -o {}",
+                "sudo {}/gen_interleave.py -o {} -a {}",
                 &damo_dir,
-                &damo_yaml_file
+                &damo_yaml_file,
+                remote_mem_start,
             ))?;
             ushell.run(cmd!("sudo {}/damo start {}", &damo_dir, &damo_yaml_file))?;
             ushell.run(cmd!("sudo taskset -cp {} $(pgrep kdamond)", &all_cores_str))?;
