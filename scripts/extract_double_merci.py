@@ -75,7 +75,10 @@ outdata = {
     "Bandwidth (MB/s)": str(max_bandwidth),
 }
 
-if strategy == "BandwidthMFS" or strategy == "Numactl":
+if strategy == "Numactl":
     outdata["Local Ratio"] = ratios[0]
+if strategy == "BandwidthMFS":
+    outdata["Local Ratio 1"] = ratios[0]
+    outdata["Local Ratio 2"] = ratios[1]
 
 print(json.dumps(outdata))
