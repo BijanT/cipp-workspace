@@ -437,7 +437,7 @@ where
         .group_hyperthreads(true)
         .build();
     let num_threads = tctx.num_threads_on_socket(0);
-    let cores_per_wkld = num_threads / cfg.workloads.len();
+    let max_cores_per_wkld = num_threads / cfg.workloads.len();
 
     let mut bgctx = BackgroundContext::new(&ushell);
 
@@ -451,14 +451,38 @@ where
     // For now, always initially pin memory to local NUMA node
     let mut cmd_prefixes: Vec<String> = vec![String::new(); cfg.workloads.len()];
 
+    // Determine how many threads/cores each workload should have
+    let cores_per_wkld: Vec<usize> = cfg
+        .workloads
+        .iter()
+        .map(|&wkld| match wkld {
+            Workload::Merci { cores, .. } => cores.unwrap_or(max_cores_per_wkld),
+            Workload::GapbsTc { .. } => max_cores_per_wkld,
+            Workload::Gups { threads, .. } => threads,
+        })
+        .collect();
+
+    // Assign threads to each workload
+    let mut tot_wkld_threads: usize = 0;
     let mut pin_cores: Vec<Vec<usize>> = vec![Vec::new(); cfg.workloads.len()];
-    for pc in &mut pin_cores {
-        for _ in 0..cores_per_wkld {
+    for (i, num_cores) in cores_per_wkld.iter().enumerate() {
+        tot_wkld_threads += num_cores;
+        for _ in 0..*num_cores {
             if let Ok(new_core) = tctx.next() {
-                pc.push(new_core);
+                pin_cores[i].push(new_core);
             } else {
                 return Err(std::fmt::Error.into());
             }
+        }
+    }
+
+    // Collect the rest of the threads in the first numa node
+    let mut extra_cores: Vec<usize> = Vec::new();
+    for _ in 0..(num_threads - tot_wkld_threads) {
+        if let Ok(new_core) = tctx.next() {
+            extra_cores.push(new_core);
+        } else {
+            return Err(std::fmt::Error.into());
         }
     }
 
@@ -472,7 +496,12 @@ where
                 .join(",")
         })
         .collect();
-    let all_cores_str = pin_cores_strs.join(",");
+    let extra_cores_str = extra_cores
+        .iter()
+        .map(ToString::to_string)
+        .collect::<Vec<_>>()
+        .join(",");
+    let all_cores_str = pin_cores_strs.join(",") + "," + &extra_cores_str;
 
     let proc_names: Vec<&str> = cfg
         .workloads
@@ -749,7 +778,7 @@ where
         .enumerate()
         .map(|(i, &wkld)| match wkld {
             Workload::Merci { runs, cores, delay } => {
-                let cores = cores.unwrap_or(cores_per_wkld);
+                let cores = cores.unwrap_or(max_cores_per_wkld);
                 run_merci(
                     &ushell,
                     &merci_dir,
