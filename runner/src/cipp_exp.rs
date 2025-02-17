@@ -746,7 +746,7 @@ where
         }
         Strategy::Linux => {
             for prefix in &mut cmd_prefixes {
-                prefix.push_str("numactl --membind=0 ");
+                prefix.push_str("numactl --preferred=0 ");
             }
         }
     }
