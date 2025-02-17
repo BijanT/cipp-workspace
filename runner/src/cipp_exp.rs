@@ -208,20 +208,7 @@ pub fn cli_options() -> clap::Command {
         )
 }
 
-#[derive(Debug)]
-struct SimpleError {
-    error: String,
-}
-
-impl std::fmt::Display for SimpleError {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
-        write!(f, "{}", self.error)
-    }
-}
-
-impl std::error::Error for SimpleError {}
-
-fn get_remote_start_addr(ushell: &SshShell) -> Result<usize, failure::Error> {
+fn get_remote_start_addr(ushell: &SshShell) -> Result<usize, ScailError> {
     let mut found_node1 = false;
     let zoneinfo_output = ushell.run(cmd!("cat /proc/zoneinfo"))?.stdout;
     for line in zoneinfo_output.lines() {
@@ -248,7 +235,7 @@ fn get_remote_start_addr(ushell: &SshShell) -> Result<usize, failure::Error> {
         }
     }
 
-    Err(SimpleError {error: "Could not find remote memory start".to_string()}.into())
+    Err(ScailError::InvalidValueError { msg: "Could not find remote memory start".to_string() })
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
