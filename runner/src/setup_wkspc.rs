@@ -38,6 +38,9 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--host_bmks
          "(Optional) If passed, build host benchmarks. This also makes them available to the guest.")
             .action(ArgAction::SetTrue))
+        .arg(arg!(--skip_slow
+         "(Optional) If passed, skip some setup steps that take a long time to speed up basic setup.")
+            .action(ArgAction::SetTrue))
 }
 
 struct SetupConfig<'a, A>
@@ -64,6 +67,8 @@ where
 
     /// Should we build host benchmarks>
     host_bmks: bool,
+    /// Should we skip some steps to speedup the setup?
+    skip_slow: bool,
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -83,6 +88,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let secret = sub_m.get_one::<String>("secret").map(|s| s.as_str());
 
     let host_bmks = sub_m.get_flag("host_bmks");
+    let skip_slow = sub_m.get_flag("skip_slow");
 
     let cfg = SetupConfig {
         login,
@@ -93,6 +99,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         wkspc_branch,
         secret,
         host_bmks,
+        skip_slow,
     };
 
     run_inner(cfg)?;
@@ -121,7 +128,7 @@ where
     }
 
     if cfg.host_bmks {
-        build_host_benchmarks(&ushell)?;
+        build_host_benchmarks(&ushell, &cfg)?;
     }
 
     ushell.run(cmd!("echo DONE"))?;
@@ -254,7 +261,13 @@ where
     Ok(())
 }
 
-fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
+fn build_host_benchmarks<A>(
+    ushell: &SshShell,
+    cfg: &SetupConfig<'_, A>
+) -> Result<(), failure::Error>
+where
+    A: std::net::ToSocketAddrs + std::fmt::Display + std::fmt::Debug + Clone,
+{
     let user_home = get_user_home_dir(&ushell)?;
     let workloads_dir = dir!(&user_home, crate::WORKLOADS_PATH);
     let quartz_build_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/build");
@@ -264,8 +277,11 @@ fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     let ycsb_dir = dir!(&workloads_dir, "YCSB");
     let gups_dir = dir!(&workloads_dir, "gups_hemem");
 
-    ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
-    ushell.run(cmd!("make; make bench-graphs").cwd(&gapbs_dir))?;
+    ushell.run(cmd!("make").cwd(&gapbs_dir))?;
+    if !cfg.skip_slow {
+        ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
+        ushell.run(cmd!("make bench-graphs").cwd(&gapbs_dir))?;
+    }
     ushell.run(cmd!("make").cwd(&redis_dir))?;
     ushell.run(cmd!("mvn -pl site.ycsb:redis-binding -am clean package").cwd(&ycsb_dir))?;
     ushell.run(cmd!("make").cwd(&gups_dir))?;
