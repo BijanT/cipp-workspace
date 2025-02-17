@@ -5,8 +5,9 @@ use libscail::{
     dir, dump_sys_info, get_user_home_dir,
     output::{Parametrize, Timestamp},
     set_kernel_printk_level, with_shell,
-    workloads::{gen_perf_command_prefix, TasksetCtxBuilder, TasksetCtxInterleaving},
-    Login,
+    workloads::{gen_perf_command_prefix, RedisWorkloadConfig, TasksetCtxBuilder, TasksetCtxInterleaving,
+    YcsbConfig, YcsbDistribution, YcsbSession, YcsbSystem, YcsbWorkload},
+    Login, ScailError,
 };
 
 use serde::{Deserialize, Serialize};
@@ -29,6 +30,10 @@ enum Workload {
         exp: usize,
         hot_exp: usize,
         num_updates: usize,
+    },
+    Redis {
+        server_size_mb: usize,
+        op_count: usize,
     },
 }
 
@@ -160,6 +165,18 @@ pub fn cli_options() -> clap::Command {
                 )
                 .arg(
                     arg!(--updates <updates> "The number of updates to do. Default is 2^exp / 8")
+                )
+        )
+        .subcommand(
+            clap::Command::new("redis")
+                .about("Run the redis workload")
+                .arg(
+                    arg!(--server_size <SERVER_SIZE> "The size of the server in GB")
+                        .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--op_count <OP_COUNT> "The number of read operations to use")
+                        .value_parser(clap::value_parser!(usize))
                 )
         )
         .subcommand(
@@ -309,6 +326,12 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
             vec![Workload::Gups {threads, exp, hot_exp, num_updates}]
         }
+        Some(("redis", sub_m)) => {
+            let server_size_mb = *sub_m.get_one::<usize>("server_size").unwrap() << 10;
+            let op_count = *sub_m.get_one::<usize>("op_count").unwrap();
+
+            vec![Workload::Redis { server_size_mb, op_count }]
+        }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             let merci_runs = 100 * tc_runs;
@@ -410,6 +433,7 @@ where
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
     let gups_file = dir!(&results_dir, cfg.gen_file_name("gups"));
+    let ycsb_file = dir!(&results_dir, cfg.gen_file_name("ycsb"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
     let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
 
@@ -424,6 +448,8 @@ where
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
     let gups_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gups_hemem/");
+    let redis_dir = dir!(&user_home, crate::WORKLOADS_PATH, "redis/src/");
+    let ycsb_dir = dir!(&user_home, crate::WORKLOADS_PATH, "YCSB/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
     isolate_remote_cores(&ushell)?;
@@ -459,6 +485,8 @@ where
             Workload::Merci { cores, .. } => cores.unwrap_or(max_cores_per_wkld),
             Workload::GapbsTc { .. } => max_cores_per_wkld,
             Workload::Gups { threads, .. } => threads,
+            // One pair of threads (one core) for redis and YCSB
+            Workload::Redis { .. } => 4,
         })
         .collect();
 
@@ -510,6 +538,7 @@ where
             Workload::Merci { .. } => "eval_baseline",
             Workload::GapbsTc { .. } => "tc",
             Workload::Gups { .. } => "gups-hotset-mov",
+            Workload::Redis { .. } => "redis-server",
         })
         .collect();
 
@@ -803,6 +832,47 @@ where
                     &cmd_prefixes[i],
                     &gups_file,
                 )
+            }
+            Workload::Redis { server_size_mb, op_count } => {
+                // Found empirically
+                const RECORD_SIZE_KB: usize = 21;
+                let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
+
+                let record_count = (server_size_mb << 10) / RECORD_SIZE_KB;
+                let redis_cfg = RedisWorkloadConfig {
+                    redis_dir: &redis_dir,
+                    nullfs: None,
+                    redis_conf: &redis_conf,
+                    server_size_mb,
+                    wk_size_gb: server_size_mb >> 10,
+                    output_file: None,
+                    server_pin_core: Some(pin_cores[i][0]),
+                    cmd_prefix: Some(&cmd_prefixes[i]),
+                    pintool: None,
+                };
+                let ycsb_cfg = YcsbConfig {
+                    workload: YcsbWorkload::Custom {
+                        record_count,
+                        op_count,
+                        distribution: YcsbDistribution::Zipfian,
+                        read_prop: 1.0,
+                        update_prop: 0.0,
+                        insert_prop: 0.0,
+                    },
+                    system: YcsbSystem::<fn(&SshShell) -> Result<(), ScailError>>::Redis(redis_cfg),
+                    client_pin_core: Some(pin_cores[i][2]),
+                    ycsb_path: &ycsb_dir,
+                    ycsb_result_file: Some(&ycsb_file),
+                };
+
+                let mut ycsb = YcsbSession::new(ycsb_cfg);
+
+                ycsb.start_and_load(&ushell)?;
+
+                // Turn off Redis snapshotting
+                ushell.run(cmd!("redis-cli -s /tmp/redis.sock CONFIG SET save \"\""))?;
+
+                Ok(ycsb.run_handle(&ushell)?)
             }
         })
         .collect();

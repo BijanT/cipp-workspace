@@ -184,6 +184,7 @@ fn install_host_dependencies(ushell: &SshShell) -> Result<(), failure::Error> {
             "msr-tools",
             "libconfig-dev",
             "uthash-dev",
+            "tcllib",
         ]),
     };
 
@@ -241,7 +242,7 @@ where
         workloads_repo,
         Some("workloads"),
         Some("main"),
-        &["gapbs"],
+        &["gapbs", "redis", "YCSB"],
     )?;
 
     clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
@@ -259,10 +260,14 @@ fn build_host_benchmarks(ushell: &SshShell) -> Result<(), failure::Error> {
     let quartz_build_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/build");
     let merci_dir = dir!(&workloads_dir, "MERCI");
     let gapbs_dir = dir!(&workloads_dir, "gapbs");
+    let redis_dir = dir!(&workloads_dir, "redis");
+    let ycsb_dir = dir!(&workloads_dir, "YCSB");
     let gups_dir = dir!(&workloads_dir, "gups_hemem");
 
     ushell.run(cmd!("./setup_merci_books.sh").cwd(&merci_dir))?;
     ushell.run(cmd!("make; make bench-graphs").cwd(&gapbs_dir))?;
+    ushell.run(cmd!("make").cwd(&redis_dir))?;
+    ushell.run(cmd!("mvn -pl site.ycsb:redis-binding -am clean package").cwd(&ycsb_dir))?;
     ushell.run(cmd!("make").cwd(&gups_dir))?;
 
     ushell.run(cmd!("mkdir -p {}", &quartz_build_dir))?;
