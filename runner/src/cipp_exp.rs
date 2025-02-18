@@ -421,6 +421,8 @@ where
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
     let gups_file = dir!(&results_dir, cfg.gen_file_name("gups"));
     let ycsb_file = dir!(&results_dir, cfg.gen_file_name("ycsb"));
+    let vmstat_file = dir!(&results_dir, cfg.gen_file_name("vmstat"));
+    let damo_status_file = dir!(&results_dir, cfg.gen_file_name("damo_status"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
     let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
 
@@ -428,6 +430,7 @@ where
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
     let numactl_dir = dir!(&user_home, crate::WKSPC_PATH, "numactl/");
     let quartz_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/");
+    let damo_dir = dir!(&user_home, "damo");
     let merci_dir = dir!(
         &user_home,
         crate::WORKLOADS_PATH,
@@ -714,7 +717,6 @@ where
             }
         }
         Strategy::Cipp => {
-            let damo_dir = dir!(&user_home, "damo");
             let damo_yaml_file = dir!(&user_home, "cipp.yaml");
             let remote_mem_start = get_remote_start_addr(&ushell)?;
 
@@ -885,6 +887,12 @@ where
             Ok(h) => h.join().1?,
             Err(e) => return Err(e),
         };
+    }
+
+    ushell.run(cmd!("cat /proc/vmstat | tee {}", &vmstat_file))?;
+
+    if matches!(&cfg.strategy, Strategy::Cipp) {
+        ushell.run(cmd!("sudo {}/damo status | tee {}", &damo_dir, &damo_status_file))?;
     }
 
     if cfg.flame_graph {
