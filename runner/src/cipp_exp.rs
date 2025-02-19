@@ -754,6 +754,10 @@ where
     }
 
     for (i, cores_str) in pin_cores_strs.iter().enumerate() {
+        // The Redis code in libscail does its own pinning, so ignore it here
+        if matches!(&cfg.workloads[i], Workload::Redis { .. }) {
+            continue;
+        }
         cmd_prefixes[i].push_str(&format!("taskset -c {} ", cores_str));
     }
 
