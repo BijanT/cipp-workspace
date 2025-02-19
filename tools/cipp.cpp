@@ -155,21 +155,11 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         ratio = 0;
 
     // Actually change the ratio
-    if (ratio == 100) {
-        // Setting these files to 0 actually sets them to 1, so set node 0 to
-        // max, and node 1 to 1
-        shell_cmd << "echo 255 | tee /sys/kernel/mm/mempolicy/weighted_interleave/node0";
-        system(shell_cmd.str().c_str());
-        shell_cmd.str(std::string());
-        shell_cmd << "echo 1 | tee /sys/kernel/mm/mempolicy/weighted_interleave/node1";
-        system(shell_cmd.str().c_str());
-    } else {
-        shell_cmd << "echo " << ratio << " | tee /sys/kernel/mm/mempolicy/weighted_interleave/node0";
-        system(shell_cmd.str().c_str());
-        shell_cmd.str(std::string());
-        shell_cmd << "echo " << 100 - ratio << " | tee /sys/kernel/mm/mempolicy/weighted_interleave/node1";
-        system(shell_cmd.str().c_str());
-    }
+    shell_cmd << "echo " << ratio << " | tee /sys/kernel/mm/mempolicy/weighted_interleave/node0";
+    system(shell_cmd.str().c_str());
+    shell_cmd.str(std::string());
+    shell_cmd << "echo " << 100 - ratio << " | tee /sys/kernel/mm/mempolicy/weighted_interleave/node1";
+    system(shell_cmd.str().c_str());
 
     std::cout << "Target ratio: " << ratio << " "
               << "BW Change: " << bw_change << " "

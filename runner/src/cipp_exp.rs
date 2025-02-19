@@ -730,10 +730,10 @@ where
             ushell.run(cmd!("sudo taskset -cp {} $(pgrep kdamond)", &all_cores_str))?;
 
             ushell.run(cmd!(
-                "echo 255 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node0"
+                "echo 100 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node0"
             ))?;
             ushell.run(cmd!(
-                "echo 1 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node1"
+                "echo 0 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node1"
             ))?;
 
             ushell.spawn(cmd!(
