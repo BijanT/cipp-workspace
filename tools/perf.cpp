@@ -84,6 +84,11 @@ void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
         types.push_back(type);
         rd_configs.push_back(rd_config);
         wr_configs.push_back(wr_config);
+        // Quick hack: In SPR and GNR, there are two channels for reads and writes
+        // SCH0 and SCH1. SCH0 is found in the file. The event for SCH1 is just
+        // one larger than SCH0
+        rd_configs.push_back(rd_config + 1);
+        wr_configs.push_back(wr_config + 1);
 
         valid_uncore = i;
     }
@@ -123,24 +128,25 @@ void open_perf_events(int cpu, std::vector<uint32_t> types,
     int fd;
     struct perf_event_attr pe;
 
-    assert(types.size() == configs.size());
-
     for (unsigned long i = 0; i < types.size(); i++) {
         memset(&pe, 0, sizeof(pe));
         pe.type = types[i];
         pe.size = sizeof(pe);
-        pe.config = configs[i];
         pe.disabled = 1;
         pe.inherit = 1;
 
-        fd = perf_event_open(&pe, -1, cpu, -1, 0);
-        if (fd == -1) {
-            std::cerr << "Error opening type: " << pe.type << " config: " <<
-                std::hex << pe.config << std::dec << std::endl;
-            return;
-        }
+        for (unsigned long j = 0; j < 2; j++) {
+                pe.config = configs[j];
+                std::cout << pe.type << " " << std::hex << configs[j] << std::dec << std::endl;
+                fd = perf_event_open(&pe, -1, cpu, -1, 0);
+                if (fd == -1) {
+                    std::cerr << "Error opening type: " << pe.type << " config: " <<
+                        std::hex << pe.config << std::dec << std::endl;
+                    continue;
+                }
 
-        fds.push_back(fd);
+                fds.push_back(fd);
+        }
     }
 }
 
