@@ -740,6 +740,8 @@ where
                 "echo 0 | sudo tee /sys/kernel/mm/mempolicy/weighted_interleave/node1"
             ))?;
 
+            ushell.run(cmd!("echo 0 | sudo tee /proc/sys/kernel/numa_balancing"))?;
+
             ushell.spawn(cmd!(
                 "sudo {}/cipp 200 8000 10000 > {}",
                 &tools_dir,
