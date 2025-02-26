@@ -519,7 +519,11 @@ where
         .map(ToString::to_string)
         .collect::<Vec<_>>()
         .join(",");
-    let all_cores_str = pin_cores_strs.join(",") + "," + &extra_cores_str;
+    let all_cores_str = if extra_cores_str.len() == 0 {
+        pin_cores_strs.join(",")
+    } else {
+        pin_cores_strs.join(",") + "," + &extra_cores_str
+    };
 
     let proc_names: Vec<&str> = cfg
         .workloads
