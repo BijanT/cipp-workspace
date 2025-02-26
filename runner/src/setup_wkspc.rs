@@ -255,7 +255,7 @@ where
     clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
 
     // Build the workspace tools
-    ushell.run(cmd!("cd tools/; make;").cwd(&wkspc_dir))?;
+    ushell.run(cmd!("cd tools/; make ARCH=haswell;").cwd(&wkspc_dir))?;
     ushell.run(cmd!("cd numactl; ./autogen.sh; ./configure; make").cwd(&wkspc_dir))?;
 
     Ok(())
