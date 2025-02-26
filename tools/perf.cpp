@@ -58,53 +58,44 @@ void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
     // I've seen the uncore_imc_ values go from 0 to 11 with gaps, so try all of them
     for (int i = 0; i < 12; i++) {
         std::stringstream type_path;
-        std::stringstream read_event_path;
-        std::stringstream write_event_path;
         std::ifstream type_file;
-        std::ifstream read_event_file;
-        std::ifstream write_event_file;
 
         type_path << BASE_DIR << i << "/type";
-        read_event_path << BASE_DIR << i << "/events/cas_count_read";
-        write_event_path << BASE_DIR << i << "/events/cas_count_write";
 
         type_file.open(type_path.str().c_str());
-        read_event_file.open(read_event_path.str().c_str());
-        write_event_file.open(write_event_path.str().c_str());
 
-        if (!type_file.is_open() || !read_event_file.is_open() || !write_event_file.is_open())
+        if (!type_file.is_open())
             continue;
 
         // The type file is easy - just the decimal value
         type_file >> type;
 
-        rd_config = read_perf_event(read_event_file);
-        wr_config = read_perf_event(write_event_file);
-
         types.push_back(type);
-        rd_configs.push_back(rd_config);
-        wr_configs.push_back(wr_config);
-        // Quick hack: In SPR and GNR, there are two channels for reads and writes
-        // SCH0 and SCH1. SCH0 is found in the file. The event for SCH1 is just
-        // one larger than SCH0
-        rd_configs.push_back(rd_config + 1);
-        wr_configs.push_back(wr_config + 1);
 
         valid_uncore = i;
     }
 
     // Get what "cpu" values correspond to different NUMA nodes
+    // and the event codes for rd and write events
     if (valid_uncore != -1) {
         std::stringstream cpumask_path;
+        std::stringstream read_event_path;
+        std::stringstream write_event_path;
         std::ifstream cpumask_file;
+        std::ifstream read_event_file;
+        std::ifstream write_event_file;
         std::string cpumask_str;
         size_t pos = 0;
 
         cpumask_path << BASE_DIR << valid_uncore << "/cpumask";
+        read_event_path << BASE_DIR << valid_uncore << "/events/cas_count_read";
+        write_event_path << BASE_DIR << valid_uncore << "/events/cas_count_write";
 
         cpumask_file.open(cpumask_path.str().c_str());
+        read_event_file.open(read_event_path.str().c_str());
+        write_event_file.open(write_event_path.str().c_str());
 
-        if (!cpumask_file.is_open())
+        if (!cpumask_file.is_open() || !read_event_file.is_open() || !write_event_file.is_open())
             return;
 
         cpumask_file >> cpumask_str;
@@ -119,6 +110,19 @@ void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
             cpumask_str.erase(0, pos + 1);
             std::cout << cpu << std::endl;
         }
+
+        rd_config = read_perf_event(read_event_file);
+        wr_config = read_perf_event(write_event_file);
+        rd_configs.push_back(rd_config);
+        wr_configs.push_back(wr_config);
+#ifdef GNR
+        // Quick hack: In SPR and GNR, there are two channels for reads and writes
+        // SCH0 and SCH1. SCH0 is found in the file. The event for SCH1 is just
+        // one larger than SCH0
+        rd_configs.push_back(rd_config + 1);
+        wr_configs.push_back(wr_config + 1);
+#endif
+
     }
 }
 
@@ -135,9 +139,8 @@ void open_perf_events(int cpu, std::vector<uint32_t> types,
         pe.disabled = 1;
         pe.inherit = 1;
 
-        for (unsigned long j = 0; j < 2; j++) {
+        for (unsigned long j = 0; j < configs.size(); j++) {
                 pe.config = configs[j];
-                std::cout << pe.type << " " << std::hex << configs[j] << std::dec << std::endl;
                 fd = perf_event_open(&pe, -1, cpu, -1, 0);
                 if (fd == -1) {
                     std::cerr << "Error opening type: " << pe.type << " config: " <<

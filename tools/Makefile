@@ -1,4 +1,10 @@
-CFLAGS=-Wall -Werror -std=c++20
+# GNR is default, for haswell: make ARCH=haswell
+ARCH=gnr
+
+cflags.common=-Wall -Werror -std=c++20
+cflags.haswell=-DHASWELL
+cflags.gnr=-DGNR
+CFLAGS := ${cflags.common} ${cflags.${ARCH}}
 
 all: fbmm_wrapper cipp bwmon meminfo
 	echo "DONE"
