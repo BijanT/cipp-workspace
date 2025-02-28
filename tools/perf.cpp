@@ -160,13 +160,9 @@ void apply_ioctl(int cmd, std::vector<int> fds)
         ioctl(fd, cmd, 0);
 }
 
-struct perf_event_mmap_page *perf_sample_setup(pid_t pid, int cpu, uint64_t type,
-        uint64_t config, uint64_t config1, uint64_t sample_type, uint64_t sample_period,
-        int *out_fd) {
-    // Has to be 1+2^n pages
-    constexpr uint64_t PERF_PAGES (1 + (1 << 16));
+int perf_sample_open(pid_t pid, int cpu, int group_fd, uint64_t type, uint64_t config,
+        uint64_t config1, uint64_t sample_type, uint64_t sample_period) {
     struct perf_event_attr attr;
-    struct perf_event_mmap_page *p;
     int fd;
 
     memset(&attr, 0, sizeof(perf_event_attr));
@@ -177,7 +173,8 @@ struct perf_event_mmap_page *perf_sample_setup(pid_t pid, int cpu, uint64_t type
     attr.config1 = config1;
     attr.sample_period = sample_period;
     attr.sample_type = sample_type;
-    attr.pinned = 1;
+    attr.read_format = PERF_FORMAT_ID | PERF_FORMAT_LOST;
+    attr.pinned = 0;
     attr.disabled = 0;
     attr.exclude_kernel = 1;
     attr.exclude_hv = 1;
@@ -185,23 +182,12 @@ struct perf_event_mmap_page *perf_sample_setup(pid_t pid, int cpu, uint64_t type
     attr.exclude_callchain_user = 1;
     attr.precise_ip = 1;
 
-    fd = perf_event_open(&attr, pid, cpu, -1, 0);
+    fd = perf_event_open(&attr, pid, cpu, group_fd, 0);
     if (fd == -1) {
-        std::cerr << "perf_event_mmap_page: Failed perf_event_open " << errno << std::endl;
-        return NULL;
+        std::cerr << "perf_event_mmap_page: Failed perf_event_open " << errno << 
+		" " << cpu << std::endl;
+        return fd;
     }
 
-    size_t mmap_size = sysconf(_SC_PAGESIZE) * PERF_PAGES;
-    p = (struct perf_event_mmap_page*)mmap(NULL, mmap_size, PROT_READ | PROT_WRITE,
-        MAP_SHARED, fd, 0);
-    if (p == MAP_FAILED) {
-        std::cerr << "perf_event_mmap_page: Failed to mmap perf_event_mmap_page" << std::endl;
-        return NULL;
-    }
-
-
-    if (out_fd)
-        *out_fd = fd;
-
-    return p;
+    return fd;
 }

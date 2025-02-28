@@ -8,13 +8,20 @@
 
 #include <linux/perf_event.h>
 #include <numa.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
 
 #include "perf.h"
 
 #define PAGE_SHIFT 12
 #define MEM_TRANS_RETIRED 0x01CD
-#define SAMPLE_PERIOD 5000
+#define MEM_LOAD_AUX 0x8203
+#define SAMPLE_PERIOD 1000
 #define EWMA_EXP 1
+
+#define MIN_LOCAL_LAT 1
+#define MIN_REMOTE_LAT 1
 
 struct perf_sample {
     struct perf_event_header header;
@@ -36,7 +43,8 @@ int main(int argc, char* argv[])
     uint64_t smoothed_local_lat = 0;
     uint64_t smoothed_remote_lat = 0;
     std::vector<int> cpus;
-    std::vector<int> perf_fds;
+    std::vector<int> aux_fds;
+    std::vector<int> lat_fds;
     std::vector<struct perf_event_mmap_page*> pebs;
     std::streambuf *buf;
     std::ofstream out_file;
@@ -88,21 +96,46 @@ int main(int argc, char* argv[])
     }
 
     for (int cpu : cpus) {
-        int fd;
-        struct perf_event_mmap_page *p;
+        int aux_fd;
+        int lat_fd;
+        uint64_t sample_type = PERF_SAMPLE_PHYS_ADDR | PERF_SAMPLE_WEIGHT_STRUCT | PERF_SAMPLE_DATA_SRC;
         // Minimum latency in cycles to sample
         uint64_t ldlat = 300;
-        uint64_t sample_type = PERF_SAMPLE_PHYS_ADDR | PERF_SAMPLE_WEIGHT_STRUCT | PERF_SAMPLE_DATA_SRC;
 
-        p = perf_sample_setup(-1, cpu, PERF_TYPE_RAW, MEM_TRANS_RETIRED, ldlat,
-            sample_type, SAMPLE_PERIOD, &fd);
-        if (!p) {
-            std::cerr << "Error setting up PEBS: " << errno << std::endl;
+        aux_fd = perf_sample_open(-1, cpu, -1, PERF_TYPE_RAW, MEM_LOAD_AUX, 0, sample_type, SAMPLE_PERIOD);
+        if (aux_fd == -1) {
+            return -1;
+        }
+
+        lat_fd = perf_sample_open(-1, cpu, aux_fd, PERF_TYPE_RAW, MEM_TRANS_RETIRED, ldlat,
+            sample_type, SAMPLE_PERIOD);
+        if (lat_fd == -1) {
+            std::cerr << "Error setting up PEBS: " << strerror(errno) << std::endl;
+            return -1;
+        }
+
+        lat_fds.push_back(lat_fd);
+        aux_fds.push_back(aux_fd);
+    }
+
+    for (long unsigned int i = 0; i < lat_fds.size(); i++) {
+        constexpr uint64_t PERF_PAGES (1 + (1 << 16));
+        struct perf_event_mmap_page *p;
+        size_t mmap_size = sysconf(_SC_PAGESIZE) * PERF_PAGES;
+
+        p = (struct perf_event_mmap_page*)mmap(NULL, mmap_size, PROT_READ | PROT_WRITE,
+            MAP_SHARED, aux_fds[i], 0);
+        if (p == MAP_FAILED) {
+            std::cerr << "Failed to mmap perf_event_mmap_page " << errno << std::endl;
+            return -1;
+        }
+
+        if (ioctl(lat_fds[i], PERF_EVENT_IOC_SET_OUTPUT, aux_fds[i]) != 0) {
+            std::cerr << "Error setting output to aux " << errno << std::endl;
             return -1;
         }
 
         pebs.push_back(p);
-        perf_fds.push_back(fd);
     }
 
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -121,25 +154,28 @@ int main(int argc, char* argv[])
 
             agg_count++;
 
-            apply_ioctl(PERF_EVENT_IOC_DISABLE, perf_fds);
+            apply_ioctl(PERF_EVENT_IOC_DISABLE, lat_fds);
 
             if (local_lat_count > 0)
                 local_lat = local_lat_sum / local_lat_count;
             if (remote_lat_count > 0)
                 remote_lat = remote_lat_sum / remote_lat_count;
 
+            local_lat = local_lat < MIN_LOCAL_LAT ? MIN_LOCAL_LAT : local_lat;
+            remote_lat = remote_lat < MIN_REMOTE_LAT ? MIN_REMOTE_LAT : remote_lat;
+
             smoothed_local_lat = (local_lat + ((1<<EWMA_EXP) - 1)*smoothed_local_lat)>>EWMA_EXP;
             smoothed_remote_lat = (remote_lat + ((1<<EWMA_EXP) - 1)*smoothed_remote_lat)>>EWMA_EXP;
 
             // To not overwhelm the reader,  only print occasionally
-            if (agg_count % 10 == 0) {
+            if (agg_count % 100 == 0) {
                 out << "Local " << smoothed_local_lat << " Remote " << smoothed_remote_lat << std::endl;
                 out << local_lat_count << " " << remote_lat_count << std::endl;
             }
 
             local_lat_sum = local_lat_count = 0;
             remote_lat_sum = remote_lat_count = 0;
-            apply_ioctl(PERF_EVENT_IOC_ENABLE, perf_fds);
+            apply_ioctl(PERF_EVENT_IOC_ENABLE, lat_fds);
             start_time = std::chrono::high_resolution_clock::now();
         }
 
