@@ -20,8 +20,8 @@
 #define SAMPLE_PERIOD 1000
 #define EWMA_EXP 1
 
-#define MIN_LOCAL_LAT 1
-#define MIN_REMOTE_LAT 1
+#define MIN_LOCAL_LAT 300
+#define MIN_REMOTE_LAT 380
 
 struct perf_sample {
     struct perf_event_header header;
@@ -96,16 +96,18 @@ int main(int argc, char* argv[])
     }
 
     for (int cpu : cpus) {
-        int aux_fd;
+        int aux_fd = -1;
         int lat_fd;
         uint64_t sample_type = PERF_SAMPLE_PHYS_ADDR | PERF_SAMPLE_WEIGHT_STRUCT | PERF_SAMPLE_DATA_SRC;
         // Minimum latency in cycles to sample
         uint64_t ldlat = 300;
 
+#ifdef GNR
         aux_fd = perf_sample_open(-1, cpu, -1, PERF_TYPE_RAW, MEM_LOAD_AUX, 0, sample_type, SAMPLE_PERIOD);
         if (aux_fd == -1) {
             return -1;
         }
+#endif
 
         lat_fd = perf_sample_open(-1, cpu, aux_fd, PERF_TYPE_RAW, MEM_TRANS_RETIRED, ldlat,
             sample_type, SAMPLE_PERIOD);
@@ -115,7 +117,9 @@ int main(int argc, char* argv[])
         }
 
         lat_fds.push_back(lat_fd);
+#ifdef GNR
         aux_fds.push_back(aux_fd);
+#endif
     }
 
     for (long unsigned int i = 0; i < lat_fds.size(); i++) {
@@ -123,15 +127,20 @@ int main(int argc, char* argv[])
         struct perf_event_mmap_page *p;
         size_t mmap_size = sysconf(_SC_PAGESIZE) * PERF_PAGES;
 
+#ifdef GNR
         p = (struct perf_event_mmap_page*)mmap(NULL, mmap_size, PROT_READ | PROT_WRITE,
             MAP_SHARED, aux_fds[i], 0);
-        if (p == MAP_FAILED) {
-            std::cerr << "Failed to mmap perf_event_mmap_page " << errno << std::endl;
-            return -1;
-        }
 
         if (ioctl(lat_fds[i], PERF_EVENT_IOC_SET_OUTPUT, aux_fds[i]) != 0) {
             std::cerr << "Error setting output to aux " << errno << std::endl;
+            return -1;
+        }
+#else
+        p = (struct perf_event_mmap_page*)mmap(NULL, mmap_size, PROT_READ | PROT_WRITE,
+            MAP_SHARED, lat_fds[i], 0);
+#endif
+        if (p == MAP_FAILED) {
+            std::cerr << "Failed to mmap perf_event_mmap_page " << errno << std::endl;
             return -1;
         }
 
