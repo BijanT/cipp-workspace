@@ -181,6 +181,7 @@ int perf_sample_open(pid_t pid, int cpu, int group_fd, uint64_t type, uint64_t c
     attr.exclude_callchain_kernel = 1;
     attr.exclude_callchain_user = 1;
     attr.precise_ip = 1;
+    attr.freq = 1;
 
     fd = perf_event_open(&attr, pid, cpu, group_fd, 0);
     if (fd == -1) {

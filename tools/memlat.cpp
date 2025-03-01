@@ -17,11 +17,11 @@
 #define PAGE_SHIFT 12
 #define MEM_TRANS_RETIRED 0x01CD
 #define MEM_LOAD_AUX 0x8203
-#define SAMPLE_PERIOD 1000
+#define SAMPLE_PERIOD 5000
 #define EWMA_EXP 1
 
 #define MIN_LOCAL_LAT 300
-#define MIN_REMOTE_LAT 380
+#define MIN_REMOTE_LAT 400
 
 struct perf_sample {
     struct perf_event_header header;
@@ -30,6 +30,9 @@ struct perf_sample {
     uint64_t phys_addr;
 };
 
+// This program rellies on reading memory access latency via a PEBS counter.
+// Read section 21.9.7 of Volume 3 of the Intel Architectures Software
+// Developer's Manual
 int main(int argc, char* argv[])
 {
     int agg_interval;
@@ -69,7 +72,7 @@ int main(int argc, char* argv[])
     if (argc == 3) {
         buf = std::cout.rdbuf();
     } else {
-        out_file.open(argv[2]);
+        out_file.open(argv[3]);
         if (!out_file.is_open()) {
             std::cerr << "Could not open " << argv[2] << "for writting" << std::endl;
             return -1;
@@ -123,7 +126,7 @@ int main(int argc, char* argv[])
     }
 
     for (long unsigned int i = 0; i < lat_fds.size(); i++) {
-        constexpr uint64_t PERF_PAGES (1 + (1 << 16));
+        constexpr uint64_t PERF_PAGES (1 + (1 << 10));
         struct perf_event_mmap_page *p;
         size_t mmap_size = sysconf(_SC_PAGESIZE) * PERF_PAGES;
 
@@ -158,6 +161,7 @@ int main(int argc, char* argv[])
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time);
         if (duration.count() >= agg_interval) {
+            std::stringstream shell_cmd;
             int local_lat = 0;
             int remote_lat = 0;
 
@@ -179,8 +183,11 @@ int main(int argc, char* argv[])
             // To not overwhelm the reader,  only print occasionally
             if (agg_count % 100 == 0) {
                 out << "Local " << smoothed_local_lat << " Remote " << smoothed_remote_lat << std::endl;
-                out << local_lat_count << " " << remote_lat_count << std::endl;
             }
+
+            shell_cmd << "echo " << ((smoothed_local_lat > smoothed_remote_lat) ? 1 : 0)
+                << " > /sys/kernel/colloid/local_gt_remote";
+            system(shell_cmd.str().c_str());
 
             local_lat_sum = local_lat_count = 0;
             remote_lat_sum = remote_lat_count = 0;
@@ -221,10 +228,18 @@ int main(int argc, char* argv[])
                 continue;
 
             if (pfn < remote_pfn) {
+#ifdef GNR
+                local_lat_sum += ps->weight.var2_w;
+#else
                 local_lat_sum += ps->weight.var1_dw;
+#endif
                 local_lat_count++;
             } else {
+#ifdef GNR
+                remote_lat_sum += ps->weight.var2_w;
+#else
                 remote_lat_sum += ps->weight.var1_dw;
+#endif
                 remote_lat_count++;
             }
         }
