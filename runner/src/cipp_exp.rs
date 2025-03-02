@@ -40,7 +40,7 @@ enum Workload {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 enum Strategy {
     Tpp,
-    Colloid,
+    Colloid { memlat: bool },
     Bwmfs { ratios: Vec<(usize, usize)> },
     Numactl { local: usize, remote: usize },
     Cipp,
@@ -102,6 +102,8 @@ pub fn cli_options() -> clap::Command {
             .conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs"))
         .arg(arg!(--cipp "Use CIPP")
             .action(ArgAction::SetTrue).conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs").conflicts_with("numactl"))
+        .arg(arg!(--memlat "Use memlat with Colloid")
+            .action(ArgAction::SetTrue).requires("colloid"))
         .arg(
             arg!(--flame_graph "Generate a flame graph of the workload.")
                 .action(ArgAction::SetTrue),
@@ -256,6 +258,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let disable_aslr = sub_m.get_flag("disable_aslr");
     let tpp = sub_m.get_flag("tpp");
     let colloid = sub_m.get_flag("colloid");
+    let memlat = sub_m.get_flag("memlat");
     let parse_ratio = |r: &String| {
         let expect_msg =
             "--bwmfs or --numactl should be of the format <local weight>:<remote weight>";
@@ -351,7 +354,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let strategy = if tpp {
         Strategy::Tpp
     } else if colloid {
-        Strategy::Colloid
+        Strategy::Colloid { memlat }
     } else if bwmfs_ratios.len() != 0 {
         // Must have one ratio for each workload
         if bwmfs_ratios.len() != workloads.len() {
@@ -447,6 +450,7 @@ where
     // Reboot to use new grubcfg with isolated cores
     let ushell = connect_and_setup_host(login)?;
 
+    let remote_mem_start = get_remote_start_addr(&ushell)?;
     let mut tctx = TasksetCtxBuilder::from_lscpu(&ushell)?
         .numa_interleaving(TasksetCtxInterleaving::Sequential)
         .skip_hyperthreads(false)
@@ -656,24 +660,31 @@ where
                 cmd!("echo 2 | sudo tee /proc/sys/kernel/numa_balancing"),
             }
         }
-        Strategy::Colloid => {
+        Strategy::Colloid { memlat }=> {
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
 
             with_shell! { ushell =>
                 cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
-                cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir),
                 cmd!("swapoff -a"),
                 cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
                 cmd!("echo 6 | sudo tee /proc/sys/kernel/numa_balancing"),
             }
 
-            bgctx.spawn(BackgroundTask {
-                name: "colloid_latency",
-                period: 5, // Seconds
-                cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
-                ensure_started: colloid_lat_file,
-            })?;
+            if *memlat {
+                let remote_mem_pfn_start = remote_mem_start / 4096;
+                ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
+                ushell.spawn(cmd!("sudo {}/memlat {} 10 {}", &tools_dir, remote_mem_pfn_start,
+                    &colloid_lat_file))?;
+            } else {
+                ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
+                bgctx.spawn(BackgroundTask {
+                    name: "colloid_latency",
+                    period: 5, // Seconds
+                    cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
+                    ensure_started: colloid_lat_file,
+                })?;
+            }
         }
         Strategy::Bwmfs { ratios } => {
             let bandwidthmfs_dir = dir!(kernel_dir, "BandwidthMMFS");
@@ -722,7 +733,6 @@ where
         }
         Strategy::Cipp => {
             let damo_yaml_file = dir!(&user_home, "cipp.yaml");
-            let remote_mem_start = get_remote_start_addr(&ushell)?;
 
             ushell.run(cmd!(
                 "sudo {}/gen_interleave.py -o {} -a {}",
