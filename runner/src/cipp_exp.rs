@@ -137,6 +137,10 @@ pub fn cli_options() -> clap::Command {
                     arg!([runs]
             "The number of iterations of MERCI to run. Default: 10")
                     .value_parser(clap::value_parser!(u64)),
+                )
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                    .value_parser(clap::value_parser!(usize))
                 ),
         )
         .subcommand(
@@ -298,9 +302,10 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let workloads = match sub_m.subcommand() {
         Some(("merci", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
+            let cores = sub_m.get_one::<usize>("threads").copied();
             vec![Workload::Merci {
                 runs,
-                cores: None,
+                cores,
                 delay: None,
             }]
         }
