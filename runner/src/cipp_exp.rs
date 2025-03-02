@@ -34,6 +34,7 @@ enum Workload {
     Redis {
         server_size_mb: usize,
         op_count: usize,
+        load_before_wklds: bool,
     },
 }
 
@@ -212,6 +213,28 @@ pub fn cli_options() -> clap::Command {
                     .value_parser(clap::value_parser!(u64))
                 )
         )
+        .subcommand(
+            clap::Command::new("gups_redis")
+                .about("Run single threaded GUPS and Redis together")
+                .arg(
+                    arg!(--server_size <SERVER_SIZE> "The size of the server in GB")
+                        .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--op_count <OP_COUNT> "The number of read operations to use")
+                        .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--exp <exp> "The log of the size of the workload")
+                        .value_parser(clap::value_parser!(usize))
+                        .required(true)
+                )
+                .arg(
+                    arg!(--hot_exp <hot_exp> "The log of the size of the hot region, if there is one")
+                        .value_parser(clap::value_parser!(usize))
+                        .required(true)
+                )
+        )
 }
 
 fn get_remote_start_addr(ushell: &SshShell) -> Result<usize, ScailError> {
@@ -325,7 +348,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
             let server_size_mb = *sub_m.get_one::<usize>("server_size").unwrap() << 10;
             let op_count = *sub_m.get_one::<usize>("op_count").unwrap();
 
-            vec![Workload::Redis { server_size_mb, op_count }]
+            vec![Workload::Redis { server_size_mb, op_count, load_before_wklds: false }]
         }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
@@ -351,6 +374,20 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
                     delay: None,
                 },
                 Workload::Merci { runs, cores, delay },
+            ]
+        }
+        Some(("gups_redis", sub_m)) => {
+            let threads = 2;
+            let exp = *sub_m.get_one::<usize>("exp").unwrap();
+            let hot_exp = *sub_m.get_one::<usize>("hot_exp").unwrap();
+            let num_updates = 5000000000;
+            let server_size_mb = *sub_m.get_one::<usize>("server_size").unwrap() << 10;
+            let op_count = *sub_m.get_one::<usize>("op_count").unwrap();
+
+            kill_after_first_done = false;
+            vec![
+                Workload::Gups { threads, exp, hot_exp, num_updates },
+                Workload::Redis { server_size_mb, op_count, load_before_wklds: false },
             ]
         }
         _ => unreachable!(),
@@ -447,6 +484,7 @@ where
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
     let gups_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gups_hemem/");
     let redis_dir = dir!(&user_home, crate::WORKLOADS_PATH, "redis/src/");
+    let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
     let ycsb_dir = dir!(&user_home, crate::WORKLOADS_PATH, "YCSB/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
@@ -815,6 +853,56 @@ where
         ));
     }
 
+    // For YCSB workloads, we should start and load data onto the servers
+    // before running the workloads, since that will take several minutes
+    let mut ycsb_sessions: Vec<Option<YcsbSession<fn(&SshShell) -> Result<(), ScailError>>>> = cfg
+        .workloads
+        .iter()
+        .enumerate()
+        .map(|(i, &wkld)| match wkld {
+            Workload::Redis { server_size_mb, op_count, load_before_wklds } => {
+                // Found empirically
+                const RECORD_SIZE_KB: usize = 21;
+
+                let record_count = (server_size_mb << 10) / RECORD_SIZE_KB;
+                let redis_cfg = RedisWorkloadConfig {
+                    redis_dir: &redis_dir,
+                    nullfs: None,
+                    redis_conf: &redis_conf,
+                    server_size_mb,
+                    wk_size_gb: server_size_mb >> 10,
+                    output_file: None,
+                    server_pin_core: Some(pin_cores[i][0]),
+                    cmd_prefix: Some(&cmd_prefixes[i]),
+                    pintool: None,
+                };
+                let ycsb_cfg = YcsbConfig {
+                    workload: YcsbWorkload::Custom {
+                        record_count,
+                        op_count,
+                        distribution: YcsbDistribution::Zipfian,
+                        read_prop: 1.0,
+                        update_prop: 0.0,
+                        insert_prop: 0.0,
+                    },
+                    system: YcsbSystem::<fn(&SshShell) -> Result<(), ScailError>>::Redis(redis_cfg),
+                    client_pin_core: Some(pin_cores[i][2]),
+                    ycsb_path: &ycsb_dir,
+                    ycsb_result_file: Some(&ycsb_file),
+                };
+
+                let mut ycsb = YcsbSession::new(ycsb_cfg);
+
+                if load_before_wklds {
+                    ycsb.start_and_load(&ushell).ok()?;
+                }
+
+                Some(ycsb)
+            },
+            _ => None,
+        })
+        .collect();
+
     let handles: Vec<_> = cfg
         .workloads
         .iter()
@@ -847,46 +935,18 @@ where
                     &gups_file,
                 )
             }
-            Workload::Redis { server_size_mb, op_count } => {
-                // Found empirically
-                const RECORD_SIZE_KB: usize = 21;
-                let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
+            Workload::Redis { load_before_wklds, .. } => {
+                match &mut ycsb_sessions[i] {
+                    Some(ycsb) => {
+                        if !load_before_wklds {
+                            ushell.run(cmd!("sleep 60"))?;
+                            ycsb.start_and_load(&ushell)?;
+                        }
 
-                let record_count = (server_size_mb << 10) / RECORD_SIZE_KB;
-                let redis_cfg = RedisWorkloadConfig {
-                    redis_dir: &redis_dir,
-                    nullfs: None,
-                    redis_conf: &redis_conf,
-                    server_size_mb,
-                    wk_size_gb: server_size_mb >> 10,
-                    output_file: None,
-                    server_pin_core: Some(pin_cores[i][0]),
-                    cmd_prefix: Some(&cmd_prefixes[i]),
-                    pintool: None,
-                };
-                let ycsb_cfg = YcsbConfig {
-                    workload: YcsbWorkload::Custom {
-                        record_count,
-                        op_count,
-                        distribution: YcsbDistribution::Zipfian,
-                        read_prop: 1.0,
-                        update_prop: 0.0,
-                        insert_prop: 0.0,
+                        Ok(ycsb.run_handle(&ushell)?)
                     },
-                    system: YcsbSystem::<fn(&SshShell) -> Result<(), ScailError>>::Redis(redis_cfg),
-                    client_pin_core: Some(pin_cores[i][2]),
-                    ycsb_path: &ycsb_dir,
-                    ycsb_result_file: Some(&ycsb_file),
-                };
-
-                let mut ycsb = YcsbSession::new(ycsb_cfg);
-
-                ycsb.start_and_load(&ushell)?;
-
-                // Turn off Redis snapshotting
-                ushell.run(cmd!("redis-cli -s /tmp/redis.sock CONFIG SET save \"\""))?;
-
-                Ok(ycsb.run_handle(&ushell)?)
+                    None => Err(ScailError::InvalidValueError { msg: "YCSB Session does not exist for Reids".to_string() }.into()),
+                }
             }
         })
         .collect();
