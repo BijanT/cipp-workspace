@@ -49,14 +49,16 @@ max_time = max(colloid_times[-1], dmi_times[-1])
 min_runtimes = [min_runtime for _ in range(len(colloid_runtimes))]
 min_times = np.arange(0, max_time, max_time / len(min_runtimes)).tolist()
 
-plt.plot(colloid_runtimes, label="Colloid")
+plt.plot(colloid_runtimes, label="Colloid", linewidth=2.0)
 plt.plot(dmi_runtimes, label="DMI")
-plt.plot(min_runtimes, label="Optimal")
+plt.plot(min_runtimes, label="Optimal", linewidth=2.0, color="green")
 
-plt.legend()
-plt.xlabel("Iteration #", fontsize=14)
-plt.ylabel("Runtime (s)", fontsize=14)
-plt.title("Embedding Reduction Runtime Across Iterations", fontsize=16)
+plt.legend(fontsize=14)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel("Iteration #", fontsize=16)
+plt.ylabel("Runtime (s)", fontsize=16)
+plt.title("Embedding Reduction Runtime Across Iterations", fontsize=18)
 
 if outfile is not None:
     plt.savefig(outfile)

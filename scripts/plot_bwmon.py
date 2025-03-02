@@ -56,13 +56,15 @@ if len(sys.argv) >= 4:
 # Bandwidth measurements are collected once every 200ms
 time_s = [0.2 * i for i in range(len(local_bw))]
 
-plt.plot(time_s, local_bw, label="Local")
-plt.plot(time_s, remote_bw, label="Remote")
+plt.plot(time_s, local_bw, label="Local", linewidth=2.0)
+plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
 plt.ylim(0, 17)
 
-plt.legend()
-plt.xlabel("Time (s)", fontsize=14)
-plt.ylabel("Bandwidth Usage (GB/s)", fontsize=14)
+plt.legend(fontsize=14)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel("Time (s)", fontsize=16)
+plt.ylabel("Bandwidth Usage (GB/s)", fontsize=16)
 plt.title("Bandwidth Utilization of " + workload, fontsize=16)
 
 if outfile is not None:

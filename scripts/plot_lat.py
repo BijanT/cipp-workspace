@@ -14,7 +14,7 @@ def read_lat(latency_file):
 
     f = open(latency_file, "r")
     for line in f:
-        matches = lat_pattern.findall(line)
+        matches = lat_pattern.findall(line.lower())
 
         if len(matches) != 1:
             eprint("Invalid line " + line)
@@ -31,6 +31,7 @@ def read_lat(latency_file):
 
 filename = sys.argv[1]
 workload = sys.argv[2]
+outfile = None
 if len(sys.argv) >= 4:
     outfile = sys.argv[3]
 
@@ -38,14 +39,16 @@ if len(sys.argv) >= 4:
 # Bandwidth measurements are collected once every 5s
 time_s = [5 * i for i in range(len(local_lat))]
 
-plt.plot(time_s, local_lat, label="Local")
-plt.plot(time_s, remote_lat, label="Remote")
+plt.plot(time_s, local_lat, label="Local", linewidth=2.0)
+plt.plot(time_s, remote_lat, label="Remote", linewidth=2.0)
 plt.ylim(0, None)
 
-plt.legend()
-plt.xlabel("Time (s)", fontsize=14)
-plt.ylabel("Access Latency (cycles)", fontsize=14)
-plt.title("Access Latency of " + workload, fontsize=16)
+plt.legend(fontsize=14)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel("Time (s)", fontsize=16)
+plt.ylabel("Access Latency (cycles)", fontsize=16)
+plt.title("Access Latency of " + workload, fontsize=18)
 
 if outfile is not None:
     plt.savefig(outfile)
