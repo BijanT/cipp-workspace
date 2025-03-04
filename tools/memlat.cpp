@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
         // Minimum latency in cycles to sample
         uint64_t ldlat = 300;
 
-#ifdef GNR
+#ifdef SPR
         aux_fd = perf_sample_open(-1, cpu, -1, PERF_TYPE_RAW, MEM_LOAD_AUX, 0, sample_type, SAMPLE_PERIOD);
         if (aux_fd == -1) {
             return -1;
@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
         }
 
         lat_fds.push_back(lat_fd);
-#ifdef GNR
+#ifdef SPR
         aux_fds.push_back(aux_fd);
 #endif
     }
@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
         struct perf_event_mmap_page *p;
         size_t mmap_size = sysconf(_SC_PAGESIZE) * PERF_PAGES;
 
-#ifdef GNR
+#ifdef SPR
         p = (struct perf_event_mmap_page*)mmap(NULL, mmap_size, PROT_READ | PROT_WRITE,
             MAP_SHARED, aux_fds[i], 0);
 
@@ -228,14 +228,14 @@ int main(int argc, char* argv[])
                 continue;
 
             if (pfn < remote_pfn) {
-#ifdef GNR
+#ifdef SPR
                 local_lat_sum += ps->weight.var2_w;
 #else
                 local_lat_sum += ps->weight.var1_dw;
 #endif
                 local_lat_count++;
             } else {
-#ifdef GNR
+#ifdef SPR
                 remote_lat_sum += ps->weight.var2_w;
 #else
                 remote_lat_sum += ps->weight.var1_dw;
