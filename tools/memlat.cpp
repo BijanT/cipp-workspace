@@ -20,8 +20,13 @@
 #define SAMPLE_PERIOD 5000
 #define EWMA_EXP 1
 
+#ifdef GNR
+#define MIN_LOCAL_LAT 380
+#define MIN_REMOTE_LAT 660
+#else
 #define MIN_LOCAL_LAT 300
 #define MIN_REMOTE_LAT 400
+#endif
 
 struct perf_sample {
     struct perf_event_header header;
