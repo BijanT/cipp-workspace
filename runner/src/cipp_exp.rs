@@ -25,6 +25,9 @@ enum Workload {
     GapbsTc {
         runs: u64,
     },
+    GapbsPr {
+        runs: u64,
+    },
     Gups {
         threads: usize,
         exp: usize,
@@ -151,6 +154,14 @@ pub fn cli_options() -> clap::Command {
                     arg!([runs]
             "The number of iterations of tc to run. Default: 10")
                     .value_parser(clap::value_parser!(u64)),
+                ),
+        )
+        .subcommand(
+            clap::Command::new("gapbs_pr")
+                .about("Run the GAPBS pr workloads")
+                .arg(
+                    arg!([runs] "The number of iterations of pr to run. Default: 10")
+                    .value_parser(clap::value_parser!(u64))
                 ),
         )
         .subcommand(
@@ -335,6 +346,10 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("gapbs_tc", sub_m)) => {
             let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             vec![Workload::GapbsTc { runs }]
+        }
+        Some(("gapbs_pr", sub_m)) => {
+            let runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
+            vec![Workload::GapbsPr { runs }]
         }
         Some(("gups", sub_m)) => {
             let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&1);
@@ -521,6 +536,7 @@ where
         .map(|&wkld| match wkld {
             Workload::Merci { cores, .. } => cores.unwrap_or(max_cores_per_wkld),
             Workload::GapbsTc { .. } => max_cores_per_wkld,
+            Workload::GapbsPr { .. } => max_cores_per_wkld,
             Workload::Gups { threads, .. } => threads,
             // One pair of threads (one core) for redis and YCSB
             Workload::Redis { .. } => 4,
@@ -578,6 +594,7 @@ where
         .map(|&wkld| match wkld {
             Workload::Merci { .. } => "eval_baseline",
             Workload::GapbsTc { .. } => "tc",
+            Workload::GapbsPr { .. } => "pr",
             Workload::Gups { .. } => "gups-hotset-mov",
             Workload::Redis { .. } => "redis-server",
         })
@@ -923,6 +940,9 @@ where
             Workload::GapbsTc { runs } => {
                 run_gapbs_tc(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
             }
+            Workload::GapbsPr { runs } => {
+                run_gapbs_pr(&ushell, &gapbs_dir, runs, &cmd_prefixes[i], &gapbs_file)
+            }
             Workload::Gups { threads, exp, hot_exp, num_updates } => {
                 run_gups(
                     &ushell,
@@ -1146,6 +1166,26 @@ fn run_gapbs_tc(
     let handle = ushell.spawn(
         cmd!(
             "{} ./tc -f benchmark/graphs/twitterU.sg -n {} | sudo tee {}",
+            cmd_prefix,
+            runs,
+            gapbs_file
+        )
+        .cwd(gapbs_dir),
+    )?;
+
+    Ok(handle)
+}
+
+fn run_gapbs_pr(
+    ushell: &SshShell,
+    gapbs_dir: &str,
+    runs: u64,
+    cmd_prefix: &str,
+    gapbs_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
+        cmd!(
+            "{} ./pr -g 26 -n {} | sudo tee {}",
             cmd_prefix,
             runs,
             gapbs_file
