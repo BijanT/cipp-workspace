@@ -3,10 +3,10 @@ timestamp="output_colloid_$(date +"%m%d%Y_%H%M")"
  
 current_dir=$(pwd)
  
-bwmon_exe=$HOME/work/cipp/cipp-workspace/tools/bwmon
+bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
 bwmon_sample_rate=200
 
-memlat_exe=$HOME/work/cipp/cipp-workspace/tools/memlat
+memlat_exe=/home/labpc/work/cipp/cipp-workspace/tools/memlat
 remote_mem_start_pfn=201326592
 memlat_sample_rate=10
  
@@ -22,8 +22,8 @@ cpu_core_list=($(seq 0 8 128))
 cpu_core_list[0]=1
  
 ## CloverLeaf Settings
-clover_exe=$HOME/work/cipp/CloverLeaf/build/omp-cloverleaf
-clover_input_file=$HOME/work/cipp/CloverLeaf/InputDecks/clover_bm256_300.in
+clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
+clover_input_file=/home/labpc/work/cipp/CloverLeaf/InputDecks/clover_bm256_300.in
 
 ## output files
 clover_dir="${current_dir}/${timestamp}/cloverleaf"

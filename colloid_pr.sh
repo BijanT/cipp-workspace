@@ -3,10 +3,10 @@ timestamp="output_colloid_$(date +"%m%d%Y_%H%M")"
  
 current_dir=$(pwd)
  
-bwmon_exe=$HOME/work/cipp/cipp-workspace/tools/bwmon
+bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
 bwmon_sample_rate=200
 
-memlat_exe=$HOME/work/cipp/cipp-workspace/tools/memlat
+memlat_exe=/home/labpc/work/cipp/cipp-workspace/tools/memlat
 remote_mem_start_pfn=201326592
 memlat_sample_rate=10
  
@@ -22,7 +22,7 @@ cpu_core_list=($(seq 0 8 128))
 cpu_core_list[0]=1
  
 ## PR Settings
-pr_exe=$HOME/work/cipp/gapbs/pr
+pr_exe=/home/labpc/work/cipp/gapbs/pr
  
 ## output files
 pr_dir="${current_dir}/${timestamp}/pr"
