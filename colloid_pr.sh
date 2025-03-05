@@ -116,7 +116,7 @@ for current_setting in "${local_remote[@]}"; do
  
                         avg_latency=$(cat "${latency_out_file}" | awk '{sum+=$2; count++} END {print sum/count}')
  
-                        printf "$tabular_data_print" "$current_setting" "$trial" "$current_core" $pr_avg_time $avg_bw $avg_latency
+                        printf "$tabular_data_print" "$current_setting" "$current_core" "$trial" $pr_avg_time $avg_bw $avg_latency
                 done
         done
 
