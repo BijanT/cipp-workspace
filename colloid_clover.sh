@@ -16,7 +16,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
 ## for LOOP
 local_remote=("local" "colloid")
-cpu_core_list=($(seq 32 16 128))
+cpu_core_list=($(seq 32 32 128))
  
 ## CloverLeaf Settings
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
