@@ -10,8 +10,6 @@ memlat_exe=/home/labpc/work/cipp/cipp-workspace/tools/memlat
 remote_mem_start_pfn=201326592
 memlat_sample_rate=10
  
-colloid_latency="/sys/kernel/colloid/latency"
- 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
  
@@ -71,7 +69,7 @@ for current_setting in "${local_remote[@]}"; do
         fi
  
         for current_core in "${cpu_core_list[@]}"; do
-                for trial in $(seq 0 4); do
+                for trial in $(seq 0 2); do
                         #sync; echo 3 > /proc/sys/vm/drop_caches;
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_cpu_${current_core}_${current_setting}.log
