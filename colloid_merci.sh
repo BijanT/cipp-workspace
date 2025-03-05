@@ -16,7 +16,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
 ## for LOOP
 local_remote=("local" "colloid")
-cpu_core_list=($(seq 16 16 128))
+cpu_core_list=($(seq 32 16 128))
  
 ## MERCI Settings
 merci_dir=/root/MERCI
