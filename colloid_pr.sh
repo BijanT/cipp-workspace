@@ -85,11 +85,11 @@ for current_setting in "${local_remote[@]}"; do
 
                         if [ "$current_setting" = "local" ]; then
 
-                                numactl -m 0 taskset -c 0-$((current_core - 1)) $pr_exe -g 30
+                                numactl -m 0 taskset -c 0-$((current_core - 1)) $pr_exe -g 30 > ${pr_out_file}&
 
                         else
 
-                                taskset -c 0-$((current_core - 1)) $pr_exe -g 30
+                                taskset -c 0-$((current_core - 1)) $pr_exe -g 30 > ${pr_out_file}&
 
                         fi
 

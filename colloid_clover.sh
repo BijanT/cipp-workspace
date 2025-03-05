@@ -81,11 +81,11 @@ for current_setting in "${local_remote[@]}"; do
 
                         if [ "$current_setting" = "local" ]; then
 
-                                numactl -m 0 taskset -c 0-$((current_core - 1)) $clover_exe --file $clover_input_file
+                                numactl -m 0 taskset -c 0-$((current_core - 1)) $clover_exe --file $clover_input_file > ${clover_out_file}&
 
                         else
 
-                                taskset -c 0-$((current_core - 1)) $clover_exe --file $clover_input_file
+                                taskset -c 0-$((current_core - 1)) $clover_exe --file $clover_input_file > ${clover_out_file}&
 
                         fi
 
