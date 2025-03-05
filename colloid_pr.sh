@@ -7,7 +7,7 @@ bwmon_exe=$HOME/work/cipp/cipp-workspace/tools/bwmon
 bwmon_sample_rate=200
 
 memlat_exe=$HOME/work/cipp/cipp-workspace/tools/memlat
-remote_mem_start_pfn=206569472 #TODO Verify
+remote_mem_start_pfn=201326592
 memlat_sample_rate=10
  
 colloid_latency="/sys/kernel/colloid/latency"
@@ -17,29 +17,25 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-local_remote=("local" "colloid")
+local_remote=("local" "colloid" "tpp")
 cpu_core_list=($(seq 0 8 128))
 cpu_core_list[0]=1
  
-## MERCI Settings
-merci_dir=/root/MERCI
-merci_exe=$merci_dir/4_performance_evaluation/bin/eval_baseline
-merci_dataset="amazon_All"
-merci_iteration_count=100
- 
+## PR Settings
+pr_exe=$HOME/work/cipp/gapbs/pr
  
 ## output files
-merci_dir="${current_dir}/${timestamp}/merci"
+pr_dir="${current_dir}/${timestamp}/pr"
 bwmon_dir="${current_dir}/${timestamp}/bwmon"
 latency_dir="${current_dir}/${timestamp}/latency"
 vmstat_dir="${current_dir}/${timestamp}/vmstat"
  
-merci_file="merci_output"
+pr_file="pr_output"
 bwmon_file="bwmon_output"
 latency_file="latency_output"
 vmstat_file="vmstat_output"
  
-mkdir -p $merci_dir $bwmon_dir $latency_dir $vmstat_dir
+mkdir -p $pr_dir $bwmon_dir $latency_dir $vmstat_dir
  
 output_header=(" Strategy" "Core Count" "Trial #" "Avg Time" "Avg BW" "Avg Latency")
 tabular_header_print="%-15s %-15s %-15s %-15s %-15s %-15s\n"
@@ -81,7 +77,7 @@ for current_setting in "${local_remote[@]}"; do
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_cpu_${current_core}_${current_setting}.log
-                        merci_out_file=${merci_dir}/${merci_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
+                        pr_out_file=${pr_dir}/${pr_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         latency_out_file=${latency_dir}/${latency_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
 
@@ -89,17 +85,17 @@ for current_setting in "${local_remote[@]}"; do
 
                         if [ "$current_setting" = "local" ]; then
 
-                                numactl -m 0 $merci_exe -d $merci_dataset -r $merci_iteration_count -c $current_core > ${merci_out_file}&
+                                numactl -m 0 taskset -c 0-$((current_core - 1)) $pr_exe -g 30
 
                         else
 
-                                $merci_exe -d $merci_dataset -r $merci_iteration_count  -c $current_core > ${merci_out_file}&
+                                taskset -c 0-$((current_core - 1)) $pr_exe -g 30
 
                         fi
 
-                        merci_pid=$!
+                        pr_pid=$!
  
-                        $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $merci_pid &
+                        $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $pr_pid &
 
                         bwmon_pid=$!
  
@@ -115,13 +111,13 @@ for current_setting in "${local_remote[@]}"; do
                         kill -9 $memlat_pid
                         cat /proc/vmstat > ${vmstat_end_out_file}
  
-                        merci_avg_time=$(cat "${merci_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
+                        pr_avg_time=$(cat "${pr_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
  
                         avg_latency=$(cat "${latency_out_file}" | awk '{sum+=$2; count++} END {print sum/count}')
  
-                        printf "$tabular_data_print" "$current_setting" "$trial" "$current_core" $merci_avg_time $avg_bw $avg_latency
+                        printf "$tabular_data_print" "$current_setting" "$trial" "$current_core" $pr_avg_time $avg_bw $avg_latency
                 done
         done
 
