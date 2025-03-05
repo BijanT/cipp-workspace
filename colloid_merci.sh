@@ -18,7 +18,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
 ## for LOOP
 local_remote=("local" "colloid" "tpp")
-cpu_core_list=($(seq 8 8 128))
+cpu_core_list=($(seq 16 16 128))
  
 ## MERCI Settings
 merci_dir=/root/MERCI
@@ -75,7 +75,7 @@ for current_setting in "${local_remote[@]}"; do
         fi
  
         for current_core in "${cpu_core_list[@]}"; do
-                for trial in $(seq 0 2); do
+                for trial in $(seq 0 4); do
                         #sync; echo 3 > /proc/sys/vm/drop_caches;
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_cpu_${current_core}_${current_setting}.log
