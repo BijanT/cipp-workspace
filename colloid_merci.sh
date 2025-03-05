@@ -1,5 +1,5 @@
 #!/bin/bash
-timestamp="output_colloid_$(date +"%m%d%Y_%H%M")"
+timestamp="output_colloid_merci_$(date +"%m%d%Y_%H%M")"
  
 current_dir=$(pwd)
  
