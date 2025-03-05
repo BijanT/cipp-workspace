@@ -15,7 +15,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-local_remote=("local" "colloid" "tpp")
+local_remote=("local" "colloid")
 cpu_core_list=($(seq 16 16 128))
  
 ## CloverLeaf Settings
