@@ -62,7 +62,7 @@ for current_setting in "${local_remote[@]}"; do
 
                 echo '0' > "$numa_balancing"
 
-        else if [ "$current_setting" = "colloid" ]; then
+        elif [ "$current_setting" = "colloid" ]; then
 
                 echo 1 > $demotion_trigger
 

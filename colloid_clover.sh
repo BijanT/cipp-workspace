@@ -54,22 +54,17 @@ printf "|---------------|---------------|---------------|---------------|-------
 for current_setting in "${local_remote[@]}"; do
  
         if [ "$current_setting" = "local" ]; then
-
                 echo '0' > "$demotion_trigger"
 
                 echo '0' > "$numa_balancing"
-
-        else if [ "$current_setting" = "colloid" ]; then
-
+        elif [ "$current_setting" = "colloid" ]; then
                 echo 1 > $demotion_trigger
 
                 echo 6 > $numa_balancing
         else
-
                 echo 1 > $demotion_trigger
 
                 echo 2 > $numa_balancing
-
         fi
  
         for current_core in "${cpu_core_list[@]}"; do
