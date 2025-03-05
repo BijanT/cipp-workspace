@@ -1,5 +1,5 @@
 #!/bin/bash
-timestamp="output_colloid__cloverleaf_$(date +"%m%d%Y_%H%M")"
+timestamp="output_colloid_cloverleaf_$(date +"%m%d%Y_%H%M")"
  
 current_dir=$(pwd)
  
