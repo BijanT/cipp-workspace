@@ -51,6 +51,8 @@ current_wkld="cloverleaf"
  
 # echo "setting scalling governance"
 tuned-adm profile throughput-performance
+echo 0 > $numa_balancing
+echo 0 > $demotion_trigger
  
 printf "$tabular_header_print" "${output_header[0]}" "${output_header[1]}" "${output_header[2]}" "${output_header[3]}" "${output_header[4]}"
 printf "|---------------|---------------|---------------|---------------|---------------|\n"
