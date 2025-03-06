@@ -18,7 +18,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
 local_remote=("local" "colloid")
 cpu_core_list=($(seq 32 32 128))
  
-## CloverLeaf Settings
+## Stream Settings
 stream_exe=/home/labpc/work/cipp/stream/stream
 
 ## output files
