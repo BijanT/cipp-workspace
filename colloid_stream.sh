@@ -103,7 +103,7 @@ for current_setting in "${local_remote[@]}"; do
                         kill -9 $memlat_pid
                         cat /proc/vmstat > ${vmstat_end_out_file}
  
-                        stream_triad=$(cat "${stream_out_file}" | grep "Triad" | tail -n1 | grep -oP '\d+\.\d+')
+                        stream_triad=$(cat "${stream_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
  

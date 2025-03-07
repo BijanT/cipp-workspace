@@ -7,9 +7,9 @@ bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
 bwmon_sample_rate=200
 
 cipp_exe=/home/labpc/work/cipp/cipp-workspace/tools/cipp
-cipp_sample_int=200
-cipp_adj_int=6000
-cipp_bw_cutoff=200000
+cipp_sample_int=100
+cipp_adj_int=9000
+cipp_bw_cutoff=300000
 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
@@ -18,7 +18,9 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
 ## for LOOP
 workloads=("cloverleaf" "pr" "stream")
 cpu_core_list=($(seq 32 32 128))
- 
+# Reserve a core for kdamond
+cpu_core_list[-1]=127
+
 ## CloverLeaf Settings
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
 clover_input_file=/home/labpc/work/cipp/CloverLeaf/InputDecks/clover_bm256_300.in
@@ -55,6 +57,7 @@ current_wkld="cloverleaf"
 tuned-adm profile throughput-performance
 echo 0 > $numa_balancing
 echo 0 > $demotion_trigger
+taskset -cp 127 $(pgrep kdamond)
  
 printf "$tabular_header_print" "${output_header[0]}" "${output_header[1]}" "${output_header[2]}" "${output_header[3]}" "${output_header[4]}"
 printf "|---------------|---------------|---------------|---------------|---------------|\n"
@@ -109,7 +112,7 @@ for current_wkld in "${workloads[@]}"; do
                         elif [ "$current_setting" = "pr" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
                         else
-                                perf_result=$(cat "${wkld_out_file}" | grep "Triad" | tail -n1 | grep -oP '\d+\.\d+')
+                                perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
                         fi
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
