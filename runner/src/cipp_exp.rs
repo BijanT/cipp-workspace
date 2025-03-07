@@ -1004,7 +1004,7 @@ where
         // whole system.
         ushell.run(cmd!("sleep 1"))?;
         ushell.spawn(cmd!(
-            "sudo {}/bwmon 200 {} $(pgrep -x {})",
+            "sudo {}/bwmon 100 {} $(pgrep -x {})",
             tools_dir,
             bwmon_file,
             proc_names[0]
