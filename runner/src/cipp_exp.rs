@@ -34,6 +34,9 @@ enum Workload {
         hot_exp: usize,
         num_updates: usize,
     },
+    CloverLeaf {
+        threads: usize,
+    },
     Redis {
         server_size_mb: usize,
         op_count: usize,
@@ -183,6 +186,14 @@ pub fn cli_options() -> clap::Command {
                 )
                 .arg(
                     arg!(--updates <updates> "The number of updates to do. Default is 2^exp / 8")
+                )
+        )
+        .subcommand(
+            clap::Command::new("clover")
+                .about("Run the CloverLeaf workload")
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                        .value_parser(clap::value_parser!(usize))
                 )
         )
         .subcommand(
@@ -359,6 +370,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
             vec![Workload::Gups {threads, exp, hot_exp, num_updates}]
         }
+        Some(("clover", sub_m)) => {
+            let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&10);
+
+            vec![Workload::CloverLeaf { threads }]
+        }
         Some(("redis", sub_m)) => {
             let server_size_mb = *sub_m.get_one::<usize>("server_size").unwrap() << 10;
             let op_count = *sub_m.get_one::<usize>("op_count").unwrap();
@@ -480,6 +496,7 @@ where
     let merci_file = dir!(&results_dir, cfg.gen_file_name("merci"));
     let gapbs_file = dir!(&results_dir, cfg.gen_file_name("gapbs"));
     let gups_file = dir!(&results_dir, cfg.gen_file_name("gups"));
+    let clover_file = dir!(&results_dir, cfg.gen_file_name("clover"));
     let ycsb_file = dir!(&results_dir, cfg.gen_file_name("ycsb"));
     let vmstat_file = dir!(&results_dir, cfg.gen_file_name("vmstat"));
     let damo_status_file = dir!(&results_dir, cfg.gen_file_name("damo_status"));
@@ -498,6 +515,7 @@ where
     );
     let gapbs_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gapbs/");
     let gups_dir = dir!(&user_home, crate::WORKLOADS_PATH, "gups_hemem/");
+    let clover_dir = dir!(&user_home, crate::WORKLOADS_PATH, "CloverLeaf/");
     let redis_dir = dir!(&user_home, crate::WORKLOADS_PATH, "redis/src/");
     let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
     let ycsb_dir = dir!(&user_home, crate::WORKLOADS_PATH, "YCSB/");
@@ -538,6 +556,7 @@ where
             Workload::GapbsTc { .. } => max_cores_per_wkld,
             Workload::GapbsPr { .. } => max_cores_per_wkld,
             Workload::Gups { threads, .. } => threads,
+            Workload::CloverLeaf { threads } => threads,
             // One pair of threads (one core) for redis and YCSB
             Workload::Redis { .. } => 4,
         })
@@ -596,6 +615,7 @@ where
             Workload::GapbsTc { .. } => "tc",
             Workload::GapbsPr { .. } => "pr",
             Workload::Gups { .. } => "gups-hotset-mov",
+            Workload::CloverLeaf { .. } => "omp-cloverleaf",
             Workload::Redis { .. } => "redis-server",
         })
         .collect();
@@ -955,6 +975,14 @@ where
                     &gups_file,
                 )
             }
+            Workload::CloverLeaf { .. } => {
+                run_clover(
+                    &ushell,
+                    &clover_dir,
+                    &cmd_prefixes[i],
+                    &clover_file,
+                )
+            }
             Workload::Redis { load_before_wklds, .. } => {
                 match &mut ycsb_sessions[i] {
                     Some(ycsb) => {
@@ -1217,6 +1245,24 @@ fn run_gups(
             gups_file
         )
         .cwd(gups_dir)
+    )?;
+
+    Ok(handle)
+}
+
+fn run_clover(
+    ushell: &SshShell,
+    clover_dir: &str,
+    cmd_prefix: &str,
+    clover_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
+        cmd!(
+            "{} ./build/omp-cloverleaf --file ./InputDecks/clover_bm64_300.in | tee {}",
+            cmd_prefix,
+            clover_file
+        )
+        .cwd(clover_dir)
     )?;
 
     Ok(handle)

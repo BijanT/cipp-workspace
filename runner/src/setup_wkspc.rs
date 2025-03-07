@@ -249,7 +249,7 @@ where
         workloads_repo,
         Some("workloads"),
         Some("main"),
-        &["gapbs", "redis", "YCSB"],
+        &["gapbs", "redis", "YCSB", "CloverLeaf"],
     )?;
 
     clone_git_repo(ushell, colloid_repo, None, None, &["hemem"])?;
@@ -276,6 +276,7 @@ where
     let redis_dir = dir!(&workloads_dir, "redis");
     let ycsb_dir = dir!(&workloads_dir, "YCSB");
     let gups_dir = dir!(&workloads_dir, "gups_hemem");
+    let clover_dir = dir!(&workloads_dir, "CloverLeaf");
 
     ushell.run(cmd!("make").cwd(&gapbs_dir))?;
     if !cfg.skip_slow {
@@ -285,6 +286,9 @@ where
     ushell.run(cmd!("make").cwd(&redis_dir))?;
     ushell.run(cmd!("mvn -pl site.ycsb:redis-binding -am clean package").cwd(&ycsb_dir))?;
     ushell.run(cmd!("make").cwd(&gups_dir))?;
+
+    ushell.run(cmd!("cmake -Bbuild -H. -DMODEL=omp").cwd(&clover_dir))?;
+    ushell.run(cmd!("cmake --build build").cwd(&clover_dir))?;
 
     ushell.run(cmd!("mkdir -p {}", &quartz_build_dir))?;
     ushell.run(cmd!("cmake ..").cwd(&quartz_build_dir))?;
