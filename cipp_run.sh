@@ -29,6 +29,8 @@ pr_exe=/home/labpc/work/cipp/gapbs/pr
 ## Stream Settings
 stream_exe=/home/labpc/work/cipp/stream/stream
 
+numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
+
 ## output files
 wkld_dir="${current_dir}/${timestamp}/wkld"
 bwmon_dir="${current_dir}/${timestamp}/bwmon"
@@ -71,11 +73,11 @@ for current_wkld in "${workloads[@]}"; do
                 for trial in $(seq 0 2); do
                         #sync; echo 3 > /proc/sys/vm/drop_caches;
 
-                        vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_cpu_${current_core}_${current_setting}.log
-                        vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_cpu_${current_core}_${current_setting}.log
+                        vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_ratio_${trial}_cpu_${current_core}_${current_wkld}.log
+                        vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_cpu_${current_core}_${current_wkld}.log
                         wkld_out_file=${clover_dir}/${wkld_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
-                        bwmon_out_file=${bwmon_dir}/${bwmon_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
-                        cipp_out_file=${cipp_dir}/${cipp_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
+                        bwmon_out_file=${bwmon_dir}/${bwmon_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
+                        cipp_out_file=${cipp_dir}/${cipp_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
 
                         cat /proc/vmstat > ${vmstat_begin_out_file}
 
