@@ -73,7 +73,7 @@ for current_wkld in "${workloads[@]}"; do
  
         if [ "$current_wkld" = "cloverleaf" ]; then
                 wkld_cmd="$clover_exe --file $clover_input_file"
-        elif [ "$current_setting" = "pr" ]; then
+        elif [ "$current_wkld" = "pr" ]; then
                 wkld_cmd="$pr_exe -g 30"
         else
                 wkld_cmd=$stream_exe
@@ -110,7 +110,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         cipp_pid=$!
 
-                        # echo "touched latency file core count $current_core, setting $current_setting"
+                        # echo "touched latency file core count $current_core, setting $current_wkld"
 
                         while kill -0 $bwmon_pid 2>/dev/null; do
                                 sleep 0.5
@@ -120,9 +120,9 @@ for current_wkld in "${workloads[@]}"; do
  
                         if [ "$current_wkld" = "cloverleaf" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Wall clock" | tail -n1 | grep -oP '\d+\.\d+')
-                        elif [ "$current_setting" = "pr" ]; then
+                        elif [ "$current_wkld" = "pr" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
-                        elif [ "$current_setting" = "stream" ]; then
+                        elif [ "$current_wkld" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
                         else
                                 perf_result=$(cat "${wlkd_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
