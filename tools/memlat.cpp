@@ -21,8 +21,8 @@
 #define EWMA_EXP 1
 
 #ifdef GNR
-#define MIN_LOCAL_LAT 380
-#define MIN_REMOTE_LAT 660
+#define MIN_LOCAL_LAT 300
+#define MIN_REMOTE_LAT 500
 #else
 #define MIN_LOCAL_LAT 300
 #define MIN_REMOTE_LAT 400
