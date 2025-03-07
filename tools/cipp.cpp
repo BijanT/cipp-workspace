@@ -124,7 +124,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         if (abs(cur_step) < 4)
             cur_step = 0;
         correct_count = 0;
-    } else if (bw_change < interleave_change / 2) {
+    } else if (bw_change < interleave_change) {
         // The last step was good, keep going
         correct_count++;
         cur_step = last_step;
