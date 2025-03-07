@@ -84,7 +84,7 @@ for current_wkld in "${workloads[@]}"; do
                         echo ${current_ratio} > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo $((100 - current_ratio)) > /sys/kernel/mm/mempolicy/weighted_interleave/node1
 
-                        if [ "$current_wkld" = "bwaves_s"] || [ "$current_wkld" = "lbm_s"]; then
+                        if [ "$current_wkld" = "bwaves_s" ] || [ "$current_wkld" = "lbm_s" ]; then
                                 $numactl_exe -w 0,1 $spec_stub --threads=${current_core} $current_wkld > ${wkld_out_file} &
                         else
                                 $numactl_exe -w 0,1 taskset -c 0-$((current_core - 1)) $wkld_cmd > ${wkld_out_file} &

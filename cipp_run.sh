@@ -47,7 +47,7 @@ bwmon_file="bwmon_output"
 cipp_file="cipp_output"
 vmstat_file="vmstat_output"
  
-mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir
+mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir $cipp_dir
  
 output_header=(" Workload" "Core Count" "Trial #" "Result" "Avg BW")
 tabular_header_print="%-15s %-15s %-15s %-15s %-15s\n"
@@ -94,7 +94,7 @@ for current_wkld in "${workloads[@]}"; do
                         echo 100 > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo 0 > /sys/kernel/mm/mempolicy/weighted_interleave/node1
 
-                        if [ "$current_wkld" = "bwaves_s"] || [ "$current_wkld" = "lbm_s"]; then
+                        if [ "$current_wkld" = "bwaves_s" ] || [ "$current_wkld" = "lbm_s" ]; then
                                 $numactl_exe -w 0,1 $spec_stub --threads=${current_core} $current_wkld > ${wkld_out_file} &
                         else
                                 $numactl_exe -w 0,1 taskset -c 0-$((current_core - 1)) $wkld_cmd > ${wkld_out_file} &
