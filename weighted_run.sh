@@ -11,7 +11,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-workloads=("cloverleaf" "pr" "stream")
+workloads=("cloverleaf" "pr" "stream" "bwaves_s" "lbm_s")
 cpu_core_list=($(seq 32 32 128))
 local_ratio_list=($(seq 60 5 100))
  
@@ -24,6 +24,9 @@ pr_exe=/home/labpc/work/cipp/gapbs/pr
  
 ## Stream Settings
 stream_exe=/home/labpc/work/cipp/stream/stream
+
+## SPEC
+spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux/x86.cfg"
 
 numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
 
@@ -38,7 +41,7 @@ vmstat_file="vmstat_output"
  
 mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir
  
-output_header=(" Workload" "Core Count" "Local Ratio" "Avg Time" "Avg BW")
+output_header=(" Workload" "Core Count" "Local Ratio" "Result" "Avg BW")
 tabular_header_print="%-15s %-15s %-15s %-15s %-15s\n"
 tabular_data_print=" %-15s %-15d %-15d %15.2f %15.2f\n"
  
@@ -50,6 +53,10 @@ tuned-adm profile throughput-performance
 echo 0 > $numa_balancing
 echo 0 > $demotion_trigger
  
+pushd /opt/cpu2017/
+source shrc
+popd
+
 printf "$tabular_header_print" "${output_header[0]}" "${output_header[1]}" "${output_header[2]}" "${output_header[3]}" "${output_header[4]}"
 printf "|---------------|---------------|---------------|---------------|---------------|\n"
  
@@ -77,7 +84,11 @@ for current_wkld in "${workloads[@]}"; do
                         echo ${current_ratio} > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo $((100 - current_ratio)) > /sys/kernel/mm/mempolicy/weighted_interleave/node1
 
-                        $numactl_exe -w 0,1 taskset -c 0-$((current_core - 1)) $wkld_cmd > ${wkld_out_file} &
+                        if [ "$current_wkld" = "bwaves_s"] || [ "$current_wkld" = "lbm_s"]; then
+                                $numactl_exe -w 0,1 $spec_stub --threads=${current_core} $current_wkld > ${wkld_out_file} &
+                        else
+                                $numactl_exe -w 0,1 taskset -c 0-$((current_core - 1)) $wkld_cmd > ${wkld_out_file} &
+                        fi
 
                         wkld_pid=$!
  
@@ -96,8 +107,10 @@ for current_wkld in "${workloads[@]}"; do
                                 perf_result=$(cat "${wkld_out_file}" | grep "Wall clock" | tail -n1 | grep -oP '\d+\.\d+')
                         elif [ "$current_setting" = "pr" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
-                        else
+                        elif [ "$current_setting" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
+                        else
+                                perf_result=$(cat "${wlkd_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
                         fi
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
