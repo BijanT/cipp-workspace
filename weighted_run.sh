@@ -76,7 +76,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
-                        wkld_out_file=${clover_dir}/${wkld_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
+                        wkld_out_file=${wkld_dir}/${wkld_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
 
                         cat /proc/vmstat > ${vmstat_begin_out_file}
