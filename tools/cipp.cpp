@@ -100,7 +100,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     // Adjust the interleave ratio
     if (cur_bw < bw_cutoff) {
         // The bandwidth is clearly unsaturated, so increase the local ratio
-        if (last_step == 0 && bw_change > 0) {
+        if (last_step <= 0 && bw_change > 0) {
             cur_step = bw_change / 100;
             if (abs(cur_step) < MIN_STEP)
                 cur_step = MIN_STEP;
