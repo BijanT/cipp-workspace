@@ -58,7 +58,6 @@ time_s = [0.2 * i for i in range(len(local_bw))]
 
 plt.plot(time_s, local_bw, label="Local", linewidth=2.0)
 plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
-plt.ylim(0, 17)
 
 plt.legend(fontsize=14)
 plt.xticks(fontsize=14)
