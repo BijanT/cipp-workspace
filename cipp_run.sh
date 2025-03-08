@@ -32,7 +32,7 @@ pr_exe=/home/labpc/work/cipp/gapbs/pr
 stream_exe=/home/labpc/work/cipp/stream/stream
 
 ## SPEC
-spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux/x86.cfg"
+spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux-x86.cfg"
 
 numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
 
@@ -42,7 +42,7 @@ bwmon_dir="${current_dir}/${timestamp}/bwmon"
 cipp_dir="${current_dir}/${timestamp}/cipp"
 vmstat_dir="${current_dir}/${timestamp}/vmstat"
  
-wlkd_file="wlkd_output"
+wkld_file="wkld_output"
 bwmon_file="bwmon_output"
 cipp_file="cipp_output"
 vmstat_file="vmstat_output"
@@ -125,7 +125,9 @@ for current_wkld in "${workloads[@]}"; do
                         elif [ "$current_wkld" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
                         else
+								echo $wkld_out_file
                                 perf_result=$(cat "${wlkd_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
+								echo b
                         fi
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')

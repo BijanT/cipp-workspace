@@ -26,7 +26,7 @@ pr_exe=/home/labpc/work/cipp/gapbs/pr
 stream_exe=/home/labpc/work/cipp/stream/stream
 
 ## SPEC
-spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux/x86.cfg"
+spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux-x86.cfg"
 
 numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
 
@@ -35,7 +35,7 @@ wkld_dir="${current_dir}/${timestamp}/wkld"
 bwmon_dir="${current_dir}/${timestamp}/bwmon"
 vmstat_dir="${current_dir}/${timestamp}/vmstat"
  
-wlkd_file="wlkd_output"
+wkld_file="wkld_output"
 bwmon_file="bwmon_output"
 vmstat_file="vmstat_output"
  
