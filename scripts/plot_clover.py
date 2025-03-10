@@ -45,6 +45,8 @@ plt.plot(colloid_times, colloid_runtimes, label="Colloid", linewidth=2.0)
 plt.plot(dmi_times, dmi_runtimes, label="DMI", linewidth=2.0)
 plt.plot(static_times, static_runtimes, label="Static", linewidth=2.0)
 
+plt.ylim(ymin=0)
+
 plt.legend(fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
