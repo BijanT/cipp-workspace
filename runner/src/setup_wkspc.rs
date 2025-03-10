@@ -277,6 +277,7 @@ where
     let ycsb_dir = dir!(&workloads_dir, "YCSB");
     let gups_dir = dir!(&workloads_dir, "gups_hemem");
     let clover_dir = dir!(&workloads_dir, "CloverLeaf");
+    let stream_dir = dir!(&workloads_dir, "stream");
 
     ushell.run(cmd!("make").cwd(&gapbs_dir))?;
     if !cfg.skip_slow {
@@ -289,6 +290,8 @@ where
 
     ushell.run(cmd!("cmake -Bbuild -H. -DMODEL=omp").cwd(&clover_dir))?;
     ushell.run(cmd!("cmake --build build").cwd(&clover_dir))?;
+
+    ushell.run(cmd!("make").cwd(&stream_dir))?;
 
     ushell.run(cmd!("mkdir -p {}", &quartz_build_dir))?;
     ushell.run(cmd!("cmake ..").cwd(&quartz_build_dir))?;

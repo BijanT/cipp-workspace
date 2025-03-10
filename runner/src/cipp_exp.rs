@@ -42,6 +42,7 @@ enum Workload {
         op_count: usize,
         load_before_wklds: bool,
     },
+    Stream,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -207,6 +208,10 @@ pub fn cli_options() -> clap::Command {
                     arg!(--op_count <OP_COUNT> "The number of read operations to use")
                         .value_parser(clap::value_parser!(usize))
                 )
+        )
+        .subcommand(
+            clap::Command::new("stream")
+                .about("Run the STREAM microbenchmark")
         )
         .subcommand(
             clap::Command::new("merci_tc")
@@ -381,6 +386,9 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
             vec![Workload::Redis { server_size_mb, op_count, load_before_wklds: false }]
         }
+        Some(("stream", _)) => {
+            vec![Workload::Stream]
+        }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             let merci_runs = 100 * tc_runs;
@@ -498,6 +506,7 @@ where
     let gups_file = dir!(&results_dir, cfg.gen_file_name("gups"));
     let clover_file = dir!(&results_dir, cfg.gen_file_name("clover"));
     let ycsb_file = dir!(&results_dir, cfg.gen_file_name("ycsb"));
+    let stream_file = dir!(&results_dir, cfg.gen_file_name("stream"));
     let vmstat_file = dir!(&results_dir, cfg.gen_file_name("vmstat"));
     let damo_status_file = dir!(&results_dir, cfg.gen_file_name("damo_status"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
@@ -519,6 +528,7 @@ where
     let redis_dir = dir!(&user_home, crate::WORKLOADS_PATH, "redis/src/");
     let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
     let ycsb_dir = dir!(&user_home, crate::WORKLOADS_PATH, "YCSB/");
+    let stream_dir = dir!(&user_home, crate::WORKLOADS_PATH, "stream/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
     isolate_remote_cores(&ushell)?;
@@ -559,6 +569,7 @@ where
             Workload::CloverLeaf { threads } => threads,
             // One pair of threads (one core) for redis and YCSB
             Workload::Redis { .. } => 4,
+            Workload::Stream => max_cores_per_wkld,
         })
         .collect();
 
@@ -617,6 +628,7 @@ where
             Workload::Gups { .. } => "gups-hotset-mov",
             Workload::CloverLeaf { .. } => "omp-cloverleaf",
             Workload::Redis { .. } => "redis-server",
+            Workload::Stream => "stream",
         })
         .collect();
 
@@ -996,6 +1008,14 @@ where
                     None => Err(ScailError::InvalidValueError { msg: "YCSB Session does not exist for Reids".to_string() }.into()),
                 }
             }
+            Workload::Stream => {
+                run_stream(
+                    &ushell,
+                    &stream_dir,
+                    &cmd_prefixes[i],
+                    &stream_file,
+                )
+            }
         })
         .collect();
 
@@ -1263,6 +1283,24 @@ fn run_clover(
             clover_file
         )
         .cwd(clover_dir)
+    )?;
+
+    Ok(handle)
+}
+
+fn run_stream(
+    ushell: &SshShell,
+    stream_dir: &str,
+    cmd_prefix: &str,
+    stream_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let handle = ushell.spawn(
+        cmd!(
+            "{} ./stream | tee {}",
+            cmd_prefix,
+            stream_file
+        )
+        .cwd(stream_dir)
     )?;
 
     Ok(handle)
