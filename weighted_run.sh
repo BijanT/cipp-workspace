@@ -110,7 +110,7 @@ for current_wkld in "${workloads[@]}"; do
                         elif [ "$current_wkld" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
                         else
-                                perf_result=$(cat "${wlkd_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
+                                perf_result=$(cat "${wkld_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
                         fi
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
