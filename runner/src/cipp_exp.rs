@@ -36,6 +36,7 @@ enum Workload {
     },
     CloverLeaf {
         threads: usize,
+        delay: Option<usize>,
     },
     Redis {
         server_size_mb: usize,
@@ -241,6 +242,18 @@ pub fn cli_options() -> clap::Command {
                 )
         )
         .subcommand(
+            clap::Command::new("double_clover")
+                .about("Run two instances of the CloverLeaf workload together, with one offset before the other")
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                        .value_parser(clap::value_parser!(usize))
+                )
+                .arg(
+                    arg!(--delay <DELAY> "The delay, in seconds, to start the second instance after the first")
+                    .value_parser(clap::value_parser!(usize))
+                )
+        )
+        .subcommand(
             clap::Command::new("gups_redis")
                 .about("Run single threaded GUPS and Redis together")
                 .arg(
@@ -378,7 +391,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("clover", sub_m)) => {
             let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&10);
 
-            vec![Workload::CloverLeaf { threads }]
+            vec![Workload::CloverLeaf { threads, delay: None }]
         }
         Some(("redis", sub_m)) => {
             let server_size_mb = *sub_m.get_one::<usize>("server_size").unwrap() << 10;
@@ -413,6 +426,16 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
                     delay: None,
                 },
                 Workload::Merci { runs, cores, delay },
+            ]
+        }
+        Some(("double_clover", sub_m)) => {
+            let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&10);
+            let delay = sub_m.get_one::<usize>("delay").copied();
+
+            kill_after_first_done = false;
+            vec![
+                Workload::CloverLeaf { threads, delay: None },
+                Workload::CloverLeaf { threads, delay },
             ]
         }
         Some(("gups_redis", sub_m)) => {
@@ -566,7 +589,7 @@ where
             Workload::GapbsTc { .. } => max_cores_per_wkld,
             Workload::GapbsPr { .. } => max_cores_per_wkld,
             Workload::Gups { threads, .. } => threads,
-            Workload::CloverLeaf { threads } => threads,
+            Workload::CloverLeaf { threads, .. } => threads,
             // One pair of threads (one core) for redis and YCSB
             Workload::Redis { .. } => 4,
             Workload::Stream => max_cores_per_wkld,
@@ -987,10 +1010,11 @@ where
                     &gups_file,
                 )
             }
-            Workload::CloverLeaf { .. } => {
+            Workload::CloverLeaf { delay, .. } => {
                 run_clover(
                     &ushell,
                     &clover_dir,
+                    delay,
                     &cmd_prefixes[i],
                     &clover_file,
                 )
@@ -1273,14 +1297,22 @@ fn run_gups(
 fn run_clover(
     ushell: &SshShell,
     clover_dir: &str,
+    delay: Option<usize>,
     cmd_prefix: &str,
     clover_file: &str,
 ) -> Result<SshSpawnHandle, failure::Error> {
+    let (sleep, outfile) = if let Some(d) = delay {
+        (format!("sleep {};", d), format!("{}2", clover_file))
+    } else {
+        (String::new(), clover_file.to_string())
+    };
+
     let handle = ushell.spawn(
         cmd!(
-            "{} ./build/omp-cloverleaf --file ./InputDecks/clover_bm64_300.in | tee {}",
+            "{} {} ./build/omp-cloverleaf --file ./InputDecks/clover_bm64_300.in | tee {}",
+            sleep,
             cmd_prefix,
-            clover_file
+            outfile,
         )
         .cwd(clover_dir)
     )?;
