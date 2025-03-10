@@ -17,6 +17,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
 ## for LOOP
 local_remote=("local" "colloid")
 cpu_core_list=($(seq 32 32 128))
+cpu_core_list[-1]=127
  
 ## Stream Settings
 stream_exe=/home/labpc/work/cipp/stream/stream
@@ -38,7 +39,7 @@ output_header=(" Strategy" "Core Count" "Trial #" "Avg Time" "Avg BW" "Avg Laten
 tabular_header_print="%-15s %-15s %-15s %-15s %-15s %-15s\n"
 tabular_data_print=" %-15s %-15d %-15d %15.2f %15.2f %-15.2f\n"
  
-current_core=128
+current_core=127
 current_setting="local"
  
 # echo "setting scalling governance"
@@ -91,7 +92,7 @@ for current_setting in "${local_remote[@]}"; do
 
                         bwmon_pid=$!
  
-                        $memlat_exe $remote_mem_start_pfn $memlat_sample_rate "${latency_out_file}" &
+                        taskset -c 127 $memlat_exe $remote_mem_start_pfn $memlat_sample_rate "${latency_out_file}" &
 
                         memlat_pid=$!
 

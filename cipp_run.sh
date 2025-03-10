@@ -9,7 +9,7 @@ bwmon_sample_rate=200
 cipp_exe=/home/labpc/work/cipp/cipp-workspace/tools/cipp
 cipp_sample_int=100
 cipp_adj_int=9000
-cipp_bw_cutoff=300000
+cipp_bw_cutoff=200000
 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
@@ -35,6 +35,8 @@ stream_exe=/home/labpc/work/cipp/stream/stream
 spec_stub="/opt/cpu2017/bin/runcpu --action=run --noreportable --iterations 5 --nobuild  --size ref --tune base --config /opt/cpu2017/gcc-linux-x86.cfg"
 
 numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
+damo_exe=/home/labpc/work/cipp/cipp_damo/damo
+damo_yaml=/home/labpc/work/cipp/cipp.yaml
 
 ## output files
 wkld_dir="${current_dir}/${timestamp}/wkld"
@@ -60,7 +62,6 @@ current_wkld="cloverleaf"
 tuned-adm profile throughput-performance
 echo 0 > $numa_balancing
 echo 0 > $demotion_trigger
-taskset -cp 127 $(pgrep kdamond)
 
 pushd /opt/cpu2017/
 source shrc
@@ -93,6 +94,8 @@ for current_wkld in "${workloads[@]}"; do
 
                         echo 100 > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo 0 > /sys/kernel/mm/mempolicy/weighted_interleave/node1
+                        $damo_exe start $damo_yaml
+                        taskset -cp 127 $(pgrep kdamond)
 
                         if [ "$current_wkld" = "bwaves_s" ] || [ "$current_wkld" = "lbm_s" ]; then
                                 $numactl_exe -w 0,1 $spec_stub --threads=${current_core} $current_wkld > ${wkld_out_file} &
@@ -102,9 +105,9 @@ for current_wkld in "${workloads[@]}"; do
 
                         wkld_pid=$!
  
-                        $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
+                        #taskset -c 127 $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
 
-                        bwmon_pid=$!
+                        #bwmon_pid=$!
 
                         $cipp_exe $cipp_sample_int $cipp_adj_int $cipp_bw_cutoff > ${cipp_out_file} &
 
@@ -112,10 +115,11 @@ for current_wkld in "${workloads[@]}"; do
 
                         # echo "touched latency file core count $current_core, setting $current_wkld"
 
-                        while kill -0 $bwmon_pid 2>/dev/null; do
+                        while kill -0 $wkld_pid 2>/dev/null; do
                                 sleep 0.5
                         done
                         kill $cipp_pid
+                        $damo_exe stop
                         cat /proc/vmstat > ${vmstat_end_out_file}
  
                         if [ "$current_wkld" = "cloverleaf" ]; then
@@ -125,9 +129,7 @@ for current_wkld in "${workloads[@]}"; do
                         elif [ "$current_wkld" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
                         else
-								echo $wkld_out_file
-                                perf_result=$(cat "${wlkd_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
-								echo b
+                                perf_result=$(cat "${wkld_out_file}" | tail -n1 | grep -oP "\d+" | tail -n1)
                         fi
 
                         avg_bw=$(grep 'Aggregate' "${bwmon_out_file}" | awk '{sum+=$3; count++} END {print sum/count}')
