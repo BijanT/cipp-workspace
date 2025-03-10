@@ -101,9 +101,11 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     if (cur_bw < bw_cutoff) {
         // The bandwidth is clearly unsaturated, so increase the local ratio
         if (last_step == 0 && bw_change > 0) {
-            cur_step = bw_change / 100;
+            cur_step = (ratio * (bw_change / 100)) / 100;
             if (abs(cur_step) < MIN_STEP)
                 cur_step = MIN_STEP;
+            else if (abs(cur_step) > MAX_STEP / 2)
+                cur_step = (cur_step > 0) ? MAX_STEP / 2 : -MAX_STEP / 2;
             correct_count = 0;
         } else if (last_step <= 0) {
             cur_step = std::max(abs(last_step) / 2, MIN_STEP);
@@ -120,9 +122,12 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         // If we have stopped moving, see if the bandwidth has changed
         // enough due to application changes to search again.
         // Divide by 100 because bw_change is in houndreths of a percent
-        cur_step = bw_change / 100;
+        cur_step = (ratio * (bw_change / 100)) / 100;
         if (abs(cur_step) < 4)
             cur_step = 0;
+        else if (abs(cur_step) > MAX_STEP / 2)
+            cur_step = (cur_step > 0) ? MAX_STEP / 2 : -MAX_STEP / 2;
+
         correct_count = 0;
     } else if (bw_change < interleave_change) {
         // The last step was good, keep going
