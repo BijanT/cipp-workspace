@@ -40,3 +40,42 @@ def get_bandwidth(bwmon_file, percentile=95):
 
     return (total_bws[i], local_bws[i], remote_bws[i])
 
+def get_clover_runtime(clover_file):
+    time_pattern = re.compile("Wall clock (\d+\.\d+)")
+    f = open(clover_file, "r")
+    runtime = 0
+
+    # The file has multiple iterations, and it prints the time
+    # since the beginning after each one. We only want the last
+    for line in f:
+        m = time_pattern.match(line.strip())
+        if m is None:
+            continue
+
+        runtime = float(m.group(1))
+
+    return runtime
+
+def get_avg_gapbs_time(gapbs_file):
+    f = open(gapbs_file, "r")
+    for line in f:
+        split = line.split(":")
+        # Format: "Average Time: <time>"
+        if split[0] == "Average Time":
+            time = split[1].strip()
+            return round(float(time), 2)
+
+    return -1
+
+def get_stream_triad(stream_file):
+    triad_pattern = re.compile("Triad:\s+(\d+).*")
+    f = open(stream_file, "r")
+
+    for line in f:
+        m = triad_pattern.match(line)
+        if m is None:
+            continue
+
+        return float(m.group(1))
+
+    return 0
