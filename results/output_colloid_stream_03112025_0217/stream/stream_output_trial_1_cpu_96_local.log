@@ -1,0 +1,33 @@
+-------------------------------------------------------------
+STREAM version $Revision: 5.10 $
+-------------------------------------------------------------
+This system uses 8 bytes per array element.
+-------------------------------------------------------------
+Array size = 1000000000 (elements), Offset = 0 (elements)
+Memory per array = 7629.4 MiB (= 7.5 GiB).
+Total memory required = 22888.2 MiB (= 22.4 GiB).
+Each kernel will be executed 750 times.
+ The *best* time for each kernel (excluding the first iteration)
+ will be used to compute the reported bandwidth.
+-------------------------------------------------------------
+Number of Threads requested = 96
+Number of Threads counted = 96
+-------------------------------------------------------------
+Your clock granularity/precision appears to be 1 microseconds.
+Each test below will take on the order of 46680 microseconds.
+   (= 46680 clock ticks)
+Increase the size of the arrays if this shows that
+you are not getting at least 20 clock ticks per test.
+-------------------------------------------------------------
+WARNING -- The above is only a rough guideline.
+For best results, please be sure you know the
+precision of your system timer.
+-------------------------------------------------------------
+Function    Best Rate MB/s  Avg time     Min time     Max time
+Copy:          405310.4     0.039989     0.039476     0.045195
+Scale:         401637.8     0.040233     0.039837     0.045045
+Add:           423444.3     0.057286     0.056678     0.062488
+Triad:         424666.2     0.057153     0.056515     0.062091
+-------------------------------------------------------------
+Solution Validates: avg error less than 1.000000e-13 on all three arrays
+-------------------------------------------------------------

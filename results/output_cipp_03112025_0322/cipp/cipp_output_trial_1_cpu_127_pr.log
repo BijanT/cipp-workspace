@@ -1,0 +1,92 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 200000 MB/s
+0
+100
+0
+Target ratio: 100 BW Change: 0 Int Change: 1000 BW: 28108
+100
+0
+Target ratio: 100 BW Change: 29 Int Change: -500 BW: 28024
+100
+0
+Target ratio: 100 BW Change: 6768 Int Change: -500 BW: 9056
+100
+0
+Target ratio: 100 BW Change: -1495 Int Change: -500 BW: 10410
+90
+10
+Target ratio: 90 BW Change: -359487 Int Change: -1000 BW: 384636
+80
+20
+Target ratio: 80 BW Change: -638 Int Change: 1000 BW: 409205
+70
+30
+Target ratio: 70 BW Change: 672 Int Change: 1000 BW: 381692
+75
+25
+Target ratio: 75 BW Change: 8754 Int Change: 1000 BW: 47526
+80
+20
+Target ratio: 80 BW Change: -57794 Int Change: -500 BW: 322198
+85
+15
+Target ratio: 85 BW Change: -716 Int Change: -500 BW: 345269
+83
+17
+Target ratio: 83 BW Change: -315 Int Change: -500 BW: 356151
+81
+19
+Target ratio: 81 BW Change: -353 Int Change: 200 BW: 368724
+81
+19
+Target ratio: 81 BW Change: 361 Int Change: 200 BW: 355400
+81
+19
+Target ratio: 81 BW Change: 14 Int Change: 0 BW: 354887
+81
+19
+Target ratio: 81 BW Change: 14 Int Change: 0 BW: 354898
+81
+19
+Target ratio: 81 BW Change: 11 Int Change: 0 BW: 355000
+81
+19
+Target ratio: 81 BW Change: 19 Int Change: 0 BW: 354709
+81
+19
+Target ratio: 81 BW Change: 7 Int Change: 0 BW: 355124
+81
+19
+Target ratio: 81 BW Change: 9 Int Change: 0 BW: 355079
+81
+19
+Target ratio: 81 BW Change: 18 Int Change: 0 BW: 354745
+81
+19
+Target ratio: 81 BW Change: 3 Int Change: 0 BW: 355274
+81
+19
+Target ratio: 81 BW Change: 1 Int Change: 0 BW: 355354
+81
+19
+Target ratio: 81 BW Change: -7 Int Change: 0 BW: 355660
+81
+19
+Target ratio: 81 BW Change: 0 Int Change: 0 BW: 355383
+81
+19
+Target ratio: 81 BW Change: 0 Int Change: 0 BW: 355391
+81
+19
+Target ratio: 81 BW Change: -1 Int Change: 0 BW: 355437
+81
+19
+Target ratio: 81 BW Change: 0 Int Change: 0 BW: 355381
+81
+19
+Target ratio: 81 BW Change: 0 Int Change: 0 BW: 355394
+81
+19
+Target ratio: 81 BW Change: -1 Int Change: 0 BW: 355469

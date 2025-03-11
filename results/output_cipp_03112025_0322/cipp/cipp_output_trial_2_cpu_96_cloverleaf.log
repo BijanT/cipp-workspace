@@ -1,0 +1,98 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 200000 MB/s
+0
+90
+10
+Target ratio: 90 BW Change: 0 Int Change: 1000 BW: 398213
+80
+20
+Target ratio: 80 BW Change: 168 Int Change: 1000 BW: 391507
+70
+30
+Target ratio: 70 BW Change: 303 Int Change: 1000 BW: 379630
+60
+40
+Target ratio: 60 BW Change: 416 Int Change: 1000 BW: 363801
+50
+50
+Target ratio: 50 BW Change: 474 Int Change: 1000 BW: 346536
+40
+60
+Target ratio: 40 BW Change: 560 Int Change: 1000 BW: 327121
+45
+55
+Target ratio: 45 BW Change: 1827 Int Change: 1000 BW: 267336
+43
+57
+Target ratio: 43 BW Change: 903 Int Change: -500 BW: 243187
+43
+57
+Target ratio: 43 BW Change: 1440 Int Change: 200 BW: 208151
+45
+55
+Target ratio: 45 BW Change: 593 Int Change: 0 BW: 195787
+47
+53
+Target ratio: 47 BW Change: 400 Int Change: -200 BW: 187945
+49
+51
+Target ratio: 49 BW Change: -302 Int Change: -200 BW: 193627
+53
+47
+Target ratio: 53 BW Change: -713 Int Change: -200 BW: 207438
+57
+43
+Target ratio: 57 BW Change: -1356 Int Change: -400 BW: 235577
+61
+39
+Target ratio: 61 BW Change: -1680 Int Change: -400 BW: 275157
+69
+31
+Target ratio: 69 BW Change: -605 Int Change: -400 BW: 291809
+77
+23
+Target ratio: 77 BW Change: -1329 Int Change: -800 BW: 330596
+73
+27
+Target ratio: 73 BW Change: -577 Int Change: -800 BW: 349684
+69
+31
+Target ratio: 69 BW Change: 67 Int Change: 400 BW: 347319
+71
+29
+Target ratio: 71 BW Change: 480 Int Change: 400 BW: 330647
+73
+27
+Target ratio: 73 BW Change: -277 Int Change: -200 BW: 339829
+73
+27
+Target ratio: 73 BW Change: -31 Int Change: -200 BW: 340911
+73
+27
+Target ratio: 73 BW Change: 10 Int Change: 0 BW: 340569
+73
+27
+Target ratio: 73 BW Change: 61 Int Change: 0 BW: 338814
+73
+27
+Target ratio: 73 BW Change: 103 Int Change: 0 BW: 337377
+73
+27
+Target ratio: 73 BW Change: 122 Int Change: 0 BW: 336719
+73
+27
+Target ratio: 73 BW Change: 109 Int Change: 0 BW: 337176
+73
+27
+Target ratio: 73 BW Change: 126 Int Change: 0 BW: 336594
+73
+27
+Target ratio: 73 BW Change: 92 Int Change: 0 BW: 337755
+73
+27
+Target ratio: 73 BW Change: 153 Int Change: 0 BW: 335681
+73
+27
+Target ratio: 73 BW Change: 27 Int Change: 0 BW: 339979

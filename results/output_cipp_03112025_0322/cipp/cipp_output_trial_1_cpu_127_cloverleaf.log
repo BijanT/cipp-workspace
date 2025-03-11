@@ -1,0 +1,89 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 200000 MB/s
+0
+90
+10
+Target ratio: 90 BW Change: 0 Int Change: 1000 BW: 409700
+80
+20
+Target ratio: 80 BW Change: -22 Int Change: 1000 BW: 410606
+70
+30
+Target ratio: 70 BW Change: 173 Int Change: 1000 BW: 403486
+60
+40
+Target ratio: 60 BW Change: 262 Int Change: 1000 BW: 392883
+50
+50
+Target ratio: 50 BW Change: 238 Int Change: 1000 BW: 383530
+40
+60
+Target ratio: 40 BW Change: 655 Int Change: 1000 BW: 358375
+45
+55
+Target ratio: 45 BW Change: 1859 Int Change: 1000 BW: 291745
+43
+57
+Target ratio: 43 BW Change: 1283 Int Change: -500 BW: 254303
+43
+57
+Target ratio: 43 BW Change: 1354 Int Change: 200 BW: 219851
+46
+54
+Target ratio: 46 BW Change: 974 Int Change: 0 BW: 198433
+49
+51
+Target ratio: 49 BW Change: -555 Int Change: -300 BW: 209447
+52
+48
+Target ratio: 52 BW Change: -738 Int Change: -300 BW: 224916
+58
+42
+Target ratio: 58 BW Change: -1090 Int Change: -300 BW: 249450
+64
+36
+Target ratio: 64 BW Change: -2281 Int Change: -600 BW: 306352
+70
+30
+Target ratio: 70 BW Change: -1390 Int Change: -600 BW: 348962
+80
+20
+Target ratio: 80 BW Change: -672 Int Change: -600 BW: 372425
+75
+25
+Target ratio: 75 BW Change: -581 Int Change: -1000 BW: 394089
+70
+30
+Target ratio: 70 BW Change: 275 Int Change: 500 BW: 383245
+65
+35
+Target ratio: 65 BW Change: 141 Int Change: 500 BW: 377818
+55
+45
+Target ratio: 55 BW Change: 218 Int Change: 500 BW: 369556
+45
+55
+Target ratio: 45 BW Change: 938 Int Change: 1000 BW: 334880
+50
+50
+Target ratio: 50 BW Change: 2064 Int Change: 1000 BW: 265734
+48
+52
+Target ratio: 48 BW Change: 444 Int Change: -500 BW: 253934
+48
+52
+Target ratio: 48 BW Change: 832 Int Change: 200 BW: 232804
+48
+52
+Target ratio: 48 BW Change: 402 Int Change: 0 BW: 223426
+48
+52
+Target ratio: 48 BW Change: 674 Int Change: 0 BW: 217095
+48
+52
+Target ratio: 48 BW Change: 895 Int Change: 0 BW: 211961
+52
+48
+Target ratio: 52 BW Change: 994 Int Change: 0 BW: 209652

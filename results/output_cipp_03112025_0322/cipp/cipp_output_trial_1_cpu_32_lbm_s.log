@@ -1,0 +1,101 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 200000 MB/s
+0
+90
+10
+Target ratio: 90 BW Change: 0 Int Change: 1000 BW: 373430
+80
+20
+Target ratio: 80 BW Change: 0 Int Change: 1000 BW: 373446
+70
+30
+Target ratio: 70 BW Change: 58 Int Change: 1000 BW: 371280
+60
+40
+Target ratio: 60 BW Change: 4 Int Change: 1000 BW: 371095
+50
+50
+Target ratio: 50 BW Change: 6 Int Change: 1000 BW: 370844
+40
+60
+Target ratio: 40 BW Change: 12 Int Change: 1000 BW: 370388
+45
+55
+Target ratio: 45 BW Change: 6853 Int Change: 1000 BW: 116547
+50
+50
+Target ratio: 50 BW Change: -236 Int Change: -500 BW: 119308
+55
+45
+Target ratio: 55 BW Change: -127 Int Change: -500 BW: 120825
+65
+35
+Target ratio: 65 BW Change: -257 Int Change: -500 BW: 123932
+75
+25
+Target ratio: 75 BW Change: -112 Int Change: -1000 BW: 125325
+85
+15
+Target ratio: 85 BW Change: -29 Int Change: -1000 BW: 125692
+95
+5
+Target ratio: 95 BW Change: -501 Int Change: -1000 BW: 132000
+100
+0
+Target ratio: 100 BW Change: -17729 Int Change: -1000 BW: 366033
+90
+10
+Target ratio: 90 BW Change: 8 Int Change: -1000 BW: 365723
+80
+20
+Target ratio: 80 BW Change: 11 Int Change: 1000 BW: 365308
+70
+30
+Target ratio: 70 BW Change: -2 Int Change: 1000 BW: 365398
+60
+40
+Target ratio: 60 BW Change: 22 Int Change: 1000 BW: 364592
+50
+50
+Target ratio: 50 BW Change: 146 Int Change: 1000 BW: 359236
+55
+45
+Target ratio: 55 BW Change: 5612 Int Change: 1000 BW: 157629
+60
+40
+Target ratio: 60 BW Change: -520 Int Change: -500 BW: 165841
+65
+35
+Target ratio: 65 BW Change: -14 Int Change: -500 BW: 166085
+75
+25
+Target ratio: 75 BW Change: -455 Int Change: -500 BW: 173654
+85
+15
+Target ratio: 85 BW Change: -471 Int Change: -1000 BW: 181842
+95
+5
+Target ratio: 95 BW Change: -820 Int Change: -1000 BW: 196754
+90
+10
+Target ratio: 90 BW Change: -285 Int Change: -1000 BW: 202370
+85
+15
+Target ratio: 85 BW Change: -8293 Int Change: 500 BW: 370202
+80
+20
+Target ratio: 80 BW Change: 30 Int Change: 500 BW: 369089
+70
+30
+Target ratio: 70 BW Change: 80 Int Change: 500 BW: 366130
+60
+40
+Target ratio: 60 BW Change: 38 Int Change: 1000 BW: 364708
+50
+50
+Target ratio: 50 BW Change: 27 Int Change: 1000 BW: 363707
+40
+60
+Target ratio: 40 BW Change: 34 Int Change: 1000 BW: 362451
