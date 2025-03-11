@@ -9,14 +9,14 @@ bwmon_sample_rate=200
 cipp_exe=/home/labpc/work/cipp/cipp-workspace/tools/cipp
 cipp_sample_int=100
 cipp_adj_int=9000
-cipp_bw_cutoff=200000
+cipp_bw_cutoff=250000
 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-workloads=("cloverleaf" "pr" "stream" "bwaves_s" "lbm_s")
+workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
 cpu_core_list=($(seq 32 32 128))
 # Reserve a core for kdamond
 cpu_core_list[-1]=127
@@ -25,8 +25,10 @@ cpu_core_list[-1]=127
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
 clover_input_file=/home/labpc/work/cipp/CloverLeaf/InputDecks/clover_bm256_300.in
 
-## PR Settings
+## GAPBS Settings
 pr_exe=/home/labpc/work/cipp/gapbs/pr
+bc_exe=/home/labpc/work/cipp/gapbs/bc
+bfs_exe=/home/labpc/work/cipp/gapbs/bfs
  
 ## Stream Settings
 stream_exe=/home/labpc/work/cipp/stream/stream
@@ -76,6 +78,10 @@ for current_wkld in "${workloads[@]}"; do
                 wkld_cmd="$clover_exe --file $clover_input_file"
         elif [ "$current_wkld" = "pr" ]; then
                 wkld_cmd="$pr_exe -g 30"
+        elif [ "$current_wkld" = "bc" ]; then
+                wkld_cmd="$bc_exe -g 30"
+        elif [ "$current_wkld" = "bfs" ]; then
+                wkld_cmd="$bfs_exe -g 30"
         else
                 wkld_cmd=$stream_exe
         fi
@@ -124,7 +130,7 @@ for current_wkld in "${workloads[@]}"; do
  
                         if [ "$current_wkld" = "cloverleaf" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Wall clock" | tail -n1 | grep -oP '\d+\.\d+')
-                        elif [ "$current_wkld" = "pr" ]; then
+                        elif [ "$current_wkld" = "pr" ] || [ "$current_wkld" = "bc" ] || [ "$current_wkld" = "bfs" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Average Time" | grep -oP '\d+\.\d+')
                         elif [ "$current_wkld" = "stream" ]; then
                                 perf_result=$(cat "${wkld_out_file}" | grep "Triad" | grep -oP '\d+\.\d+' | head -n1)
