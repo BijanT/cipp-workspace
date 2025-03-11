@@ -63,7 +63,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     static int correct_count = 0;
     static int64_t last_bw = 0;
     static int last_ratio = 100;
-    static int last_step = -MAX_STEP;
+    static int last_step = -MAX_STEP * 2;
     int64_t cur_bw;
     int nth_percentile_index;
     int bw_change, interleave_change;
@@ -114,10 +114,6 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
             cur_step = last_step;
             correct_count++;
         }
-    } else if (last_ratio == 100) {
-        // Probe downward to see if we can make use of more bandwidth
-        cur_step = -abs(last_step);
-        correct_count = 0;
     } else if (last_step == 0) {
         // If we have stopped moving, see if the bandwidth has changed
         // enough due to application changes to search again.
@@ -128,6 +124,10 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         else if (abs(cur_step) > MAX_STEP / 2)
             cur_step = (cur_step > 0) ? MAX_STEP / 2 : -MAX_STEP / 2;
 
+        correct_count = 0;
+    } else if (last_ratio == 100) {
+        // Probe downward to see if we can make use of more bandwidth
+        cur_step = -abs(last_step) / 2;
         correct_count = 0;
     } else if (bw_change < interleave_change) {
         // The last step was good, keep going
