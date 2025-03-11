@@ -79,3 +79,16 @@ def get_stream_triad(stream_file):
         return float(m.group(1))
 
     return 0
+
+def get_spec_time(spec_file):
+    spec_pattern = re.compile(".*; (\d+) total seconds elapsed")
+    f = open(spec_file, "r")
+
+    for line in f:
+        m = spec_pattern.match(line)
+        if m is None:
+            continue
+
+        return float(m.group(1))
+
+    return 0
