@@ -1,0 +1,89 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 250000 MB/s
+0
+100
+0
+Target ratio: 100 BW Change: 0 Int Change: 2000 BW: 22561
+100
+0
+Target ratio: 100 BW Change: 72 Int Change: -1000 BW: 22397
+100
+0
+Target ratio: 100 BW Change: 1163 Int Change: -1000 BW: 19790
+100
+0
+Target ratio: 100 BW Change: 5220 Int Change: -1000 BW: 9459
+100
+0
+Target ratio: 100 BW Change: -933 Int Change: -1000 BW: 10342
+95
+5
+Target ratio: 95 BW Change: -269259 Int Change: -1000 BW: 288810
+90
+10
+Target ratio: 90 BW Change: -2225 Int Change: 500 BW: 353075
+85
+15
+Target ratio: 85 BW Change: 492 Int Change: 500 BW: 335692
+87
+13
+Target ratio: 87 BW Change: 8868 Int Change: 500 BW: 37968
+89
+11
+Target ratio: 89 BW Change: 1155 Int Change: -200 BW: 33580
+91
+9
+Target ratio: 91 BW Change: -66292 Int Change: -200 BW: 256190
+95
+5
+Target ratio: 95 BW Change: -1536 Int Change: -200 BW: 295562
+99
+1
+Target ratio: 99 BW Change: -731 Int Change: -400 BW: 317183
+97
+3
+Target ratio: 97 BW Change: 1534 Int Change: -400 BW: 268498
+95
+5
+Target ratio: 95 BW Change: -1175 Int Change: 200 BW: 300066
+95
+5
+Target ratio: 95 BW Change: 269 Int Change: 200 BW: 291994
+99
+1
+Target ratio: 99 BW Change: 571 Int Change: 0 BW: 275316
+100
+0
+Target ratio: 100 BW Change: -874 Int Change: -400 BW: 299382
+98
+2
+Target ratio: 98 BW Change: 296 Int Change: -400 BW: 290510
+96
+4
+Target ratio: 96 BW Change: -595 Int Change: 200 BW: 307799
+96
+4
+Target ratio: 96 BW Change: 213 Int Change: 200 BW: 301229
+100
+0
+Target ratio: 100 BW Change: 1411 Int Change: 0 BW: 258710
+98
+2
+Target ratio: 98 BW Change: -294 Int Change: -500 BW: 266324
+96
+4
+Target ratio: 96 BW Change: -747 Int Change: 200 BW: 286242
+94
+6
+Target ratio: 94 BW Change: 197 Int Change: 200 BW: 280582
+94
+6
+Target ratio: 94 BW Change: 376 Int Change: 200 BW: 270030
+89
+11
+Target ratio: 89 BW Change: -1006 Int Change: 0 BW: 297216
+84
+16
+Target ratio: 84 BW Change: 125 Int Change: 500 BW: 293492

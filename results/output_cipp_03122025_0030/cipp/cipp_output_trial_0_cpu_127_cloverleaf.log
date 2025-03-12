@@ -1,0 +1,89 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 250000 MB/s
+0
+90
+10
+Target ratio: 90 BW Change: 0 Int Change: 2000 BW: 407435
+80
+20
+Target ratio: 80 BW Change: 10 Int Change: 1000 BW: 407026
+70
+30
+Target ratio: 70 BW Change: 23 Int Change: 1000 BW: 406074
+60
+40
+Target ratio: 60 BW Change: 223 Int Change: 1000 BW: 397007
+50
+50
+Target ratio: 50 BW Change: 254 Int Change: 1000 BW: 386901
+40
+60
+Target ratio: 40 BW Change: 340 Int Change: 1000 BW: 373743
+45
+55
+Target ratio: 45 BW Change: 2141 Int Change: 1000 BW: 293713
+43
+57
+Target ratio: 43 BW Change: 1380 Int Change: -500 BW: 253178
+45
+55
+Target ratio: 45 BW Change: 1012 Int Change: 200 BW: 227534
+47
+53
+Target ratio: 47 BW Change: 290 Int Change: -200 BW: 220927
+49
+51
+Target ratio: 49 BW Change: 230 Int Change: -200 BW: 215834
+53
+47
+Target ratio: 53 BW Change: -159 Int Change: -200 BW: 219284
+57
+43
+Target ratio: 57 BW Change: -679 Int Change: -400 BW: 234174
+61
+39
+Target ratio: 61 BW Change: -1103 Int Change: -400 BW: 260005
+69
+31
+Target ratio: 69 BW Change: -1013 Int Change: -400 BW: 286344
+77
+23
+Target ratio: 77 BW Change: -1852 Int Change: -800 BW: 339392
+85
+15
+Target ratio: 85 BW Change: -1075 Int Change: -800 BW: 375877
+81
+19
+Target ratio: 81 BW Change: 0 Int Change: -800 BW: 375854
+77
+23
+Target ratio: 77 BW Change: -300 Int Change: 400 BW: 387159
+73
+27
+Target ratio: 73 BW Change: -45 Int Change: 400 BW: 388918
+65
+35
+Target ratio: 65 BW Change: -46 Int Change: 400 BW: 390710
+57
+43
+Target ratio: 57 BW Change: 521 Int Change: 800 BW: 370330
+49
+51
+Target ratio: 49 BW Change: 271 Int Change: 800 BW: 360263
+53
+47
+Target ratio: 53 BW Change: 2106 Int Change: 800 BW: 284388
+51
+49
+Target ratio: 51 BW Change: 625 Int Change: -400 BW: 266593
+51
+49
+Target ratio: 51 BW Change: 547 Int Change: 200 BW: 251985
+53
+47
+Target ratio: 53 BW Change: 175 Int Change: 0 BW: 247559
+55
+45
+Target ratio: 55 BW Change: -90 Int Change: -200 BW: 249806

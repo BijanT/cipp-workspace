@@ -1,0 +1,50 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 250000 MB/s
+0
+100
+0
+Target ratio: 100 BW Change: 0 Int Change: 2000 BW: 15996
+100
+0
+Target ratio: 100 BW Change: 51 Int Change: -1000 BW: 15914
+100
+0
+Target ratio: 100 BW Change: 10 Int Change: -1000 BW: 15897
+100
+0
+Target ratio: 100 BW Change: 3488 Int Change: -1000 BW: 10351
+100
+0
+Target ratio: 100 BW Change: 6016 Int Change: -1000 BW: 4123
+100
+0
+Target ratio: 100 BW Change: -13963 Int Change: -1000 BW: 9880
+100
+0
+Target ratio: 100 BW Change: -220408 Int Change: -1000 BW: 227644
+100
+0
+Target ratio: 100 BW Change: -799 Int Change: -1000 BW: 245849
+95
+5
+Target ratio: 95 BW Change: -1996 Int Change: -1000 BW: 294930
+90
+10
+Target ratio: 90 BW Change: 481 Int Change: 500 BW: 280721
+92
+8
+Target ratio: 92 BW Change: 785 Int Change: 500 BW: 258663
+94
+6
+Target ratio: 94 BW Change: 8933 Int Change: -200 BW: 27575
+96
+4
+Target ratio: 96 BW Change: -55 Int Change: -200 BW: 27729
+100
+0
+Target ratio: 100 BW Change: 3850 Int Change: -200 BW: 17053
+100
+0
+Target ratio: 100 BW Change: -124953 Int Change: -400 BW: 230136

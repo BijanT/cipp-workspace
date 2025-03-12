@@ -1,0 +1,89 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 9000 ms
+	Bandwidth saturation cutoff: 250000 MB/s
+0
+90
+10
+Target ratio: 90 BW Change: 0 Int Change: 2000 BW: 412311
+80
+20
+Target ratio: 80 BW Change: 52 Int Change: 1000 BW: 410150
+70
+30
+Target ratio: 70 BW Change: 102 Int Change: 1000 BW: 405959
+60
+40
+Target ratio: 60 BW Change: 185 Int Change: 1000 BW: 398437
+50
+50
+Target ratio: 50 BW Change: 602 Int Change: 1000 BW: 374441
+40
+60
+Target ratio: 40 BW Change: 420 Int Change: 1000 BW: 358692
+45
+55
+Target ratio: 45 BW Change: 2432 Int Change: 1000 BW: 271448
+50
+50
+Target ratio: 50 BW Change: 1369 Int Change: -500 BW: 234286
+55
+45
+Target ratio: 55 BW Change: 176 Int Change: -500 BW: 230160
+65
+35
+Target ratio: 65 BW Change: -986 Int Change: -500 BW: 252872
+75
+25
+Target ratio: 75 BW Change: -1757 Int Change: -1000 BW: 297309
+85
+15
+Target ratio: 85 BW Change: -2024 Int Change: -1000 BW: 357510
+80
+20
+Target ratio: 80 BW Change: -656 Int Change: -1000 BW: 380992
+75
+25
+Target ratio: 75 BW Change: 39 Int Change: 500 BW: 379505
+70
+30
+Target ratio: 70 BW Change: -122 Int Change: 500 BW: 384172
+60
+40
+Target ratio: 60 BW Change: 82 Int Change: 500 BW: 380992
+50
+50
+Target ratio: 50 BW Change: 312 Int Change: 1000 BW: 369071
+40
+60
+Target ratio: 40 BW Change: 283 Int Change: 1000 BW: 358605
+45
+55
+Target ratio: 45 BW Change: 2966 Int Change: 1000 BW: 252240
+50
+50
+Target ratio: 50 BW Change: 941 Int Change: -500 BW: 228501
+55
+45
+Target ratio: 55 BW Change: 36 Int Change: -500 BW: 227664
+65
+35
+Target ratio: 65 BW Change: -1091 Int Change: -500 BW: 252503
+75
+25
+Target ratio: 75 BW Change: -2261 Int Change: -1000 BW: 309615
+85
+15
+Target ratio: 85 BW Change: -1636 Int Change: -1000 BW: 360296
+80
+20
+Target ratio: 80 BW Change: -455 Int Change: -1000 BW: 376721
+75
+25
+Target ratio: 75 BW Change: -220 Int Change: 500 BW: 385010
+70
+30
+Target ratio: 70 BW Change: 258 Int Change: 500 BW: 375053
+60
+40
+Target ratio: 60 BW Change: -116 Int Change: 500 BW: 379409
