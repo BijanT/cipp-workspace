@@ -7,18 +7,10 @@ import matplotlib.pyplot as plt
 
 from helpers import eprint
 
-def add_record(bw_list, data_point):
-    # We see big drops in BW between merci iterations, that makes the graph
-    # hard to read. Smooth those over.
-    if len(bw_list) != 0 and data_point <= bw_list[-1] / 4:
-        bw_list.append(bw_list[-1])
-    else:
-        bw_list.append(data_point)
-
 def read_bw(bwmon_file):
     local_bws = []
     remote_bws = []
-    node_bw_pattern = re.compile("Node (\d): .* Total (\d+) MB/s")
+    node_bw_pattern = re.compile(r"Node (\d): .* Total (\d+) MB/s")
 
     f = open(bwmon_file, "r")
     for line in f:
@@ -33,14 +25,14 @@ def read_bw(bwmon_file):
         bw = float(bw) / 1024
 
         if node == 0:
-            add_record(local_bws, bw)
+            local_bws.append(bw)
         elif node == 1:
-            add_record(remote_bws, bw)
+            remote_bws.append(bw)
         else:
             eprint("Invalid node " + str(node) + " from line " + line)
             sys.exit(1)
 
-    if len(local_bws) != len(remote_bws):
+    if len(local_bws) != len(remote_bws) and len(remote_bws) != 0:
         eprint("Different local and remote bandwidth measurements!")
         sys.exit(1)
 
@@ -57,14 +49,17 @@ if len(sys.argv) >= 4:
 time_s = [0.2 * i for i in range(len(local_bw))]
 
 plt.plot(time_s, local_bw, label="Local", linewidth=2.0)
-plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
+if len(remote_bw) != 0:
+    plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
 
-plt.legend(fontsize=14)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.xlabel("Time (s)", fontsize=16)
-plt.ylabel("Bandwidth Usage (GB/s)", fontsize=16)
-plt.title("Bandwidth Utilization of " + workload, fontsize=16)
+plt.ylim(ymin=0, ymax=425)
+
+plt.legend(fontsize=18)
+plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
+plt.xlabel("Time (s)", fontsize=22)
+plt.ylabel("Bandwidth Usage (GB/s)", fontsize=22)
+plt.title("Bandwidth Utilization of " + workload, fontsize=24)
 
 if outfile is not None:
     plt.savefig(outfile)

@@ -47,14 +47,14 @@ plt.plot(static_times, static_runtimes, label="Static", linewidth=2.0)
 
 plt.ylim(ymin=0)
 
-plt.legend(fontsize=14)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.xlabel("Time (s)", fontsize=16)
-plt.ylabel("Iteration Time (s)", fontsize=16)
-plt.title("CloverLeaf Iteration Speed Over Time", fontsize=18)
+plt.legend(fontsize=18)
+plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
+plt.xlabel("Time (s)", fontsize=22)
+plt.ylabel("Iteration Time (s)", fontsize=22)
+plt.title("CloverLeaf Iteration Speed Over Time", fontsize=24)
 
 if outfile is not None:
-    plt.savefig(outfile)
+    plt.savefig(outfile, bbox_inches="tight")
 else:
     plt.show()
