@@ -101,9 +101,13 @@ void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
 
         cpumask_file >> cpumask_str;
 
-        // The format of cpumask is CPU indices delimited by ","
+        // The format of cpumask is CPU indices delimited by "," or "-"
         while (pos != std::string::npos) {
             pos = cpumask_str.find(",");
+	    // TODO: Add code to actually parse the range when the - delimiter is used
+            if (pos == std::string::npos)
+                pos = cpumask_str.find("-");
+	    std::cout << "pos" << pos << std::endl;
             std::string token = cpumask_str.substr(0, pos);
             int cpu = std::stoi(token);
             cpus.push_back(cpu);
