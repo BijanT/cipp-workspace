@@ -44,6 +44,9 @@ enum Workload {
         load_before_wklds: bool,
     },
     Stream,
+    SpecBwaves {
+        threads: usize,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -213,6 +216,14 @@ pub fn cli_options() -> clap::Command {
         .subcommand(
             clap::Command::new("stream")
                 .about("Run the STREAM microbenchmark")
+        )
+        .subcommand(
+            clap::Command::new("bwaves")
+                .about("Run the SPEC 2017 bwaves_s benchmark.")
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                        .value_parser(clap::value_parser!(usize))
+                )
         )
         .subcommand(
             clap::Command::new("merci_tc")
@@ -402,6 +413,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         Some(("stream", _)) => {
             vec![Workload::Stream]
         }
+        Some(("bwaves", sub_m)) => {
+            let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&10);
+
+            vec![Workload::SpecBwaves { threads } ]
+        }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             let merci_runs = 100 * tc_runs;
@@ -530,6 +546,7 @@ where
     let clover_file = dir!(&results_dir, cfg.gen_file_name("clover"));
     let ycsb_file = dir!(&results_dir, cfg.gen_file_name("ycsb"));
     let stream_file = dir!(&results_dir, cfg.gen_file_name("stream"));
+    let spec_file = dir!(&results_dir, cfg.gen_file_name("spec"));
     let vmstat_file = dir!(&results_dir, cfg.gen_file_name("vmstat"));
     let damo_status_file = dir!(&results_dir, cfg.gen_file_name("damo_status"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
@@ -552,6 +569,7 @@ where
     let redis_conf = dir!(&user_home, crate::WKSPC_PATH, "redis.conf");
     let ycsb_dir = dir!(&user_home, crate::WORKLOADS_PATH, "YCSB/");
     let stream_dir = dir!(&user_home, crate::WORKLOADS_PATH, "stream/");
+    let spec_dir = dir!(&user_home, crate::WORKLOADS_PATH, "spec2017/");
     let kernel_dir = dir!(&user_home, crate::KERNEL_PATH);
 
     isolate_remote_cores(&ushell)?;
@@ -593,6 +611,7 @@ where
             // One pair of threads (one core) for redis and YCSB
             Workload::Redis { .. } => 4,
             Workload::Stream => max_cores_per_wkld,
+            Workload::SpecBwaves { threads } => threads,
         })
         .collect();
 
@@ -656,6 +675,7 @@ where
             Workload::CloverLeaf { .. } => "omp-cloverleaf",
             Workload::Redis { .. } => "redis-server",
             Workload::Stream => "stream",
+            Workload::SpecBwaves { .. } => "speed_bwaves_ba",
         })
         .collect();
 
@@ -1044,6 +1064,16 @@ where
                     &stream_file,
                 )
             }
+            Workload::SpecBwaves { threads } => {
+                run_spec(
+                    &ushell,
+                    &spec_dir,
+                    "bwaves_s",
+                    threads,
+                    &cmd_prefixes[i],
+                    &spec_file,
+                )
+            }
         })
         .collect();
 
@@ -1337,6 +1367,32 @@ fn run_stream(
             stream_file
         )
         .cwd(stream_dir)
+    )?;
+
+    Ok(handle)
+}
+
+fn run_spec(
+    ushell: &SshShell,
+    spec_dir: &str,
+    workload: &str,
+    threads: usize,
+    cmd_prefix: &str,
+    spec_file: &str,
+) -> Result<SshSpawnHandle, failure::Error> {
+    let spec_stub = "runcpu --action=run --noreportable --iterations 1 --nobuild \
+        --size ref --tune base --config spec-linux-x86.cfg";
+
+    let handle = ushell.spawn(
+        cmd!(
+            "source shrc && {} {} --threads={} {} | tee {}",
+            cmd_prefix,
+            spec_stub,
+            threads,
+            workload,
+            spec_file,
+        )
+        .cwd(spec_dir)
     )?;
 
     Ok(handle)

@@ -2,7 +2,7 @@
 use crate::WKSPC_PATH;
 use clap::{arg, ArgAction};
 
-use libscail::{clone_git_repo, dir, get_user_home_dir, with_shell, GitRepo, Login};
+use libscail::{clone_git_repo, dir, get_user_home_dir, install_spec_2017, with_shell, GitRepo, Login};
 
 use spurs::{cmd, Execute, SshShell};
 
@@ -41,6 +41,8 @@ pub fn cli_options() -> clap::Command {
         .arg(arg!(--skip_slow
          "(Optional) If passed, skip some setup steps that take a long time to speed up basic setup.")
             .action(ArgAction::SetTrue))
+        .arg(arg!(--spec2017 <iso_path>
+         "(Optional) If passed, build spec2017 workloads."))
 }
 
 struct SetupConfig<'a, A>
@@ -69,6 +71,8 @@ where
     host_bmks: bool,
     /// Should we skip some steps to speedup the setup?
     skip_slow: bool,
+    /// Should we install SPEC 2017? If so, what is the ISO path?
+    spec_2017: Option<&'a str>,
 }
 
 pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
@@ -89,6 +93,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
     let host_bmks = sub_m.get_flag("host_bmks");
     let skip_slow = sub_m.get_flag("skip_slow");
+    let spec_2017 = sub_m.get_one::<String>("spec2017").map(|s| s.as_str());
 
     let cfg = SetupConfig {
         login,
@@ -100,6 +105,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         secret,
         host_bmks,
         skip_slow,
+        spec_2017,
     };
 
     run_inner(cfg)?;
@@ -129,6 +135,15 @@ where
 
     if cfg.host_bmks {
         build_host_benchmarks(&ushell, &cfg)?;
+    }
+
+    if let Some(iso_path) = cfg.spec_2017 {
+        let spec_path = dir!(
+            crate::WORKLOADS_PATH,
+            "spec2017",
+        );
+        let config = "spec-linux-x86.cfg";
+        install_spec_2017(&ushell, &cfg.login, iso_path, &config, &spec_path)?;
     }
 
     ushell.run(cmd!("echo DONE"))?;
