@@ -28,7 +28,7 @@ for file in results_files:
 
     if workload == "clover" or workload == "cloverleaf":
         result = get_clover_runtime(filename)
-    elif workload == "pr":
+    elif workload == "pr" or workload == "bc" or workload == "bfs":
         result = get_avg_gapbs_time(filename)
     elif workload == "stream":
         result = get_stream_triad(filename)
