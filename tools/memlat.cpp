@@ -41,6 +41,7 @@ struct perf_sample {
 int main(int argc, char* argv[])
 {
     int agg_interval;
+    int display_interval;
     int agg_count = 0;
     uint64_t remote_pfn;
     struct bitmask *cpumask;
@@ -73,6 +74,7 @@ int main(int argc, char* argv[])
         std::cerr << "Invalid sample interval: " << argv[2] << std::endl;
         return -1;
     }
+    display_interval = agg_interval * 100;
 
     if (argc == 3) {
         buf = std::cout.rdbuf();
@@ -156,6 +158,7 @@ int main(int argc, char* argv[])
     }
 
     auto start_time = std::chrono::high_resolution_clock::now();
+    auto display_time = std::chrono::high_resolution_clock::now();
     while (true) {
         struct perf_event_header *ph;
         struct perf_sample *ps;
@@ -186,8 +189,10 @@ int main(int argc, char* argv[])
             smoothed_remote_lat = (remote_lat + ((1<<EWMA_EXP) - 1)*smoothed_remote_lat)>>EWMA_EXP;
 
             // To not overwhelm the reader,  only print occasionally
-            if (agg_count % 100 == 0) {
+            auto display_duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - display_time);
+            if (display_duration.count() >= display_interval) {
                 out << "Local " << smoothed_local_lat << " Remote " << smoothed_remote_lat << std::endl;
+                display_time = std::chrono::high_resolution_clock::now();
             }
 
             shell_cmd << "echo " << ((smoothed_local_lat > smoothed_remote_lat) ? 1 : 0)
