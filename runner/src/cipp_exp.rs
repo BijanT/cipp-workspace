@@ -535,7 +535,7 @@ where
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
     let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
 
-    let colloid_dir = dir!(&user_home, "colloid/tpp/");
+    let colloid_dir = dir!(&user_home, crate::KERNEL_PATH);
     let tools_dir = dir!(&user_home, crate::WKSPC_PATH, "tools/");
     let numactl_dir = dir!(&user_home, crate::WKSPC_PATH, "numactl/");
     let quartz_dir = dir!(&user_home, crate::WKSPC_PATH, "quartz/");
@@ -640,6 +640,10 @@ where
     } else {
         pin_cores_strs.join(",") + "," + &extra_cores_str
     };
+
+    // All of the local NUMA cores should be taken by now. Get a core from
+    // the remote NUMA for monitoring processes.
+    let remote_core = tctx.next().unwrap();
 
     let proc_names: Vec<&str> = cfg
         .workloads
@@ -789,13 +793,13 @@ where
             if *memlat {
                 let remote_mem_pfn_start = remote_mem_start / 4096;
                 ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
-                ushell.spawn(cmd!("sudo {}/memlat {} 10 {}", &tools_dir, remote_mem_pfn_start,
+                ushell.spawn(cmd!("sudo taskset -c {} {}/memlat {} 10 {}", remote_core, &tools_dir, remote_mem_pfn_start,
                     &colloid_lat_file))?;
             } else {
                 ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
                 bgctx.spawn(BackgroundTask {
                     name: "colloid_latency",
-                    period: 5, // Seconds
+                    period: 1, // Seconds
                     cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
                     ensure_started: colloid_lat_file,
                 })?;
