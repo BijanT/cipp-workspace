@@ -31,7 +31,7 @@
 struct perf_sample {
     struct perf_event_header header;
     union perf_sample_weight weight;
-    uint64_t data_src;
+    union perf_mem_data_src data_src;
     uint64_t phys_addr;
 };
 
@@ -163,6 +163,7 @@ int main(int argc, char* argv[])
         struct perf_event_header *ph;
         struct perf_sample *ps;
         uint64_t pfn;
+        uint64_t data_src;
         bool read_sample = false;
 
         // Every so often, collect the results
@@ -235,6 +236,12 @@ int main(int argc, char* argv[])
             p->data_tail += ph->size;
 
             if (!pfn)
+                continue;
+
+            // Make sure this has missed the L3 cache
+            data_src = ps->data_src.mem_lvl_num;
+            if (!(data_src == PERF_MEM_LVLNUM_CXL || data_src == PERF_MEM_LVLNUM_RAM ||
+                  data_src == PERF_MEM_LVLNUM_PMEM))
                 continue;
 
             if (pfn < remote_pfn) {
