@@ -28,6 +28,10 @@
 #define MIN_REMOTE_LAT 400
 #endif
 
+#ifndef PERF_MEM_LVLNUM_CXL
+#define PERF_MEM_LVLNUM_CXL 0x09
+#endif
+
 struct perf_sample {
     struct perf_event_header header;
     union perf_sample_weight weight;
