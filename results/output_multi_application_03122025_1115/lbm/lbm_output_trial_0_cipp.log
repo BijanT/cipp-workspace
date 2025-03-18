@@ -1,0 +1,283 @@
+SPEC CPU(r) 2017 Benchmark Suites
+Copyright 1995-2019 Standard Performance Evaluation Corporation (SPEC)
+
+runcpu v6612
+Using 'linux-x86_64' tools
+Reading file manifests... read 32225 entries from 2 files in 0.08s (416204 files/s)
+Loading runcpu modules.................
+Locating benchmarks...found 47 benchmarks in 73 benchsets.
+Reading config file '/opt/cpu2017/gcc-linux-x86.cfg'
+1 configuration selected:
+
+ Action    Run Mode   Workload     Report Type      Benchmarks
+--------   --------   --------   ----------------   ---------------------------
+validate   speed      refspeed   SPECspeed2017_fp   619.lbm_s                  
+-------------------------------------------------------------------------------
+
+Setting up environment for running 619.lbm_s...
+Starting runcpu for 619.lbm_s...
+Running "specperl /opt/cpu2017/bin/sysinfo" to gather system information.
+sysinfo: r6732 of 2022-11-07 (fe91c89b7ed5c36ae2c92cc097bec197)
+sysinfo: ...getting basic information about kernel, users, and limits
+sysinfo: Getting system information for Linux...
+sysinfo: ...getting CPU info
+sysinfo: ...getting info from numactl
+sysinfo: ...getting memory info
+sysinfo: ...getting info from systemd
+sysinfo: ...getting power info
+sysinfo: ...getting system tuning info
+sysinfo: ...getting OS info
+sysinfo: ...getting disk info
+sysinfo: ...getting info from /sys/devices/virtual/dmi/id
+sysinfo: ...getting info from dmidecode
+Retrieving flags file (/opt/cpu2017/config/flags/gcc.xml)...
+Benchmarks selected: 619.lbm_s
+Compiling Binaries
+  Up to date 619.lbm_s base mytest-m64
+
+
+Setting Up Run Directories
+  Setting up 619.lbm_s refspeed (ref) base mytest-m64: run_base_refspeed_mytest-m64.0003
+Running Benchmarks
+  Running (#1) 619.lbm_s refspeed (ref) base mytest-m64 threads:64 [2025-03-12 13:24:14]
+  Running (#2) 619.lbm_s refspeed (ref) base mytest-m64 threads:64 [2025-03-12 13:26:22]
+  Running (#3) 619.lbm_s refspeed (ref) base mytest-m64 threads:64 [2025-03-12 13:28:15]
+619.lbm_s: copy 0 non-zero return code (exit code=137, signal=0)
+
+****************************************
+Contents of speccmds.out
+****************************************
+specinvoke r4356
+ Invoked as: /opt/cpu2017/bin/specinvoke -d /opt/cpu2017/benchspec/CPU/619.lbm_s/run/run_base_refspeed_mytest-m64.0003 -f speccmds.cmd -q -e speccmds.err -o speccmds.stdout
+timer ticks over every 1000 ns
+ Environment in effect for these runs:
+ # 1: LD_LIBRARY_PATH=/usr/lib64/:/usr/lib/:/lib64
+ # 2: XDG_DATA_DIRS=/root/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+ # 3: LESSOPEN=||/usr/bin/lesspipe.sh %s
+ # 4: LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01
+;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+ # 5: HOSTNAME=intel-forest-009
+ # 6: HTTP_PROXY=http://proxy-web.micron.com:80
+ # 7: OLDPWD=/opt/cpu2017
+ # 8: SPEC=/opt/cpu2017
+ # 9: USER=root
+ #10: DISPLAY=localhost:10.0
+ #11: LOGNAME=root
+ #12: HOME=/root
+ #13: TERM=screen
+ #14: PWD=/home/labpc/work/cipp
+ #15: http_proxy=http://proxy-web.micron.com:80
+ #16: LIBC_FATAL_STDERR_=1
+ #17: GUESTFISH_RESTORE=\e[0m
+ #18: BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+ #19: BIN_SH=xpg4
+ #20: SUDO_USER=labpc
+ #21: no_proxy=localhost,127.0.0.1,.micron.com
+ #22: NO_PROXY=localhost,127.0.0.1,.micron.com
+ #23: PYENV_ROOT=/opt/pyenv
+ #24: SUDO_UID=1000
+ #25: HTTPS_PROXY=http://proxy-web.micron.com:80
+ #26: SUDO_COMMAND=/bin/bash
+ #27: LC_LANG=C
+ #28: GUESTFISH_OUTPUT=\e[0m
+ #29: MAIL=/var/spool/mail/labpc
+ #30: PATH=/opt/cpu2017/bin:/opt/pyenv/shims:/opt/pyenv/bin:/root/.local/bin:/root/bin:/sbin:/bin:/usr/sbin:/usr/bin
+ #31: which_declare=declare -f
+ #32: DUALCASE=1
+ #33: OMP_STACKSIZE=120M
+ #34: PYENV_SHELL=bash
+ #35: SUDO_GID=1000
+ #36: FTP_PROXY=http://proxy-web.micron.com:80
+ #37: GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\] 
+ #38: GUESTFISH_INIT=\e[1;34m
+ #39: https_proxy=http://proxy-web.micron.com:80
+ #40: SHLVL=1
+ #41: HISTSIZE=1000
+ #42: LC_ALL=C
+ #43: SPECDB_PWD=/home/labpc/work/cipp
+ #44: SHELL=/bin/bash
+ #45: SPECPERLLIB=/opt/cpu2017/bin/lib:/opt/cpu2017/bin
+ #46: ftp_proxy=http://proxy-web.micron.com:80
+ #47: LANG=en_US.UTF-8
+ #48: OMP_NUM_THREADS=64
+running commands in speccmds.cmd 1 times
+runs started at		1741811295, 995744000, Wed Mar 12 13:28:15 2025
+run 1 started at	1741811295, 999175000, Wed Mar 12 13:28:15 2025
+child started: 0,	1741811295, 999615000, pid=117012, '../run_base_refspeed_mytest-m64.0003/lbm_s_base.mytest-m64 2000 reference.dat 0 0 200_200_260_ldc.of > lbm.out 2>> lbm.err'
+child finished: 0,	1741811374, 743374000, sec=78, nsec=743759000, pid=117012, rc=35072
+run 1 finished at:	1741811374, 744771000, Wed Mar 12 13:29:34 2025
+run 1 elapsed time:	        78, 745596000, 78.745596000
+runs finished at	1741811374, 748951000, Wed Mar 12 13:29:34 2025
+runs elapsed time:	        78, 753207000, 78.753207000
+error: a total of 1 children finished with errors
+specinvoke exit: rc=0
+
+****************************************
+  Running (#4) 619.lbm_s refspeed (ref) base mytest-m64 threads:64 [2025-03-12 13:29:35]
+619.lbm_s: copy 0 non-zero return code (exit code=137, signal=0)
+
+****************************************
+Contents of speccmds.out
+****************************************
+specinvoke r4356
+ Invoked as: /opt/cpu2017/bin/specinvoke -d /opt/cpu2017/benchspec/CPU/619.lbm_s/run/run_base_refspeed_mytest-m64.0003 -f speccmds.cmd -q -e speccmds.err -o speccmds.stdout
+timer ticks over every 1000 ns
+ Environment in effect for these runs:
+ # 1: SUDO_USER=labpc
+ # 2: LIBC_FATAL_STDERR_=1
+ # 3: BIN_SH=xpg4
+ # 4: GUESTFISH_RESTORE=\e[0m
+ # 5: BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+ # 6: PWD=/home/labpc/work/cipp
+ # 7: TERM=screen
+ # 8: http_proxy=http://proxy-web.micron.com:80
+ # 9: HOME=/root
+ #10: LOGNAME=root
+ #11: SUDO_UID=1000
+ #12: PYENV_ROOT=/opt/pyenv
+ #13: NO_PROXY=localhost,127.0.0.1,.micron.com
+ #14: no_proxy=localhost,127.0.0.1,.micron.com
+ #15: LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01
+;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+ #16: LESSOPEN=||/usr/bin/lesspipe.sh %s
+ #17: XDG_DATA_DIRS=/root/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+ #18: LD_LIBRARY_PATH=/usr/lib64/:/usr/lib/:/lib64
+ #19: DISPLAY=localhost:10.0
+ #20: SPEC=/opt/cpu2017
+ #21: USER=root
+ #22: OLDPWD=/opt/cpu2017
+ #23: HTTP_PROXY=http://proxy-web.micron.com:80
+ #24: HOSTNAME=intel-forest-009
+ #25: LC_ALL=C
+ #26: HISTSIZE=1000
+ #27: LANG=en_US.UTF-8
+ #28: ftp_proxy=http://proxy-web.micron.com:80
+ #29: SPECPERLLIB=/opt/cpu2017/bin/lib:/opt/cpu2017/bin
+ #30: SHELL=/bin/bash
+ #31: SPECDB_PWD=/home/labpc/work/cipp
+ #32: PYENV_SHELL=bash
+ #33: SUDO_GID=1000
+ #34: OMP_STACKSIZE=120M
+ #35: DUALCASE=1
+ #36: which_declare=declare -f
+ #37: PATH=/opt/cpu2017/bin:/opt/pyenv/shims:/opt/pyenv/bin:/root/.local/bin:/root/bin:/sbin:/bin:/usr/sbin:/usr/bin
+ #38: GUESTFISH_OUTPUT=\e[0m
+ #39: MAIL=/var/spool/mail/labpc
+ #40: LC_LANG=C
+ #41: SUDO_COMMAND=/bin/bash
+ #42: HTTPS_PROXY=http://proxy-web.micron.com:80
+ #43: SHLVL=1
+ #44: https_proxy=http://proxy-web.micron.com:80
+ #45: GUESTFISH_INIT=\e[1;34m
+ #46: GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\] 
+ #47: FTP_PROXY=http://proxy-web.micron.com:80
+ #48: OMP_NUM_THREADS=64
+running commands in speccmds.cmd 1 times
+runs started at		1741811375, 405818000, Wed Mar 12 13:29:35 2025
+run 1 started at	1741811375, 405833000, Wed Mar 12 13:29:35 2025
+child started: 0,	1741811375, 405838000, pid=117286, '../run_base_refspeed_mytest-m64.0003/lbm_s_base.mytest-m64 2000 reference.dat 0 0 200_200_260_ldc.of > lbm.out 2>> lbm.err'
+child finished: 0,	1741811417, 325609000, sec=41, nsec=919771000, pid=117286, rc=35072
+run 1 finished at:	1741811417, 327886000, Wed Mar 12 13:30:17 2025
+run 1 elapsed time:	        41, 922053000, 41.922053000
+runs finished at	1741811417, 330754000, Wed Mar 12 13:30:17 2025
+runs elapsed time:	        41, 924936000, 41.924936000
+error: a total of 1 children finished with errors
+specinvoke exit: rc=0
+
+****************************************
+  Running (#5) 619.lbm_s refspeed (ref) base mytest-m64 threads:64 [2025-03-12 13:30:17]
+619.lbm_s: copy 0 non-zero return code (exit code=137, signal=0)
+
+****************************************
+Contents of speccmds.out
+****************************************
+specinvoke r4356
+ Invoked as: /opt/cpu2017/bin/specinvoke -d /opt/cpu2017/benchspec/CPU/619.lbm_s/run/run_base_refspeed_mytest-m64.0003 -f speccmds.cmd -q -e speccmds.err -o speccmds.stdout
+timer ticks over every 1000 ns
+ Environment in effect for these runs:
+ # 1: LANG=en_US.UTF-8
+ # 2: ftp_proxy=http://proxy-web.micron.com:80
+ # 3: SPECPERLLIB=/opt/cpu2017/bin/lib:/opt/cpu2017/bin
+ # 4: SHELL=/bin/bash
+ # 5: SPECDB_PWD=/home/labpc/work/cipp
+ # 6: LC_ALL=C
+ # 7: HISTSIZE=1000
+ # 8: SHLVL=1
+ # 9: https_proxy=http://proxy-web.micron.com:80
+ #10: GUESTFISH_INIT=\e[1;34m
+ #11: GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\] 
+ #12: FTP_PROXY=http://proxy-web.micron.com:80
+ #13: SUDO_GID=1000
+ #14: PYENV_SHELL=bash
+ #15: OMP_STACKSIZE=120M
+ #16: DUALCASE=1
+ #17: which_declare=declare -f
+ #18: PATH=/opt/cpu2017/bin:/opt/pyenv/shims:/opt/pyenv/bin:/root/.local/bin:/root/bin:/sbin:/bin:/usr/sbin:/usr/bin
+ #19: MAIL=/var/spool/mail/labpc
+ #20: GUESTFISH_OUTPUT=\e[0m
+ #21: LC_LANG=C
+ #22: SUDO_COMMAND=/bin/bash
+ #23: HTTPS_PROXY=http://proxy-web.micron.com:80
+ #24: SUDO_UID=1000
+ #25: PYENV_ROOT=/opt/pyenv
+ #26: NO_PROXY=localhost,127.0.0.1,.micron.com
+ #27: no_proxy=localhost,127.0.0.1,.micron.com
+ #28: SUDO_USER=labpc
+ #29: BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+ #30: BIN_SH=xpg4
+ #31: LIBC_FATAL_STDERR_=1
+ #32: GUESTFISH_RESTORE=\e[0m
+ #33: http_proxy=http://proxy-web.micron.com:80
+ #34: PWD=/home/labpc/work/cipp
+ #35: TERM=screen
+ #36: HOME=/root
+ #37: LOGNAME=root
+ #38: DISPLAY=localhost:10.0
+ #39: SPEC=/opt/cpu2017
+ #40: USER=root
+ #41: HTTP_PROXY=http://proxy-web.micron.com:80
+ #42: OLDPWD=/opt/cpu2017
+ #43: HOSTNAME=intel-forest-009
+ #44: LESSOPEN=||/usr/bin/lesspipe.sh %s
+ #45: LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01
+;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+ #46: XDG_DATA_DIRS=/root/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+ #47: LD_LIBRARY_PATH=/usr/lib64/:/usr/lib/:/lib64
+ #48: OMP_NUM_THREADS=64
+running commands in speccmds.cmd 1 times
+runs started at		1741811417, 937188000, Wed Mar 12 13:30:17 2025
+run 1 started at	1741811417, 937202000, Wed Mar 12 13:30:17 2025
+child started: 0,	1741811417, 937207000, pid=117397, '../run_base_refspeed_mytest-m64.0003/lbm_s_base.mytest-m64 2000 reference.dat 0 0 200_200_260_ldc.of > lbm.out 2>> lbm.err'
+child finished: 0,	1741811462, 797009000, sec=44, nsec=859802000, pid=117397, rc=35072
+run 1 finished at:	1741811462, 799796000, Wed Mar 12 13:31:02 2025
+run 1 elapsed time:	        44, 862594000, 44.862594000
+runs finished at	1741811462, 803517000, Wed Mar 12 13:31:02 2025
+runs elapsed time:	        44, 866329000, 44.866329000
+error: a total of 1 children finished with errors
+specinvoke exit: rc=0
+
+****************************************
+Success: 2x619.lbm_s
+Error: 3x619.lbm_s
+Producing Raw Reports
+ label: mytest-m64
+  workload: refspeed (ref)
+   metric: SPECspeed2017_fp_base
+    format: raw -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.rsf
+Parsing flags for 619.lbm_s base: done
+Doing flag reduction: done
+    format: flags -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.flags.html
+    format: cfg -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.cfg, /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.orig.cfg
+    format: CSV -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.csv
+    format: PDF -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.pdf
+    format: HTML -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.html
+    format: Text -> /opt/cpu2017/result/CPU2017.267.fpspeed.refspeed.txt
+The log for this run is in /opt/cpu2017/result/CPU2017.267.log
+
+runcpu finished at 2025-03-12 13:31:06; 417 total seconds elapsed
