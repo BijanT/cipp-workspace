@@ -135,7 +135,7 @@ pub fn cli_options() -> clap::Command {
                 .conflicts_with("msr_throttle"),
         )
         .arg(
-            arg!(--msr_throttle <REGISTER_VAL> "Write to the MSR_UNCORE_RATIO_LIMIT register to lower uncore frequency")
+            arg!(--msr_throttle "Write to the MSR_UNCORE_RATIO_LIMIT register to lower uncore frequency")
                 .action(ArgAction::SetTrue)
                 .conflicts_with("quartz"),
         )
@@ -747,8 +747,8 @@ where
             // TODO: This is specific to c220g2. Make it generic
             with_shell! { ushell =>
                 cmd!("sudo modprobe msr"),
-                cmd!("sudo wrmsr -p 0 0x620 0x1010"),
-                cmd!("sudo wrmsr -p 10 0x620 0x707"),
+                //cmd!("sudo wrmsr -p 0 0x620 0x1e1e"),
+                cmd!("sudo wrmsr -p 10 0x620 0x606"),
             }
         }
         ThrottleType::Native => (),
