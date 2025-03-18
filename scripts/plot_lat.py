@@ -51,6 +51,6 @@ plt.ylabel("Access Latency (cycles)", fontsize=16)
 plt.title("Access Latency of " + workload, fontsize=18)
 
 if outfile is not None:
-    plt.savefig(outfile)
+    plt.savefig(outfile, bbox_inches="tight")
 else:
     plt.show()
