@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
         std::cerr << "Invalid sample interval: " << argv[2] << std::endl;
         return -1;
     }
-    display_interval = agg_interval * 100;
+    display_interval = agg_interval * 10;
 
     if (argc == 3) {
         buf = std::cout.rdbuf();
