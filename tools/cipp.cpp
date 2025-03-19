@@ -12,9 +12,10 @@
 
 #include "perf.h"
 
-constexpr int BW_PERCENTILE = 50;
+constexpr int BW_PERCENTILE = 75;
 constexpr int MAX_STEP = 10;
 constexpr int MIN_STEP = 2;
+constexpr int THROTTLE_THRESHOLD = 25;
 
 int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
@@ -68,6 +69,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     int nth_percentile_index;
     int bw_change, interleave_change;
     int cur_step;
+    bool good_step;
     std::stringstream shell_cmd;
     std::multiset<uint64_t> sorted_bw;
     long unsigned int i = 0;
@@ -84,7 +86,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     nth_percentile_index = (sorted_bw.size() * BW_PERCENTILE / 100) - 1;
     cur_bw = *std::next(sorted_bw.begin(), nth_percentile_index);
     if (cur_bw == 0)
-	    cur_bw = 1;
+        cur_bw = 1;
 
     // Calculate the relative change in BW and interleave ratio
     if (last_bw == 0)
@@ -96,6 +98,11 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     interleave_change = last_step * -100;//(10000 * (last_ratio - ratio)) / last_ratio;
 
     last_ratio = ratio;
+
+    // Step is goof is the change is bw is less than the change in interleave ratio
+    // However, if the bw change is positive (bw going down) when the interleave change
+    // is negative (more in local), we probably want to stay in the same direction
+    good_step = (bw_change < interleave_change) || (bw_change > 0 && interleave_change < 0);
 
     // Adjust the interleave ratio
     if (cur_bw < bw_cutoff) {
@@ -129,10 +136,15 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         // Probe downward to see if we can make use of more bandwidth
         cur_step = -abs(last_step) / 2;
         correct_count = 0;
-    } else if (bw_change < interleave_change) {
-        // The last step was good, keep going
-        correct_count++;
-        cur_step = last_step;
+    } else if (good_step) {
+        int bw_int_ratio = (bw_change * 100) / interleave_change;
+        if (bw_change > 0 && interleave_change > 0 && bw_int_ratio > THROTTLE_THRESHOLD) {
+            cur_step = (100 - bw_int_ratio) * last_step / 100;
+        } else {
+            // The last step was good, keep going
+            correct_count++;
+            cur_step = last_step;
+        }
     } else {
         // The last step was bad, reverse
         correct_count = 0;
