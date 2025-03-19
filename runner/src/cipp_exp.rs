@@ -47,6 +47,9 @@ enum Workload {
     SpecBwaves {
         threads: usize,
     },
+    SpecLbm {
+        threads: usize,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -220,6 +223,14 @@ pub fn cli_options() -> clap::Command {
         .subcommand(
             clap::Command::new("bwaves")
                 .about("Run the SPEC 2017 bwaves_s benchmark.")
+                .arg(
+                    arg!(--threads <THREADS> "The number of threads to run with")
+                        .value_parser(clap::value_parser!(usize))
+                )
+        )
+        .subcommand(
+            clap::Command::new("lbm")
+                .about("Run the SPEC 2017 lbm_s benchmark.")
                 .arg(
                     arg!(--threads <THREADS> "The number of threads to run with")
                         .value_parser(clap::value_parser!(usize))
@@ -418,6 +429,11 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
 
             vec![Workload::SpecBwaves { threads } ]
         }
+        Some(("lbm", sub_m)) => {
+            let threads = *sub_m.get_one::<usize>("threads").unwrap_or(&10);
+
+            vec![Workload::SpecLbm { threads } ]
+        }
         Some(("merci_tc", sub_m)) => {
             let tc_runs = *sub_m.get_one::<u64>("runs").unwrap_or(&10);
             let merci_runs = 100 * tc_runs;
@@ -612,6 +628,7 @@ where
             Workload::Redis { .. } => 4,
             Workload::Stream => max_cores_per_wkld,
             Workload::SpecBwaves { threads } => threads,
+            Workload::SpecLbm { threads } => threads,
         })
         .collect();
 
@@ -676,6 +693,7 @@ where
             Workload::Redis { .. } => "redis-server",
             Workload::Stream => "stream",
             Workload::SpecBwaves { .. } => "speed_bwaves_ba",
+            Workload::SpecLbm { .. } => "lbm_s_base.mark",
         })
         .collect();
 
@@ -1074,13 +1092,24 @@ where
                     &spec_file,
                 )
             }
+            Workload::SpecLbm { threads } => {
+                run_spec(
+                    &ushell,
+                    &spec_dir,
+                    "lbm_s",
+                    threads,
+                    &cmd_prefixes[i],
+                    &spec_file,
+                )
+            }
         })
         .collect();
 
     if cfg.bwmon {
         // Attach bwmon to only the first workload since it will track bw for the
         // whole system.
-        ushell.run(cmd!("sleep 1"))?;
+        // TODO: have while loop that waits for app to start
+        ushell.run(cmd!("sleep 10"))?;
         ushell.spawn(cmd!(
             "sudo {}/bwmon 100 {} $(pgrep -x {})",
             tools_dir,
