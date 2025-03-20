@@ -820,6 +820,7 @@ where
         Strategy::Colloid { memlat }=> {
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
+            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-perf")))?;
 
             with_shell! { ushell =>
                 cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
