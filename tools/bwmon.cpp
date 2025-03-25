@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
     uint64_t total_bw;
     uint64_t count;
     long unsigned int i;
+	long unsigned int num_nodes;
     struct pollfd pollfd;
     pid_t pid;
     int pidfd;
@@ -71,12 +72,27 @@ int main(int argc, char* argv[])
 
     get_perf_uncore_info(types, cpus, rd_configs, wr_configs);
 
-    rd_fds.resize(cpus.size());
-    wr_fds.resize(cpus.size());
+#ifdef GNR
+	num_nodes = cpus.size() + 1;
+#else
+	num_nodes = cpus.size();
+#endif
+    rd_fds.resize(num_nodes);
+    wr_fds.resize(num_nodes);
     for (i = 0; i < cpus.size(); i++) {
         open_perf_events(cpus[i], types, rd_configs, rd_fds[i]);
         open_perf_events(cpus[i], types, wr_configs, wr_fds[i]);
     }
+#ifdef GNR
+    // Quick hack: The performance counters for CXL are different than for local.
+    // Just hardcode them
+    std::vector<uint32_t> cxl_types = {284, 285, 286, 287, 288, 289};
+    std::vector<uint64_t> cxl_read_configs = {0x2043};
+    std::vector<uint64_t> cxl_write_configs = {0x1043};
+
+    open_perf_events(0, cxl_types, cxl_read_configs, rd_fds[i]);
+    open_perf_events(0, cxl_types, cxl_write_configs, wr_fds[i]);
+#endif
 
     if (argc == 2) {
         pid = -1;
@@ -102,7 +118,7 @@ int main(int argc, char* argv[])
                 break;
         }
 
-        for (i = 0; i < cpus.size(); i++) {
+        for (i = 0; i < num_nodes; i++) {
             apply_ioctl(PERF_EVENT_IOC_RESET, rd_fds[i]);
             apply_ioctl(PERF_EVENT_IOC_RESET, wr_fds[i]);
             apply_ioctl(PERF_EVENT_IOC_ENABLE, rd_fds[i]);
@@ -111,12 +127,12 @@ int main(int argc, char* argv[])
 
         std::this_thread::sleep_for(std::chrono::milliseconds(sample_interval_ms));
 
-        for (i = 0; i < cpus.size(); i++) {
+        for (i = 0; i < num_nodes; i++) {
             apply_ioctl(PERF_EVENT_IOC_DISABLE, rd_fds[i]);
             apply_ioctl(PERF_EVENT_IOC_DISABLE, wr_fds[i]);
         }
 
-        for (i = 0; i < cpus.size(); i++) {
+        for (i = 0; i < num_nodes; i++) {
             rd_count = wr_count = 0;
 
             for (int fd : rd_fds[i]) {
