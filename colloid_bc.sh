@@ -4,7 +4,7 @@ timestamp="output_colloid_bc_$(date +"%m%d%Y_%H%M")"
 current_dir=$(pwd)
  
 bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
-bwmon_sample_rate=200
+bwmon_sample_rate=100
 
 memlat_exe=/home/labpc/work/cipp/cipp-workspace/tools/memlat
 remote_mem_start_pfn=201326592
@@ -93,7 +93,7 @@ for current_setting in "${local_remote[@]}"; do
 
                         bc_pid=$!
  
-                        $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $bc_pid &
+                        taskset -c 127 $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $bc_pid &
 
                         bwmon_pid=$!
  

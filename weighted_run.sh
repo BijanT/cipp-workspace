@@ -4,7 +4,7 @@ timestamp="output_numactl_$(date +"%m%d%Y_%H%M")"
 current_dir=$(pwd)
  
 bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
-bwmon_sample_rate=200
+bwmon_sample_rate=100
 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
@@ -14,6 +14,7 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
 workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
 cpu_core_list=($(seq 32 32 128))
 local_ratio_list=($(seq 60 5 100))
+cpu_core_list[-1]=127
  
 ## CloverLeaf Settings
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
@@ -98,7 +99,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         wkld_pid=$!
  
-                        $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
+                        taskset -c 127 $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
 
                         bwmon_pid=$!
 
