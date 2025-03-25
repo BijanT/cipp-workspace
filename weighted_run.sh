@@ -41,6 +41,7 @@ vmstat_dir="${current_dir}/${timestamp}/vmstat"
 wkld_file="wkld_output"
 bwmon_file="bwmon_output"
 vmstat_file="vmstat_output"
+pgmigrate_file="pgmigrate_output"
  
 mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir
  
@@ -83,6 +84,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
+                        pgmigrate_out_file=${vmstat_dir}/${pgmigrate_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         wkld_out_file=${wkld_dir}/${wkld_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
 
@@ -106,7 +108,8 @@ for current_wkld in "${workloads[@]}"; do
                         # echo "touched latency file core count $current_core, setting $current_wkld"
 
                         while kill -0 $bwmon_pid 2>/dev/null; do
-                                sleep 0.5
+                                cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
+                                sleep 1
                         done
                         cat /proc/vmstat > ${vmstat_end_out_file}
  

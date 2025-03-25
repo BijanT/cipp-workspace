@@ -42,6 +42,7 @@ bwaves_file="bwaves_output"
 latency_file="latency_output"
 cipp_file="cipp_output"
 vmstat_file="vmstat_output"
+pgmigrate_file="pgmigrate_output"
  
 mkdir -p $lbm_dir $bwaves_dir $latency_dir $vmstat_dir $cipp_dir
  
@@ -82,6 +83,7 @@ for current_setting in "${strategies[@]}"; do
 
                 vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_${current_setting}.log
                 vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_${current_setting}.log
+                pgmigrate_out_file=${vmstat_dir}/${pgmigrate_file}_trial_${trial}_${current_setting}.log
                 lbm_out_file=${lbm_dir}/${lbm_file}_trial_${trial}_${current_setting}.log
                 bwaves_out_file=${bwaves_dir}/${bwaves_file}_trial_${trial}_${current_setting}.log
                 cipp_out_file=${cipp_dir}/${cipp_file}_trial_${trial}_${current_setting}.log
@@ -138,9 +140,11 @@ for current_setting in "${strategies[@]}"; do
                 fi
  
                 while kill -0 $lbm_pid 2>/dev/null; do
-                        sleep 0.5
+                        cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
+                        sleep 1
                 done
                 while kill -0 $bwaves_pid 2>/dev/null; do
+                        cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
                         sleep 0.5
                 done
 

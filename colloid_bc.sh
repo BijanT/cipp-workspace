@@ -32,6 +32,7 @@ bc_file="bc_output"
 bwmon_file="bwmon_output"
 latency_file="latency_output"
 vmstat_file="vmstat_output"
+pgmigrate_file="pgmigrate_output"
  
 mkdir -p $bc_dir $bwmon_dir $latency_dir $vmstat_dir
  
@@ -75,6 +76,7 @@ for current_setting in "${local_remote[@]}"; do
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_cpu_${current_core}_${current_setting}.log
+                        pgmigrate_out_file=${vmstat_dir}/${pgmigrate_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         bc_out_file=${bc_dir}/${bc_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
                         latency_out_file=${latency_dir}/${latency_file}_trial_${trial}_cpu_${current_core}_${current_setting}.log
@@ -104,7 +106,8 @@ for current_setting in "${local_remote[@]}"; do
                         # echo "touched latency file core count $current_core, setting $current_setting"
 
                         while kill -0 $bwmon_pid 2>/dev/null; do
-                                sleep 0.5
+                                cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
+                                sleep 1
                         done
                         kill -9 $memlat_pid
                         cat /proc/vmstat > ${vmstat_end_out_file}

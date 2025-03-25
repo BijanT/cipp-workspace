@@ -50,6 +50,7 @@ wkld_file="wkld_output"
 bwmon_file="bwmon_output"
 cipp_file="cipp_output"
 vmstat_file="vmstat_output"
+pgmigrate_file="pgmigrate_output"
  
 mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir $cipp_dir
  
@@ -92,6 +93,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         vmstat_begin_out_file=${vmstat_dir}/${vmstat_file}_begin_ratio_${trial}_cpu_${current_core}_${current_wkld}.log
                         vmstat_end_out_file=${vmstat_dir}/${vmstat_file}_end_trial_${trial}_cpu_${current_core}_${current_wkld}.log
+                        pgmigrate_out_file=${vmstat_dir}/${pgmigrate_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
                         wkld_out_file=${wkld_dir}/${wkld_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
                         cipp_out_file=${cipp_dir}/${cipp_file}_trial_${trial}_cpu_${current_core}_${current_wkld}.log
@@ -122,7 +124,8 @@ for current_wkld in "${workloads[@]}"; do
                         # echo "touched latency file core count $current_core, setting $current_wkld"
 
                         while kill -0 $wkld_pid 2>/dev/null; do
-                                sleep 0.5
+                                cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
+                                sleep 1
                         done
                         kill $cipp_pid
                         $damo_exe stop
