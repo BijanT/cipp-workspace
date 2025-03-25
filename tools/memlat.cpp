@@ -18,11 +18,11 @@
 #define MEM_TRANS_RETIRED 0x01CD
 #define MEM_LOAD_AUX 0x8203
 #define SAMPLE_PERIOD 5000
-#define EWMA_EXP 1
+#define EWMA_EXP 2
 
 #ifdef GNR
-#define MIN_LOCAL_LAT 300
-#define MIN_REMOTE_LAT 500
+#define MIN_LOCAL_LAT 460
+#define MIN_REMOTE_LAT 820
 #else
 #define MIN_LOCAL_LAT 300
 #define MIN_REMOTE_LAT 400
@@ -53,8 +53,8 @@ int main(int argc, char* argv[])
     uint64_t local_lat_count = 0;
     uint64_t remote_lat_sum = 0;
     uint64_t remote_lat_count = 0;
-    uint64_t smoothed_local_lat = 0;
-    uint64_t smoothed_remote_lat = 0;
+    uint64_t smoothed_local_lat = MIN_LOCAL_LAT;
+    uint64_t smoothed_remote_lat = MIN_REMOTE_LAT;
     std::vector<int> cpus;
     std::vector<int> aux_fds;
     std::vector<int> lat_fds;
