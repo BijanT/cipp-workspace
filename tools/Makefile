@@ -6,13 +6,16 @@ cflags.haswell=-DHASWELL
 cflags.gnr=-DGNR
 CFLAGS := ${cflags.common} ${cflags.${ARCH}}
 
-all: fbmm_wrapper cipp bwmon memlat meminfo
+all: fbmm_wrapper cipp cipp_total_bw bwmon memlat meminfo
 	echo "DONE"
 
 fbmm_wrapper: fbmm_wrapper.c
 	gcc fbmm_wrapper.c -o fbmm_wrapper
 
 cipp: cipp.o perf.o
+	g++ $^ -o $@
+
+cipp_total_bw: cipp_total_bw.o perf.o
 	g++ $^ -o $@
 
 bwmon: bwmon.o perf.o
@@ -24,8 +27,11 @@ memlat: memlat.o perf.o
 meminfo: meminfo.cpp
 	g++ $^ -o $@
 
-cipp.o: cipp.cpp
+cipp.o: cipp.cpp perf.h
 	g++ $(CFLAGS) cipp.cpp -c -o $@
+
+cipp_total_bw.o: cipp_total_bw.cpp perf.h
+	g++ $(CFLAGS) cipp_total_bw.cpp -c -o $@
 
 bwmon.o: bwmon.cpp perf.h
 	g++ $(CFLAGS) bwmon.cpp -c -o $@

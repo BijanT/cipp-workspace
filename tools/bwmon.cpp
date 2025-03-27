@@ -85,11 +85,7 @@ int main(int argc, char* argv[])
     }
 #ifdef GNR
     // Quick hack: The performance counters for CXL are different than for local.
-    // Just hardcode them
-    std::vector<uint32_t> cxl_types = {284, 285, 286, 287, 288, 289};
-    std::vector<uint64_t> cxl_read_configs = {0x2043};
-    std::vector<uint64_t> cxl_write_configs = {0x1043};
-
+    // Just use hardcoded values
     open_perf_events(0, cxl_types, cxl_read_configs, rd_fds[i]);
     open_perf_events(0, cxl_types, cxl_write_configs, wr_fds[i]);
 #endif

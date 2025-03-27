@@ -7,6 +7,12 @@
 
 #include <linux/perf_event.h>
 
+#ifdef GNR
+extern std::vector<uint32_t> cxl_types;
+extern std::vector<uint64_t> cxl_read_configs;
+extern std::vector<uint64_t> cxl_write_configs;
+#endif
+
 int perf_event_open(struct perf_event_attr *attr, pid_t pid, int cpu,
     int group_fd, unsigned long flags);
 void get_perf_uncore_info(std::vector<uint32_t> &types, std::vector<int> &cpus,
