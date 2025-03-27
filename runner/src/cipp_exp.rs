@@ -58,7 +58,7 @@ enum Strategy {
     Colloid,
     Bwmfs { ratios: Vec<(usize, usize)> },
     Numactl { local: usize, remote: usize },
-    Cipp,
+    Cipp { total_bw: bool },
     Linux,
 }
 
@@ -118,6 +118,8 @@ pub fn cli_options() -> clap::Command {
             .conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs"))
         .arg(arg!(--cipp "Use CIPP")
             .action(ArgAction::SetTrue).conflicts_with("colloid").conflicts_with("tpp").conflicts_with("bwmfs").conflicts_with("numactl"))
+        .arg(arg!(--cipp_total_bw "Use the total BW varient of CIPP")
+            .action(ArgAction::SetTrue).requires("cipp"))
         .arg(arg!(--memlat "Use memlat with Colloid")
             .action(ArgAction::SetTrue).requires("colloid"))
         .arg(
@@ -378,6 +380,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let numactl_ratio = sub_m.get_one("numactl").map(parse_ratio);
     let mut kill_after_first_done = true;
     let cipp = sub_m.get_flag("cipp");
+    let cipp_total_bw = sub_m.get_flag("cipp_total_bw");
     let flame_graph = sub_m.get_flag("flame_graph");
     let bwmon = sub_m.get_flag("bwmon");
     let meminfo = sub_m.get_flag("meminfo");
@@ -507,7 +510,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     } else if let Some((local, remote)) = numactl_ratio {
         Strategy::Numactl { local, remote }
     } else if cipp {
-        Strategy::Cipp
+        Strategy::Cipp { total_bw: cipp_total_bw }
     } else {
         Strategy::Linux
     };
@@ -808,6 +811,25 @@ where
         }
     }
 
+    // Record memory access latencies as the workload runs
+    if cfg.memlat {
+        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-perf")))?;
+        let remote_mem_pfn_start = remote_mem_start / 4096;
+        ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
+        ushell.spawn(cmd!("sudo taskset -c {} {}/memlat {} 10 {}", remote_core, &tools_dir,
+            remote_mem_pfn_start, &colloid_lat_file))?;
+    } else {
+        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
+        ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
+
+        bgctx.spawn(BackgroundTask {
+            name: "colloid_latency",
+            period: 1, // Seconds
+            cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
+            ensure_started: colloid_lat_file,
+        })?;
+    }
+
     // Use whatever tiering strategy specified
     match &cfg.strategy {
         Strategy::Tpp => {
@@ -875,8 +897,9 @@ where
                 prefix.push_str(&format!("{}/numactl -w 0,1 ", &numactl_dir));
             }
         }
-        Strategy::Cipp => {
+        Strategy::Cipp { total_bw } => {
             let damo_yaml_file = dir!(&user_home, "cipp.yaml");
+            let cipp_exe = if *total_bw { "cipp_total_bw" } else { "cipp" };
 
             ushell.run(cmd!(
                 "sudo {}/gen_interleave.py -o {} -a {}",
@@ -897,8 +920,9 @@ where
             ushell.run(cmd!("echo 0 | sudo tee /proc/sys/kernel/numa_balancing"))?;
 
             ushell.spawn(cmd!(
-                "sudo {}/cipp 100 6000 30000 > {}",
+                "sudo {}/{} 100 6000 30000 > {}",
                 &tools_dir,
+                cipp_exe,
                 &cipp_file
             ))?;
 
@@ -961,25 +985,6 @@ where
         cmd: format!("cat /proc/vmstat | grep \"\\(pgmigrate_success\\|pgdemote\\)\" >> {}", &pgmigrate_file),
         ensure_started: pgmigrate_file,
     })?;
-
-    // Record memory access latencies as the workload runs
-    if cfg.memlat {
-        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-perf")))?;
-        let remote_mem_pfn_start = remote_mem_start / 4096;
-        ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
-        ushell.spawn(cmd!("sudo taskset -c {} {}/memlat {} 10 {}", remote_core, &tools_dir,
-            remote_mem_pfn_start, &colloid_lat_file))?;
-    } else {
-        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
-        ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
-
-        bgctx.spawn(BackgroundTask {
-            name: "colloid_latency",
-            period: 1, // Seconds
-            cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
-            ensure_started: colloid_lat_file,
-        })?;
-    }
 
     // For YCSB workloads, we should start and load data onto the servers
     // before running the workloads, since that will take several minutes
@@ -1145,7 +1150,7 @@ where
 
     ushell.run(cmd!("cat /proc/vmstat | tee {}", &vmstat_file))?;
 
-    if matches!(&cfg.strategy, Strategy::Cipp) {
+    if let Strategy::Cipp { .. } = &cfg.strategy {
         ushell.run(cmd!("sudo {}/damo status | tee {}", &damo_dir, &damo_status_file))?;
     }
 
