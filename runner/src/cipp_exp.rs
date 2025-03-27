@@ -55,7 +55,7 @@ enum Workload {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 enum Strategy {
     Tpp,
-    Colloid { memlat: bool },
+    Colloid,
     Bwmfs { ratios: Vec<(usize, usize)> },
     Numactl { local: usize, remote: usize },
     Cipp,
@@ -87,6 +87,7 @@ struct Config {
     flame_graph: bool,
     bwmon: bool,
     meminfo: bool,
+    memlat: bool,
     time: bool,
     throttle: ThrottleType,
 
@@ -490,7 +491,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
     let strategy = if tpp {
         Strategy::Tpp
     } else if colloid {
-        Strategy::Colloid { memlat }
+        Strategy::Colloid
     } else if bwmfs_ratios.len() != 0 {
         // Must have one ratio for each workload
         if bwmfs_ratios.len() != workloads.len() {
@@ -531,6 +532,7 @@ pub fn run(sub_m: &clap::ArgMatches) -> Result<(), failure::Error> {
         flame_graph,
         bwmon,
         meminfo,
+        memlat,
         time,
         throttle,
         timestamp: Timestamp::now(),
@@ -564,6 +566,7 @@ where
     let stream_file = dir!(&results_dir, cfg.gen_file_name("stream"));
     let spec_file = dir!(&results_dir, cfg.gen_file_name("spec"));
     let vmstat_file = dir!(&results_dir, cfg.gen_file_name("vmstat"));
+    let pgmigrate_file = dir!(&results_dir, cfg.gen_file_name("pgmigrate"));
     let damo_status_file = dir!(&results_dir, cfg.gen_file_name("damo_status"));
     let meminfo_file_stub = dir!(&results_dir, cfg.gen_file_name("meminfo"));
     let time_file_stub = dir!(&results_dir, cfg.gen_file_name("time"));
@@ -817,31 +820,14 @@ where
                 cmd!("echo 2 | sudo tee /proc/sys/kernel/numa_balancing"),
             }
         }
-        Strategy::Colloid { memlat }=> {
+        Strategy::Colloid => {
             ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "tierinit")))?;
-            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
-            ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-perf")))?;
 
             with_shell! { ushell =>
                 cmd!("sudo insmod {}/tierinit/tierinit.ko", colloid_dir),
                 cmd!("swapoff -a"),
                 cmd!("echo 1 | sudo tee /sys/kernel/mm/numa/demotion_enabled"),
                 cmd!("echo 6 | sudo tee /proc/sys/kernel/numa_balancing"),
-            }
-
-            if *memlat {
-                let remote_mem_pfn_start = remote_mem_start / 4096;
-                ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
-                ushell.spawn(cmd!("sudo taskset -c {} {}/memlat {} 10 {}", remote_core, &tools_dir, remote_mem_pfn_start,
-                    &colloid_lat_file))?;
-            } else {
-                ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
-                bgctx.spawn(BackgroundTask {
-                    name: "colloid_latency",
-                    period: 1, // Seconds
-                    cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
-                    ensure_started: colloid_lat_file,
-                })?;
             }
         }
         Strategy::Bwmfs { ratios } => {
@@ -966,6 +952,33 @@ where
             "sudo perf record -a -g -F 1999 -o {} ",
             &perf_record_file
         ));
+    }
+
+    // Keep track of how many pages are migrated
+    bgctx.spawn(BackgroundTask {
+        name: "pgmigrate",
+        period: 1, // Seconds
+        cmd: format!("cat /proc/vmstat | grep \"\\(pgmigrate_success\\|pgdemote\\)\" >> {}", &pgmigrate_file),
+        ensure_started: pgmigrate_file,
+    })?;
+
+    // Record memory access latencies as the workload runs
+    if cfg.memlat {
+        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-perf")))?;
+        let remote_mem_pfn_start = remote_mem_start / 4096;
+        ushell.run(cmd!("sudo insmod {}/colloid-perf/colloid-perf.ko", colloid_dir))?;
+        ushell.spawn(cmd!("sudo taskset -c {} {}/memlat {} 10 {}", remote_core, &tools_dir,
+            remote_mem_pfn_start, &colloid_lat_file))?;
+    } else {
+        ushell.run(cmd!("make").cwd(dir!(&colloid_dir, "colloid-mon")))?;
+        ushell.run(cmd!("sudo insmod {}/colloid-mon/colloid-mon.ko", colloid_dir))?;
+
+        bgctx.spawn(BackgroundTask {
+            name: "colloid_latency",
+            period: 1, // Seconds
+            cmd: format!("cat /sys/kernel/colloid/latency >> {}", &colloid_lat_file),
+            ensure_started: colloid_lat_file,
+        })?;
     }
 
     // For YCSB workloads, we should start and load data onto the servers
