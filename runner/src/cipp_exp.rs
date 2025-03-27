@@ -897,7 +897,7 @@ where
             ushell.run(cmd!("echo 0 | sudo tee /proc/sys/kernel/numa_balancing"))?;
 
             ushell.spawn(cmd!(
-                "sudo {}/cipp 100 6000 10000 > {}",
+                "sudo {}/cipp 100 6000 30000 > {}",
                 &tools_dir,
                 &cipp_file
             ))?;
