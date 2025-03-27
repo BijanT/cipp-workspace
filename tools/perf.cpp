@@ -14,6 +14,12 @@
 
 #include "perf.h"
 
+#ifdef GNR
+std::vector<uint32_t> cxl_types = {284, 285, 286, 287, 288, 289};
+std::vector<uint64_t> cxl_read_configs = {0x2043};
+std::vector<uint64_t> cxl_write_configs = {0x1043};
+#endif
+
 int perf_event_open(struct perf_event_attr *attr, pid_t pid, int cpu,
     int group_fd, unsigned long flags)
 {
