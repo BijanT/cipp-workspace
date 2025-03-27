@@ -17,9 +17,10 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
 ## for LOOP
 workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
-cpu_core_list=($(seq 32 32 128))
+cpu_core_list=($(seq 30 30 120))
 # Reserve a core for kdamond
-cpu_core_list[-1]=127
+cpu_core_list[-1]=119
+rsvd_core=119
 
 ## CloverLeaf Settings
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
@@ -103,7 +104,7 @@ for current_wkld in "${workloads[@]}"; do
                         echo 100 > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo 0 > /sys/kernel/mm/mempolicy/weighted_interleave/node1
                         $damo_exe start $damo_yaml
-                        taskset -cp 127 $(pgrep kdamond)
+                        taskset -cp $rsvd_core $(pgrep kdamond)
 
                         if [ "$current_wkld" = "bwaves_s" ] || [ "$current_wkld" = "lbm_s" ]; then
                                 $numactl_exe -w 0,1 $spec_stub --threads=${current_core} $current_wkld > ${wkld_out_file} &
@@ -113,7 +114,7 @@ for current_wkld in "${workloads[@]}"; do
 
                         wkld_pid=$!
  
-                        #taskset -c 127 $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
+                        #taskset -c $rsvd_core $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
 
                         #bwmon_pid=$!
 

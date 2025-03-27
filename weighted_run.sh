@@ -6,15 +6,20 @@ current_dir=$(pwd)
 bwmon_exe=/home/labpc/work/cipp/cipp-workspace/tools/bwmon
 bwmon_sample_rate=100
 
+memlat_exe=/home/labpc/work/cipp/cipp-workspace/tools/memlat
+remote_mem_start_pfn=201326592
+memlat_sample_rate=10
+ 
 demotion_trigger="/sys/kernel/mm/numa/demotion_enabled"
 numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
 workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
-cpu_core_list=($(seq 32 32 128))
+cpu_core_list=($(seq 30 30 120))
 local_ratio_list=($(seq 60 5 100))
-cpu_core_list[-1]=127
+cpu_core_list[-1]=119
+rsvd_core=119
  
 ## CloverLeaf Settings
 clover_exe=/home/labpc/work/cipp/CloverLeaf/build/omp-cloverleaf
@@ -37,13 +42,15 @@ numactl_exe=/home/labpc/work/cipp/cipp-workspace/numactl/numactl
 wkld_dir="${current_dir}/${timestamp}/wkld"
 bwmon_dir="${current_dir}/${timestamp}/bwmon"
 vmstat_dir="${current_dir}/${timestamp}/vmstat"
+latency_dir="${current_dir}/${timestamp}/latency"
  
 wkld_file="wkld_output"
 bwmon_file="bwmon_output"
 vmstat_file="vmstat_output"
 pgmigrate_file="pgmigrate_output"
+latency_file="latency_output"
  
-mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir
+mkdir -p $wkld_dir $bwmon_dir $latency_dir $vmstat_dir $latency_dir
  
 output_header=(" Workload" "Core Count" "Local Ratio" "Result" "Avg BW")
 tabular_header_print="%-15s %-15s %-15s %-15s %-15s\n"
@@ -87,6 +94,7 @@ for current_wkld in "${workloads[@]}"; do
                         pgmigrate_out_file=${vmstat_dir}/${pgmigrate_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         wkld_out_file=${wkld_dir}/${wkld_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
                         bwmon_out_file=${bwmon_dir}/${bwmon_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
+                        latency_out_file=${latency_dir}/${latency_file}_ratio_${current_ratio}_cpu_${current_core}_${current_wkld}.log
 
                         cat /proc/vmstat > ${vmstat_begin_out_file}
 
@@ -101,9 +109,13 @@ for current_wkld in "${workloads[@]}"; do
 
                         wkld_pid=$!
  
-                        taskset -c 127 $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
+                        taskset -c $rsvd_core $bwmon_exe $bwmon_sample_rate "${bwmon_out_file}" $wkld_pid &
 
                         bwmon_pid=$!
+
+                        taskset -c $rsvd_core $memlat_exe $remote_mem_start_pfn $memlat_sample_rate "${latency_out_file}" &
+
+                        memlat_pid=$!
 
                         # echo "touched latency file core count $current_core, setting $current_wkld"
 
@@ -111,6 +123,7 @@ for current_wkld in "${workloads[@]}"; do
                                 cat /proc/vmstat | grep "\(pgmigrate_success\|pgdemote\)" >> ${pgmigrate_out_file}
                                 sleep 1
                         done
+                        kill -9 $memlat_pid
                         cat /proc/vmstat > ${vmstat_end_out_file}
  
                         if [ "$current_wkld" = "cloverleaf" ]; then

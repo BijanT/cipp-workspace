@@ -100,7 +100,7 @@ for current_setting in "${strategies[@]}"; do
                         numactl -m 0 $lbm_exe > ${lbm_out_file} &
                         lbm_pid=$!
                 elif [ "$current_setting" = "colloid" ]; then
-                        taskset -c 127 $memlat_exe $remote_mem_start_pfn $memlat_sample_rate "${latency_out_file}" &
+                        taskset -c 119 $memlat_exe $remote_mem_start_pfn $memlat_sample_rate "${latency_out_file}" &
                         memlat_pid=$!
 
                         $bwaves_exe > ${bwaves_out_file}&
@@ -125,7 +125,7 @@ for current_setting in "${strategies[@]}"; do
                         echo 100 > /sys/kernel/mm/mempolicy/weighted_interleave/node0
                         echo 0 > /sys/kernel/mm/mempolicy/weighted_interleave/node1
                         $damo_exe start $damo_yaml
-                        taskset -cp 127 $(pgrep kdamond)
+                        taskset -cp 119 $(pgrep kdamond)
 
                         $numactl_exe -w 0,1 $bwaves_exe > ${bwaves_out_file} &
                         bwaves_pid=$!
