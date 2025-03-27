@@ -15,7 +15,8 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-local_remote=("local" "colloid")
+#local_remote=("local" "colloid")
+local_remote=("colloid")
 cpu_core_list=($(seq 30 30 120))
 cpu_core_list[-1]=119
 rsvd_core=119

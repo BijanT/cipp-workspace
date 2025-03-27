@@ -15,7 +15,8 @@ numa_balancing="/proc/sys/kernel/numa_balancing"
  
  
 ## for LOOP
-workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
+#workloads=("cloverleaf" "pr" "bfs" "bc" "stream" "bwaves_s" "lbm_s")
+workloads=("cloverleaf" "bwaves_s" "lbm_s")
 cpu_core_list=($(seq 30 30 120))
 local_ratio_list=($(seq 60 5 100))
 cpu_core_list[-1]=119
