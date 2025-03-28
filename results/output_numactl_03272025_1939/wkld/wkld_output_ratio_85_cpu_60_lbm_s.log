@@ -1,0 +1,63 @@
+SPEC CPU(r) 2017 Benchmark Suites
+Copyright 1995-2019 Standard Performance Evaluation Corporation (SPEC)
+
+runcpu v6612
+Using 'linux-x86_64' tools
+Reading file manifests... read 32225 entries from 2 files in 0.12s (259218 files/s)
+Loading runcpu modules.................
+Locating benchmarks...found 47 benchmarks in 73 benchsets.
+Reading config file '/opt/cpu2017/gcc-linux-x86.cfg'
+1 configuration selected:
+
+ Action    Run Mode   Workload     Report Type      Benchmarks
+--------   --------   --------   ----------------   ---------------------------
+validate   speed      refspeed   SPECspeed2017_fp   619.lbm_s                  
+-------------------------------------------------------------------------------
+
+Setting up environment for running 619.lbm_s...
+Starting runcpu for 619.lbm_s...
+Running "specperl /opt/cpu2017/bin/sysinfo" to gather system information.
+sysinfo: r6732 of 2022-11-07 (fe91c89b7ed5c36ae2c92cc097bec197)
+sysinfo: ...getting basic information about kernel, users, and limits
+sysinfo: Getting system information for Linux...
+sysinfo: ...getting CPU info
+sysinfo: ...getting info from numactl
+sysinfo: ...getting memory info
+sysinfo: ...getting info from systemd
+sysinfo: ...getting power info
+sysinfo: ...getting system tuning info
+sysinfo: ...getting OS info
+sysinfo: ...getting disk info
+sysinfo: ...getting info from /sys/devices/virtual/dmi/id
+sysinfo: ...getting info from dmidecode
+Retrieving flags file (/opt/cpu2017/config/flags/gcc.xml)...
+Benchmarks selected: 619.lbm_s
+Compiling Binaries
+  Up to date 619.lbm_s base mytest-m64
+
+
+Setting Up Run Directories
+  Setting up 619.lbm_s refspeed (ref) base mytest-m64: run_base_refspeed_mytest-m64.0003
+Running Benchmarks
+  Running (#1) 619.lbm_s refspeed (ref) base mytest-m64 threads:60 [2025-03-28 06:51:43]
+  Running (#2) 619.lbm_s refspeed (ref) base mytest-m64 threads:60 [2025-03-28 06:52:33]
+  Running (#3) 619.lbm_s refspeed (ref) base mytest-m64 threads:60 [2025-03-28 06:53:22]
+  Running (#4) 619.lbm_s refspeed (ref) base mytest-m64 threads:60 [2025-03-28 06:54:12]
+  Running (#5) 619.lbm_s refspeed (ref) base mytest-m64 threads:60 [2025-03-28 06:55:02]
+Success: 5x619.lbm_s
+Producing Raw Reports
+ label: mytest-m64
+  workload: refspeed (ref)
+   metric: SPECspeed2017_fp_base
+    format: raw -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.rsf
+Parsing flags for 619.lbm_s base: done
+Doing flag reduction: done
+    format: flags -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.flags.html
+    format: cfg -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.cfg, /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.orig.cfg
+    format: CSV -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.csv
+    format: PDF -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.pdf
+    format: HTML -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.html
+    format: Text -> /opt/cpu2017/result/CPU2017.367.fpspeed.refspeed.txt
+The log for this run is in /opt/cpu2017/result/CPU2017.367.log
+
+runcpu finished at 2025-03-28 06:55:56; 256 total seconds elapsed
