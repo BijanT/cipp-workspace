@@ -5,7 +5,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 
-from helpers import eprint
+from helpers import moving_avg,eprint
 
 def read_bw(bwmon_file):
     local_bws = []
@@ -45,14 +45,16 @@ if len(sys.argv) >= 4:
     outfile = sys.argv[3]
 
 (local_bw, remote_bw) = read_bw(filename)
+avg_local_bw = moving_avg(local_bw, 10)
+avg_remote_bw = moving_avg(remote_bw, 10)
 # Bandwidth measurements are collected once every 100ms
-time_s = [0.1 * i for i in range(len(local_bw))]
+time_s = [0.1 * i for i in range(len(avg_local_bw))]
 
-plt.plot(time_s, local_bw, label="Local", linewidth=2.0)
+plt.plot(time_s, avg_local_bw, label="Local", linewidth=2.0)
 if len(remote_bw) != 0:
-    total_bw = [local + remote for local, remote in zip(local_bw, remote_bw)]
-    plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
-    #plt.plot(time_s, total_bw, label="Total", linewidth=2.0)
+    total_bw = [local + remote for local, remote in zip(avg_local_bw, avg_remote_bw)]
+    plt.plot(time_s, avg_remote_bw, label="Remote", linewidth=2.0)
+    plt.plot(time_s, total_bw, label="Total", linewidth=2.0)
 
 plt.ylim(ymin=0, ymax=425)
 

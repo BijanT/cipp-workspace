@@ -8,7 +8,7 @@ def get_bandwidth(bwmon_file, percentile=95):
     local_bws = []
     remote_bws = []
     total_bws = []
-    node_bw_pattern = re.compile("Total (\d+) MB/s")
+    node_bw_pattern = re.compile(r"Total (\d+) MB/s")
 
     if percentile < 0 or percentile > 100:
         eprint("Invalid percentile " + str(percentile))
@@ -41,7 +41,7 @@ def get_bandwidth(bwmon_file, percentile=95):
     return (total_bws[i], local_bws[i], remote_bws[i])
 
 def get_clover_runtime(clover_file):
-    time_pattern = re.compile("Wall clock (\d+\.\d+)")
+    time_pattern = re.compile(r"Wall clock (\d+\.\d+)")
     f = open(clover_file, "r")
     runtime = 0
 
@@ -68,7 +68,7 @@ def get_avg_gapbs_time(gapbs_file):
     return -1
 
 def get_stream_triad(stream_file):
-    triad_pattern = re.compile("Triad:\s+(\d+).*")
+    triad_pattern = re.compile(r"Triad:\s+(\d+).*")
     f = open(stream_file, "r")
 
     for line in f:
@@ -81,7 +81,7 @@ def get_stream_triad(stream_file):
     return 0
 
 def get_spec_time(spec_file):
-    spec_pattern = re.compile(".*; (\d+) total seconds elapsed")
+    spec_pattern = re.compile(r".*; (\d+) total seconds elapsed")
     f = open(spec_file, "r")
 
     for line in f:
@@ -92,3 +92,21 @@ def get_spec_time(spec_file):
         return float(m.group(1))
 
     return 0
+
+def moving_avg(data, window_size):
+    moving_avgs = []
+    for i in range(len(data) - window_size):
+        window = data[i:i+window_size]
+        avg = sum(window) / window_size
+        moving_avgs.append(avg)
+
+    return moving_avgs
+
+def window_max(data, window_size):
+    maxes = []
+    for i in range(len(data) - window_size):
+        window = data[i:i+window_size]
+        maxes.append(max(window))
+
+    return maxes
+

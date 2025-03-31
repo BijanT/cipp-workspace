@@ -23,7 +23,7 @@ for file in results_files:
     ratio = m.group(1)
     cores = m.group(2)
     workload = m.group(3)
-    strategy = "DMI"
+    strategy = "Numactl"
     filename = results_path + "/" + file
 
     if workload == "clover" or workload == "cloverleaf":

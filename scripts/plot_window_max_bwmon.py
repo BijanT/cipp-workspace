@@ -5,7 +5,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 
-from helpers import eprint
+from helpers import window_max,eprint
 
 def read_bw(bwmon_file):
     local_bws = []
@@ -45,25 +45,29 @@ if len(sys.argv) >= 4:
     outfile = sys.argv[3]
 
 (local_bw, remote_bw) = read_bw(filename)
+avg_local_bw = window_max(local_bw, 5)
+avg_remote_bw = window_max(remote_bw, 5)
 # Bandwidth measurements are collected once every 100ms
-time_s = [0.1 * i for i in range(len(local_bw))]
+time_s = [0.1 * i for i in range(len(avg_local_bw))]
 
-plt.plot(time_s, local_bw, label="Local", linewidth=2.0)
+plt.figure(figsize=(10,6))
+
+plt.plot(time_s, avg_local_bw, label="Local", linewidth=2.0)
 if len(remote_bw) != 0:
-    total_bw = [local + remote for local, remote in zip(local_bw, remote_bw)]
-    plt.plot(time_s, remote_bw, label="Remote", linewidth=2.0)
-    #plt.plot(time_s, total_bw, label="Total", linewidth=2.0)
+    total_bw = [local + remote for local, remote in zip(avg_local_bw, avg_remote_bw)]
+    plt.plot(time_s, avg_remote_bw, label="Remote", linewidth=2.0)
+    plt.plot(time_s, total_bw, label="Total", linewidth=2.0)
 
 plt.ylim(ymin=0, ymax=425)
 
-plt.legend(fontsize=18)
+#plt.legend(fontsize=18, ncols=3, bbox_to_anchor=(1.05, 1.0))
 plt.xticks(fontsize=18)
 plt.yticks(fontsize=18)
 plt.xlabel("Time (s)", fontsize=22)
 plt.ylabel("Bandwidth Usage (GB/s)", fontsize=22)
-plt.title("Bandwidth Utilization of " + workload, fontsize=24)
+#plt.title("Bandwidth Utilization of " + workload, fontsize=24)
 
 if outfile is not None:
-    plt.savefig(outfile)
+    plt.savefig(outfile, bbox_inches="tight")
 else:
     plt.show()
