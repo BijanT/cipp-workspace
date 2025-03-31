@@ -1,0 +1,4880 @@
+Node 0: Read 173682 Write 249219 Total 422901 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 422901
+
+Node 0: Read 240748 Write 180885 Total 421633 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 421633
+
+Node 0: Read 260602 Write 162980 Total 423582 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 423582
+
+Node 0: Read 243692 Write 159138 Total 402830 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 402830
+
+Node 0: Read 243979 Write 170724 Total 414703 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 414703
+
+Node 0: Read 273984 Write 147064 Total 421048 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 421048
+
+Node 0: Read 224072 Write 186548 Total 410620 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 410620
+
+Node 0: Read 285557 Write 140887 Total 426444 MB/s
+Node 1: Read 0 Write 0 Total 0 MB/s
+Aggregate BW: 426444
+
+Node 0: Read 229592 Write 174495 Total 404087 MB/s
+Node 1: Read 3 Write 3 Total 6 MB/s
+Aggregate BW: 404093
+
+Node 0: Read 262956 Write 156695 Total 419651 MB/s
+Node 1: Read 2 Write 3 Total 5 MB/s
+Aggregate BW: 419656
+
+Node 0: Read 250254 Write 164197 Total 414451 MB/s
+Node 1: Read 3 Write 3 Total 6 MB/s
+Aggregate BW: 414457
+
+Node 0: Read 227860 Write 155335 Total 383195 MB/s
+Node 1: Read 903 Write 922 Total 1825 MB/s
+Aggregate BW: 385020
+
+Node 0: Read 245967 Write 138801 Total 384768 MB/s
+Node 1: Read 2615 Write 2547 Total 5162 MB/s
+Aggregate BW: 389930
+
+Node 0: Read 226009 Write 171223 Total 397232 MB/s
+Node 1: Read 5087 Write 4091 Total 9178 MB/s
+Aggregate BW: 406410
+
+Node 0: Read 263937 Write 131873 Total 395810 MB/s
+Node 1: Read 6740 Write 7403 Total 14143 MB/s
+Aggregate BW: 409953
+
+Node 0: Read 210650 Write 184743 Total 395393 MB/s
+Node 1: Read 10788 Write 3652 Total 14440 MB/s
+Aggregate BW: 409833
+
+Node 0: Read 272968 Write 129829 Total 402797 MB/s
+Node 1: Read 10468 Write 15197 Total 25665 MB/s
+Aggregate BW: 428462
+
+Node 0: Read 220712 Write 179215 Total 399927 MB/s
+Node 1: Read 13322 Write 1102 Total 14424 MB/s
+Aggregate BW: 414351
+
+Node 0: Read 233199 Write 129158 Total 362357 MB/s
+Node 1: Read 20205 Write 19971 Total 40176 MB/s
+Aggregate BW: 402533
+
+Node 0: Read 226716 Write 162711 Total 389427 MB/s
+Node 1: Read 19386 Write 2197 Total 21583 MB/s
+Aggregate BW: 411010
+
+Node 0: Read 241917 Write 167941 Total 409858 MB/s
+Node 1: Read 22403 Write 19190 Total 41593 MB/s
+Aggregate BW: 451451
+
+Node 0: Read 270242 Write 134900 Total 405142 MB/s
+Node 1: Read 24020 Write 20235 Total 44255 MB/s
+Aggregate BW: 449397
+
+Node 0: Read 208655 Write 190588 Total 399243 MB/s
+Node 1: Read 37073 Write 2907 Total 39980 MB/s
+Aggregate BW: 439223
+
+Node 0: Read 240471 Write 120895 Total 361366 MB/s
+Node 1: Read 33528 Write 33586 Total 67114 MB/s
+Aggregate BW: 428480
+
+Node 0: Read 226847 Write 169659 Total 396506 MB/s
+Node 1: Read 32427 Write 2154 Total 34581 MB/s
+Aggregate BW: 431087
+
+Node 0: Read 243612 Write 159412 Total 403024 MB/s
+Node 1: Read 35844 Write 32851 Total 68695 MB/s
+Aggregate BW: 471719
+
+Node 0: Read 279500 Write 128661 Total 408161 MB/s
+Node 1: Read 37193 Write 35236 Total 72429 MB/s
+Aggregate BW: 480590
+
+Node 0: Read 197479 Write 197955 Total 395434 MB/s
+Node 1: Read 62477 Write 1579 Total 64056 MB/s
+Aggregate BW: 459490
+
+Node 0: Read 237722 Write 129243 Total 366965 MB/s
+Node 1: Read 52789 Write 46259 Total 99048 MB/s
+Aggregate BW: 466013
+
+Node 0: Read 228344 Write 156963 Total 385307 MB/s
+Node 1: Read 46752 Write 13742 Total 60494 MB/s
+Aggregate BW: 445801
+
+Node 0: Read 211311 Write 170622 Total 381933 MB/s
+Node 1: Read 49151 Write 25935 Total 75086 MB/s
+Aggregate BW: 457019
+
+Node 0: Read 267646 Write 114039 Total 381685 MB/s
+Node 1: Read 58655 Write 55073 Total 113728 MB/s
+Aggregate BW: 495413
+
+Node 0: Read 198076 Write 190365 Total 388441 MB/s
+Node 1: Read 74904 Write 1786 Total 76690 MB/s
+Aggregate BW: 465131
+
+Node 0: Read 221154 Write 134179 Total 355333 MB/s
+Node 1: Read 58954 Write 57765 Total 116719 MB/s
+Aggregate BW: 472052
+
+Node 0: Read 266849 Write 121420 Total 388269 MB/s
+Node 1: Read 59944 Write 53226 Total 113170 MB/s
+Aggregate BW: 501439
+
+Node 0: Read 174300 Write 212464 Total 386764 MB/s
+Node 1: Read 106912 Write 1544 Total 108456 MB/s
+Aggregate BW: 495220
+
+Node 0: Read 194379 Write 104143 Total 298522 MB/s
+Node 1: Read 69800 Write 67393 Total 137193 MB/s
+Aggregate BW: 435715
+
+Node 0: Read 254016 Write 138767 Total 392783 MB/s
+Node 1: Read 65677 Write 43028 Total 108705 MB/s
+Aggregate BW: 501488
+
+Node 0: Read 169324 Write 197722 Total 367046 MB/s
+Node 1: Read 102355 Write 5327 Total 107682 MB/s
+Aggregate BW: 474728
+
+Node 0: Read 217530 Write 124187 Total 341717 MB/s
+Node 1: Read 79430 Write 65609 Total 145039 MB/s
+Aggregate BW: 486756
+
+Node 0: Read 260325 Write 131406 Total 391731 MB/s
+Node 1: Read 66372 Write 49794 Total 116166 MB/s
+Aggregate BW: 507897
+
+Node 0: Read 163835 Write 203641 Total 367476 MB/s
+Node 1: Read 107870 Write 942 Total 108812 MB/s
+Aggregate BW: 476288
+
+Node 0: Read 217284 Write 126807 Total 344091 MB/s
+Node 1: Read 76501 Write 65712 Total 142213 MB/s
+Aggregate BW: 486304
+
+Node 0: Read 259458 Write 127536 Total 386994 MB/s
+Node 1: Read 66657 Write 52854 Total 119511 MB/s
+Aggregate BW: 506505
+
+Node 0: Read 158711 Write 205738 Total 364449 MB/s
+Node 1: Read 110472 Write 1345 Total 111817 MB/s
+Aggregate BW: 476266
+
+Node 0: Read 192332 Write 101778 Total 294110 MB/s
+Node 1: Read 79642 Write 70420 Total 150062 MB/s
+Aggregate BW: 444172
+
+Node 0: Read 241421 Write 145534 Total 386955 MB/s
+Node 1: Read 68833 Write 38510 Total 107343 MB/s
+Aggregate BW: 494298
+
+Node 0: Read 168178 Write 187515 Total 355693 MB/s
+Node 1: Read 96764 Write 12656 Total 109420 MB/s
+Aggregate BW: 465113
+
+Node 0: Read 209155 Write 117886 Total 327041 MB/s
+Node 1: Read 92778 Write 68362 Total 161140 MB/s
+Aggregate BW: 488181
+
+Node 0: Read 239178 Write 146594 Total 385772 MB/s
+Node 1: Read 69032 Write 36762 Total 105794 MB/s
+Aggregate BW: 491566
+
+Node 0: Read 169257 Write 185384 Total 354641 MB/s
+Node 1: Read 95210 Write 14257 Total 109467 MB/s
+Aggregate BW: 464108
+
+Node 0: Read 210965 Write 116088 Total 327053 MB/s
+Node 1: Read 94139 Write 68389 Total 162528 MB/s
+Aggregate BW: 489581
+
+Node 0: Read 237861 Write 145857 Total 383718 MB/s
+Node 1: Read 69123 Write 34489 Total 103612 MB/s
+Aggregate BW: 487330
+
+Node 0: Read 175174 Write 185667 Total 360841 MB/s
+Node 1: Read 95697 Write 14917 Total 110614 MB/s
+Aggregate BW: 471455
+
+Node 0: Read 210327 Write 92773 Total 303100 MB/s
+Node 1: Read 77437 Write 73125 Total 150562 MB/s
+Aggregate BW: 453662
+
+Node 0: Read 216786 Write 167722 Total 384508 MB/s
+Node 1: Read 73749 Write 23509 Total 97258 MB/s
+Aggregate BW: 481766
+
+Node 0: Read 175077 Write 163578 Total 338655 MB/s
+Node 1: Read 77945 Write 30286 Total 108231 MB/s
+Aggregate BW: 446886
+
+Node 0: Read 228809 Write 103306 Total 332115 MB/s
+Node 1: Read 87525 Write 70929 Total 158454 MB/s
+Aggregate BW: 490569
+
+Node 0: Read 201691 Write 172922 Total 374613 MB/s
+Node 1: Read 81279 Write 15695 Total 96974 MB/s
+Aggregate BW: 471587
+
+Node 0: Read 181013 Write 154224 Total 335237 MB/s
+Node 1: Read 73520 Write 38171 Total 111691 MB/s
+Aggregate BW: 446928
+
+Node 0: Read 239331 Write 102207 Total 341538 MB/s
+Node 1: Read 87074 Write 71293 Total 158367 MB/s
+Aggregate BW: 499905
+
+Node 0: Read 181955 Write 184063 Total 366018 MB/s
+Node 1: Read 95005 Write 6172 Total 101177 MB/s
+Aggregate BW: 467195
+
+Node 0: Read 197664 Write 149722 Total 347386 MB/s
+Node 1: Read 73507 Write 45092 Total 118599 MB/s
+Aggregate BW: 465985
+
+Node 0: Read 230594 Write 84428 Total 315022 MB/s
+Node 1: Read 75418 Write 67330 Total 142748 MB/s
+Aggregate BW: 457770
+
+Node 0: Read 151213 Write 204875 Total 356088 MB/s
+Node 1: Read 116523 Write 335 Total 116858 MB/s
+Aggregate BW: 472946
+
+Node 0: Read 188254 Write 99110 Total 287364 MB/s
+Node 1: Read 76954 Write 73403 Total 150357 MB/s
+Aggregate BW: 437721
+
+Node 0: Read 241955 Write 124928 Total 366883 MB/s
+Node 1: Read 74613 Write 50733 Total 125346 MB/s
+Aggregate BW: 492229
+
+Node 0: Read 149530 Write 191691 Total 341221 MB/s
+Node 1: Read 109613 Write 5981 Total 115594 MB/s
+Aggregate BW: 456815
+
+Node 0: Read 192667 Write 100163 Total 292830 MB/s
+Node 1: Read 90924 Write 73639 Total 164563 MB/s
+Aggregate BW: 457393
+
+Node 0: Read 229792 Write 150135 Total 379927 MB/s
+Node 1: Read 74373 Write 35261 Total 109634 MB/s
+Aggregate BW: 489561
+
+Node 0: Read 172903 Write 186169 Total 359072 MB/s
+Node 1: Read 104259 Write 21378 Total 125637 MB/s
+Aggregate BW: 484709
+
+Node 0: Read 199494 Write 98103 Total 297597 MB/s
+Node 1: Read 90602 Write 74201 Total 164803 MB/s
+Aggregate BW: 462400
+
+Node 0: Read 215932 Write 159700 Total 375632 MB/s
+Node 1: Read 75844 Write 26091 Total 101935 MB/s
+Aggregate BW: 477567
+
+Node 0: Read 158446 Write 150751 Total 309197 MB/s
+Node 1: Read 76963 Write 36717 Total 113680 MB/s
+Aggregate BW: 422877
+
+Node 0: Read 239167 Write 87189 Total 326356 MB/s
+Node 1: Read 85568 Write 75054 Total 160622 MB/s
+Aggregate BW: 486978
+
+Node 0: Read 156972 Write 202229 Total 359201 MB/s
+Node 1: Read 115562 Write 154 Total 115716 MB/s
+Aggregate BW: 474917
+
+Node 0: Read 180564 Write 98118 Total 278682 MB/s
+Node 1: Read 78505 Write 75191 Total 153696 MB/s
+Aggregate BW: 432378
+
+Node 0: Read 240855 Write 122833 Total 363688 MB/s
+Node 1: Read 76280 Write 54006 Total 130286 MB/s
+Aggregate BW: 493974
+
+Node 0: Read 142701 Write 191362 Total 334063 MB/s
+Node 1: Read 112225 Write 4328 Total 116553 MB/s
+Aggregate BW: 450616
+
+Node 0: Read 190483 Write 95042 Total 285525 MB/s
+Node 1: Read 89613 Write 75011 Total 164624 MB/s
+Aggregate BW: 450149
+
+Node 0: Read 216697 Write 149573 Total 366270 MB/s
+Node 1: Read 75811 Write 31228 Total 107039 MB/s
+Aggregate BW: 473309
+
+Node 0: Read 142642 Write 144027 Total 286669 MB/s
+Node 1: Read 79952 Write 30037 Total 109989 MB/s
+Aggregate BW: 396658
+
+Node 0: Read 238417 Write 87985 Total 326402 MB/s
+Node 1: Read 87960 Write 76135 Total 164095 MB/s
+Aggregate BW: 490497
+
+Node 0: Read 153326 Write 200393 Total 353719 MB/s
+Node 1: Read 118417 Write 1214 Total 119631 MB/s
+Aggregate BW: 473350
+
+Node 0: Read 177331 Write 107693 Total 285024 MB/s
+Node 1: Read 80092 Write 67961 Total 148053 MB/s
+Aggregate BW: 433077
+
+Node 0: Read 248788 Write 104973 Total 353761 MB/s
+Node 1: Read 79808 Write 67126 Total 146934 MB/s
+Aggregate BW: 500695
+
+Node 0: Read 146027 Write 198955 Total 344982 MB/s
+Node 1: Read 119582 Write 1310 Total 120892 MB/s
+Aggregate BW: 465874
+
+Node 0: Read 178257 Write 93930 Total 272187 MB/s
+Node 1: Read 84119 Write 76305 Total 160424 MB/s
+Aggregate BW: 432611
+
+Node 0: Read 232902 Write 133283 Total 366185 MB/s
+Node 1: Read 79299 Write 48352 Total 127651 MB/s
+Aggregate BW: 493836
+
+Node 0: Read 143771 Write 177786 Total 321557 MB/s
+Node 1: Read 103065 Write 13667 Total 116732 MB/s
+Aggregate BW: 438289
+
+Node 0: Read 197529 Write 85060 Total 282589 MB/s
+Node 1: Read 84894 Write 77812 Total 162706 MB/s
+Aggregate BW: 445295
+
+Node 0: Read 196665 Write 168723 Total 365388 MB/s
+Node 1: Read 93956 Write 22317 Total 116273 MB/s
+Aggregate BW: 481661
+
+Node 0: Read 165714 Write 143073 Total 308787 MB/s
+Node 1: Read 81086 Write 45216 Total 126302 MB/s
+Aggregate BW: 435089
+
+Node 0: Read 232476 Write 86662 Total 319138 MB/s
+Node 1: Read 93381 Write 76851 Total 170232 MB/s
+Aggregate BW: 489370
+
+Node 0: Read 143275 Write 193552 Total 336827 MB/s
+Node 1: Read 118929 Write 3622 Total 122551 MB/s
+Aggregate BW: 459378
+
+Node 0: Read 172197 Write 93169 Total 265366 MB/s
+Node 1: Read 83625 Write 77029 Total 160654 MB/s
+Aggregate BW: 426020
+
+Node 0: Read 224210 Write 126390 Total 350600 MB/s
+Node 1: Read 83287 Write 50062 Total 133349 MB/s
+Aggregate BW: 483949
+
+Node 0: Read 136437 Write 178066 Total 314503 MB/s
+Node 1: Read 107012 Write 16228 Total 123240 MB/s
+Aggregate BW: 437743
+
+Node 0: Read 192769 Write 96009 Total 288778 MB/s
+Node 1: Read 93379 Write 76428 Total 169807 MB/s
+Aggregate BW: 458585
+
+Node 0: Read 205256 Write 153554 Total 358810 MB/s
+Node 1: Read 83507 Write 30200 Total 113707 MB/s
+Aggregate BW: 472517
+
+Node 0: Read 161230 Write 149914 Total 311144 MB/s
+Node 1: Read 81179 Write 39350 Total 120529 MB/s
+Aggregate BW: 431673
+
+Node 0: Read 223814 Write 94346 Total 318160 MB/s
+Node 1: Read 102518 Write 76462 Total 178980 MB/s
+Aggregate BW: 497140
+
+Node 0: Read 160096 Write 194220 Total 354316 MB/s
+Node 1: Read 115736 Write 5406 Total 121142 MB/s
+Aggregate BW: 475458
+
+Node 0: Read 174577 Write 118468 Total 293045 MB/s
+Node 1: Read 82981 Write 59924 Total 142905 MB/s
+Aggregate BW: 435950
+
+Node 0: Read 243654 Write 96450 Total 340104 MB/s
+Node 1: Read 87095 Write 73871 Total 160966 MB/s
+Aggregate BW: 501070
+
+Node 0: Read 139225 Write 200975 Total 340200 MB/s
+Node 1: Read 122837 Write 4776 Total 127613 MB/s
+Aggregate BW: 467813
+
+Node 0: Read 173118 Write 91842 Total 264960 MB/s
+Node 1: Read 84651 Write 76839 Total 161490 MB/s
+Aggregate BW: 426450
+
+Node 0: Read 230676 Write 125424 Total 356100 MB/s
+Node 1: Read 85123 Write 53068 Total 138191 MB/s
+Aggregate BW: 494291
+
+Node 0: Read 139601 Write 175351 Total 314952 MB/s
+Node 1: Read 106211 Write 15824 Total 122035 MB/s
+Aggregate BW: 436987
+
+Node 0: Read 190934 Write 94106 Total 285040 MB/s
+Node 1: Read 96399 Write 76334 Total 172733 MB/s
+Aggregate BW: 457773
+
+Node 0: Read 203657 Write 154590 Total 358247 MB/s
+Node 1: Read 84016 Write 30208 Total 114224 MB/s
+Aggregate BW: 472471
+
+Node 0: Read 171715 Write 159961 Total 331676 MB/s
+Node 1: Read 92420 Write 40720 Total 133140 MB/s
+Aggregate BW: 464816
+
+Node 0: Read 204635 Write 87531 Total 292166 MB/s
+Node 1: Read 96975 Write 76314 Total 173289 MB/s
+Aggregate BW: 465455
+
+Node 0: Read 178098 Write 174712 Total 352810 MB/s
+Node 1: Read 102091 Write 16893 Total 118984 MB/s
+Aggregate BW: 471794
+
+Node 0: Read 168118 Write 130505 Total 298623 MB/s
+Node 1: Read 83515 Write 51893 Total 135408 MB/s
+Aggregate BW: 434031
+
+Node 0: Read 235238 Write 85664 Total 320902 MB/s
+Node 1: Read 94767 Write 76430 Total 171197 MB/s
+Aggregate BW: 492099
+
+Node 0: Read 145217 Write 197899 Total 343116 MB/s
+Node 1: Read 121490 Write 6974 Total 128464 MB/s
+Aggregate BW: 471580
+
+Node 0: Read 165666 Write 86343 Total 252009 MB/s
+Node 1: Read 87963 Write 77483 Total 165446 MB/s
+Aggregate BW: 417455
+
+Node 0: Read 222960 Write 123276 Total 346236 MB/s
+Node 1: Read 89378 Write 53066 Total 142444 MB/s
+Aggregate BW: 488680
+
+Node 0: Read 145888 Write 175997 Total 321885 MB/s
+Node 1: Read 110286 Write 20674 Total 130960 MB/s
+Aggregate BW: 452845
+
+Node 0: Read 183933 Write 89978 Total 273911 MB/s
+Node 1: Read 99489 Write 76462 Total 175951 MB/s
+Aggregate BW: 449862
+
+Node 0: Read 200877 Write 149776 Total 350653 MB/s
+Node 1: Read 86961 Write 32798 Total 119759 MB/s
+Aggregate BW: 470412
+
+Node 0: Read 158544 Write 146760 Total 305304 MB/s
+Node 1: Read 83685 Write 42733 Total 126418 MB/s
+Aggregate BW: 431722
+
+Node 0: Read 212086 Write 87911 Total 299997 MB/s
+Node 1: Read 101291 Write 76631 Total 177922 MB/s
+Aggregate BW: 477919
+
+Node 0: Read 160694 Write 182423 Total 343117 MB/s
+Node 1: Read 115575 Write 11664 Total 127239 MB/s
+Aggregate BW: 470356
+
+Node 0: Read 171586 Write 122271 Total 293857 MB/s
+Node 1: Read 85945 Write 59897 Total 145842 MB/s
+Aggregate BW: 439699
+
+Node 0: Read 228153 Write 90423 Total 318576 MB/s
+Node 1: Read 94761 Write 74331 Total 169092 MB/s
+Aggregate BW: 487668
+
+Node 0: Read 138120 Write 193228 Total 331348 MB/s
+Node 1: Read 125171 Write 8708 Total 133879 MB/s
+Aggregate BW: 465227
+
+Node 0: Read 167101 Write 91236 Total 258337 MB/s
+Node 1: Read 88541 Write 77106 Total 165647 MB/s
+Aggregate BW: 423984
+
+Node 0: Read 223617 Write 121660 Total 345277 MB/s
+Node 1: Read 90938 Write 55472 Total 146410 MB/s
+Aggregate BW: 491687
+
+Node 0: Read 143411 Write 178438 Total 321849 MB/s
+Node 1: Read 113596 Write 18941 Total 132537 MB/s
+Aggregate BW: 454386
+
+Node 0: Read 180430 Write 91232 Total 271662 MB/s
+Node 1: Read 100335 Write 76331 Total 176666 MB/s
+Aggregate BW: 448328
+
+Node 0: Read 201172 Write 149707 Total 350879 MB/s
+Node 1: Read 87700 Write 33959 Total 121659 MB/s
+Aggregate BW: 472538
+
+Node 0: Read 159805 Write 146981 Total 306786 MB/s
+Node 1: Read 83478 Write 42481 Total 125959 MB/s
+Aggregate BW: 432745
+
+Node 0: Read 212955 Write 87415 Total 300370 MB/s
+Node 1: Read 102490 Write 76605 Total 179095 MB/s
+Aggregate BW: 479465
+
+Node 0: Read 159387 Write 182203 Total 341590 MB/s
+Node 1: Read 116552 Write 11325 Total 127877 MB/s
+Aggregate BW: 469467
+
+Node 0: Read 170463 Write 119448 Total 289911 MB/s
+Node 1: Read 86118 Write 60275 Total 146393 MB/s
+Aggregate BW: 436304
+
+Node 0: Read 231044 Write 92286 Total 323330 MB/s
+Node 1: Read 95065 Write 73915 Total 168980 MB/s
+Aggregate BW: 492310
+
+Node 0: Read 140794 Write 194858 Total 335652 MB/s
+Node 1: Read 125294 Write 8812 Total 134106 MB/s
+Aggregate BW: 469758
+
+Node 0: Read 168148 Write 91288 Total 259436 MB/s
+Node 1: Read 88548 Write 77208 Total 165756 MB/s
+Aggregate BW: 425192
+
+Node 0: Read 222676 Write 124028 Total 346704 MB/s
+Node 1: Read 91146 Write 55546 Total 146692 MB/s
+Aggregate BW: 493396
+
+Node 0: Read 132090 Write 166641 Total 298731 MB/s
+Node 1: Read 101932 Write 22084 Total 124016 MB/s
+Aggregate BW: 422747
+
+Node 0: Read 189698 Write 84782 Total 274480 MB/s
+Node 1: Read 95314 Write 76329 Total 171643 MB/s
+Aggregate BW: 446123
+
+Node 0: Read 167245 Write 168837 Total 336082 MB/s
+Node 1: Read 103145 Write 16353 Total 119498 MB/s
+Aggregate BW: 455580
+
+Node 0: Read 159491 Write 117813 Total 277304 MB/s
+Node 1: Read 86848 Write 60827 Total 147675 MB/s
+Aggregate BW: 424979
+
+Node 0: Read 226294 Write 95129 Total 321423 MB/s
+Node 1: Read 96026 Write 72858 Total 168884 MB/s
+Aggregate BW: 490307
+
+Node 0: Read 128967 Write 193426 Total 322393 MB/s
+Node 1: Read 128702 Write 9905 Total 138607 MB/s
+Aggregate BW: 461000
+
+Node 0: Read 164400 Write 87749 Total 252149 MB/s
+Node 1: Read 99208 Write 76322 Total 175530 MB/s
+Aggregate BW: 427679
+
+Node 0: Read 201366 Write 146719 Total 348085 MB/s
+Node 1: Read 88760 Write 35566 Total 124326 MB/s
+Aggregate BW: 472411
+
+Node 0: Read 154098 Write 143381 Total 297479 MB/s
+Node 1: Read 84613 Write 44556 Total 129169 MB/s
+Aggregate BW: 426648
+
+Node 0: Read 211518 Write 82843 Total 294361 MB/s
+Node 1: Read 99416 Write 76556 Total 175972 MB/s
+Aggregate BW: 470333
+
+Node 0: Read 152633 Write 187696 Total 340329 MB/s
+Node 1: Read 122905 Write 9713 Total 132618 MB/s
+Aggregate BW: 472947
+
+Node 0: Read 163665 Write 109763 Total 273428 MB/s
+Node 1: Read 87787 Write 65970 Total 153757 MB/s
+Aggregate BW: 427185
+
+Node 0: Read 223601 Write 100289 Total 323890 MB/s
+Node 1: Read 95113 Write 67609 Total 162722 MB/s
+Aggregate BW: 486612
+
+Node 0: Read 141071 Write 193213 Total 334284 MB/s
+Node 1: Read 127545 Write 9789 Total 137334 MB/s
+Aggregate BW: 471618
+
+Node 0: Read 164298 Write 88218 Total 252516 MB/s
+Node 1: Read 97560 Write 76601 Total 174161 MB/s
+Aggregate BW: 426677
+
+Node 0: Read 211991 Write 140789 Total 352780 MB/s
+Node 1: Read 89911 Write 43499 Total 133410 MB/s
+Aggregate BW: 486190
+
+Node 0: Read 150868 Write 157589 Total 308457 MB/s
+Node 1: Read 95586 Write 33751 Total 129337 MB/s
+Aggregate BW: 437794
+
+Node 0: Read 195211 Write 82352 Total 277563 MB/s
+Node 1: Read 96888 Write 76347 Total 173235 MB/s
+Aggregate BW: 450798
+
+Node 0: Read 173929 Write 169770 Total 343699 MB/s
+Node 1: Read 106534 Write 20592 Total 127126 MB/s
+Aggregate BW: 470825
+
+Node 0: Read 162188 Write 126708 Total 288896 MB/s
+Node 1: Read 86795 Write 54691 Total 141486 MB/s
+Aggregate BW: 430382
+
+Node 0: Read 228879 Write 82861 Total 311740 MB/s
+Node 1: Read 98637 Write 75962 Total 174599 MB/s
+Aggregate BW: 486339
+
+Node 0: Read 129231 Write 182987 Total 312218 MB/s
+Node 1: Read 116677 Write 12785 Total 129462 MB/s
+Aggregate BW: 441680
+
+Node 0: Read 160548 Write 87457 Total 248005 MB/s
+Node 1: Read 97956 Write 76451 Total 174407 MB/s
+Aggregate BW: 422412
+
+Node 0: Read 209676 Write 135004 Total 344680 MB/s
+Node 1: Read 92805 Write 45691 Total 138496 MB/s
+Aggregate BW: 483176
+
+Node 0: Read 151177 Write 158648 Total 309825 MB/s
+Node 1: Read 98799 Write 34678 Total 133477 MB/s
+Aggregate BW: 443302
+
+Node 0: Read 190798 Write 80166 Total 270964 MB/s
+Node 1: Read 98005 Write 76421 Total 174426 MB/s
+Aggregate BW: 445390
+
+Node 0: Read 169303 Write 169587 Total 338890 MB/s
+Node 1: Read 108858 Write 20742 Total 129600 MB/s
+Aggregate BW: 468490
+
+Node 0: Read 163863 Write 125301 Total 289164 MB/s
+Node 1: Read 87849 Write 56349 Total 144198 MB/s
+Aggregate BW: 433362
+
+Node 0: Read 224149 Write 84789 Total 308938 MB/s
+Node 1: Read 101385 Write 75355 Total 176740 MB/s
+Aggregate BW: 485678
+
+Node 0: Read 134765 Write 191983 Total 326748 MB/s
+Node 1: Read 127486 Write 11861 Total 139347 MB/s
+Aggregate BW: 466095
+
+Node 0: Read 160386 Write 85945 Total 246331 MB/s
+Node 1: Read 92494 Write 77139 Total 169633 MB/s
+Aggregate BW: 415964
+
+Node 0: Read 212625 Write 122792 Total 335417 MB/s
+Node 1: Read 95408 Write 53070 Total 148478 MB/s
+Aggregate BW: 483895
+
+Node 0: Read 146821 Write 170452 Total 317273 MB/s
+Node 1: Read 111295 Write 27487 Total 138782 MB/s
+Aggregate BW: 456055
+
+Node 0: Read 178242 Write 81008 Total 259250 MB/s
+Node 1: Read 99732 Write 76475 Total 176207 MB/s
+Aggregate BW: 435457
+
+Node 0: Read 174732 Write 162627 Total 337359 MB/s
+Node 1: Read 106377 Write 25092 Total 131469 MB/s
+Aggregate BW: 468828
+
+Node 0: Read 157343 Write 125599 Total 282942 MB/s
+Node 1: Read 88479 Write 58490 Total 146969 MB/s
+Aggregate BW: 429911
+
+Node 0: Read 218719 Write 85366 Total 304085 MB/s
+Node 1: Read 102545 Write 75707 Total 178252 MB/s
+Aggregate BW: 482337
+
+Node 0: Read 130615 Write 191111 Total 321726 MB/s
+Node 1: Read 129652 Write 12270 Total 141922 MB/s
+Aggregate BW: 463648
+
+Node 0: Read 155785 Write 85036 Total 240821 MB/s
+Node 1: Read 99099 Write 76443 Total 175542 MB/s
+Aggregate BW: 416363
+
+Node 0: Read 182169 Write 135260 Total 317429 MB/s
+Node 1: Read 96008 Write 36603 Total 132611 MB/s
+Aggregate BW: 450040
+
+Node 0: Read 158287 Write 138292 Total 296579 MB/s
+Node 1: Read 87596 Write 51025 Total 138621 MB/s
+Aggregate BW: 435200
+
+Node 0: Read 207346 Write 82679 Total 290025 MB/s
+Node 1: Read 111233 Write 76893 Total 188126 MB/s
+Aggregate BW: 478151
+
+Node 0: Read 139693 Write 188485 Total 328178 MB/s
+Node 1: Read 132644 Write 14533 Total 147177 MB/s
+Aggregate BW: 475355
+
+Node 0: Read 157466 Write 88980 Total 246446 MB/s
+Node 1: Read 94468 Write 77746 Total 172214 MB/s
+Aggregate BW: 418660
+
+Node 0: Read 206790 Write 120227 Total 327017 MB/s
+Node 1: Read 99679 Write 55766 Total 155445 MB/s
+Aggregate BW: 482462
+
+Node 0: Read 142883 Write 167400 Total 310283 MB/s
+Node 1: Read 111453 Write 28519 Total 139972 MB/s
+Aggregate BW: 450255
+
+Node 0: Read 174570 Write 72949 Total 247519 MB/s
+Node 1: Read 93712 Write 76429 Total 170141 MB/s
+Aggregate BW: 417660
+
+Node 0: Read 165643 Write 169356 Total 334999 MB/s
+Node 1: Read 117825 Write 24150 Total 141975 MB/s
+Aggregate BW: 476974
+
+Node 0: Read 161654 Write 123138 Total 284792 MB/s
+Node 1: Read 90158 Write 59003 Total 149161 MB/s
+Aggregate BW: 433953
+
+Node 0: Read 210598 Write 84726 Total 295324 MB/s
+Node 1: Read 108432 Write 73314 Total 181746 MB/s
+Aggregate BW: 477070
+
+Node 0: Read 128965 Write 189423 Total 318388 MB/s
+Node 1: Read 131471 Write 15504 Total 146975 MB/s
+Aggregate BW: 465363
+
+Node 0: Read 152546 Write 87687 Total 240233 MB/s
+Node 1: Read 100373 Write 76558 Total 176931 MB/s
+Aggregate BW: 417164
+
+Node 0: Read 200733 Write 135116 Total 335849 MB/s
+Node 1: Read 98529 Write 47293 Total 145822 MB/s
+Aggregate BW: 481671
+
+Node 0: Read 150732 Write 151619 Total 302351 MB/s
+Node 1: Read 98199 Write 41203 Total 139402 MB/s
+Aggregate BW: 441753
+
+Node 0: Read 186168 Write 76128 Total 262296 MB/s
+Node 1: Read 101179 Write 76480 Total 177659 MB/s
+Aggregate BW: 439955
+
+Node 0: Read 155104 Write 171266 Total 326370 MB/s
+Node 1: Read 119341 Write 19921 Total 139262 MB/s
+Aggregate BW: 465632
+
+Node 0: Read 163310 Write 116670 Total 279980 MB/s
+Node 1: Read 91198 Write 63102 Total 154300 MB/s
+Aggregate BW: 434280
+
+Node 0: Read 209550 Write 87310 Total 296860 MB/s
+Node 1: Read 107957 Write 71159 Total 179116 MB/s
+Aggregate BW: 475976
+
+Node 0: Read 136426 Write 190350 Total 326776 MB/s
+Node 1: Read 132851 Write 15708 Total 148559 MB/s
+Aggregate BW: 475335
+
+Node 0: Read 153226 Write 84652 Total 237878 MB/s
+Node 1: Read 96613 Write 76850 Total 173463 MB/s
+Aggregate BW: 411341
+
+Node 0: Read 203066 Write 120828 Total 323894 MB/s
+Node 1: Read 100282 Write 52668 Total 152950 MB/s
+Aggregate BW: 476844
+
+Node 0: Read 142528 Write 157427 Total 299955 MB/s
+Node 1: Read 104543 Write 39029 Total 143572 MB/s
+Aggregate BW: 443527
+
+Node 0: Read 180783 Write 75780 Total 256563 MB/s
+Node 1: Read 101791 Write 76405 Total 178196 MB/s
+Aggregate BW: 434759
+
+Node 0: Read 162300 Write 167898 Total 330198 MB/s
+Node 1: Read 118503 Write 24128 Total 142631 MB/s
+Aggregate BW: 472829
+
+Node 0: Read 153685 Write 115181 Total 268866 MB/s
+Node 1: Read 91306 Write 63538 Total 154844 MB/s
+Aggregate BW: 423710
+
+Node 0: Read 204222 Write 91974 Total 296196 MB/s
+Node 1: Read 107398 Write 69212 Total 176610 MB/s
+Aggregate BW: 472806
+
+Node 0: Read 123658 Write 183174 Total 306832 MB/s
+Node 1: Read 128982 Write 17205 Total 146187 MB/s
+Aggregate BW: 453019
+
+Node 0: Read 159845 Write 83469 Total 243314 MB/s
+Node 1: Read 104579 Write 76620 Total 181199 MB/s
+Aggregate BW: 424513
+
+Node 0: Read 171933 Write 140709 Total 312642 MB/s
+Node 1: Read 98652 Write 34063 Total 132715 MB/s
+Aggregate BW: 445357
+
+Node 0: Read 152907 Write 123810 Total 276717 MB/s
+Node 1: Read 91659 Write 61461 Total 153120 MB/s
+Aggregate BW: 429837
+
+Node 0: Read 199175 Write 81612 Total 280787 MB/s
+Node 1: Read 112830 Write 73161 Total 185991 MB/s
+Aggregate BW: 466778
+
+Node 0: Read 124364 Write 183371 Total 307735 MB/s
+Node 1: Read 131523 Write 17955 Total 149478 MB/s
+Aggregate BW: 457213
+
+Node 0: Read 152281 Write 83532 Total 235813 MB/s
+Node 1: Read 105434 Write 76595 Total 182029 MB/s
+Aggregate BW: 417842
+
+Node 0: Read 185921 Write 138970 Total 324891 MB/s
+Node 1: Read 100140 Write 42064 Total 142204 MB/s
+Aggregate BW: 467095
+
+Node 0: Read 150979 Write 133751 Total 284730 MB/s
+Node 1: Read 89546 Write 56117 Total 145663 MB/s
+Aggregate BW: 430393
+
+Node 0: Read 197703 Write 79621 Total 277324 MB/s
+Node 1: Read 113744 Write 73426 Total 187170 MB/s
+Aggregate BW: 464494
+
+Node 0: Read 132493 Write 182144 Total 314637 MB/s
+Node 1: Read 129817 Write 18397 Total 148214 MB/s
+Aggregate BW: 462851
+
+Node 0: Read 149257 Write 85112 Total 234369 MB/s
+Node 1: Read 98879 Write 77043 Total 175922 MB/s
+Aggregate BW: 410291
+
+Node 0: Read 195546 Write 120452 Total 315998 MB/s
+Node 1: Read 104679 Write 52700 Total 157379 MB/s
+Aggregate BW: 473377
+
+Node 0: Read 145493 Write 156449 Total 301942 MB/s
+Node 1: Read 107421 Write 38565 Total 145986 MB/s
+Aggregate BW: 447928
+
+Node 0: Read 173545 Write 78881 Total 252426 MB/s
+Node 1: Read 108007 Write 76503 Total 184510 MB/s
+Aggregate BW: 436936
+
+Node 0: Read 154144 Write 163445 Total 317589 MB/s
+Node 1: Read 119556 Write 24244 Total 143800 MB/s
+Aggregate BW: 461389
+
+Node 0: Read 154694 Write 112142 Total 266836 MB/s
+Node 1: Read 93991 Write 67651 Total 161642 MB/s
+Aggregate BW: 428478
+
+Node 0: Read 196449 Write 92319 Total 288768 MB/s
+Node 1: Read 112167 Write 67912 Total 180079 MB/s
+Aggregate BW: 468847
+
+Node 0: Read 122137 Write 178702 Total 300839 MB/s
+Node 1: Read 129255 Write 20216 Total 149471 MB/s
+Aggregate BW: 450310
+
+Node 0: Read 157248 Write 79662 Total 236910 MB/s
+Node 1: Read 104387 Write 76443 Total 180830 MB/s
+Aggregate BW: 417740
+
+Node 0: Read 181113 Write 142907 Total 324020 MB/s
+Node 1: Read 100426 Write 39949 Total 140375 MB/s
+Aggregate BW: 464395
+
+Node 0: Read 159189 Write 135850 Total 295039 MB/s
+Node 1: Read 88898 Write 55600 Total 144498 MB/s
+Aggregate BW: 439537
+
+Node 0: Read 192398 Write 71774 Total 264172 MB/s
+Node 1: Read 106079 Write 76418 Total 182497 MB/s
+Aggregate BW: 446669
+
+Node 0: Read 134834 Write 177817 Total 312651 MB/s
+Node 1: Read 129287 Write 18637 Total 147924 MB/s
+Aggregate BW: 460575
+
+Node 0: Read 146708 Write 83694 Total 230402 MB/s
+Node 1: Read 98659 Write 77189 Total 175848 MB/s
+Aggregate BW: 406250
+
+Node 0: Read 196240 Write 117337 Total 313577 MB/s
+Node 1: Read 105362 Write 53723 Total 159085 MB/s
+Aggregate BW: 472662
+
+Node 0: Read 143057 Write 158540 Total 301597 MB/s
+Node 1: Read 109262 Write 37415 Total 146677 MB/s
+Aggregate BW: 448274
+
+Node 0: Read 173558 Write 75803 Total 249361 MB/s
+Node 1: Read 104090 Write 76407 Total 180497 MB/s
+Aggregate BW: 429858
+
+Node 0: Read 159134 Write 162014 Total 321148 MB/s
+Node 1: Read 118125 Write 27039 Total 145164 MB/s
+Aggregate BW: 466312
+
+Node 0: Read 156592 Write 116888 Total 273480 MB/s
+Node 1: Read 92986 Write 64450 Total 157436 MB/s
+Aggregate BW: 430916
+
+Node 0: Read 199358 Write 83476 Total 282834 MB/s
+Node 1: Read 113584 Write 69948 Total 183532 MB/s
+Aggregate BW: 466366
+
+Node 0: Read 135719 Write 184189 Total 319908 MB/s
+Node 1: Read 134003 Write 18780 Total 152783 MB/s
+Aggregate BW: 472691
+
+Node 0: Read 146770 Write 83289 Total 230059 MB/s
+Node 1: Read 104301 Write 76520 Total 180821 MB/s
+Aggregate BW: 410880
+
+Node 0: Read 191568 Write 129029 Total 320597 MB/s
+Node 1: Read 102593 Write 48317 Total 150910 MB/s
+Aggregate BW: 471507
+
+Node 0: Read 150015 Write 147296 Total 297311 MB/s
+Node 1: Read 98291 Write 46081 Total 144372 MB/s
+Aggregate BW: 441683
+
+Node 0: Read 182507 Write 75320 Total 257827 MB/s
+Node 1: Read 103971 Write 76400 Total 180371 MB/s
+Aggregate BW: 438198
+
+Node 0: Read 144256 Write 176549 Total 320805 MB/s
+Node 1: Read 126284 Write 18935 Total 145219 MB/s
+Aggregate BW: 466024
+
+Node 0: Read 160446 Write 110311 Total 270757 MB/s
+Node 1: Read 94124 Write 67452 Total 161576 MB/s
+Aggregate BW: 432333
+
+Node 0: Read 198298 Write 91207 Total 289505 MB/s
+Node 1: Read 112110 Write 66578 Total 178688 MB/s
+Aggregate BW: 468193
+
+Node 0: Read 133652 Write 183633 Total 317285 MB/s
+Node 1: Read 133470 Write 19306 Total 152776 MB/s
+Aggregate BW: 470061
+
+Node 0: Read 154770 Write 83536 Total 238306 MB/s
+Node 1: Read 104049 Write 76596 Total 180645 MB/s
+Aggregate BW: 418951
+
+Node 0: Read 187912 Write 138565 Total 326477 MB/s
+Node 1: Read 101186 Write 44495 Total 145681 MB/s
+Aggregate BW: 472158
+
+Node 0: Read 155449 Write 139613 Total 295062 MB/s
+Node 1: Read 91864 Write 52677 Total 144541 MB/s
+Aggregate BW: 439603
+
+Node 0: Read 188831 Write 76323 Total 265154 MB/s
+Node 1: Read 105631 Write 76362 Total 181993 MB/s
+Aggregate BW: 447147
+
+Node 0: Read 139891 Write 182033 Total 321924 MB/s
+Node 1: Read 130937 Write 18718 Total 149655 MB/s
+Aggregate BW: 471579
+
+Node 0: Read 156957 Write 97543 Total 254500 MB/s
+Node 1: Read 96689 Write 74239 Total 170928 MB/s
+Aggregate BW: 425428
+
+Node 0: Read 198085 Write 104935 Total 303020 MB/s
+Node 1: Read 109277 Write 61147 Total 170424 MB/s
+Aggregate BW: 473444
+
+Node 0: Read 134484 Write 172643 Total 307127 MB/s
+Node 1: Read 123180 Write 24840 Total 148020 MB/s
+Aggregate BW: 455147
+
+Node 0: Read 162685 Write 79340 Total 242025 MB/s
+Node 1: Read 103963 Write 76397 Total 180360 MB/s
+Aggregate BW: 422385
+
+Node 0: Read 180945 Write 142650 Total 323595 MB/s
+Node 1: Read 100928 Write 39890 Total 140818 MB/s
+Aggregate BW: 464413
+
+Node 0: Read 158387 Write 135264 Total 293651 MB/s
+Node 1: Read 88924 Write 55488 Total 144412 MB/s
+Aggregate BW: 438063
+
+Node 0: Read 191754 Write 70943 Total 262697 MB/s
+Node 1: Read 103959 Write 76386 Total 180345 MB/s
+Aggregate BW: 443042
+
+Node 0: Read 136420 Write 182602 Total 319022 MB/s
+Node 1: Read 130297 Write 18790 Total 149087 MB/s
+Aggregate BW: 468109
+
+Node 0: Read 152525 Write 86577 Total 239102 MB/s
+Node 1: Read 98243 Write 77981 Total 176224 MB/s
+Aggregate BW: 415326
+
+Node 0: Read 197015 Write 117246 Total 314261 MB/s
+Node 1: Read 105785 Write 55768 Total 161553 MB/s
+Aggregate BW: 475814
+
+Node 0: Read 141407 Write 162323 Total 303730 MB/s
+Node 1: Read 112875 Write 34581 Total 147456 MB/s
+Aggregate BW: 451186
+
+Node 0: Read 170276 Write 76347 Total 246623 MB/s
+Node 1: Read 105301 Write 76340 Total 181641 MB/s
+Aggregate BW: 428264
+
+Node 0: Read 152943 Write 163640 Total 316583 MB/s
+Node 1: Read 119528 Write 23787 Total 143315 MB/s
+Aggregate BW: 459898
+
+Node 0: Read 161238 Write 116268 Total 277506 MB/s
+Node 1: Read 94109 Write 69457 Total 163566 MB/s
+Aggregate BW: 441072
+
+Node 0: Read 200304 Write 88268 Total 288572 MB/s
+Node 1: Read 113972 Write 70461 Total 184433 MB/s
+Aggregate BW: 473005
+
+Node 0: Read 125386 Write 183569 Total 308955 MB/s
+Node 1: Read 132897 Write 18681 Total 151578 MB/s
+Aggregate BW: 460533
+
+Node 0: Read 152052 Write 87183 Total 239235 MB/s
+Node 1: Read 106860 Write 76386 Total 183246 MB/s
+Aggregate BW: 422481
+
+Node 0: Read 193359 Write 135009 Total 328368 MB/s
+Node 1: Read 102325 Write 47749 Total 150074 MB/s
+Aggregate BW: 478442
+
+Node 0: Read 151462 Write 145676 Total 297138 MB/s
+Node 1: Read 96574 Write 47330 Total 143904 MB/s
+Aggregate BW: 441042
+
+Node 0: Read 183807 Write 74311 Total 258118 MB/s
+Node 1: Read 103784 Write 76374 Total 180158 MB/s
+Aggregate BW: 438276
+
+Node 0: Read 140594 Write 172829 Total 313423 MB/s
+Node 1: Read 124133 Write 19928 Total 144061 MB/s
+Aggregate BW: 457484
+
+Node 0: Read 155197 Write 97596 Total 252793 MB/s
+Node 1: Read 97261 Write 74162 Total 171423 MB/s
+Aggregate BW: 424216
+
+Node 0: Read 196067 Write 104457 Total 300524 MB/s
+Node 1: Read 110308 Write 61079 Total 171387 MB/s
+Aggregate BW: 471911
+
+Node 0: Read 134533 Write 171517 Total 306050 MB/s
+Node 1: Read 122727 Write 26124 Total 148851 MB/s
+Aggregate BW: 454901
+
+Node 0: Read 160251 Write 78208 Total 238459 MB/s
+Node 1: Read 104242 Write 76388 Total 180630 MB/s
+Aggregate BW: 419089
+
+Node 0: Read 178743 Write 143737 Total 322480 MB/s
+Node 1: Read 102151 Write 39650 Total 141801 MB/s
+Aggregate BW: 464281
+
+Node 0: Read 162402 Write 136470 Total 298872 MB/s
+Node 1: Read 89879 Write 57797 Total 147676 MB/s
+Aggregate BW: 446548
+
+Node 0: Read 194010 Write 74916 Total 268926 MB/s
+Node 1: Read 110817 Write 75867 Total 186684 MB/s
+Aggregate BW: 455610
+
+Node 0: Read 129950 Write 182257 Total 312207 MB/s
+Node 1: Read 130839 Write 19356 Total 150195 MB/s
+Aggregate BW: 462402
+
+Node 0: Read 146038 Write 82493 Total 228531 MB/s
+Node 1: Read 100182 Write 76685 Total 176867 MB/s
+Aggregate BW: 405398
+
+Node 0: Read 195147 Write 119595 Total 314742 MB/s
+Node 1: Read 105746 Write 53488 Total 159234 MB/s
+Aggregate BW: 473976
+
+Node 0: Read 146406 Write 157506 Total 303912 MB/s
+Node 1: Read 109583 Write 39402 Total 148985 MB/s
+Aggregate BW: 452897
+
+Node 0: Read 172125 Write 73794 Total 245919 MB/s
+Node 1: Read 104634 Write 76380 Total 181014 MB/s
+Aggregate BW: 426933
+
+Node 0: Read 154826 Write 165151 Total 319977 MB/s
+Node 1: Read 119849 Write 25710 Total 145559 MB/s
+Aggregate BW: 465536
+
+Node 0: Read 154500 Write 115724 Total 270224 MB/s
+Node 1: Read 94143 Write 65087 Total 159230 MB/s
+Aggregate BW: 429454
+
+Node 0: Read 197314 Write 85730 Total 283044 MB/s
+Node 1: Read 114613 Write 68965 Total 183578 MB/s
+Aggregate BW: 466622
+
+Node 0: Read 137940 Write 183159 Total 321099 MB/s
+Node 1: Read 134284 Write 19471 Total 153755 MB/s
+Aggregate BW: 474854
+
+Node 0: Read 145939 Write 83077 Total 229016 MB/s
+Node 1: Read 104632 Write 76513 Total 181145 MB/s
+Aggregate BW: 410161
+
+Node 0: Read 191011 Write 126690 Total 317701 MB/s
+Node 1: Read 104063 Write 49607 Total 153670 MB/s
+Aggregate BW: 471371
+
+Node 0: Read 149898 Write 146970 Total 296868 MB/s
+Node 1: Read 99568 Write 46820 Total 146388 MB/s
+Aggregate BW: 443256
+
+Node 0: Read 179806 Write 73822 Total 253628 MB/s
+Node 1: Read 104901 Write 76438 Total 181339 MB/s
+Aggregate BW: 434967
+
+Node 0: Read 142049 Write 175429 Total 317478 MB/s
+Node 1: Read 129043 Write 19708 Total 148751 MB/s
+Aggregate BW: 466229
+
+Node 0: Read 158987 Write 109119 Total 268106 MB/s
+Node 1: Read 95379 Write 67868 Total 163247 MB/s
+Aggregate BW: 431353
+
+Node 0: Read 196185 Write 92226 Total 288411 MB/s
+Node 1: Read 113872 Write 66241 Total 180113 MB/s
+Aggregate BW: 468524
+
+Node 0: Read 129668 Write 181082 Total 310750 MB/s
+Node 1: Read 132308 Write 20538 Total 152846 MB/s
+Aggregate BW: 463596
+
+Node 0: Read 153390 Write 82102 Total 235492 MB/s
+Node 1: Read 106594 Write 76418 Total 183012 MB/s
+Aggregate BW: 418504
+
+Node 0: Read 181642 Write 138452 Total 320094 MB/s
+Node 1: Read 101666 Write 42234 Total 143900 MB/s
+Aggregate BW: 463994
+
+Node 0: Read 159586 Write 139251 Total 298837 MB/s
+Node 1: Read 93501 Write 57108 Total 150609 MB/s
+Aggregate BW: 449446
+
+Node 0: Read 185847 Write 72154 Total 258001 MB/s
+Node 1: Read 108250 Write 76513 Total 184763 MB/s
+Aggregate BW: 442764
+
+Node 0: Read 132560 Write 175999 Total 308559 MB/s
+Node 1: Read 129940 Write 20023 Total 149963 MB/s
+Aggregate BW: 458522
+
+Node 0: Read 153877 Write 89907 Total 243784 MB/s
+Node 1: Read 100545 Write 79279 Total 179824 MB/s
+Aggregate BW: 423608
+
+Node 0: Read 187842 Write 114036 Total 301878 MB/s
+Node 1: Read 107466 Write 55919 Total 163385 MB/s
+Aggregate BW: 465263
+
+Node 0: Read 139640 Write 154851 Total 294491 MB/s
+Node 1: Read 108603 Write 42179 Total 150782 MB/s
+Aggregate BW: 445273
+
+Node 0: Read 172765 Write 74353 Total 247118 MB/s
+Node 1: Read 107177 Write 76659 Total 183836 MB/s
+Aggregate BW: 430954
+
+Node 0: Read 148153 Write 166310 Total 314463 MB/s
+Node 1: Read 125002 Write 23304 Total 148306 MB/s
+Aggregate BW: 462769
+
+Node 0: Read 154403 Write 109239 Total 263642 MB/s
+Node 1: Read 95422 Write 68153 Total 163575 MB/s
+Aggregate BW: 427217
+
+Node 0: Read 195426 Write 89918 Total 285344 MB/s
+Node 1: Read 114609 Write 66372 Total 180981 MB/s
+Aggregate BW: 466325
+
+Node 0: Read 130112 Write 181136 Total 311248 MB/s
+Node 1: Read 132951 Write 20836 Total 153787 MB/s
+Aggregate BW: 465035
+
+Node 0: Read 153023 Write 81199 Total 234222 MB/s
+Node 1: Read 105228 Write 76418 Total 181646 MB/s
+Aggregate BW: 415868
+
+Node 0: Read 181229 Write 139640 Total 320869 MB/s
+Node 1: Read 101979 Write 42701 Total 144680 MB/s
+Aggregate BW: 465549
+
+Node 0: Read 156418 Write 135541 Total 291959 MB/s
+Node 1: Read 89734 Write 56482 Total 146216 MB/s
+Aggregate BW: 438175
+
+Node 0: Read 192243 Write 72644 Total 264887 MB/s
+Node 1: Read 107853 Write 76378 Total 184231 MB/s
+Aggregate BW: 449118
+
+Node 0: Read 134930 Write 181483 Total 316413 MB/s
+Node 1: Read 134274 Write 20091 Total 154365 MB/s
+Aggregate BW: 470778
+
+Node 0: Read 144823 Write 83201 Total 228024 MB/s
+Node 1: Read 99971 Write 77295 Total 177266 MB/s
+Aggregate BW: 405290
+
+Node 0: Read 192136 Write 117027 Total 309163 MB/s
+Node 1: Read 106936 Write 54154 Total 161090 MB/s
+Aggregate BW: 470253
+
+Node 0: Read 144024 Write 155976 Total 300000 MB/s
+Node 1: Read 108768 Write 39702 Total 148470 MB/s
+Aggregate BW: 448470
+
+Node 0: Read 171940 Write 74626 Total 246566 MB/s
+Node 1: Read 105007 Write 76382 Total 181389 MB/s
+Aggregate BW: 427955
+
+Node 0: Read 152309 Write 166452 Total 318761 MB/s
+Node 1: Read 120636 Write 25611 Total 146247 MB/s
+Aggregate BW: 465008
+
+Node 0: Read 158716 Write 115781 Total 274497 MB/s
+Node 1: Read 94415 Write 65019 Total 159434 MB/s
+Aggregate BW: 433931
+
+Node 0: Read 194644 Write 84210 Total 278854 MB/s
+Node 1: Read 115878 Write 68564 Total 184442 MB/s
+Aggregate BW: 463296
+
+Node 0: Read 134947 Write 182195 Total 317142 MB/s
+Node 1: Read 133903 Write 20097 Total 154000 MB/s
+Aggregate BW: 471142
+
+Node 0: Read 147562 Write 84962 Total 232524 MB/s
+Node 1: Read 105744 Write 76368 Total 182112 MB/s
+Aggregate BW: 414636
+
+Node 0: Read 192473 Write 120425 Total 312898 MB/s
+Node 1: Read 106174 Write 52193 Total 158367 MB/s
+Aggregate BW: 471265
+
+Node 0: Read 147635 Write 154686 Total 302321 MB/s
+Node 1: Read 108538 Write 42427 Total 150965 MB/s
+Aggregate BW: 453286
+
+Node 0: Read 172733 Write 72780 Total 245513 MB/s
+Node 1: Read 105018 Write 76396 Total 181414 MB/s
+Aggregate BW: 426927
+
+Node 0: Read 144366 Write 166813 Total 311179 MB/s
+Node 1: Read 124329 Write 21168 Total 145497 MB/s
+Aggregate BW: 456676
+
+Node 0: Read 161149 Write 112045 Total 273194 MB/s
+Node 1: Read 95523 Write 69433 Total 164956 MB/s
+Aggregate BW: 438150
+
+Node 0: Read 188198 Write 91224 Total 279422 MB/s
+Node 1: Read 114181 Write 65435 Total 179616 MB/s
+Aggregate BW: 459038
+
+Node 0: Read 130747 Write 180724 Total 311471 MB/s
+Node 1: Read 133418 Write 21074 Total 154492 MB/s
+Aggregate BW: 465963
+
+Node 0: Read 152716 Write 80879 Total 233595 MB/s
+Node 1: Read 107054 Write 76419 Total 183473 MB/s
+Aggregate BW: 417068
+
+Node 0: Read 180392 Write 139181 Total 319573 MB/s
+Node 1: Read 102359 Write 42319 Total 144678 MB/s
+Aggregate BW: 464251
+
+Node 0: Read 159726 Write 137193 Total 296919 MB/s
+Node 1: Read 92053 Write 58580 Total 150633 MB/s
+Aggregate BW: 447552
+
+Node 0: Read 186953 Write 71904 Total 258857 MB/s
+Node 1: Read 108285 Write 76404 Total 184689 MB/s
+Aggregate BW: 443546
+
+Node 0: Read 131481 Write 176428 Total 307909 MB/s
+Node 1: Read 129812 Write 20195 Total 150007 MB/s
+Aggregate BW: 457916
+
+Node 0: Read 148018 Write 86410 Total 234428 MB/s
+Node 1: Read 103049 Write 77687 Total 180736 MB/s
+Aggregate BW: 415164
+
+Node 0: Read 187422 Write 118456 Total 305878 MB/s
+Node 1: Read 106404 Write 52650 Total 159054 MB/s
+Aggregate BW: 464932
+
+Node 0: Read 145897 Write 153658 Total 299555 MB/s
+Node 1: Read 107065 Write 41867 Total 148932 MB/s
+Aggregate BW: 448487
+
+Node 0: Read 173767 Write 73700 Total 247467 MB/s
+Node 1: Read 105413 Write 76396 Total 181809 MB/s
+Aggregate BW: 429276
+
+Node 0: Read 150053 Write 166950 Total 317003 MB/s
+Node 1: Read 122884 Write 24402 Total 147286 MB/s
+Aggregate BW: 464289
+
+Node 0: Read 158583 Write 113346 Total 271929 MB/s
+Node 1: Read 94769 Write 66804 Total 161573 MB/s
+Aggregate BW: 433502
+
+Node 0: Read 193636 Write 87926 Total 281562 MB/s
+Node 1: Read 115204 Write 67600 Total 182804 MB/s
+Aggregate BW: 464366
+
+Node 0: Read 133618 Write 183603 Total 317221 MB/s
+Node 1: Read 135222 Write 20391 Total 155613 MB/s
+Aggregate BW: 472834
+
+Node 0: Read 150454 Write 81218 Total 231672 MB/s
+Node 1: Read 105383 Write 76399 Total 181782 MB/s
+Aggregate BW: 413454
+
+Node 0: Read 184900 Write 134398 Total 319298 MB/s
+Node 1: Read 103034 Write 46584 Total 149618 MB/s
+Aggregate BW: 468916
+
+Node 0: Read 152826 Write 140752 Total 293578 MB/s
+Node 1: Read 94749 Write 52122 Total 146871 MB/s
+Aggregate BW: 440449
+
+Node 0: Read 184323 Write 70981 Total 255304 MB/s
+Node 1: Read 105004 Write 76658 Total 181662 MB/s
+Aggregate BW: 436966
+
+Node 0: Read 138357 Write 179611 Total 317968 MB/s
+Node 1: Read 133179 Write 20187 Total 153366 MB/s
+Aggregate BW: 471334
+
+Node 0: Read 155071 Write 98633 Total 253704 MB/s
+Node 1: Read 97552 Write 73706 Total 171258 MB/s
+Aggregate BW: 424962
+
+Node 0: Read 193347 Write 103648 Total 296995 MB/s
+Node 1: Read 111498 Write 61420 Total 172918 MB/s
+Aggregate BW: 469913
+
+Node 0: Read 133820 Write 170806 Total 304626 MB/s
+Node 1: Read 123324 Write 26926 Total 150250 MB/s
+Aggregate BW: 454876
+
+Node 0: Read 160348 Write 78911 Total 239259 MB/s
+Node 1: Read 104974 Write 76408 Total 181382 MB/s
+Aggregate BW: 420641
+
+Node 0: Read 176308 Write 142832 Total 319140 MB/s
+Node 1: Read 103955 Write 39780 Total 143735 MB/s
+Aggregate BW: 462875
+
+Node 0: Read 158763 Write 132956 Total 291719 MB/s
+Node 1: Read 91004 Write 59507 Total 150511 MB/s
+Aggregate BW: 442230
+
+Node 0: Read 187555 Write 79132 Total 266687 MB/s
+Node 1: Read 117014 Write 70907 Total 187921 MB/s
+Aggregate BW: 454608
+
+Node 0: Read 129833 Write 181581 Total 311414 MB/s
+Node 1: Read 133227 Write 20130 Total 153357 MB/s
+Aggregate BW: 464771
+
+Node 0: Read 146511 Write 84535 Total 231046 MB/s
+Node 1: Read 104994 Write 76451 Total 181445 MB/s
+Aggregate BW: 412491
+
+Node 0: Read 191332 Write 127409 Total 318741 MB/s
+Node 1: Read 104666 Write 49838 Total 154504 MB/s
+Aggregate BW: 473245
+
+Node 0: Read 148977 Write 146638 Total 295615 MB/s
+Node 1: Read 100451 Write 46952 Total 147403 MB/s
+Aggregate BW: 443018
+
+Node 0: Read 178622 Write 73376 Total 251998 MB/s
+Node 1: Read 105128 Write 76433 Total 181561 MB/s
+Aggregate BW: 433559
+
+Node 0: Read 141466 Write 174768 Total 316234 MB/s
+Node 1: Read 129605 Write 20132 Total 149737 MB/s
+Aggregate BW: 465971
+
+Node 0: Read 160285 Write 103059 Total 263344 MB/s
+Node 1: Read 96695 Write 71211 Total 167906 MB/s
+Aggregate BW: 431250
+
+Node 0: Read 191685 Write 96192 Total 287877 MB/s
+Node 1: Read 113223 Write 63005 Total 176228 MB/s
+Aggregate BW: 464105
+
+Node 0: Read 133057 Write 174727 Total 307784 MB/s
+Node 1: Read 129369 Write 25361 Total 154730 MB/s
+Aggregate BW: 462514
+
+Node 0: Read 155568 Write 77032 Total 232600 MB/s
+Node 1: Read 106065 Write 77166 Total 183231 MB/s
+Aggregate BW: 415831
+
+Node 0: Read 176017 Write 141723 Total 317740 MB/s
+Node 1: Read 104901 Write 40812 Total 145713 MB/s
+Aggregate BW: 463453
+
+Node 0: Read 157855 Write 132674 Total 290529 MB/s
+Node 1: Read 91154 Write 58678 Total 149832 MB/s
+Aggregate BW: 440361
+
+Node 0: Read 188870 Write 73048 Total 261918 MB/s
+Node 1: Read 110896 Write 76770 Total 187666 MB/s
+Aggregate BW: 449584
+
+Node 0: Read 130911 Write 176027 Total 306938 MB/s
+Node 1: Read 130415 Write 20703 Total 151118 MB/s
+Aggregate BW: 458056
+
+Node 0: Read 148107 Write 86953 Total 235060 MB/s
+Node 1: Read 104631 Write 78524 Total 183155 MB/s
+Aggregate BW: 418215
+
+Node 0: Read 184945 Write 117787 Total 302732 MB/s
+Node 1: Read 106612 Write 52852 Total 159464 MB/s
+Aggregate BW: 462196
+
+Node 0: Read 141534 Write 148080 Total 289614 MB/s
+Node 1: Read 103797 Write 47904 Total 151701 MB/s
+Aggregate BW: 441315
+
+Node 0: Read 176759 Write 70589 Total 247348 MB/s
+Node 1: Read 105867 Write 77055 Total 182922 MB/s
+Aggregate BW: 430270
+
+Node 0: Read 140650 Write 174661 Total 315311 MB/s
+Node 1: Read 131965 Write 20919 Total 152884 MB/s
+Aggregate BW: 468195
+
+Node 0: Read 151854 Write 88553 Total 240407 MB/s
+Node 1: Read 100610 Write 79972 Total 180582 MB/s
+Aggregate BW: 420989
+
+Node 0: Read 187312 Write 112098 Total 299410 MB/s
+Node 1: Read 108480 Write 56092 Total 164572 MB/s
+Aggregate BW: 463982
+
+Node 0: Read 143741 Write 160519 Total 304260 MB/s
+Node 1: Read 115180 Write 38280 Total 153460 MB/s
+Aggregate BW: 457720
+
+Node 0: Read 166435 Write 75514 Total 241949 MB/s
+Node 1: Read 108161 Write 76918 Total 185079 MB/s
+Aggregate BW: 427028
+
+Node 0: Read 149737 Write 161064 Total 310801 MB/s
+Node 1: Read 121830 Write 25672 Total 147502 MB/s
+Aggregate BW: 458303
+
+Node 0: Read 157714 Write 113719 Total 271433 MB/s
+Node 1: Read 96304 Write 68705 Total 165009 MB/s
+Aggregate BW: 436442
+
+Node 0: Read 192722 Write 88757 Total 281479 MB/s
+Node 1: Read 116300 Write 68362 Total 184662 MB/s
+Aggregate BW: 466141
+
+Node 0: Read 125068 Write 180787 Total 305855 MB/s
+Node 1: Read 134945 Write 21605 Total 156550 MB/s
+Aggregate BW: 462405
+
+Node 0: Read 151441 Write 84693 Total 236134 MB/s
+Node 1: Read 108289 Write 76943 Total 185232 MB/s
+Aggregate BW: 421366
+
+Node 0: Read 178084 Write 136804 Total 314888 MB/s
+Node 1: Read 102914 Write 42455 Total 145369 MB/s
+Aggregate BW: 460257
+
+Node 0: Read 155844 Write 133570 Total 289414 MB/s
+Node 1: Read 92315 Write 58501 Total 150816 MB/s
+Aggregate BW: 440230
+
+Node 0: Read 194916 Write 77318 Total 272234 MB/s
+Node 1: Read 118181 Write 76265 Total 194446 MB/s
+Aggregate BW: 466680
+
+Node 0: Read 130778 Write 183234 Total 314012 MB/s
+Node 1: Read 137291 Write 20800 Total 158091 MB/s
+Aggregate BW: 472103
+
+Node 0: Read 147252 Write 84923 Total 232175 MB/s
+Node 1: Read 100960 Write 77910 Total 178870 MB/s
+Aggregate BW: 411045
+
+Node 0: Read 190967 Write 115353 Total 306320 MB/s
+Node 1: Read 107562 Write 53924 Total 161486 MB/s
+Aggregate BW: 467806
+
+Node 0: Read 144532 Write 154968 Total 299500 MB/s
+Node 1: Read 110169 Write 41300 Total 151469 MB/s
+Aggregate BW: 450969
+
+Node 0: Read 170737 Write 71927 Total 242664 MB/s
+Node 1: Read 105814 Write 76941 Total 182755 MB/s
+Aggregate BW: 425419
+
+Node 0: Read 149970 Write 164577 Total 314547 MB/s
+Node 1: Read 125487 Write 25605 Total 151092 MB/s
+Aggregate BW: 465639
+
+Node 0: Read 153476 Write 110363 Total 263839 MB/s
+Node 1: Read 95980 Write 69504 Total 165484 MB/s
+Aggregate BW: 429323
+
+Node 0: Read 189468 Write 91678 Total 281146 MB/s
+Node 1: Read 114995 Write 66806 Total 181801 MB/s
+Aggregate BW: 462947
+
+Node 0: Read 123532 Write 174648 Total 298180 MB/s
+Node 1: Read 129064 Write 24882 Total 153946 MB/s
+Aggregate BW: 452126
+
+Node 0: Read 156227 Write 76575 Total 232802 MB/s
+Node 1: Read 105595 Write 77200 Total 182795 MB/s
+Aggregate BW: 415597
+
+Node 0: Read 174588 Write 141336 Total 315924 MB/s
+Node 1: Read 105350 Write 40068 Total 145418 MB/s
+Aggregate BW: 461342
+
+Node 0: Read 160499 Write 133556 Total 294055 MB/s
+Node 1: Read 91309 Write 59520 Total 150829 MB/s
+Aggregate BW: 444884
+
+Node 0: Read 191409 Write 72833 Total 264242 MB/s
+Node 1: Read 110232 Write 76123 Total 186355 MB/s
+Aggregate BW: 450597
+
+Node 0: Read 130363 Write 181772 Total 312135 MB/s
+Node 1: Read 135373 Write 20712 Total 156085 MB/s
+Aggregate BW: 468220
+
+Node 0: Read 142938 Write 81943 Total 224881 MB/s
+Node 1: Read 102489 Write 77660 Total 180149 MB/s
+Aggregate BW: 405030
+
+Node 0: Read 190008 Write 117826 Total 307834 MB/s
+Node 1: Read 107246 Write 53279 Total 160525 MB/s
+Aggregate BW: 468359
+
+Node 0: Read 144960 Write 153179 Total 298139 MB/s
+Node 1: Read 108179 Write 42382 Total 150561 MB/s
+Aggregate BW: 448700
+
+Node 0: Read 171050 Write 72766 Total 243816 MB/s
+Node 1: Read 106494 Write 76938 Total 183432 MB/s
+Aggregate BW: 427248
+
+Node 0: Read 154764 Write 165597 Total 320361 MB/s
+Node 1: Read 124713 Write 28329 Total 153042 MB/s
+Aggregate BW: 473403
+
+Node 0: Read 150362 Write 111588 Total 261950 MB/s
+Node 1: Read 95381 Write 67224 Total 162605 MB/s
+Aggregate BW: 424555
+
+Node 0: Read 186819 Write 90219 Total 277038 MB/s
+Node 1: Read 114877 Write 66141 Total 181018 MB/s
+Aggregate BW: 458056
+
+Node 0: Read 123829 Write 174428 Total 298257 MB/s
+Node 1: Read 129034 Write 25051 Total 154085 MB/s
+Aggregate BW: 452342
+
+Node 0: Read 156289 Write 76989 Total 233278 MB/s
+Node 1: Read 105963 Write 77225 Total 183188 MB/s
+Aggregate BW: 416466
+
+Node 0: Read 174839 Write 142022 Total 316861 MB/s
+Node 1: Read 104987 Write 40283 Total 145270 MB/s
+Aggregate BW: 462131
+
+Node 0: Read 160947 Write 134083 Total 295030 MB/s
+Node 1: Read 91357 Write 59784 Total 151141 MB/s
+Aggregate BW: 446171
+
+Node 0: Read 186834 Write 78686 Total 265520 MB/s
+Node 1: Read 118128 Write 71834 Total 189962 MB/s
+Aggregate BW: 455482
+
+Node 0: Read 130794 Write 184552 Total 315346 MB/s
+Node 1: Read 138746 Write 20743 Total 159489 MB/s
+Aggregate BW: 474835
+
+Node 0: Read 145546 Write 82770 Total 228316 MB/s
+Node 1: Read 103657 Write 77302 Total 180959 MB/s
+Aggregate BW: 409275
+
+Node 0: Read 190152 Write 119638 Total 309790 MB/s
+Node 1: Read 107022 Write 52653 Total 159675 MB/s
+Aggregate BW: 469465
+
+Node 0: Read 144646 Write 151076 Total 295722 MB/s
+Node 1: Read 106230 Write 43532 Total 149762 MB/s
+Aggregate BW: 445484
+
+Node 0: Read 174205 Write 72572 Total 246777 MB/s
+Node 1: Read 105618 Write 76983 Total 182601 MB/s
+Aggregate BW: 429378
+
+Node 0: Read 153252 Write 166792 Total 320044 MB/s
+Node 1: Read 125012 Write 27421 Total 152433 MB/s
+Aggregate BW: 472477
+
+Node 0: Read 150649 Write 110704 Total 261353 MB/s
+Node 1: Read 95625 Write 67858 Total 163483 MB/s
+Aggregate BW: 424836
+
+Node 0: Read 189781 Write 91266 Total 281047 MB/s
+Node 1: Read 115276 Write 67350 Total 182626 MB/s
+Aggregate BW: 463673
+
+Node 0: Read 122192 Write 174719 Total 296911 MB/s
+Node 1: Read 129229 Write 24052 Total 153281 MB/s
+Aggregate BW: 450192
+
+Node 0: Read 155948 Write 77060 Total 233008 MB/s
+Node 1: Read 106094 Write 77235 Total 183329 MB/s
+Aggregate BW: 416337
+
+Node 0: Read 177085 Write 140456 Total 317541 MB/s
+Node 1: Read 104961 Write 41429 Total 146390 MB/s
+Aggregate BW: 463931
+
+Node 0: Read 157463 Write 133159 Total 290622 MB/s
+Node 1: Read 91464 Write 59516 Total 150980 MB/s
+Aggregate BW: 441602
+
+Node 0: Read 187361 Write 78667 Total 266028 MB/s
+Node 1: Read 117842 Write 71802 Total 189644 MB/s
+Aggregate BW: 455672
+
+Node 0: Read 129612 Write 181584 Total 311196 MB/s
+Node 1: Read 135098 Write 20713 Total 155811 MB/s
+Aggregate BW: 467007
+
+Node 0: Read 145198 Write 83127 Total 228325 MB/s
+Node 1: Read 105053 Write 77131 Total 182184 MB/s
+Aggregate BW: 410509
+
+Node 0: Read 189949 Write 125239 Total 315188 MB/s
+Node 1: Read 105966 Write 50692 Total 156658 MB/s
+Aggregate BW: 471846
+
+Node 0: Read 148746 Write 148652 Total 297398 MB/s
+Node 1: Read 104369 Write 46601 Total 150970 MB/s
+Aggregate BW: 448368
+
+Node 0: Read 174990 Write 72086 Total 247076 MB/s
+Node 1: Read 105799 Write 76991 Total 182790 MB/s
+Aggregate BW: 429866
+
+Node 0: Read 142915 Write 168404 Total 311319 MB/s
+Node 1: Read 127810 Write 21653 Total 149463 MB/s
+Aggregate BW: 460782
+
+Node 0: Read 155516 Write 106581 Total 262097 MB/s
+Node 1: Read 96410 Write 69683 Total 166093 MB/s
+Aggregate BW: 428190
+
+Node 0: Read 196533 Write 90646 Total 287179 MB/s
+Node 1: Read 115641 Write 68024 Total 183665 MB/s
+Aggregate BW: 470844
+
+Node 0: Read 123543 Write 178287 Total 301830 MB/s
+Node 1: Read 133240 Write 23095 Total 156335 MB/s
+Aggregate BW: 458165
+
+Node 0: Read 152962 Write 78058 Total 231020 MB/s
+Node 1: Read 105921 Write 76983 Total 182904 MB/s
+Aggregate BW: 413924
+
+Node 0: Read 180038 Write 138201 Total 318239 MB/s
+Node 1: Read 104213 Write 43213 Total 147426 MB/s
+Aggregate BW: 465665
+
+Node 0: Read 154128 Write 133289 Total 287417 MB/s
+Node 1: Read 91456 Write 59582 Total 151038 MB/s
+Aggregate BW: 438455
+
+Node 0: Read 188761 Write 78774 Total 267535 MB/s
+Node 1: Read 118060 Write 72707 Total 190767 MB/s
+Aggregate BW: 458302
+
+Node 0: Read 129238 Write 178559 Total 307797 MB/s
+Node 1: Read 131608 Write 20835 Total 152443 MB/s
+Aggregate BW: 460240
+
+Node 0: Read 144593 Write 84570 Total 229163 MB/s
+Node 1: Read 109084 Write 77121 Total 186205 MB/s
+Aggregate BW: 415368
+
+Node 0: Read 182693 Write 135206 Total 317899 MB/s
+Node 1: Read 103887 Write 44963 Total 148850 MB/s
+Aggregate BW: 466749
+
+Node 0: Read 149385 Write 132061 Total 281446 MB/s
+Node 1: Read 91376 Write 58921 Total 150297 MB/s
+Aggregate BW: 431743
+
+Node 0: Read 191393 Write 71267 Total 262660 MB/s
+Node 1: Read 108131 Write 76207 Total 184338 MB/s
+Aggregate BW: 446998
+
+Node 0: Read 131908 Write 180009 Total 311917 MB/s
+Node 1: Read 133342 Write 20721 Total 154063 MB/s
+Aggregate BW: 465980
+
+Node 0: Read 142506 Write 81819 Total 224325 MB/s
+Node 1: Read 101840 Write 77511 Total 179351 MB/s
+Aggregate BW: 403676
+
+Node 0: Read 190860 Write 118655 Total 309515 MB/s
+Node 1: Read 107283 Write 53275 Total 160558 MB/s
+Aggregate BW: 470073
+
+Node 0: Read 144320 Write 154493 Total 298813 MB/s
+Node 1: Read 109994 Write 42480 Total 152474 MB/s
+Aggregate BW: 451287
+
+Node 0: Read 171072 Write 71814 Total 242886 MB/s
+Node 1: Read 106090 Write 77174 Total 183264 MB/s
+Aggregate BW: 426150
+
+Node 0: Read 153085 Write 167456 Total 320541 MB/s
+Node 1: Read 125115 Write 27309 Total 152424 MB/s
+Aggregate BW: 472965
+
+Node 0: Read 150562 Write 110435 Total 260997 MB/s
+Node 1: Read 95619 Write 67855 Total 163474 MB/s
+Aggregate BW: 424471
+
+Node 0: Read 187503 Write 91446 Total 278949 MB/s
+Node 1: Read 114535 Write 65719 Total 180254 MB/s
+Aggregate BW: 459203
+
+Node 0: Read 124964 Write 174006 Total 298970 MB/s
+Node 1: Read 128660 Write 25878 Total 154538 MB/s
+Aggregate BW: 453508
+
+Node 0: Read 156478 Write 77597 Total 234075 MB/s
+Node 1: Read 106803 Write 77210 Total 184013 MB/s
+Aggregate BW: 418088
+
+Node 0: Read 174157 Write 141352 Total 315509 MB/s
+Node 1: Read 106524 Write 39956 Total 146480 MB/s
+Aggregate BW: 461989
+
+Node 0: Read 153342 Write 128385 Total 281727 MB/s
+Node 1: Read 92470 Write 61113 Total 153583 MB/s
+Aggregate BW: 435310
+
+Node 0: Read 190970 Write 79259 Total 270229 MB/s
+Node 1: Read 118134 Write 71811 Total 189945 MB/s
+Aggregate BW: 460174
+
+Node 0: Read 131611 Write 182026 Total 313637 MB/s
+Node 1: Read 132167 Write 20707 Total 152874 MB/s
+Aggregate BW: 466511
+
+Node 0: Read 145864 Write 82356 Total 228220 MB/s
+Node 1: Read 102982 Write 77469 Total 180451 MB/s
+Aggregate BW: 408671
+
+Node 0: Read 189930 Write 118310 Total 308240 MB/s
+Node 1: Read 107194 Write 53011 Total 160205 MB/s
+Aggregate BW: 468445
+
+Node 0: Read 143297 Write 153065 Total 296362 MB/s
+Node 1: Read 108422 Write 42727 Total 151149 MB/s
+Aggregate BW: 447511
+
+Node 0: Read 172052 Write 71476 Total 243528 MB/s
+Node 1: Read 105959 Write 77190 Total 183149 MB/s
+Aggregate BW: 426677
+
+Node 0: Read 144745 Write 166487 Total 311232 MB/s
+Node 1: Read 126795 Write 22953 Total 149748 MB/s
+Aggregate BW: 460980
+
+Node 0: Read 152370 Write 105667 Total 258037 MB/s
+Node 1: Read 96762 Write 70777 Total 167539 MB/s
+Aggregate BW: 425576
+
+Node 0: Read 190205 Write 92674 Total 282879 MB/s
+Node 1: Read 114562 Write 65800 Total 180362 MB/s
+Aggregate BW: 463241
+
+Node 0: Read 123569 Write 171850 Total 295419 MB/s
+Node 1: Read 125832 Write 26096 Total 151928 MB/s
+Aggregate BW: 447347
+
+Node 0: Read 157840 Write 76286 Total 234126 MB/s
+Node 1: Read 105813 Write 77038 Total 182851 MB/s
+Aggregate BW: 416977
+
+Node 0: Read 171096 Write 145941 Total 317037 MB/s
+Node 1: Read 108023 Write 38087 Total 146110 MB/s
+Aggregate BW: 463147
+
+Node 0: Read 158200 Write 129450 Total 287650 MB/s
+Node 1: Read 92029 Write 59945 Total 151974 MB/s
+Aggregate BW: 439624
+
+Node 0: Read 188263 Write 78704 Total 266967 MB/s
+Node 1: Read 117772 Write 71371 Total 189143 MB/s
+Aggregate BW: 456110
+
+Node 0: Read 128147 Write 182424 Total 310571 MB/s
+Node 1: Read 135913 Write 20735 Total 156648 MB/s
+Aggregate BW: 467219
+
+Node 0: Read 146131 Write 84643 Total 230774 MB/s
+Node 1: Read 105868 Write 77108 Total 182976 MB/s
+Aggregate BW: 413750
+
+Node 0: Read 189746 Write 129219 Total 318965 MB/s
+Node 1: Read 105534 Write 50040 Total 155574 MB/s
+Aggregate BW: 474539
+
+Node 0: Read 148303 Write 145047 Total 293350 MB/s
+Node 1: Read 100599 Write 48373 Total 148972 MB/s
+Aggregate BW: 442322
+
+Node 0: Read 178226 Write 71027 Total 249253 MB/s
+Node 1: Read 106213 Write 77400 Total 183613 MB/s
+Aggregate BW: 432866
+
+Node 0: Read 143538 Write 172967 Total 316505 MB/s
+Node 1: Read 131016 Write 22908 Total 153924 MB/s
+Aggregate BW: 470429
+
+Node 0: Read 151364 Write 103987 Total 255351 MB/s
+Node 1: Read 97329 Write 71317 Total 168646 MB/s
+Aggregate BW: 423997
+
+Node 0: Read 190287 Write 93139 Total 283426 MB/s
+Node 1: Read 114431 Write 64383 Total 178814 MB/s
+Aggregate BW: 462240
+
+Node 0: Read 127404 Write 174245 Total 301649 MB/s
+Node 1: Read 129997 Write 24203 Total 154200 MB/s
+Aggregate BW: 455849
+
+Node 0: Read 155254 Write 76587 Total 231841 MB/s
+Node 1: Read 106353 Write 77687 Total 184040 MB/s
+Aggregate BW: 415881
+
+Node 0: Read 175448 Write 141182 Total 316630 MB/s
+Node 1: Read 105160 Write 41469 Total 146629 MB/s
+Aggregate BW: 463259
+
+Node 0: Read 159575 Write 134091 Total 293666 MB/s
+Node 1: Read 91804 Write 59611 Total 151415 MB/s
+Aggregate BW: 445081
+
+Node 0: Read 190086 Write 71072 Total 261158 MB/s
+Node 1: Read 108701 Write 76367 Total 185068 MB/s
+Aggregate BW: 446226
+
+Node 0: Read 130710 Write 181119 Total 311829 MB/s
+Node 1: Read 134661 Write 21176 Total 155837 MB/s
+Aggregate BW: 467666
+
+Node 0: Read 142495 Write 81235 Total 223730 MB/s
+Node 1: Read 102407 Write 77921 Total 180328 MB/s
+Aggregate BW: 404058
+
+Node 0: Read 186632 Write 115474 Total 302106 MB/s
+Node 1: Read 107569 Write 53851 Total 161420 MB/s
+Aggregate BW: 463526
+
+Node 0: Read 140175 Write 148250 Total 288425 MB/s
+Node 1: Read 105036 Write 46627 Total 151663 MB/s
+Aggregate BW: 440088
+
+Node 0: Read 175396 Write 73024 Total 248420 MB/s
+Node 1: Read 106141 Write 77428 Total 183569 MB/s
+Aggregate BW: 431989
+
+Node 0: Read 144367 Write 168682 Total 313049 MB/s
+Node 1: Read 128415 Write 25373 Total 153788 MB/s
+Aggregate BW: 466837
+
+Node 0: Read 153615 Write 109013 Total 262628 MB/s
+Node 1: Read 96346 Write 69086 Total 165432 MB/s
+Aggregate BW: 428060
+
+Node 0: Read 193126 Write 89174 Total 282300 MB/s
+Node 1: Read 115844 Write 67270 Total 183114 MB/s
+Aggregate BW: 465414
+
+Node 0: Read 130728 Write 181874 Total 312602 MB/s
+Node 1: Read 136997 Write 22529 Total 159526 MB/s
+Aggregate BW: 472128
+
+Node 0: Read 149434 Write 78178 Total 227612 MB/s
+Node 1: Read 105866 Write 77446 Total 183312 MB/s
+Aggregate BW: 410924
+
+Node 0: Read 176659 Write 137321 Total 313980 MB/s
+Node 1: Read 104023 Write 42465 Total 146488 MB/s
+Aggregate BW: 460468
+
+Node 0: Read 151309 Write 129420 Total 280729 MB/s
+Node 1: Read 92888 Write 61511 Total 154399 MB/s
+Aggregate BW: 435128
+
+Node 0: Read 187544 Write 78336 Total 265880 MB/s
+Node 1: Read 118398 Write 72017 Total 190415 MB/s
+Aggregate BW: 456295
+
+Node 0: Read 130034 Write 184236 Total 314270 MB/s
+Node 1: Read 139343 Write 21212 Total 160555 MB/s
+Aggregate BW: 474825
+
+Node 0: Read 144766 Write 83273 Total 228039 MB/s
+Node 1: Read 103432 Write 77837 Total 181269 MB/s
+Aggregate BW: 409308
+
+Node 0: Read 190134 Write 119026 Total 309160 MB/s
+Node 1: Read 107673 Write 53315 Total 160988 MB/s
+Aggregate BW: 470148
+
+Node 0: Read 144546 Write 151854 Total 296400 MB/s
+Node 1: Read 108489 Write 43744 Total 152233 MB/s
+Aggregate BW: 448633
+
+Node 0: Read 172407 Write 71764 Total 244171 MB/s
+Node 1: Read 106531 Write 77455 Total 183986 MB/s
+Aggregate BW: 428157
+
+Node 0: Read 149118 Write 165467 Total 314585 MB/s
+Node 1: Read 127270 Write 26232 Total 153502 MB/s
+Aggregate BW: 468087
+
+Node 0: Read 152782 Write 109682 Total 262464 MB/s
+Node 1: Read 96533 Write 69968 Total 166501 MB/s
+Aggregate BW: 428965
+
+Node 0: Read 187580 Write 91385 Total 278965 MB/s
+Node 1: Read 115259 Write 66480 Total 181739 MB/s
+Aggregate BW: 460704
+
+Node 0: Read 124461 Write 173611 Total 298072 MB/s
+Node 1: Read 129684 Write 26545 Total 156229 MB/s
+Aggregate BW: 454301
+
+Node 0: Read 155763 Write 76312 Total 232075 MB/s
+Node 1: Read 106397 Write 77712 Total 184109 MB/s
+Aggregate BW: 416184
+
+Node 0: Read 174680 Write 140448 Total 315128 MB/s
+Node 1: Read 105985 Write 41124 Total 147109 MB/s
+Aggregate BW: 462237
+
+Node 0: Read 157525 Write 132092 Total 289617 MB/s
+Node 1: Read 92374 Write 60538 Total 152912 MB/s
+Aggregate BW: 442529
+
+Node 0: Read 187741 Write 78382 Total 266123 MB/s
+Node 1: Read 118552 Write 72395 Total 190947 MB/s
+Aggregate BW: 457070
+
+Node 0: Read 129530 Write 182407 Total 311937 MB/s
+Node 1: Read 135249 Write 21209 Total 156458 MB/s
+Aggregate BW: 468395
+
+Node 0: Read 142762 Write 81942 Total 224704 MB/s
+Node 1: Read 106279 Write 77675 Total 183954 MB/s
+Aggregate BW: 408658
+
+Node 0: Read 189983 Write 125689 Total 315672 MB/s
+Node 1: Read 106386 Write 51414 Total 157800 MB/s
+Aggregate BW: 473472
+
+Node 0: Read 147147 Write 146154 Total 293301 MB/s
+Node 1: Read 102848 Write 47483 Total 150331 MB/s
+Aggregate BW: 443632
+
+Node 0: Read 176782 Write 71532 Total 248314 MB/s
+Node 1: Read 105704 Write 77468 Total 183172 MB/s
+Aggregate BW: 431486
+
+Node 0: Read 144702 Write 168812 Total 313514 MB/s
+Node 1: Read 129202 Write 23609 Total 152811 MB/s
+Aggregate BW: 466325
+
+Node 0: Read 152334 Write 107399 Total 259733 MB/s
+Node 1: Read 96784 Write 70126 Total 166910 MB/s
+Aggregate BW: 426643
+
+Node 0: Read 188217 Write 92947 Total 281164 MB/s
+Node 1: Read 114682 Write 64933 Total 179615 MB/s
+Aggregate BW: 460779
+
+Node 0: Read 129348 Write 176019 Total 305367 MB/s
+Node 1: Read 131822 Write 23817 Total 155639 MB/s
+Aggregate BW: 461006
+
+Node 0: Read 153399 Write 78296 Total 231695 MB/s
+Node 1: Read 107632 Write 77628 Total 185260 MB/s
+Aggregate BW: 416955
+
+Node 0: Read 178852 Write 137686 Total 316538 MB/s
+Node 1: Read 104973 Write 43503 Total 148476 MB/s
+Aggregate BW: 465014
+
+Node 0: Read 151674 Write 131219 Total 282893 MB/s
+Node 1: Read 92193 Write 59651 Total 151844 MB/s
+Aggregate BW: 434737
+
+Node 0: Read 191110 Write 72243 Total 263353 MB/s
+Node 1: Read 110251 Write 76407 Total 186658 MB/s
+Aggregate BW: 450011
+
+Node 0: Read 130448 Write 179178 Total 309626 MB/s
+Node 1: Read 134302 Write 21209 Total 155511 MB/s
+Aggregate BW: 465137
+
+Node 0: Read 142565 Write 81548 Total 224113 MB/s
+Node 1: Read 102493 Write 78003 Total 180496 MB/s
+Aggregate BW: 404609
+
+Node 0: Read 191524 Write 115347 Total 306871 MB/s
+Node 1: Read 108446 Write 55942 Total 164388 MB/s
+Aggregate BW: 471259
+
+Node 0: Read 138067 Write 149781 Total 287848 MB/s
+Node 1: Read 106566 Write 45619 Total 152185 MB/s
+Aggregate BW: 440033
+
+Node 0: Read 174190 Write 72731 Total 246921 MB/s
+Node 1: Read 106475 Write 77441 Total 183916 MB/s
+Aggregate BW: 430837
+
+Node 0: Read 148483 Write 166640 Total 315123 MB/s
+Node 1: Read 126851 Write 25844 Total 152695 MB/s
+Aggregate BW: 467818
+
+Node 0: Read 154325 Write 110243 Total 264568 MB/s
+Node 1: Read 96363 Write 69400 Total 165763 MB/s
+Aggregate BW: 430331
+
+Node 0: Read 190734 Write 88616 Total 279350 MB/s
+Node 1: Read 115854 Write 66994 Total 182848 MB/s
+Aggregate BW: 462198
+
+Node 0: Read 126943 Write 177927 Total 304870 MB/s
+Node 1: Read 132845 Write 22442 Total 155287 MB/s
+Aggregate BW: 460157
+
+Node 0: Read 152058 Write 77685 Total 229743 MB/s
+Node 1: Read 106516 Write 77437 Total 183953 MB/s
+Aggregate BW: 413696
+
+Node 0: Read 177422 Write 138402 Total 315824 MB/s
+Node 1: Read 104846 Write 44748 Total 149594 MB/s
+Aggregate BW: 465418
+
+Node 0: Read 154053 Write 134373 Total 288426 MB/s
+Node 1: Read 91874 Write 59783 Total 151657 MB/s
+Aggregate BW: 440083
+
+Node 0: Read 189549 Write 78273 Total 267822 MB/s
+Node 1: Read 118513 Write 73810 Total 192323 MB/s
+Aggregate BW: 460145
+
+Node 0: Read 126989 Write 182460 Total 309449 MB/s
+Node 1: Read 136610 Write 21332 Total 157942 MB/s
+Aggregate BW: 467391
+
+Node 0: Read 143808 Write 83541 Total 227349 MB/s
+Node 1: Read 108904 Write 77725 Total 186629 MB/s
+Aggregate BW: 413978
+
+Node 0: Read 182225 Write 134681 Total 316906 MB/s
+Node 1: Read 104620 Write 45592 Total 150212 MB/s
+Aggregate BW: 467118
+
+Node 0: Read 147832 Write 131268 Total 279100 MB/s
+Node 1: Read 92047 Write 59112 Total 151159 MB/s
+Aggregate BW: 430259
+
+Node 0: Read 186666 Write 78148 Total 264814 MB/s
+Node 1: Read 118055 Write 71815 Total 189870 MB/s
+Aggregate BW: 454684
+
+Node 0: Read 127993 Write 182102 Total 310095 MB/s
+Node 1: Read 136315 Write 21308 Total 157623 MB/s
+Aggregate BW: 467718
+
+Node 0: Read 143926 Write 81966 Total 225892 MB/s
+Node 1: Read 107321 Write 77591 Total 184912 MB/s
+Aggregate BW: 410804
+
+Node 0: Read 186924 Write 126703 Total 313627 MB/s
+Node 1: Read 105441 Write 50256 Total 155697 MB/s
+Aggregate BW: 469324
+
+Node 0: Read 145626 Write 142421 Total 288047 MB/s
+Node 1: Read 99183 Write 51327 Total 150510 MB/s
+Aggregate BW: 438557
+
+Node 0: Read 179656 Write 71422 Total 251078 MB/s
+Node 1: Read 106351 Write 77428 Total 183779 MB/s
+Aggregate BW: 434857
+
+Node 0: Read 139146 Write 176570 Total 315716 MB/s
+Node 1: Read 134598 Write 21384 Total 155982 MB/s
+Aggregate BW: 471698
+
+Node 0: Read 155765 Write 99755 Total 255520 MB/s
+Node 1: Read 98287 Write 73740 Total 172027 MB/s
+Aggregate BW: 427547
+
+Node 0: Read 191948 Write 97212 Total 289160 MB/s
+Node 1: Read 113342 Write 63324 Total 176666 MB/s
+Aggregate BW: 465826
+
+Node 0: Read 131490 Write 171326 Total 302816 MB/s
+Node 1: Read 126807 Write 27030 Total 153837 MB/s
+Aggregate BW: 456653
+
+Node 0: Read 156831 Write 76636 Total 233467 MB/s
+Node 1: Read 106315 Write 77444 Total 183759 MB/s
+Aggregate BW: 417226
+
+Node 0: Read 175959 Write 140611 Total 316570 MB/s
+Node 1: Read 104718 Write 41761 Total 146479 MB/s
+Aggregate BW: 463049
+
+Node 0: Read 156519 Write 132372 Total 288891 MB/s
+Node 1: Read 91952 Write 59267 Total 151219 MB/s
+Aggregate BW: 440110
+
+Node 0: Read 190895 Write 71281 Total 262176 MB/s
+Node 1: Read 108597 Write 76438 Total 185035 MB/s
+Aggregate BW: 447211
+
+Node 0: Read 131648 Write 180413 Total 312061 MB/s
+Node 1: Read 134401 Write 21191 Total 155592 MB/s
+Aggregate BW: 467653
+
+Node 0: Read 142267 Write 81293 Total 223560 MB/s
+Node 1: Read 102337 Write 78246 Total 180583 MB/s
+Aggregate BW: 404143
+
+Node 0: Read 191760 Write 116879 Total 308639 MB/s
+Node 1: Read 108063 Write 54594 Total 162657 MB/s
+Aggregate BW: 471296
+
+Node 0: Read 143682 Write 154048 Total 297730 MB/s
+Node 1: Read 111066 Write 43320 Total 154386 MB/s
+Aggregate BW: 452116
+
+Node 0: Read 170393 Write 71506 Total 241899 MB/s
+Node 1: Read 106230 Write 77439 Total 183669 MB/s
+Aggregate BW: 425568
+
+Node 0: Read 148695 Write 166581 Total 315276 MB/s
+Node 1: Read 125960 Write 25940 Total 151900 MB/s
+Aggregate BW: 467176
+
+Node 0: Read 179806 Write 128651 Total 308457 MB/s
+Node 1: Read 96382 Write 76138 Total 172520 MB/s
+Aggregate BW: 480977
+
+Node 0: Read 190453 Write 78382 Total 268835 MB/s
+Node 1: Read 118117 Write 71706 Total 189823 MB/s
+Aggregate BW: 458658
+
+Node 0: Read 131656 Write 181357 Total 313013 MB/s
+Node 1: Read 133468 Write 21204 Total 154672 MB/s
+Aggregate BW: 467685
+
+Node 0: Read 141360 Write 80900 Total 222260 MB/s
+Node 1: Read 104464 Write 77655 Total 182119 MB/s
+Aggregate BW: 404379
+
+Node 0: Read 189663 Write 125886 Total 315549 MB/s
+Node 1: Read 105977 Write 50896 Total 156873 MB/s
+Aggregate BW: 472422
+
+Node 0: Read 145985 Write 145578 Total 291563 MB/s
+Node 1: Read 102484 Write 48474 Total 150958 MB/s
+Aggregate BW: 442521
+
+Node 0: Read 177252 Write 71780 Total 249032 MB/s
+Node 1: Read 106320 Write 77454 Total 183774 MB/s
+Aggregate BW: 432806
+
+Node 0: Read 140187 Write 169753 Total 309940 MB/s
+Node 1: Read 129035 Write 21570 Total 150605 MB/s
+Aggregate BW: 460545
+
+Node 0: Read 159085 Write 107694 Total 266779 MB/s
+Node 1: Read 96924 Write 70684 Total 167608 MB/s
+Aggregate BW: 434387
+
+Node 0: Read 190466 Write 90762 Total 281228 MB/s
+Node 1: Read 115148 Write 65764 Total 180912 MB/s
+Aggregate BW: 462140
+
+Node 0: Read 128471 Write 177128 Total 305599 MB/s
+Node 1: Read 132359 Write 23076 Total 155435 MB/s
+Aggregate BW: 461034
+
+Node 0: Read 153028 Write 78330 Total 231358 MB/s
+Node 1: Read 106560 Write 77479 Total 184039 MB/s
+Aggregate BW: 415397
+
+Node 0: Read 176957 Write 139881 Total 316838 MB/s
+Node 1: Read 103878 Write 42382 Total 146260 MB/s
+Aggregate BW: 463098
+
+Node 0: Read 155859 Write 134597 Total 290456 MB/s
+Node 1: Read 91596 Write 58962 Total 150558 MB/s
+Aggregate BW: 441014
+
+Node 0: Read 190025 Write 71131 Total 261156 MB/s
+Node 1: Read 108714 Write 76389 Total 185103 MB/s
+Aggregate BW: 446259
+
+Node 0: Read 129485 Write 176399 Total 305884 MB/s
+Node 1: Read 131747 Write 21204 Total 152951 MB/s
+Aggregate BW: 458835
+
+Node 0: Read 143641 Write 83351 Total 226992 MB/s
+Node 1: Read 105396 Write 78310 Total 183706 MB/s
+Aggregate BW: 410698
+
+Node 0: Read 188265 Write 118191 Total 306456 MB/s
+Node 1: Read 107434 Write 53025 Total 160459 MB/s
+Aggregate BW: 466915
+
+Node 0: Read 146253 Write 152902 Total 299155 MB/s
+Node 1: Read 109965 Write 44207 Total 154172 MB/s
+Aggregate BW: 453327
+
+Node 0: Read 171537 Write 70715 Total 242252 MB/s
+Node 1: Read 105927 Write 77779 Total 183706 MB/s
+Aggregate BW: 425958
+
+Node 0: Read 137879 Write 162497 Total 300376 MB/s
+Node 1: Read 118105 Write 21742 Total 139847 MB/s
+Aggregate BW: 440223
+
+Node 0: Read 159982 Write 100682 Total 260664 MB/s
+Node 1: Read 97904 Write 74228 Total 172132 MB/s
+Aggregate BW: 432796
+
+Node 0: Read 195478 Write 98212 Total 293690 MB/s
+Node 1: Read 113495 Write 64259 Total 177754 MB/s
+Aggregate BW: 471444
+
+Node 0: Read 132929 Write 176319 Total 309248 MB/s
+Node 1: Read 131193 Write 25071 Total 156264 MB/s
+Aggregate BW: 465512
+
+Node 0: Read 154897 Write 85323 Total 240220 MB/s
+Node 1: Read 112642 Write 76656 Total 189298 MB/s
+Aggregate BW: 429518
+
+Node 0: Read 185375 Write 136362 Total 321737 MB/s
+Node 1: Read 104093 Write 47128 Total 151221 MB/s
+Aggregate BW: 472958
+
+Node 0: Read 149173 Write 134564 Total 283737 MB/s
+Node 1: Read 90642 Write 58004 Total 148646 MB/s
+Aggregate BW: 432383
+
+Node 0: Read 195724 Write 79260 Total 274984 MB/s
+Node 1: Read 119568 Write 75862 Total 195430 MB/s
+Aggregate BW: 470414
+
+Node 0: Read 127607 Write 182929 Total 310536 MB/s
+Node 1: Read 136267 Write 21350 Total 157617 MB/s
+Aggregate BW: 468153
+
+Node 0: Read 149137 Write 87765 Total 236902 MB/s
+Node 1: Read 105562 Write 74389 Total 179951 MB/s
+Aggregate BW: 416853
+
+Node 0: Read 200535 Write 130485 Total 331020 MB/s
+Node 1: Read 104198 Write 54407 Total 158605 MB/s
+Aggregate BW: 489625
+
+Node 0: Read 153101 Write 158642 Total 311743 MB/s
+Node 1: Read 109916 Write 42147 Total 152063 MB/s
+Aggregate BW: 463806
+
+Node 0: Read 173721 Write 89278 Total 262999 MB/s
+Node 1: Read 113197 Write 74213 Total 187410 MB/s
+Aggregate BW: 450409
+
+Node 0: Read 186650 Write 150381 Total 337031 MB/s
+Node 1: Read 110983 Write 44877 Total 155860 MB/s
+Aggregate BW: 492891
+
+Node 0: Read 161541 Write 142430 Total 303971 MB/s
+Node 1: Read 94804 Write 54467 Total 149271 MB/s
+Aggregate BW: 453242
+
+Node 0: Read 186224 Write 84666 Total 270890 MB/s
+Node 1: Read 114050 Write 73934 Total 187984 MB/s
+Aggregate BW: 458874
+
+Node 0: Read 165878 Write 164663 Total 330541 MB/s
+Node 1: Read 121609 Write 33007 Total 154616 MB/s
+Aggregate BW: 485157
+
+Node 0: Read 165618 Write 128625 Total 294243 MB/s
+Node 1: Read 90540 Write 63174 Total 153714 MB/s
+Aggregate BW: 447957
+
+Node 0: Read 198856 Write 86715 Total 285571 MB/s
+Node 1: Read 115335 Write 66941 Total 182276 MB/s
+Aggregate BW: 467847
+
+Node 0: Read 138546 Write 191951 Total 330497 MB/s
+Node 1: Read 138074 Write 22010 Total 160084 MB/s
+Aggregate BW: 490581
+
+Node 0: Read 167951 Write 103084 Total 271035 MB/s
+Node 1: Read 100940 Write 76217 Total 177157 MB/s
+Aggregate BW: 448192
+
+Node 0: Read 202080 Write 112280 Total 314360 MB/s
+Node 1: Read 106184 Write 60370 Total 166554 MB/s
+Aggregate BW: 480914
+
+Node 0: Read 143748 Write 171821 Total 315569 MB/s
+Node 1: Read 118678 Write 33221 Total 151899 MB/s
+Aggregate BW: 467468
+
+Node 0: Read 166868 Write 102852 Total 269720 MB/s
+Node 1: Read 118881 Write 71514 Total 190395 MB/s
+Aggregate BW: 460115
+
+Node 0: Read 199995 Write 132328 Total 332323 MB/s
+Node 1: Read 100529 Write 51528 Total 152057 MB/s
+Aggregate BW: 484380
+
+Node 0: Read 160850 Write 159818 Total 320668 MB/s
+Node 1: Read 107485 Write 43535 Total 151020 MB/s
+Aggregate BW: 471688
+
+Node 0: Read 178133 Write 100821 Total 278954 MB/s
+Node 1: Read 116552 Write 71615 Total 188167 MB/s
+Aggregate BW: 467121
+
+Node 0: Read 183799 Write 139678 Total 323477 MB/s
+Node 1: Read 97377 Write 39853 Total 137230 MB/s
+Aggregate BW: 460707
+
+Node 0: Read 175107 Write 150132 Total 325239 MB/s
+Node 1: Read 95470 Write 54258 Total 149728 MB/s
+Aggregate BW: 474967
+
+Node 0: Read 191329 Write 111218 Total 302547 MB/s
+Node 1: Read 124007 Write 69103 Total 193110 MB/s
+Aggregate BW: 495657
+
+Node 0: Read 201282 Write 149109 Total 350391 MB/s
+Node 1: Read 102526 Write 47497 Total 150023 MB/s
+Aggregate BW: 500414
+
+Node 0: Read 164011 Write 152857 Total 316868 MB/s
+Node 1: Read 98292 Write 51607 Total 149899 MB/s
+Aggregate BW: 466767
+
+Node 0: Read 187343 Write 105209 Total 292552 MB/s
+Node 1: Read 119329 Write 68788 Total 188117 MB/s
+Aggregate BW: 480669
+
+Node 0: Read 195535 Write 150871 Total 346406 MB/s
+Node 1: Read 106839 Write 44744 Total 151583 MB/s
+Aggregate BW: 497989
+
+Node 0: Read 167972 Write 153531 Total 321503 MB/s
+Node 1: Read 99228 Write 52898 Total 152126 MB/s
+Aggregate BW: 473629
+
+Node 0: Read 187107 Write 105477 Total 292584 MB/s
+Node 1: Read 119359 Write 68756 Total 188115 MB/s
+Aggregate BW: 480699
+
+Node 0: Read 171162 Write 151296 Total 322458 MB/s
+Node 1: Read 102978 Write 30978 Total 133956 MB/s
+Aggregate BW: 456414
+
+Node 0: Read 189474 Write 146302 Total 335776 MB/s
+Node 1: Read 88683 Write 61923 Total 150606 MB/s
+Aggregate BW: 486382
+
+Node 0: Read 201896 Write 118896 Total 320792 MB/s
+Node 1: Read 123223 Write 66451 Total 189674 MB/s
+Aggregate BW: 510466
+
+Node 0: Read 207114 Write 150406 Total 357520 MB/s
+Node 1: Read 101060 Write 47563 Total 148623 MB/s
+Aggregate BW: 506143
+
+Node 0: Read 175798 Write 166398 Total 342196 MB/s
+Node 1: Read 108146 Write 46672 Total 154818 MB/s
+Aggregate BW: 497014
+
+Node 0: Read 183385 Write 122930 Total 306315 MB/s
+Node 1: Read 123494 Write 66748 Total 190242 MB/s
+Aggregate BW: 496557
+
+Node 0: Read 224448 Write 130838 Total 355286 MB/s
+Node 1: Read 99999 Write 58344 Total 158343 MB/s
+Aggregate BW: 513629
+
+Node 0: Read 164533 Write 184008 Total 348541 MB/s
+Node 1: Read 123011 Write 28773 Total 151784 MB/s
+Aggregate BW: 500325
+
+Node 0: Read 189351 Write 119168 Total 308519 MB/s
+Node 1: Read 98316 Write 72160 Total 170476 MB/s
+Aggregate BW: 478995
+
+Node 0: Read 214825 Write 111812 Total 326637 MB/s
+Node 1: Read 103018 Write 56348 Total 159366 MB/s
+Aggregate BW: 486003
+
+Node 0: Read 156823 Write 187620 Total 344443 MB/s
+Node 1: Read 121201 Write 26089 Total 147290 MB/s
+Aggregate BW: 491733
+
+Node 0: Read 182606 Write 116736 Total 299342 MB/s
+Node 1: Read 94770 Write 61692 Total 156462 MB/s
+Aggregate BW: 455804
+
+Node 0: Read 246035 Write 132388 Total 378423 MB/s
+Node 1: Read 96491 Write 62527 Total 159018 MB/s
+Aggregate BW: 537441
+
+Node 0: Read 175195 Write 203504 Total 378699 MB/s
+Node 1: Read 129075 Write 22263 Total 151338 MB/s
+Aggregate BW: 530037
+
+Node 0: Read 219333 Write 143795 Total 363128 MB/s
+Node 1: Read 81055 Write 72626 Total 153681 MB/s
+Aggregate BW: 516809
+
+Node 0: Read 228088 Write 127076 Total 355164 MB/s
+Node 1: Read 123165 Write 59678 Total 182843 MB/s
+Aggregate BW: 538007
+
+Node 0: Read 215939 Write 162905 Total 378844 MB/s
+Node 1: Read 98780 Write 42407 Total 141187 MB/s
+Aggregate BW: 520031
+
+Node 0: Read 204028 Write 183048 Total 387076 MB/s
+Node 1: Read 110316 Write 43733 Total 154049 MB/s
+Aggregate BW: 541125
+
+Node 0: Read 215757 Write 143833 Total 359590 MB/s
+Node 1: Read 101333 Write 65743 Total 167076 MB/s
+Aggregate BW: 526666
+
+Node 0: Read 248421 Write 121026 Total 369447 MB/s
+Node 1: Read 103852 Write 67025 Total 170877 MB/s
+Aggregate BW: 540324
+
+Node 0: Read 176027 Write 189967 Total 365994 MB/s
+Node 1: Read 116510 Write 22010 Total 138520 MB/s
+Aggregate BW: 504514
+
+Node 0: Read 217581 Write 145405 Total 362986 MB/s
+Node 1: Read 75151 Write 61524 Total 136675 MB/s
+Aggregate BW: 499661
+
+Node 0: Read 236836 Write 129442 Total 366278 MB/s
+Node 1: Read 111936 Write 51928 Total 163864 MB/s
+Aggregate BW: 530142
+
+Node 0: Read 213625 Write 176057 Total 389682 MB/s
+Node 1: Read 93651 Write 30486 Total 124137 MB/s
+Aggregate BW: 513819
+
+Node 0: Read 218236 Write 169999 Total 388235 MB/s
+Node 1: Read 83713 Write 48414 Total 132127 MB/s
+Aggregate BW: 520362
+
+Node 0: Read 233531 Write 154302 Total 387833 MB/s
+Node 1: Read 108979 Write 53246 Total 162225 MB/s
+Aggregate BW: 550058
+
+Node 0: Read 282083 Write 153359 Total 435442 MB/s
+Node 1: Read 101443 Write 64975 Total 166418 MB/s
+Aggregate BW: 601860
+
+Node 0: Read 223363 Write 178422 Total 401785 MB/s
+Node 1: Read 91678 Write 32529 Total 124207 MB/s
+Aggregate BW: 525992
+
+Node 0: Read 215170 Write 170203 Total 385373 MB/s
+Node 1: Read 83287 Write 48961 Total 132248 MB/s
+Aggregate BW: 517621
+
+Node 0: Read 235572 Write 155652 Total 391224 MB/s
+Node 1: Read 109088 Write 53321 Total 162409 MB/s
+Aggregate BW: 553633
+
+Node 0: Read 260576 Write 137898 Total 398474 MB/s
+Node 1: Read 88628 Write 57998 Total 146626 MB/s
+Aggregate BW: 545100
+
+Node 0: Read 190464 Write 196677 Total 387141 MB/s
+Node 1: Read 107334 Write 22404 Total 129738 MB/s
+Aggregate BW: 516879
+
+Node 0: Read 241672 Write 151911 Total 393583 MB/s
+Node 1: Read 70330 Write 61917 Total 132247 MB/s
+Aggregate BW: 525830
+
+Node 0: Read 248633 Write 146384 Total 395017 MB/s
+Node 1: Read 116174 Write 49205 Total 165379 MB/s
+Aggregate BW: 560396
+
+Node 0: Read 234582 Write 157542 Total 392124 MB/s
+Node 1: Read 75478 Write 37034 Total 112512 MB/s
+Aggregate BW: 504636
+
+Node 0: Read 215480 Write 177555 Total 393035 MB/s
+Node 1: Read 83483 Write 38789 Total 122272 MB/s
+Aggregate BW: 515307
+
+Node 0: Read 242788 Write 157816 Total 400604 MB/s
+Node 1: Read 91214 Write 53539 Total 144753 MB/s
+Aggregate BW: 545357
+
+Node 0: Read 266848 Write 134651 Total 401499 MB/s
+Node 1: Read 92101 Write 56813 Total 148914 MB/s
+Aggregate BW: 550413
+
+Node 0: Read 203880 Write 181036 Total 384916 MB/s
+Node 1: Read 90648 Write 22100 Total 112748 MB/s
+Aggregate BW: 497664
+
+Node 0: Read 233741 Write 164501 Total 398242 MB/s
+Node 1: Read 70347 Write 53050 Total 123397 MB/s
+Aggregate BW: 521639
+
+Node 0: Read 227420 Write 151434 Total 378854 MB/s
+Node 1: Read 109378 Write 45952 Total 155330 MB/s
+Aggregate BW: 534184
+
+Node 0: Read 248757 Write 155291 Total 404048 MB/s
+Node 1: Read 75332 Write 43345 Total 118677 MB/s
+Aggregate BW: 522725
+
+Node 0: Read 205732 Write 179443 Total 385175 MB/s
+Node 1: Read 82594 Write 34861 Total 117455 MB/s
+Aggregate BW: 502630
+
+Node 0: Read 239858 Write 154997 Total 394855 MB/s
+Node 1: Read 85957 Write 51005 Total 136962 MB/s
+Aggregate BW: 531817
+
+Node 0: Read 268949 Write 133795 Total 402744 MB/s
+Node 1: Read 87744 Write 53971 Total 141715 MB/s
+Aggregate BW: 544459
+
+Node 0: Read 206486 Write 182013 Total 388499 MB/s
+Node 1: Read 86927 Write 21602 Total 108529 MB/s
+Aggregate BW: 497028
+
+Node 0: Read 238585 Write 163414 Total 401999 MB/s
+Node 1: Read 64502 Write 53480 Total 117982 MB/s
+Aggregate BW: 519981
+
+Node 0: Read 243552 Write 162561 Total 406113 MB/s
+Node 1: Read 109478 Write 45528 Total 155006 MB/s
+Aggregate BW: 561119
+
+Node 0: Read 266702 Write 149569 Total 416271 MB/s
+Node 1: Read 79894 Write 48765 Total 128659 MB/s
+Aggregate BW: 544930
+
+Node 0: Read 200502 Write 189883 Total 390385 MB/s
+Node 1: Read 92155 Write 22656 Total 114811 MB/s
+Aggregate BW: 505196
+
+Node 0: Read 238319 Write 154656 Total 392975 MB/s
+Node 1: Read 68812 Write 51539 Total 120351 MB/s
+Aggregate BW: 513326
+
+Node 0: Read 258262 Write 136279 Total 394541 MB/s
+Node 1: Read 90062 Write 49388 Total 139450 MB/s
+Aggregate BW: 533991
+
+Node 0: Read 205733 Write 180872 Total 386605 MB/s
+Node 1: Read 82861 Write 21597 Total 104458 MB/s
+Aggregate BW: 491063
+
+Node 0: Read 242142 Write 164970 Total 407112 MB/s
+Node 1: Read 59856 Write 53119 Total 112975 MB/s
+Aggregate BW: 520087
+
+Node 0: Read 248344 Write 162836 Total 411180 MB/s
+Node 1: Read 113302 Write 42945 Total 156247 MB/s
+Aggregate BW: 567427
+
+Node 0: Read 244012 Write 157441 Total 401453 MB/s
+Node 1: Read 70797 Write 38265 Total 109062 MB/s
+Aggregate BW: 510515
+
+Node 0: Read 215601 Write 177561 Total 393162 MB/s
+Node 1: Read 75201 Write 35087 Total 110288 MB/s
+Aggregate BW: 503450
+
+Node 0: Read 249593 Write 159604 Total 409197 MB/s
+Node 1: Read 79652 Write 48459 Total 128111 MB/s
+Aggregate BW: 537308
+
+Node 0: Read 267262 Write 139755 Total 407017 MB/s
+Node 1: Read 85287 Write 47846 Total 133133 MB/s
+Aggregate BW: 540150
+
+Node 0: Read 207416 Write 193226 Total 400642 MB/s
+Node 1: Read 87225 Write 21572 Total 108797 MB/s
+Aggregate BW: 509439
+
+Node 0: Read 242042 Write 158707 Total 400749 MB/s
+Node 1: Read 61403 Write 53989 Total 115392 MB/s
+Aggregate BW: 516141
+
+Node 0: Read 254376 Write 146084 Total 400460 MB/s
+Node 1: Read 99496 Write 41282 Total 140778 MB/s
+Aggregate BW: 541238
+
+Node 0: Read 231190 Write 166464 Total 397654 MB/s
+Node 1: Read 69064 Write 28688 Total 97752 MB/s
+Aggregate BW: 495406
+
+Node 0: Read 222116 Write 168350 Total 390466 MB/s
+Node 1: Read 62744 Write 44495 Total 107239 MB/s
+Aggregate BW: 497705
+
+Node 0: Read 246001 Write 161015 Total 407016 MB/s
+Node 1: Read 95508 Write 40352 Total 135860 MB/s
+Aggregate BW: 542876
+
+Node 0: Read 260996 Write 151790 Total 412786 MB/s
+Node 1: Read 73418 Write 43022 Total 116440 MB/s
+Aggregate BW: 529226
+
+Node 0: Read 206755 Write 187979 Total 394734 MB/s
+Node 1: Read 80740 Write 23804 Total 104544 MB/s
+Aggregate BW: 499278
+
+Node 0: Read 238582 Write 155851 Total 394433 MB/s
+Node 1: Read 65065 Write 46771 Total 111836 MB/s
+Aggregate BW: 506269
+
+Node 0: Read 262338 Write 137792 Total 400130 MB/s
+Node 1: Read 78294 Write 44077 Total 122371 MB/s
+Aggregate BW: 522501
+
+Node 0: Read 209929 Write 187154 Total 397083 MB/s
+Node 1: Read 76805 Write 21499 Total 98304 MB/s
+Aggregate BW: 495387
+
+Node 0: Read 246994 Write 165348 Total 412342 MB/s
+Node 1: Read 57081 Write 49860 Total 106941 MB/s
+Aggregate BW: 519283
+
+Node 0: Read 251410 Write 145443 Total 396853 MB/s
+Node 1: Read 94998 Write 38650 Total 133648 MB/s
+Aggregate BW: 530501
+
+Node 0: Read 227603 Write 165822 Total 393425 MB/s
+Node 1: Read 64723 Write 26181 Total 90904 MB/s
+Aggregate BW: 484329
+
+Node 0: Read 231651 Write 171223 Total 402874 MB/s
+Node 1: Read 59589 Write 44376 Total 103965 MB/s
+Aggregate BW: 506839
+
+Node 0: Read 247489 Write 163145 Total 410634 MB/s
+Node 1: Read 92464 Write 37725 Total 130189 MB/s
+Aggregate BW: 540823
+
+Node 0: Read 264856 Write 155175 Total 420031 MB/s
+Node 1: Read 70420 Write 40506 Total 110926 MB/s
+Aggregate BW: 530957
+
+Node 0: Read 210301 Write 185763 Total 396064 MB/s
+Node 1: Read 72757 Write 25161 Total 97918 MB/s
+Aggregate BW: 493982
+
+Node 0: Read 227915 Write 151055 Total 378970 MB/s
+Node 1: Read 68851 Write 36688 Total 105539 MB/s
+Aggregate BW: 484509
+
+Node 0: Read 255456 Write 146073 Total 401529 MB/s
+Node 1: Read 66964 Write 36214 Total 103178 MB/s
+Aggregate BW: 504707
+
+Node 0: Read 211691 Write 183426 Total 395117 MB/s
+Node 1: Read 65339 Write 23256 Total 88595 MB/s
+Aggregate BW: 483712
+
+Node 0: Read 245953 Write 162919 Total 408872 MB/s
+Node 1: Read 61892 Write 39301 Total 101193 MB/s
+Aggregate BW: 510065
+
+Node 0: Read 263859 Write 142170 Total 406029 MB/s
+Node 1: Read 72220 Write 37877 Total 110097 MB/s
+Aggregate BW: 516126
+
+Node 0: Read 211967 Write 183113 Total 395080 MB/s
+Node 1: Read 65654 Write 21316 Total 86970 MB/s
+Aggregate BW: 482050
+
+Node 0: Read 247412 Write 166602 Total 414014 MB/s
+Node 1: Read 53461 Write 44108 Total 97569 MB/s
+Aggregate BW: 511583
+
+Node 0: Read 261360 Write 147219 Total 408579 MB/s
+Node 1: Read 83983 Write 33250 Total 117233 MB/s
+Aggregate BW: 525812
+
+Node 0: Read 226531 Write 170310 Total 396841 MB/s
+Node 1: Read 58488 Write 23001 Total 81489 MB/s
+Aggregate BW: 478330
+
+Node 0: Read 232350 Write 168620 Total 400970 MB/s
+Node 1: Read 47705 Write 40716 Total 88421 MB/s
+Aggregate BW: 489391
+
+Node 0: Read 255876 Write 149041 Total 404917 MB/s
+Node 1: Read 84309 Write 30518 Total 114827 MB/s
+Aggregate BW: 519744
+
+Node 0: Read 223743 Write 170061 Total 393804 MB/s
+Node 1: Read 56140 Write 21923 Total 78063 MB/s
+Aggregate BW: 471867
+
+Node 0: Read 236793 Write 167160 Total 403953 MB/s
+Node 1: Read 45699 Write 40044 Total 85743 MB/s
+Aggregate BW: 489696
+
+Node 0: Read 255443 Write 151168 Total 406611 MB/s
+Node 1: Read 83141 Write 30143 Total 113284 MB/s
+Aggregate BW: 519895
+
+Node 0: Read 225916 Write 167264 Total 393180 MB/s
+Node 1: Read 54828 Write 22779 Total 77607 MB/s
+Aggregate BW: 470787
+
+Node 0: Read 231957 Write 166896 Total 398853 MB/s
+Node 1: Read 45605 Write 39795 Total 85400 MB/s
+Aggregate BW: 484253
+
+Node 0: Read 261599 Write 159320 Total 420919 MB/s
+Node 1: Read 87904 Write 30086 Total 117990 MB/s
+Aggregate BW: 538909
+
+Node 0: Read 236427 Write 167516 Total 403943 MB/s
+Node 1: Read 53985 Write 26130 Total 80115 MB/s
+Aggregate BW: 484058
+
+Node 0: Read 230402 Write 172518 Total 402920 MB/s
+Node 1: Read 47367 Write 37455 Total 84822 MB/s
+Aggregate BW: 487742
+
+Node 0: Read 245466 Write 148588 Total 394054 MB/s
+Node 1: Read 74733 Write 27207 Total 101940 MB/s
+Aggregate BW: 495994
+
+Node 0: Read 243963 Write 166075 Total 410038 MB/s
+Node 1: Read 52491 Write 27483 Total 79974 MB/s
+Aggregate BW: 490012
+
+Node 0: Read 233570 Write 177635 Total 411205 MB/s
+Node 1: Read 48238 Write 36811 Total 85049 MB/s
+Aggregate BW: 496254
+
+Node 0: Read 246245 Write 161143 Total 407388 MB/s
+Node 1: Read 77827 Write 27044 Total 104871 MB/s
+Aggregate BW: 512259
+
+Node 0: Read 250442 Write 158212 Total 408654 MB/s
+Node 1: Read 54535 Write 30462 Total 84997 MB/s
+Aggregate BW: 493651
+
+Node 0: Read 225896 Write 175536 Total 401432 MB/s
+Node 1: Read 48110 Write 31753 Total 79863 MB/s
+Aggregate BW: 481295
+
+Node 0: Read 249293 Write 165605 Total 414898 MB/s
+Node 1: Read 69590 Write 26914 Total 96504 MB/s
+Aggregate BW: 511402
+
+Node 0: Read 258682 Write 157452 Total 416134 MB/s
+Node 1: Read 57576 Write 31765 Total 89341 MB/s
+Aggregate BW: 505475
+
+Node 0: Read 221720 Write 181013 Total 402733 MB/s
+Node 1: Read 51302 Write 27422 Total 78724 MB/s
+Aggregate BW: 481457
+
+Node 0: Read 238870 Write 159230 Total 398100 MB/s
+Node 1: Read 62037 Write 24607 Total 86644 MB/s
+Aggregate BW: 484744
+
+Node 0: Read 252413 Write 153295 Total 405708 MB/s
+Node 1: Read 54230 Write 29913 Total 84143 MB/s
+Aggregate BW: 489851
+
+Node 0: Read 223230 Write 178295 Total 401525 MB/s
+Node 1: Read 46629 Write 27797 Total 74426 MB/s
+Aggregate BW: 475951
+
+Node 0: Read 247174 Write 161494 Total 408668 MB/s
+Node 1: Read 60454 Write 24616 Total 85070 MB/s
+Aggregate BW: 493738
+
+Node 0: Read 256947 Write 153682 Total 410629 MB/s
+Node 1: Read 55104 Write 29952 Total 85056 MB/s
+Aggregate BW: 495685
+
+Node 0: Read 222282 Write 178476 Total 400758 MB/s
+Node 1: Read 47940 Write 26735 Total 74675 MB/s
+Aggregate BW: 475433
+
+Node 0: Read 245955 Write 162147 Total 408102 MB/s
+Node 1: Read 58973 Write 25205 Total 84178 MB/s
+Aggregate BW: 492280
+
+Node 0: Read 248836 Write 149653 Total 398489 MB/s
+Node 1: Read 54951 Write 29355 Total 84306 MB/s
+Aggregate BW: 482795
+
+Node 0: Read 216260 Write 177063 Total 393323 MB/s
+Node 1: Read 45884 Write 28461 Total 74345 MB/s
+Aggregate BW: 467668
+
+Node 0: Read 240701 Write 154563 Total 395264 MB/s
+Node 1: Read 58572 Write 22019 Total 80591 MB/s
+Aggregate BW: 475855
+
+Node 0: Read 252143 Write 160145 Total 412288 MB/s
+Node 1: Read 49606 Write 28955 Total 78561 MB/s
+Aggregate BW: 490849
+
+Node 0: Read 223034 Write 175432 Total 398466 MB/s
+Node 1: Read 40622 Write 30920 Total 71542 MB/s
+Aggregate BW: 470008
+
+Node 0: Read 249762 Write 162431 Total 412193 MB/s
+Node 1: Read 67749 Write 21726 Total 89475 MB/s
+Aggregate BW: 501668
+
+Node 0: Read 239671 Write 156611 Total 396282 MB/s
+Node 1: Read 47695 Write 26932 Total 74627 MB/s
+Aggregate BW: 470909
+
+Node 0: Read 229397 Write 173657 Total 403054 MB/s
+Node 1: Read 39005 Write 31562 Total 70567 MB/s
+Aggregate BW: 473621
+
+Node 0: Read 253420 Write 163145 Total 416565 MB/s
+Node 1: Read 69426 Write 21751 Total 91177 MB/s
+Aggregate BW: 507742
+
+Node 0: Read 246710 Write 161366 Total 408076 MB/s
+Node 1: Read 48052 Write 27413 Total 75465 MB/s
+Aggregate BW: 483541
+
+Node 0: Read 225252 Write 172779 Total 398031 MB/s
+Node 1: Read 38289 Write 32100 Total 70389 MB/s
+Aggregate BW: 468420
+
+Node 0: Read 250159 Write 154726 Total 404885 MB/s
+Node 1: Read 64401 Write 19357 Total 83758 MB/s
+Aggregate BW: 488643
+
+Node 0: Read 241237 Write 161636 Total 402873 MB/s
+Node 1: Read 43297 Write 24293 Total 67590 MB/s
+Aggregate BW: 470463
+
+Node 0: Read 233729 Write 173702 Total 407431 MB/s
+Node 1: Read 33272 Write 31689 Total 64961 MB/s
+Aggregate BW: 472392
+
+Node 0: Read 259618 Write 159844 Total 419462 MB/s
+Node 1: Read 65422 Write 19126 Total 84548 MB/s
+Aggregate BW: 504010
+
+Node 0: Read 241352 Write 164999 Total 406351 MB/s
+Node 1: Read 42877 Write 23877 Total 66754 MB/s
+Aggregate BW: 473105
+
+Node 0: Read 234778 Write 175609 Total 410387 MB/s
+Node 1: Read 33088 Write 31524 Total 64612 MB/s
+Aggregate BW: 474999
+
+Node 0: Read 263366 Write 154145 Total 417511 MB/s
+Node 1: Read 65169 Write 19376 Total 84545 MB/s
+Aggregate BW: 502056
+
+Node 0: Read 235581 Write 172791 Total 408372 MB/s
+Node 1: Read 41528 Write 21625 Total 63153 MB/s
+Aggregate BW: 471525
+
+Node 0: Read 231601 Write 167866 Total 399467 MB/s
+Node 1: Read 35989 Write 28825 Total 64814 MB/s
+Aggregate BW: 464281
+
+Node 0: Read 253334 Write 140240 Total 393574 MB/s
+Node 1: Read 58885 Write 13534 Total 72419 MB/s
+Aggregate BW: 465993
+
+Node 0: Read 207109 Write 173248 Total 380357 MB/s
+Node 1: Read 31036 Write 22216 Total 53252 MB/s
+Aggregate BW: 433609
+
+Node 0: Read 249051 Write 167982 Total 417033 MB/s
+Node 1: Read 43082 Write 14387 Total 57469 MB/s
+Aggregate BW: 474502
+
+Node 0: Read 248966 Write 156697 Total 405663 MB/s
+Node 1: Read 41522 Write 25854 Total 67376 MB/s
+Aggregate BW: 473039
+
+Node 0: Read 222956 Write 173688 Total 396644 MB/s
+Node 1: Read 28713 Write 27594 Total 56307 MB/s
+Aggregate BW: 452951
+
+Node 0: Read 257582 Write 158526 Total 416108 MB/s
+Node 1: Read 56648 Write 14025 Total 70673 MB/s
+Aggregate BW: 486781
+
+Node 0: Read 248992 Write 165116 Total 414108 MB/s
+Node 1: Read 38293 Write 23622 Total 61915 MB/s
+Aggregate BW: 476023
+
+Node 0: Read 235378 Write 173390 Total 408768 MB/s
+Node 1: Read 27555 Write 27498 Total 55053 MB/s
+Aggregate BW: 463821
+
+Node 0: Read 265581 Write 155911 Total 421492 MB/s
+Node 1: Read 56849 Write 14112 Total 70961 MB/s
+Aggregate BW: 492453
+
+Node 0: Read 237506 Write 172628 Total 410134 MB/s
+Node 1: Read 34123 Write 21556 Total 55679 MB/s
+Aggregate BW: 465813
+
+Node 0: Read 227071 Write 164062 Total 391133 MB/s
+Node 1: Read 32310 Write 17012 Total 49322 MB/s
+Aggregate BW: 440455
+
+Node 0: Read 263061 Write 148261 Total 411322 MB/s
+Node 1: Read 47200 Write 16376 Total 63576 MB/s
+Aggregate BW: 474898
+
+Node 0: Read 224088 Write 176575 Total 400663 MB/s
+Node 1: Read 28007 Write 22073 Total 50080 MB/s
+Aggregate BW: 450743
+
+Node 0: Read 248700 Write 163573 Total 412273 MB/s
+Node 1: Read 38455 Write 11895 Total 50350 MB/s
+Aggregate BW: 462623
+
+Node 0: Read 257542 Write 153528 Total 411070 MB/s
+Node 1: Read 41228 Write 21126 Total 62354 MB/s
+Aggregate BW: 473424
+
+Node 0: Read 231053 Write 177334 Total 408387 MB/s
+Node 1: Read 26474 Write 24392 Total 50866 MB/s
+Aggregate BW: 459253
+
+Node 0: Read 255060 Write 163892 Total 418952 MB/s
+Node 1: Read 45806 Write 11408 Total 57214 MB/s
+Aggregate BW: 476166
+
+Node 0: Read 260132 Write 158431 Total 418563 MB/s
+Node 1: Read 38009 Write 24619 Total 62628 MB/s
+Aggregate BW: 481191
+
+Node 0: Read 232459 Write 175273 Total 407732 MB/s
+Node 1: Read 25234 Write 25920 Total 51154 MB/s
+Aggregate BW: 458886
+
+Node 0: Read 254075 Write 150071 Total 404146 MB/s
+Node 1: Read 47231 Write 8977 Total 56208 MB/s
+Aggregate BW: 460354
+
+Node 0: Read 231985 Write 166312 Total 398297 MB/s
+Node 1: Read 26852 Write 21308 Total 48160 MB/s
+Aggregate BW: 446457
+
+Node 0: Read 235009 Write 163251 Total 398260 MB/s
+Node 1: Read 27524 Write 14220 Total 41744 MB/s
+Aggregate BW: 440004
+
+Node 0: Read 265369 Write 148259 Total 413628 MB/s
+Node 1: Read 44401 Write 14527 Total 58928 MB/s
+Aggregate BW: 472556
+
+Node 0: Read 227051 Write 176072 Total 403123 MB/s
+Node 1: Read 23019 Write 22263 Total 45282 MB/s
+Aggregate BW: 448405
+
+Node 0: Read 249846 Write 166529 Total 416375 MB/s
+Node 1: Read 36822 Write 8805 Total 45627 MB/s
+Aggregate BW: 462002
+
+Node 0: Read 249866 Write 155539 Total 405405 MB/s
+Node 1: Read 35571 Write 23250 Total 58821 MB/s
+Aggregate BW: 464226
+
+Node 0: Read 233197 Write 178657 Total 411854 MB/s
+Node 1: Read 23462 Write 24758 Total 48220 MB/s
+Aggregate BW: 460074
+
+Node 0: Read 258753 Write 157026 Total 415779 MB/s
+Node 1: Read 46316 Write 8280 Total 54596 MB/s
+Aggregate BW: 470375
+
+Node 0: Read 244586 Write 167539 Total 412125 MB/s
+Node 1: Read 27046 Write 21783 Total 48829 MB/s
+Aggregate BW: 460954
+
+Node 0: Read 240400 Write 175560 Total 415960 MB/s
+Node 1: Read 22657 Write 15875 Total 38532 MB/s
+Aggregate BW: 454492
+
+Node 0: Read 265768 Write 148930 Total 414698 MB/s
+Node 1: Read 44684 Write 7139 Total 51823 MB/s
+Aggregate BW: 466521
+
+Node 0: Read 234039 Write 174267 Total 408306 MB/s
+Node 1: Read 20471 Write 21253 Total 41724 MB/s
+Aggregate BW: 450030
+
+Node 0: Read 247599 Write 166273 Total 413872 MB/s
+Node 1: Read 30151 Write 7697 Total 37848 MB/s
+Aggregate BW: 451720
+
+Node 0: Read 257493 Write 149925 Total 407418 MB/s
+Node 1: Read 36144 Write 17855 Total 53999 MB/s
+Aggregate BW: 461417
+
+Node 0: Read 233580 Write 176282 Total 409862 MB/s
+Node 1: Read 18830 Write 22956 Total 41786 MB/s
+Aggregate BW: 451648
+
+Node 0: Read 257901 Write 162869 Total 420770 MB/s
+Node 1: Read 39244 Write 6173 Total 45417 MB/s
+Aggregate BW: 466187
+
+Node 0: Read 248313 Write 155588 Total 403901 MB/s
+Node 1: Read 30671 Write 22024 Total 52695 MB/s
+Aggregate BW: 456596
+
+Node 0: Read 221556 Write 164691 Total 386247 MB/s
+Node 1: Read 18323 Write 13299 Total 31622 MB/s
+Aggregate BW: 417869
+
+Node 0: Read 265065 Write 147148 Total 412213 MB/s
+Node 1: Read 41353 Write 4920 Total 46273 MB/s
+Aggregate BW: 458486
+
+Node 0: Read 237031 Write 174852 Total 411883 MB/s
+Node 1: Read 16027 Write 21377 Total 37404 MB/s
+Aggregate BW: 449287
+
+Node 0: Read 249317 Write 166262 Total 415579 MB/s
+Node 1: Read 27625 Write 3781 Total 31406 MB/s
+Aggregate BW: 446985
+
+Node 0: Read 257923 Write 153919 Total 411842 MB/s
+Node 1: Read 31325 Write 18793 Total 50118 MB/s
+Aggregate BW: 461960
+
+Node 0: Read 234920 Write 175111 Total 410031 MB/s
+Node 1: Read 15243 Write 22177 Total 37420 MB/s
+Aggregate BW: 447451
+
+Node 0: Read 260831 Write 157247 Total 418078 MB/s
+Node 1: Read 38050 Write 3565 Total 41615 MB/s
+Aggregate BW: 459693
+
+Node 0: Read 246438 Write 161749 Total 408187 MB/s
+Node 1: Read 24121 Write 21484 Total 45605 MB/s
+Aggregate BW: 453792
+
+Node 0: Read 240147 Write 173975 Total 414122 MB/s
+Node 1: Read 19291 Write 13548 Total 32839 MB/s
+Aggregate BW: 446961
+
+Node 0: Read 246510 Write 137898 Total 384408 MB/s
+Node 1: Read 38955 Write 5101 Total 44056 MB/s
+Aggregate BW: 428464
+
+Node 0: Read 234190 Write 178344 Total 412534 MB/s
+Node 1: Read 12882 Write 22241 Total 35123 MB/s
+Aggregate BW: 447657
+
+Node 0: Read 253603 Write 165059 Total 418662 MB/s
+Node 1: Read 31718 Write 3473 Total 35191 MB/s
+Aggregate BW: 453853
+
+Node 0: Read 256754 Write 157232 Total 413986 MB/s
+Node 1: Read 29130 Write 21695 Total 50825 MB/s
+Aggregate BW: 464811
+
+Node 0: Read 236121 Write 175888 Total 412009 MB/s
+Node 1: Read 15655 Write 22287 Total 37942 MB/s
+Aggregate BW: 449951
+
+Node 0: Read 268529 Write 152799 Total 421328 MB/s
+Node 1: Read 40965 Write 3657 Total 44622 MB/s
+Aggregate BW: 465950
+
+Node 0: Read 238349 Write 168703 Total 407052 MB/s
+Node 1: Read 20818 Write 21186 Total 42004 MB/s
+Aggregate BW: 449056
+
+Node 0: Read 245836 Write 168897 Total 414733 MB/s
+Node 1: Read 24425 Write 8161 Total 32586 MB/s
+Aggregate BW: 447319
+
+Node 0: Read 260033 Write 151174 Total 411207 MB/s
+Node 1: Read 36448 Write 11521 Total 47969 MB/s
+Aggregate BW: 459176
+
+Node 0: Read 209962 Write 162195 Total 372157 MB/s
+Node 1: Read 9450 Write 21208 Total 30658 MB/s
+Aggregate BW: 402815
+
+Node 0: Read 262858 Write 157200 Total 420058 MB/s
+Node 1: Read 35249 Write 2603 Total 37852 MB/s
+Aggregate BW: 457910
+
+Node 0: Read 245158 Write 167807 Total 412965 MB/s
+Node 1: Read 21495 Write 20207 Total 41702 MB/s
+Aggregate BW: 454667
+
+Node 0: Read 242691 Write 173502 Total 416193 MB/s
+Node 1: Read 18600 Write 10625 Total 29225 MB/s
+Aggregate BW: 445418
+
+Node 0: Read 260354 Write 149346 Total 409700 MB/s
+Node 1: Read 35592 Write 7345 Total 42937 MB/s
+Aggregate BW: 452637
+
+Node 0: Read 227354 Write 173822 Total 401176 MB/s
+Node 1: Read 11051 Write 20909 Total 31960 MB/s
+Aggregate BW: 433136
+
+Node 0: Read 246117 Write 157248 Total 403365 MB/s
+Node 1: Read 31049 Write 2602 Total 33651 MB/s
+Aggregate BW: 437016
+
+Node 0: Read 244960 Write 159322 Total 404282 MB/s
+Node 1: Read 24299 Write 20479 Total 44778 MB/s
+Aggregate BW: 449060
+
+Node 0: Read 226652 Write 170183 Total 396835 MB/s
+Node 1: Read 17625 Write 10864 Total 28489 MB/s
+Aggregate BW: 425324
+
+Node 0: Read 248491 Write 140777 Total 389268 MB/s
+Node 1: Read 30479 Write 5452 Total 35931 MB/s
+Aggregate BW: 425199
+
+Node 0: Read 228112 Write 173540 Total 401652 MB/s
+Node 1: Read 9703 Write 18436 Total 28139 MB/s
+Aggregate BW: 429791
+
+Node 0: Read 258905 Write 156750 Total 415655 MB/s
+Node 1: Read 27798 Write 2633 Total 30431 MB/s
+Aggregate BW: 446086
+
+Node 0: Read 248516 Write 159880 Total 408396 MB/s
+Node 1: Read 20581 Write 17824 Total 38405 MB/s
+Aggregate BW: 446801
+
+Node 0: Read 237250 Write 170984 Total 408234 MB/s
+Node 1: Read 14746 Write 10942 Total 25688 MB/s
+Aggregate BW: 433922
+
+Node 0: Read 269398 Write 147385 Total 416783 MB/s
+Node 1: Read 32041 Write 3678 Total 35719 MB/s
+Aggregate BW: 452502
+
+Node 0: Read 230397 Write 173397 Total 403794 MB/s
+Node 1: Read 9090 Write 17900 Total 26990 MB/s
+Aggregate BW: 430784
+
+Node 0: Read 253799 Write 161043 Total 414842 MB/s
+Node 1: Read 25284 Write 2610 Total 27894 MB/s
+Aggregate BW: 442736
+
+Node 0: Read 256601 Write 158479 Total 415080 MB/s
+Node 1: Read 23169 Write 17616 Total 40785 MB/s
+Aggregate BW: 455865
+
+Node 0: Read 224950 Write 166120 Total 391070 MB/s
+Node 1: Read 13390 Write 14391 Total 27781 MB/s
+Aggregate BW: 418851
+
+Node 0: Read 268018 Write 150608 Total 418626 MB/s
+Node 1: Read 34064 Write 2623 Total 36687 MB/s
+Aggregate BW: 455313
+
+Node 0: Read 235569 Write 178263 Total 413832 MB/s
+Node 1: Read 12022 Write 18307 Total 30329 MB/s
+Aggregate BW: 444161
+
+Node 0: Read 250461 Write 162898 Total 413359 MB/s
+Node 1: Read 23523 Write 2664 Total 26187 MB/s
+Aggregate BW: 439546
+
+Node 0: Read 255021 Write 156429 Total 411450 MB/s
+Node 1: Read 25043 Write 15963 Total 41006 MB/s
+Aggregate BW: 452456
+
+Node 0: Read 232399 Write 174412 Total 406811 MB/s
+Node 1: Read 10838 Write 19022 Total 29860 MB/s
+Aggregate BW: 436671
+
+Node 0: Read 267719 Write 147333 Total 415052 MB/s
+Node 1: Read 32798 Write 2500 Total 35298 MB/s
+Aggregate BW: 450350
+
+Node 0: Read 240766 Write 169689 Total 410455 MB/s
+Node 1: Read 17762 Write 18105 Total 35867 MB/s
+Aggregate BW: 446322
+
+Node 0: Read 288108 Write 183539 Total 471647 MB/s
+Node 1: Read 13568 Write 17265 Total 30833 MB/s
+Aggregate BW: 502480
+
+Node 0: Read 258744 Write 142292 Total 401036 MB/s
+Node 1: Read 33902 Write 2378 Total 36280 MB/s
+Aggregate BW: 437316
+
+Node 0: Read 228993 Write 173578 Total 402571 MB/s
+Node 1: Read 11367 Write 18367 Total 29734 MB/s
+Aggregate BW: 432305
+
+Node 0: Read 252295 Write 159289 Total 411584 MB/s
+Node 1: Read 24133 Write 2628 Total 26761 MB/s
+Aggregate BW: 438345
+
+Node 0: Read 257947 Write 160658 Total 418605 MB/s
+Node 1: Read 24712 Write 17861 Total 42573 MB/s
+Aggregate BW: 461178
+
+Node 0: Read 234703 Write 174070 Total 408773 MB/s
+Node 1: Read 11209 Write 16973 Total 28182 MB/s
+Aggregate BW: 436955
+
+Node 0: Read 264054 Write 145871 Total 409925 MB/s
+Node 1: Read 34546 Write 2481 Total 37027 MB/s
+Aggregate BW: 446952
+
+Node 0: Read 234542 Write 175494 Total 410036 MB/s
+Node 1: Read 13590 Write 17891 Total 31481 MB/s
+Aggregate BW: 441517
+
+Node 0: Read 251979 Write 164612 Total 416591 MB/s
+Node 1: Read 22276 Write 2620 Total 24896 MB/s
+Aggregate BW: 441487
+
+Node 0: Read 250493 Write 154207 Total 404700 MB/s
+Node 1: Read 25475 Write 14833 Total 40308 MB/s
+Aggregate BW: 445008
+
+Node 0: Read 235231 Write 177210 Total 412441 MB/s
+Node 1: Read 9231 Write 16468 Total 25699 MB/s
+Aggregate BW: 438140
+
+Node 0: Read 265851 Write 145320 Total 411171 MB/s
+Node 1: Read 30131 Write 2311 Total 32442 MB/s
+Aggregate BW: 443613
+
+Node 0: Read 224027 Write 174656 Total 398683 MB/s
+Node 1: Read 10569 Write 16240 Total 26809 MB/s
+Aggregate BW: 425492
+
+Node 0: Read 254927 Write 158624 Total 413551 MB/s
+Node 1: Read 21267 Write 2607 Total 23874 MB/s
+Aggregate BW: 437425
+
+Node 0: Read 255870 Write 158738 Total 414608 MB/s
+Node 1: Read 21404 Write 15731 Total 37135 MB/s
+Aggregate BW: 451743
+
+Node 0: Read 233845 Write 171885 Total 405730 MB/s
+Node 1: Read 10213 Write 14128 Total 24341 MB/s
+Aggregate BW: 430071
+
+Node 0: Read 270142 Write 146400 Total 416542 MB/s
+Node 1: Read 29742 Write 2352 Total 32094 MB/s
+Aggregate BW: 448636
+
+Node 0: Read 227790 Write 176200 Total 403990 MB/s
+Node 1: Read 10552 Write 16256 Total 26808 MB/s
+Aggregate BW: 430798
+
+Node 0: Read 253712 Write 155557 Total 409269 MB/s
+Node 1: Read 21570 Write 2815 Total 24385 MB/s
+Aggregate BW: 433654
+
+Node 0: Read 234688 Write 144715 Total 379403 MB/s
+Node 1: Read 21554 Write 19880 Total 41434 MB/s
+Aggregate BW: 420837
+
+Node 0: Read 238009 Write 171798 Total 409807 MB/s
+Node 1: Read 13933 Write 12991 Total 26924 MB/s
+Aggregate BW: 436731
+
+Node 0: Read 266534 Write 151316 Total 417850 MB/s
+Node 1: Read 33706 Write 3992 Total 37698 MB/s
+Aggregate BW: 455548
+
+Node 0: Read 229384 Write 176894 Total 406278 MB/s
+Node 1: Read 12091 Write 18689 Total 30780 MB/s
+Aggregate BW: 437058
+
+Node 0: Read 253670 Write 162227 Total 415897 MB/s
+Node 1: Read 23982 Write 2660 Total 26642 MB/s
+Aggregate BW: 442539
+
+Node 0: Read 256056 Write 157745 Total 413801 MB/s
+Node 1: Read 25031 Write 18148 Total 43179 MB/s
+Aggregate BW: 456980
+
+Node 0: Read 231062 Write 170893 Total 401955 MB/s
+Node 1: Read 11146 Write 16774 Total 27920 MB/s
+Aggregate BW: 429875
+
+Node 0: Read 268749 Write 146561 Total 415310 MB/s
+Node 1: Read 35076 Write 2468 Total 37544 MB/s
+Aggregate BW: 452854
+
+Node 0: Read 227091 Write 174458 Total 401549 MB/s
+Node 1: Read 13806 Write 19488 Total 33294 MB/s
+Aggregate BW: 434843
+
+Node 0: Read 242184 Write 155196 Total 397380 MB/s
+Node 1: Read 26377 Write 3478 Total 29855 MB/s
+Aggregate BW: 427235
+
+Node 0: Read 251874 Write 159533 Total 411407 MB/s
+Node 1: Read 27293 Write 20424 Total 47717 MB/s
+Aggregate BW: 459124
+
+Node 0: Read 229469 Write 170155 Total 399624 MB/s
+Node 1: Read 13163 Write 18047 Total 31210 MB/s
+Aggregate BW: 430834
+
+Node 0: Read 267394 Write 150844 Total 418238 MB/s
+Node 1: Read 40215 Write 2625 Total 42840 MB/s
+Aggregate BW: 461078
+
+Node 0: Read 234917 Write 178591 Total 413508 MB/s
+Node 1: Read 16870 Write 20510 Total 37380 MB/s
+Aggregate BW: 450888
+
+Node 0: Read 246720 Write 166682 Total 413402 MB/s
+Node 1: Read 24573 Write 2807 Total 27380 MB/s
+Aggregate BW: 440782
+
+Node 0: Read 256865 Write 155026 Total 411891 MB/s
+Node 1: Read 31675 Write 15476 Total 47151 MB/s
+Aggregate BW: 459042
+
+Node 0: Read 232287 Write 172493 Total 404780 MB/s
+Node 1: Read 11256 Write 22116 Total 33372 MB/s
+Aggregate BW: 438152
+
+Node 0: Read 258066 Write 147745 Total 405811 MB/s
+Node 1: Read 33998 Write 2830 Total 36828 MB/s
+Aggregate BW: 442639
+
+Node 0: Read 234449 Write 163854 Total 398303 MB/s
+Node 1: Read 21894 Write 22911 Total 44805 MB/s
+Aggregate BW: 443108
+
+Node 0: Read 240350 Write 165909 Total 406259 MB/s
+Node 1: Read 23630 Write 6965 Total 30595 MB/s
+Aggregate BW: 436854
+
+Node 0: Read 257815 Write 151966 Total 409781 MB/s
+Node 1: Read 37627 Write 9709 Total 47336 MB/s
+Aggregate BW: 457117
+
+Node 0: Read 235868 Write 172875 Total 408743 MB/s
+Node 1: Read 13526 Write 22775 Total 36301 MB/s
+Aggregate BW: 445044
+
+Node 0: Read 251563 Write 157248 Total 408811 MB/s
+Node 1: Read 31686 Write 2663 Total 34349 MB/s
+Aggregate BW: 443160
+
+Node 0: Read 244093 Write 158376 Total 402469 MB/s
+Node 1: Read 25580 Write 22108 Total 47688 MB/s
+Aggregate BW: 450157
+
+Node 0: Read 238792 Write 169258 Total 408050 MB/s
+Node 1: Read 15231 Write 18106 Total 33337 MB/s
+Aggregate BW: 441387
+
+Node 0: Read 261935 Write 147957 Total 409892 MB/s
+Node 1: Read 42117 Write 2713 Total 44830 MB/s
+Aggregate BW: 454722
+
+Node 0: Read 229070 Write 172389 Total 401459 MB/s
+Node 1: Read 15500 Write 23152 Total 38652 MB/s
+Aggregate BW: 440111
+
+Node 0: Read 241419 Write 154194 Total 395613 MB/s
+Node 1: Read 30202 Write 3513 Total 33715 MB/s
+Aggregate BW: 429328
+
+Node 0: Read 255354 Write 160810 Total 416164 MB/s
+Node 1: Read 32997 Write 23778 Total 56775 MB/s
+Aggregate BW: 472939
+
+Node 0: Read 235528 Write 172770 Total 408298 MB/s
+Node 1: Read 12519 Write 24507 Total 37026 MB/s
+Aggregate BW: 445324
+
+Node 0: Read 261705 Write 150659 Total 412364 MB/s
+Node 1: Read 43204 Write 2640 Total 45844 MB/s
+Aggregate BW: 458208
+
+Node 0: Read 239261 Write 165774 Total 405035 MB/s
+Node 1: Read 24495 Write 23934 Total 48429 MB/s
+Aggregate BW: 453464
+
+Node 0: Read 236778 Write 166346 Total 403124 MB/s
+Node 1: Read 26056 Write 7998 Total 34054 MB/s
+Aggregate BW: 437178
+
+Node 0: Read 256546 Write 152956 Total 409502 MB/s
+Node 1: Read 42885 Write 10380 Total 53265 MB/s
+Aggregate BW: 462767
+
+Node 0: Read 233207 Write 171507 Total 404714 MB/s
+Node 1: Read 14837 Write 25225 Total 40062 MB/s
+Aggregate BW: 444776
+
+Node 0: Read 249488 Write 159084 Total 408572 MB/s
+Node 1: Read 33793 Write 2668 Total 36461 MB/s
+Aggregate BW: 445033
+
+Node 0: Read 232364 Write 147763 Total 380127 MB/s
+Node 1: Read 28735 Write 24075 Total 52810 MB/s
+Aggregate BW: 432937
+
+Node 0: Read 238538 Write 168543 Total 407081 MB/s
+Node 1: Read 17091 Write 17841 Total 34932 MB/s
+Aggregate BW: 442013
+
+Node 0: Read 263365 Write 150450 Total 413815 MB/s
+Node 1: Read 45253 Write 3133 Total 48386 MB/s
+Aggregate BW: 462201
+
+Node 0: Read 234903 Write 172377 Total 407280 MB/s
+Node 1: Read 19391 Write 23334 Total 42725 MB/s
+Aggregate BW: 450005
+
+Node 0: Read 245422 Write 167273 Total 412695 MB/s
+Node 1: Read 27255 Write 3084 Total 30339 MB/s
+Aggregate BW: 443034
+
+Node 0: Read 252882 Write 153636 Total 406518 MB/s
+Node 1: Read 37301 Write 15045 Total 52346 MB/s
+Aggregate BW: 458864
+
+Node 0: Read 233015 Write 170721 Total 403736 MB/s
+Node 1: Read 13230 Write 24715 Total 37945 MB/s
+Aggregate BW: 441681
+
+Node 0: Read 259799 Write 158134 Total 417933 MB/s
+Node 1: Read 35920 Write 2667 Total 38587 MB/s
+Aggregate BW: 456520
+
+Node 0: Read 241120 Write 156480 Total 397600 MB/s
+Node 1: Read 25648 Write 24133 Total 49781 MB/s
+Aggregate BW: 447381
+
+Node 0: Read 240992 Write 169938 Total 410930 MB/s
+Node 1: Read 20139 Write 15455 Total 35594 MB/s
+Aggregate BW: 446524
+
+Node 0: Read 262127 Write 151994 Total 414121 MB/s
+Node 1: Read 44982 Write 5710 Total 50692 MB/s
+Aggregate BW: 464813
+
+Node 0: Read 231330 Write 171965 Total 403295 MB/s
+Node 1: Read 16128 Write 24605 Total 40733 MB/s
+Aggregate BW: 444028
+
+Node 0: Read 248764 Write 164945 Total 413709 MB/s
+Node 1: Read 30998 Write 2724 Total 33722 MB/s
+Aggregate BW: 447431
+
+Node 0: Read 254292 Write 157047 Total 411339 MB/s
+Node 1: Read 36783 Write 20787 Total 57570 MB/s
+Aggregate BW: 468909
+
+Node 0: Read 234984 Write 171057 Total 406041 MB/s
+Node 1: Read 13865 Write 25730 Total 39595 MB/s
+Aggregate BW: 445636
+
+Node 0: Read 259945 Write 154786 Total 414731 MB/s
+Node 1: Read 38926 Write 2679 Total 41605 MB/s
+Aggregate BW: 456336
+
+Node 0: Read 243276 Write 162461 Total 405737 MB/s
+Node 1: Read 26284 Write 24329 Total 50613 MB/s
+Aggregate BW: 456350
+
+Node 0: Read 240081 Write 172190 Total 412271 MB/s
+Node 1: Read 22123 Write 14356 Total 36479 MB/s
+Aggregate BW: 448750
+
+Node 0: Read 242866 Write 143484 Total 386350 MB/s
+Node 1: Read 40646 Write 7237 Total 47883 MB/s
+Aggregate BW: 434233
+
+Node 0: Read 221518 Write 167053 Total 388571 MB/s
+Node 1: Read 15017 Write 25656 Total 40673 MB/s
+Aggregate BW: 429244
+
+Node 0: Read 252761 Write 157864 Total 410625 MB/s
+Node 1: Read 35245 Write 2768 Total 38013 MB/s
+Aggregate BW: 448638
+
+Node 0: Read 244444 Write 158362 Total 402806 MB/s
+Node 1: Read 29894 Write 24701 Total 54595 MB/s
+Aggregate BW: 457401
+
+Node 0: Read 238445 Write 170035 Total 408480 MB/s
+Node 1: Read 15460 Write 19995 Total 35455 MB/s
+Aggregate BW: 443935
+
+Node 0: Read 262737 Write 149449 Total 412186 MB/s
+Node 1: Read 47557 Write 2834 Total 50391 MB/s
+Aggregate BW: 462577
+
+Node 0: Read 235529 Write 172476 Total 408005 MB/s
+Node 1: Read 19955 Write 24419 Total 44374 MB/s
+Aggregate BW: 452379
+
+Node 0: Read 240381 Write 165964 Total 406345 MB/s
+Node 1: Read 28738 Write 2964 Total 31702 MB/s
+Aggregate BW: 438047
+
+Node 0: Read 255401 Write 155775 Total 411176 MB/s
+Node 1: Read 38595 Write 17367 Total 55962 MB/s
+Aggregate BW: 467138
+
+Node 0: Read 217545 Write 159835 Total 377380 MB/s
+Node 1: Read 12290 Write 26791 Total 39081 MB/s
+Aggregate BW: 416461
+
+Node 0: Read 260809 Write 154569 Total 415378 MB/s
+Node 1: Read 42174 Write 2761 Total 44935 MB/s
+Aggregate BW: 460313
+
+Node 0: Read 244115 Write 164247 Total 408362 MB/s
+Node 1: Read 26760 Write 24812 Total 51572 MB/s
+Aggregate BW: 459934
+
+Node 0: Read 239121 Write 170866 Total 409987 MB/s
+Node 1: Read 22526 Write 15314 Total 37840 MB/s
+Aggregate BW: 447827
+
+Node 0: Read 255934 Write 151712 Total 407646 MB/s
+Node 1: Read 46664 Write 6991 Total 53655 MB/s
+Aggregate BW: 461301
+
+Node 0: Read 232153 Write 169848 Total 402001 MB/s
+Node 1: Read 16734 Write 25593 Total 42327 MB/s
+Aggregate BW: 444328
+
+Node 0: Read 275982 Write 189821 Total 465803 MB/s
+Node 1: Read 33223 Write 8732 Total 41955 MB/s
+Aggregate BW: 507758
+
+Node 0: Read 258050 Write 153551 Total 411601 MB/s
+Node 1: Read 43725 Write 11689 Total 55414 MB/s
+Aggregate BW: 467015
+
+Node 0: Read 234821 Write 172254 Total 407075 MB/s
+Node 1: Read 15995 Write 26116 Total 42111 MB/s
+Aggregate BW: 449186
+
+Node 0: Read 242555 Write 154410 Total 396965 MB/s
+Node 1: Read 36115 Write 3547 Total 39662 MB/s
+Aggregate BW: 436627
+
+Node 0: Read 244715 Write 155664 Total 400379 MB/s
+Node 1: Read 34999 Write 28941 Total 63940 MB/s
+Aggregate BW: 464319
+
+Node 0: Read 236827 Write 169294 Total 406121 MB/s
+Node 1: Read 16937 Write 25077 Total 42014 MB/s
+Aggregate BW: 448135
+
+Node 0: Read 259985 Write 150844 Total 410829 MB/s
+Node 1: Read 55186 Write 2619 Total 57805 MB/s
+Aggregate BW: 468634
+
+Node 0: Read 237678 Write 171375 Total 409053 MB/s
+Node 1: Read 24081 Write 27555 Total 51636 MB/s
+Aggregate BW: 460689
+
+Node 0: Read 237078 Write 165910 Total 402988 MB/s
+Node 1: Read 30444 Write 7025 Total 37469 MB/s
+Aggregate BW: 440457
+
+Node 0: Read 258055 Write 154084 Total 412139 MB/s
+Node 1: Read 47812 Write 14193 Total 62005 MB/s
+Aggregate BW: 474144
+
+Node 0: Read 234665 Write 169146 Total 403811 MB/s
+Node 1: Read 17506 Write 28811 Total 46317 MB/s
+Aggregate BW: 450128
+
+Node 0: Read 246533 Write 163420 Total 409953 MB/s
+Node 1: Read 38956 Write 2674 Total 41630 MB/s
+Aggregate BW: 451583
+
+Node 0: Read 243455 Write 151112 Total 394567 MB/s
+Node 1: Read 37331 Write 29083 Total 66414 MB/s
+Aggregate BW: 460981
+
+Node 0: Read 237012 Write 171845 Total 408857 MB/s
+Node 1: Read 17424 Write 27395 Total 44819 MB/s
+Aggregate BW: 453676
+
+Node 0: Read 256787 Write 153754 Total 410541 MB/s
+Node 1: Read 52142 Write 2731 Total 54873 MB/s
+Aggregate BW: 465414
+
+Node 0: Read 240588 Write 165222 Total 405810 MB/s
+Node 1: Read 29114 Write 28326 Total 57440 MB/s
+Aggregate BW: 463250
+
+Node 0: Read 233233 Write 166340 Total 399573 MB/s
+Node 1: Read 30464 Write 9283 Total 39747 MB/s
+Aggregate BW: 439320
+
+Node 0: Read 256866 Write 153266 Total 410132 MB/s
+Node 1: Read 50689 Write 12590 Total 63279 MB/s
+Aggregate BW: 473411
+
+Node 0: Read 235711 Write 169438 Total 405149 MB/s
+Node 1: Read 17390 Write 29309 Total 46699 MB/s
+Aggregate BW: 451848
+
+Node 0: Read 242357 Write 163527 Total 405884 MB/s
+Node 1: Read 38314 Write 2643 Total 40957 MB/s
+Aggregate BW: 446841
+
+Node 0: Read 254618 Write 152725 Total 407343 MB/s
+Node 1: Read 40434 Write 28815 Total 69249 MB/s
+Aggregate BW: 476592
+
+Node 0: Read 227044 Write 164513 Total 391557 MB/s
+Node 1: Read 15618 Write 30240 Total 45858 MB/s
+Aggregate BW: 437415
+
+Node 0: Read 261922 Write 157584 Total 419506 MB/s
+Node 1: Read 51183 Write 2747 Total 53930 MB/s
+Aggregate BW: 473436
+
+Node 0: Read 243874 Write 166750 Total 410624 MB/s
+Node 1: Read 30331 Write 28372 Total 58703 MB/s
+Aggregate BW: 469327
+
+Node 0: Read 236194 Write 169087 Total 405281 MB/s
+Node 1: Read 26606 Write 16248 Total 42854 MB/s
+Aggregate BW: 448135
+
+Node 0: Read 256566 Write 153519 Total 410085 MB/s
+Node 1: Read 54080 Write 7255 Total 61335 MB/s
+Aggregate BW: 471420
+
+Node 0: Read 231989 Write 169538 Total 401527 MB/s
+Node 1: Read 19286 Write 29038 Total 48324 MB/s
+Aggregate BW: 449851
+
+Node 0: Read 242542 Write 165355 Total 407897 MB/s
+Node 1: Read 35337 Write 2678 Total 38015 MB/s
+Aggregate BW: 445912
+
+Node 0: Read 252847 Write 154785 Total 407632 MB/s
+Node 1: Read 44690 Write 22852 Total 67542 MB/s
+Aggregate BW: 475174
+
+Node 0: Read 234029 Write 168378 Total 402407 MB/s
+Node 1: Read 17470 Write 29793 Total 47263 MB/s
+Aggregate BW: 449670
+
+Node 0: Read 237778 Write 148129 Total 385907 MB/s
+Node 1: Read 44833 Write 3552 Total 48385 MB/s
+Aggregate BW: 434292
+
+Node 0: Read 243054 Write 159727 Total 402781 MB/s
+Node 1: Read 32061 Write 30494 Total 62555 MB/s
+Aggregate BW: 465336
+
+Node 0: Read 235908 Write 168781 Total 404689 MB/s
+Node 1: Read 23703 Write 20533 Total 44236 MB/s
+Aggregate BW: 448925
+
+Node 0: Read 258402 Write 153424 Total 411826 MB/s
+Node 1: Read 58921 Write 3492 Total 62413 MB/s
+Aggregate BW: 474239
+
+Node 0: Read 237941 Write 168969 Total 406910 MB/s
+Node 1: Read 25403 Write 29736 Total 55139 MB/s
+Aggregate BW: 462049
+
+Node 0: Read 236125 Write 167715 Total 403840 MB/s
+Node 1: Read 32815 Write 6949 Total 39764 MB/s
+Aggregate BW: 443604
+
+Node 0: Read 256151 Write 152763 Total 408914 MB/s
+Node 1: Read 51218 Write 15828 Total 67046 MB/s
+Aggregate BW: 475960
+
+Node 0: Read 233669 Write 167878 Total 401547 MB/s
+Node 1: Read 18583 Write 30857 Total 49440 MB/s
+Aggregate BW: 450987
+
+Node 0: Read 246935 Write 168201 Total 415136 MB/s
+Node 1: Read 41187 Write 2639 Total 43826 MB/s
+Aggregate BW: 458962
+
+Node 0: Read 232221 Write 143892 Total 376113 MB/s
+Node 1: Read 40822 Write 31522 Total 72344 MB/s
+Aggregate BW: 448457
+
+Node 0: Read 241585 Write 167077 Total 408662 MB/s
+Node 1: Read 19105 Write 35735 Total 54840 MB/s
+Aggregate BW: 463502
+
+Node 0: Read 242299 Write 151765 Total 394064 MB/s
+Node 1: Read 68870 Write 4752 Total 73622 MB/s
+Aggregate BW: 467686
+
+Node 0: Read 242449 Write 173939 Total 416388 MB/s
+Node 1: Read 34294 Write 37072 Total 71366 MB/s
+Aggregate BW: 487754
+
+Node 0: Read 232100 Write 169699 Total 401799 MB/s
+Node 1: Read 39312 Write 13935 Total 53247 MB/s
+Aggregate BW: 455046
+
+Node 0: Read 253254 Write 159237 Total 412491 MB/s
+Node 1: Read 70010 Write 13487 Total 83497 MB/s
+Aggregate BW: 495988
+
+Node 0: Read 234623 Write 164640 Total 399263 MB/s
+Node 1: Read 26285 Write 37998 Total 64283 MB/s
+Aggregate BW: 463546
+
+Node 0: Read 234240 Write 169818 Total 404058 MB/s
+Node 1: Read 44330 Write 4636 Total 48966 MB/s
+Aggregate BW: 453024
+
+Node 0: Read 254632 Write 155765 Total 410397 MB/s
+Node 1: Read 65513 Write 22804 Total 88317 MB/s
+Aggregate BW: 498714
+
+Node 0: Read 235986 Write 165700 Total 401686 MB/s
+Node 1: Read 24584 Write 38553 Total 63137 MB/s
+Aggregate BW: 464823
+
+Node 0: Read 237148 Write 170342 Total 407490 MB/s
+Node 1: Read 48021 Write 2663 Total 50684 MB/s
+Aggregate BW: 458174
+
+Node 0: Read 239130 Write 146253 Total 385383 MB/s
+Node 1: Read 58731 Write 31542 Total 90273 MB/s
+Aggregate BW: 475656
+
+Node 0: Read 235362 Write 165891 Total 401253 MB/s
+Node 1: Read 27674 Write 41367 Total 69041 MB/s
+Aggregate BW: 470294
+
+Node 0: Read 239844 Write 170737 Total 410581 MB/s
+Node 1: Read 62567 Write 2798 Total 65365 MB/s
+Aggregate BW: 475946
+
+Node 0: Read 254261 Write 158078 Total 412339 MB/s
+Node 1: Read 59207 Write 40304 Total 99511 MB/s
+Aggregate BW: 511850
+
+Node 0: Read 238997 Write 165136 Total 404133 MB/s
+Node 1: Read 26227 Write 41721 Total 67948 MB/s
+Aggregate BW: 472081
+
+Node 0: Read 240836 Write 167708 Total 408544 MB/s
+Node 1: Read 61284 Write 2711 Total 63995 MB/s
+Aggregate BW: 472539
+
+Node 0: Read 252007 Write 153836 Total 405843 MB/s
+Node 1: Read 59238 Write 40424 Total 99662 MB/s
+Aggregate BW: 505505
+
+Node 0: Read 235578 Write 163719 Total 399297 MB/s
+Node 1: Read 26956 Write 41744 Total 68700 MB/s
+Aggregate BW: 467997
+
+Node 0: Read 238609 Write 166423 Total 405032 MB/s
+Node 1: Read 62383 Write 2684 Total 65067 MB/s
+Aggregate BW: 470099
+
+Node 0: Read 231673 Write 141071 Total 372744 MB/s
+Node 1: Read 53572 Write 42581 Total 96153 MB/s
+Aggregate BW: 468897
+
+Node 0: Read 237656 Write 165096 Total 402752 MB/s
+Node 1: Read 29176 Write 43820 Total 72996 MB/s
+Aggregate BW: 475748
+
+Node 0: Read 241420 Write 168240 Total 409660 MB/s
+Node 1: Read 73053 Write 2826 Total 75879 MB/s
+Aggregate BW: 485539
+
+Node 0: Read 246117 Write 157240 Total 403357 MB/s
+Node 1: Read 54546 Write 43080 Total 97626 MB/s
+Aggregate BW: 500983
+
+Node 0: Read 239277 Write 161716 Total 400993 MB/s
+Node 1: Read 28111 Write 44370 Total 72481 MB/s
+Aggregate BW: 473474
+
+Node 0: Read 239619 Write 166356 Total 405975 MB/s
+Node 1: Read 73074 Write 2711 Total 75785 MB/s
+Aggregate BW: 481760
+
+Node 0: Read 241403 Write 153218 Total 394621 MB/s
+Node 1: Read 54334 Write 43293 Total 97627 MB/s
+Aggregate BW: 492248
+
+Node 0: Read 240907 Write 162800 Total 403707 MB/s
+Node 1: Read 29734 Write 44568 Total 74302 MB/s
+Aggregate BW: 478009
+
+Node 0: Read 234383 Write 162948 Total 397331 MB/s
+Node 1: Read 74469 Write 2729 Total 77198 MB/s
+Aggregate BW: 474529
+
+Node 0: Read 230055 Write 148858 Total 378913 MB/s
+Node 1: Read 47334 Write 45156 Total 92490 MB/s
+Aggregate BW: 471403
+
+Node 0: Read 235375 Write 166729 Total 402104 MB/s
+Node 1: Read 35784 Write 31392 Total 67176 MB/s
+Aggregate BW: 469280
+
+Node 0: Read 243967 Write 162054 Total 406021 MB/s
+Node 1: Read 89012 Write 4124 Total 93136 MB/s
+Aggregate BW: 499157
+
+Node 0: Read 238248 Write 160325 Total 398573 MB/s
+Node 1: Read 46518 Write 44192 Total 90710 MB/s
+Aggregate BW: 489283
+
+Node 0: Read 226022 Write 165489 Total 391511 MB/s
+Node 1: Read 46417 Write 19639 Total 66056 MB/s
+Aggregate BW: 457567
+
+Node 0: Read 248711 Write 159289 Total 408000 MB/s
+Node 1: Read 88648 Write 12650 Total 101298 MB/s
+Aggregate BW: 509298
+
+Node 0: Read 231526 Write 161248 Total 392774 MB/s
+Node 1: Read 37952 Write 44070 Total 82022 MB/s
+Aggregate BW: 474796
+
+Node 0: Read 228949 Write 166381 Total 395330 MB/s
+Node 1: Read 46713 Write 15970 Total 62683 MB/s
+Aggregate BW: 458013
+
+Node 0: Read 248333 Write 158912 Total 407245 MB/s
+Node 1: Read 87195 Write 15893 Total 103088 MB/s
+Aggregate BW: 510333
+
+Node 0: Read 213563 Write 148010 Total 361573 MB/s
+Node 1: Read 28799 Write 47268 Total 76067 MB/s
+Aggregate BW: 437640
+
+Node 0: Read 226498 Write 172079 Total 398577 MB/s
+Node 1: Read 59066 Write 2718 Total 61784 MB/s
+Aggregate BW: 460361
+
+Node 0: Read 250071 Write 154301 Total 404372 MB/s
+Node 1: Read 79484 Write 34610 Total 114094 MB/s
+Aggregate BW: 518466
+
+Node 0: Read 228543 Write 154925 Total 383468 MB/s
+Node 1: Read 30733 Write 46823 Total 77556 MB/s
+Aggregate BW: 461024
+
+Node 0: Read 233320 Write 173377 Total 406697 MB/s
+Node 1: Read 59642 Write 2725 Total 62367 MB/s
+Aggregate BW: 469064
+
+Node 0: Read 244535 Write 151935 Total 396470 MB/s
+Node 1: Read 77391 Write 37421 Total 114812 MB/s
+Aggregate BW: 511282
+
+Node 0: Read 228011 Write 154714 Total 382725 MB/s
+Node 1: Read 30749 Write 46900 Total 77649 MB/s
+Aggregate BW: 460374
+
+Node 0: Read 231500 Write 171687 Total 403187 MB/s
+Node 1: Read 61161 Write 2663 Total 63824 MB/s
+Aggregate BW: 467011
+
+Node 0: Read 247527 Write 153084 Total 400611 MB/s
+Node 1: Read 76993 Write 38501 Total 115494 MB/s
+Aggregate BW: 516105
+
+Node 0: Read 217279 Write 144065 Total 361344 MB/s
+Node 1: Read 24741 Write 48942 Total 73683 MB/s
+Aggregate BW: 435027
+
+Node 0: Read 233117 Write 172033 Total 405150 MB/s
+Node 1: Read 69653 Write 2790 Total 72443 MB/s
+Aggregate BW: 477593
+
+Node 0: Read 241199 Write 145372 Total 386571 MB/s
+Node 1: Read 73027 Write 47292 Total 120319 MB/s
+Aggregate BW: 506890
+
+Node 0: Read 259508 Write 175729 Total 435237 MB/s
+Node 1: Read 43935 Write 48881 Total 92816 MB/s
+Aggregate BW: 528053
+
+Node 0: Read 234354 Write 176909 Total 411263 MB/s
+Node 1: Read 59023 Write 5579 Total 64602 MB/s
+Aggregate BW: 475865
+
+Node 0: Read 238695 Write 152453 Total 391148 MB/s
+Node 1: Read 83935 Write 32649 Total 116584 MB/s
+Aggregate BW: 507732
+
+Node 0: Read 221181 Write 151598 Total 372779 MB/s
+Node 1: Read 31109 Write 48599 Total 79708 MB/s
+Aggregate BW: 452487
+
+Node 0: Read 223163 Write 169507 Total 392670 MB/s
+Node 1: Read 65843 Write 2679 Total 68522 MB/s
+Aggregate BW: 461192
+
+Node 0: Read 231734 Write 141208 Total 372942 MB/s
+Node 1: Read 72338 Write 47524 Total 119862 MB/s
+Aggregate BW: 492804
+
+Node 0: Read 211069 Write 139337 Total 350406 MB/s
+Node 1: Read 21923 Write 52056 Total 73979 MB/s
+Aggregate BW: 424385
+
+Node 0: Read 218296 Write 153948 Total 372244 MB/s
+Node 1: Read 93678 Write 4600 Total 98278 MB/s
+Aggregate BW: 470522
+
+Node 0: Read 224502 Write 150549 Total 375051 MB/s
+Node 1: Read 51173 Write 51526 Total 102699 MB/s
+Aggregate BW: 477750
+
+Node 0: Read 218013 Write 163283 Total 381296 MB/s
+Node 1: Read 53850 Write 21348 Total 75198 MB/s
+Aggregate BW: 456494
+
+Node 0: Read 240340 Write 161584 Total 401924 MB/s
+Node 1: Read 104284 Write 16558 Total 120842 MB/s
+Aggregate BW: 522766
+
+Node 0: Read 219757 Write 147113 Total 366870 MB/s
+Node 1: Read 43201 Write 51485 Total 94686 MB/s
+Aggregate BW: 461556
+
+Node 0: Read 221265 Write 165304 Total 386569 MB/s
+Node 1: Read 54966 Write 16317 Total 71283 MB/s
+Aggregate BW: 457852
+
+Node 0: Read 241441 Write 159855 Total 401296 MB/s
+Node 1: Read 102304 Write 21657 Total 123961 MB/s
+Aggregate BW: 525257
+
+Node 0: Read 211617 Write 143618 Total 355235 MB/s
+Node 1: Read 33805 Write 52407 Total 86212 MB/s
+Aggregate BW: 441447
+
+Node 0: Read 223364 Write 173160 Total 396524 MB/s
+Node 1: Read 63928 Write 4718 Total 68646 MB/s
+Aggregate BW: 465170
+
+Node 0: Read 214929 Write 138033 Total 352962 MB/s
+Node 1: Read 87280 Write 35972 Total 123252 MB/s
+Aggregate BW: 476214
+
+Node 0: Read 214539 Write 142010 Total 356549 MB/s
+Node 1: Read 30029 Write 55506 Total 85535 MB/s
+Aggregate BW: 442084
+
+Node 0: Read 226069 Write 178670 Total 404739 MB/s
+Node 1: Read 80712 Write 2807 Total 83519 MB/s
+Aggregate BW: 488258
+
+Node 0: Read 225858 Write 131258 Total 357116 MB/s
+Node 1: Read 79741 Write 54293 Total 134034 MB/s
+Aggregate BW: 491150
+
+Node 0: Read 212503 Write 136912 Total 349415 MB/s
+Node 1: Read 26334 Write 55509 Total 81843 MB/s
+Aggregate BW: 431258
+
+Node 0: Read 227186 Write 172705 Total 399891 MB/s
+Node 1: Read 91841 Write 2754 Total 94595 MB/s
+Aggregate BW: 494486
+
+Node 0: Read 218652 Write 131140 Total 349792 MB/s
+Node 1: Read 68225 Write 55039 Total 123264 MB/s
+Aggregate BW: 473056
+
+Node 0: Read 216179 Write 143855 Total 360034 MB/s
+Node 1: Read 31863 Write 48066 Total 79929 MB/s
+Aggregate BW: 439963
+
+Node 0: Read 226932 Write 170661 Total 397593 MB/s
+Node 1: Read 104158 Write 2948 Total 107106 MB/s
+Aggregate BW: 504699
+
+Node 0: Read 197945 Write 118700 Total 316645 MB/s
+Node 1: Read 52403 Write 57756 Total 110159 MB/s
+Aggregate BW: 426804
+
+Node 0: Read 215096 Write 164365 Total 379461 MB/s
+Node 1: Read 59784 Write 22290 Total 82074 MB/s
+Aggregate BW: 461535
+
+Node 0: Read 230833 Write 160229 Total 391062 MB/s
+Node 1: Read 114007 Write 21028 Total 135035 MB/s
+Aggregate BW: 526097
+
+Node 0: Read 204146 Write 136070 Total 340216 MB/s
+Node 1: Read 38398 Write 57114 Total 95512 MB/s
+Aggregate BW: 435728
+
+Node 0: Read 218950 Write 171648 Total 390598 MB/s
+Node 1: Read 67829 Write 8275 Total 76104 MB/s
+Aggregate BW: 466702
+
+Node 0: Read 229636 Write 149187 Total 378823 MB/s
+Node 1: Read 104115 Write 34969 Total 139084 MB/s
+Aggregate BW: 517907
+
+Node 0: Read 204709 Write 130993 Total 335702 MB/s
+Node 1: Read 29651 Write 57663 Total 87314 MB/s
+Aggregate BW: 423016
+
+Node 0: Read 221590 Write 176410 Total 398000 MB/s
+Node 1: Read 75793 Write 2822 Total 78615 MB/s
+Aggregate BW: 476615
+
+Node 0: Read 218310 Write 135294 Total 353604 MB/s
+Node 1: Read 91989 Write 48218 Total 140207 MB/s
+Aggregate BW: 493811
+
+Node 0: Read 188502 Write 115266 Total 303768 MB/s
+Node 1: Read 17014 Write 58476 Total 75490 MB/s
+Aggregate BW: 379258
+
+Node 0: Read 220755 Write 171396 Total 392151 MB/s
+Node 1: Read 117221 Write 5480 Total 122701 MB/s
+Aggregate BW: 514852
+
+Node 0: Read 208914 Write 131556 Total 340470 MB/s
+Node 1: Read 61775 Write 59743 Total 121518 MB/s
+Aggregate BW: 461988
+
+Node 0: Read 205251 Write 157925 Total 363176 MB/s
+Node 1: Read 62367 Write 26218 Total 88585 MB/s
+Aggregate BW: 451761
+
+Node 0: Read 220509 Write 154650 Total 375159 MB/s
+Node 1: Read 116026 Write 25890 Total 141916 MB/s
+Aggregate BW: 517075
+
+Node 0: Read 205352 Write 132379 Total 337731 MB/s
+Node 1: Read 43914 Write 60394 Total 104308 MB/s
+Aggregate BW: 442039
+
+Node 0: Read 216050 Write 165833 Total 381883 MB/s
+Node 1: Read 68251 Write 14971 Total 83222 MB/s
+Aggregate BW: 465105
+
+Node 0: Read 224725 Write 149101 Total 373826 MB/s
+Node 1: Read 110717 Write 33065 Total 143782 MB/s
+Aggregate BW: 517608
+
+Node 0: Read 206373 Write 131677 Total 338050 MB/s
+Node 1: Read 35001 Write 60968 Total 95969 MB/s
+Aggregate BW: 434019
+
+Node 0: Read 204570 Write 159898 Total 364468 MB/s
+Node 1: Read 77162 Write 8019 Total 85181 MB/s
+Aggregate BW: 449649
+
+Node 0: Read 210276 Write 121127 Total 331403 MB/s
+Node 1: Read 89086 Write 61839 Total 150925 MB/s
+Aggregate BW: 482328
+
+Node 0: Read 206805 Write 130868 Total 337673 MB/s
+Node 1: Read 34129 Write 63036 Total 97165 MB/s
+Aggregate BW: 434838
+
+Node 0: Read 222417 Write 174107 Total 396524 MB/s
+Node 1: Read 100276 Write 7781 Total 108057 MB/s
+Aggregate BW: 504581
+
+Node 0: Read 209148 Write 121935 Total 331083 MB/s
+Node 1: Read 83319 Write 62625 Total 145944 MB/s
+Aggregate BW: 477027
+
+Node 0: Read 208200 Write 132654 Total 340854 MB/s
+Node 1: Read 34778 Write 61349 Total 96127 MB/s
+Aggregate BW: 436981
+
+Node 0: Read 221440 Write 171344 Total 392784 MB/s
+Node 1: Read 107779 Write 8058 Total 115837 MB/s
+Aggregate BW: 508621
+
+Node 0: Read 206392 Write 120274 Total 326666 MB/s
+Node 1: Read 74729 Write 63654 Total 138383 MB/s
+Aggregate BW: 465049
+
+Node 0: Read 209663 Write 142252 Total 351915 MB/s
+Node 1: Read 42326 Write 53646 Total 95972 MB/s
+Aggregate BW: 447887
+
+Node 0: Read 221723 Write 168574 Total 390297 MB/s
+Node 1: Read 118086 Write 11694 Total 129780 MB/s
+Aggregate BW: 520077
+
+Node 0: Read 206984 Write 123593 Total 330577 MB/s
+Node 1: Read 70316 Write 66936 Total 137252 MB/s
+Aggregate BW: 467829
+
+Node 0: Read 210364 Write 146365 Total 356729 MB/s
+Node 1: Read 51136 Write 53295 Total 104431 MB/s
+Aggregate BW: 461160
+
+Node 0: Read 223941 Write 167641 Total 391582 MB/s
+Node 1: Read 123361 Write 12427 Total 135788 MB/s
+Aggregate BW: 527370
+
+Node 0: Read 208757 Write 125587 Total 334344 MB/s
+Node 1: Read 69109 Write 67339 Total 136448 MB/s
+Aggregate BW: 470792
+
+Node 0: Read 209767 Write 154111 Total 363878 MB/s
+Node 1: Read 62502 Write 45213 Total 107715 MB/s
+Aggregate BW: 471593
+
+Node 0: Read 224413 Write 165242 Total 389655 MB/s
+Node 1: Read 124971 Write 15475 Total 140446 MB/s
+Aggregate BW: 530101
+
+Node 0: Read 208246 Write 124368 Total 332614 MB/s
+Node 1: Read 67995 Write 67336 Total 135331 MB/s
+Aggregate BW: 467945
+
+Node 0: Read 206012 Write 149374 Total 355386 MB/s
+Node 1: Read 62399 Write 45215 Total 107614 MB/s
+Aggregate BW: 463000
+
+Node 0: Read 214821 Write 155263 Total 370084 MB/s
+Node 1: Read 128177 Write 17804 Total 145981 MB/s
+Aggregate BW: 516065
+
+Node 0: Read 205677 Write 126710 Total 332387 MB/s
+Node 1: Read 65553 Write 70822 Total 136375 MB/s
+Aggregate BW: 468762
+
+Node 0: Read 206894 Write 153267 Total 360161 MB/s
+Node 1: Read 73581 Write 37943 Total 111524 MB/s
+Aggregate BW: 471685
+
+Node 0: Read 221745 Write 156888 Total 378633 MB/s
+Node 1: Read 129234 Write 26547 Total 155781 MB/s
+Aggregate BW: 534414
+
+Node 0: Read 204902 Write 124048 Total 328950 MB/s
+Node 1: Read 64454 Write 70913 Total 135367 MB/s
+Aggregate BW: 464317
+
+Node 0: Read 204503 Write 152501 Total 357004 MB/s
+Node 1: Read 73672 Write 37022 Total 110694 MB/s
+Aggregate BW: 467698
+
+Node 0: Read 221752 Write 156467 Total 378219 MB/s
+Node 1: Read 129535 Write 27501 Total 157036 MB/s
+Aggregate BW: 535255
+
+Node 0: Read 204000 Write 122090 Total 326090 MB/s
+Node 1: Read 64144 Write 70862 Total 135006 MB/s
+Aggregate BW: 461096
+
+Node 0: Read 207147 Write 153439 Total 360586 MB/s
+Node 1: Read 73741 Write 36336 Total 110077 MB/s
+Aggregate BW: 470663
+
+Node 0: Read 213443 Write 148552 Total 361995 MB/s
+Node 1: Read 130080 Write 29249 Total 159329 MB/s
+Aggregate BW: 521324
+
+Node 0: Read 203864 Write 125263 Total 329127 MB/s
+Node 1: Read 57714 Write 72453 Total 130167 MB/s
+Aggregate BW: 459294
+
+Node 0: Read 206527 Write 153162 Total 359689 MB/s
+Node 1: Read 74735 Write 34545 Total 109280 MB/s
+Aggregate BW: 468969
+
+Node 0: Read 220401 Write 153066 Total 373467 MB/s
+Node 1: Read 131637 Write 30999 Total 162636 MB/s
+Aggregate BW: 536103
+
+Node 0: Read 203256 Write 122406 Total 325662 MB/s
+Node 1: Read 62641 Write 72316 Total 134957 MB/s
+Aggregate BW: 460619
+
+Node 0: Read 204375 Write 150587 Total 354962 MB/s
+Node 1: Read 74165 Write 36292 Total 110457 MB/s
+Aggregate BW: 465419
+
+Node 0: Read 222483 Write 155790 Total 378273 MB/s
+Node 1: Read 131125 Write 29682 Total 160807 MB/s
+Aggregate BW: 539080
+
+Node 0: Read 200441 Write 121100 Total 321541 MB/s
+Node 1: Read 64660 Write 72340 Total 137000 MB/s
+Aggregate BW: 458541
+
+Node 0: Read 206623 Write 152196 Total 358819 MB/s
+Node 1: Read 74358 Write 37177 Total 111535 MB/s
+Aggregate BW: 470354
+
+Node 0: Read 207368 Write 143327 Total 350695 MB/s
+Node 1: Read 129672 Write 31677 Total 161349 MB/s
+Aggregate BW: 512044
+
+Node 0: Read 204447 Write 124142 Total 328589 MB/s
+Node 1: Read 60159 Write 76370 Total 136529 MB/s
+Aggregate BW: 465118
+
+Node 0: Read 204129 Write 152220 Total 356349 MB/s
+Node 1: Read 77777 Write 37938 Total 115715 MB/s
+Aggregate BW: 472064
+
+Node 0: Read 219778 Write 153544 Total 373322 MB/s
+Node 1: Read 134584 Write 32986 Total 167570 MB/s
+Aggregate BW: 540892
+
+Node 0: Read 204893 Write 118677 Total 323570 MB/s
+Node 1: Read 69435 Write 76180 Total 145615 MB/s
+Aggregate BW: 469185
+
+Node 0: Read 204073 Write 149869 Total 353942 MB/s
+Node 1: Read 78431 Write 43155 Total 121586 MB/s
+Aggregate BW: 475528
+
+Node 0: Read 221349 Write 157802 Total 379151 MB/s
+Node 1: Read 133105 Write 29192 Total 162297 MB/s
+Aggregate BW: 541448
+
+Node 0: Read 206065 Write 116768 Total 322833 MB/s
+Node 1: Read 73735 Write 76742 Total 150477 MB/s
+Aggregate BW: 473310
+
+Node 0: Read 201394 Write 148412 Total 349806 MB/s
+Node 1: Read 76656 Write 50005 Total 126661 MB/s
+Aggregate BW: 476467
+
+Node 0: Read 209980 Write 151555 Total 361535 MB/s
+Node 1: Read 133825 Write 25033 Total 158858 MB/s
+Aggregate BW: 520393
+
+Node 0: Read 205205 Write 120641 Total 325846 MB/s
+Node 1: Read 74635 Write 80282 Total 154917 MB/s
+Aggregate BW: 480763
+
+Node 0: Read 198792 Write 148737 Total 347529 MB/s
+Node 1: Read 81505 Write 47412 Total 128917 MB/s
+Aggregate BW: 476446
+
+Node 0: Read 213310 Write 154301 Total 367611 MB/s
+Node 1: Read 136634 Write 33218 Total 169852 MB/s
+Aggregate BW: 537463
+
+Node 0: Read 198513 Write 116669 Total 315182 MB/s
+Node 1: Read 72088 Write 79518 Total 151606 MB/s
+Aggregate BW: 466788
+
+Node 0: Read 195037 Write 147152 Total 342189 MB/s
+Node 1: Read 80311 Write 43656 Total 123967 MB/s
+Aggregate BW: 466156
+
+Node 0: Read 221004 Write 156825 Total 377829 MB/s
+Node 1: Read 136633 Write 32987 Total 169620 MB/s
+Aggregate BW: 547449
+
+Node 0: Read 202215 Write 115197 Total 317412 MB/s
+Node 1: Read 75200 Write 79679 Total 154879 MB/s
+Aggregate BW: 472291
+
+Node 0: Read 199881 Write 142465 Total 342346 MB/s
+Node 1: Read 71905 Write 56148 Total 128053 MB/s
+Aggregate BW: 470399
+
+Node 0: Read 206981 Write 148952 Total 355933 MB/s
+Node 1: Read 135365 Write 25724 Total 161089 MB/s
+Aggregate BW: 517022
+
+Node 0: Read 203147 Write 115674 Total 318821 MB/s
+Node 1: Read 78876 Write 83910 Total 162786 MB/s
+Aggregate BW: 481607
+
+Node 0: Read 198155 Write 145844 Total 343999 MB/s
+Node 1: Read 83716 Write 56610 Total 140326 MB/s
+Aggregate BW: 484325
+
+Node 0: Read 215374 Write 158425 Total 373799 MB/s
+Node 1: Read 137474 Write 31993 Total 169467 MB/s
+Aggregate BW: 543266
+
+Node 0: Read 201697 Write 112692 Total 314389 MB/s
+Node 1: Read 84582 Write 83810 Total 168392 MB/s
+Aggregate BW: 482781
+
+Node 0: Read 194265 Write 134792 Total 329057 MB/s
+Node 1: Read 69002 Write 67255 Total 136257 MB/s
+Aggregate BW: 465314
+
+Node 0: Read 220744 Write 165715 Total 386459 MB/s
+Node 1: Read 133417 Write 27901 Total 161318 MB/s
+Aggregate BW: 547777
+
+Node 0: Read 197181 Write 111042 Total 308223 MB/s
+Node 1: Read 93666 Write 80277 Total 173943 MB/s
+Aggregate BW: 482166
+
+Node 0: Read 192216 Write 128679 Total 320895 MB/s
+Node 1: Read 59940 Write 74125 Total 134065 MB/s
+Aggregate BW: 454960
+
+Node 0: Read 211676 Write 159640 Total 371316 MB/s
+Node 1: Read 127754 Write 28835 Total 156589 MB/s
+Aggregate BW: 527905
+
+Node 0: Read 188864 Write 101304 Total 290168 MB/s
+Node 1: Read 94489 Write 84739 Total 179228 MB/s
+Aggregate BW: 469396
+
+Node 0: Read 188114 Write 126140 Total 314254 MB/s
+Node 1: Read 67335 Write 75825 Total 143160 MB/s
+Aggregate BW: 457414
+
+Node 0: Read 225316 Write 168032 Total 393348 MB/s
+Node 1: Read 126861 Write 33560 Total 160421 MB/s
+Aggregate BW: 553769
+
+Node 0: Read 194504 Write 112005 Total 306509 MB/s
+Node 1: Read 115900 Write 78888 Total 194788 MB/s
+Aggregate BW: 501297
+
+Node 0: Read 189050 Write 119193 Total 308243 MB/s
+Node 1: Read 60394 Write 83589 Total 143983 MB/s
+Aggregate BW: 452226
+
+Node 0: Read 221152 Write 166065 Total 387217 MB/s
+Node 1: Read 108811 Write 37675 Total 146486 MB/s
+Aggregate BW: 533703
+
+Node 0: Read 204134 Write 133878 Total 338012 MB/s
+Node 1: Read 139815 Write 59358 Total 199173 MB/s
+Aggregate BW: 537185
+
+Node 0: Read 185038 Write 105667 Total 290705 MB/s
+Node 1: Read 53302 Write 87837 Total 141139 MB/s
+Aggregate BW: 431844
+
+Node 0: Read 201681 Write 152012 Total 353693 MB/s
+Node 1: Read 97334 Write 36878 Total 134212 MB/s
+Aggregate BW: 487905
+
+Node 0: Read 205696 Write 137743 Total 343439 MB/s
+Node 1: Read 144558 Write 55814 Total 200372 MB/s
+Aggregate BW: 543811
+
+Node 0: Read 196233 Write 110319 Total 306552 MB/s
+Node 1: Read 67672 Write 90035 Total 157707 MB/s
+Aggregate BW: 464259
+
+Node 0: Read 198511 Write 144329 Total 342840 MB/s
+Node 1: Read 92374 Write 53866 Total 146240 MB/s
+Aggregate BW: 489080
+
+Node 0: Read 218319 Write 154721 Total 373040 MB/s
+Node 1: Read 144347 Write 41315 Total 185662 MB/s
+Aggregate BW: 558702
+
+Node 0: Read 198704 Write 103231 Total 301935 MB/s
+Node 1: Read 90331 Write 87994 Total 178325 MB/s
+Aggregate BW: 480260
+
+Node 0: Read 192611 Write 128815 Total 321426 MB/s
+Node 1: Read 72717 Write 78540 Total 151257 MB/s
+Aggregate BW: 472683
+
+Node 0: Read 230107 Write 168604 Total 398711 MB/s
+Node 1: Read 124802 Write 37290 Total 162092 MB/s
+Aggregate BW: 560803
+
+Node 0: Read 188520 Write 108781 Total 297301 MB/s
+Node 1: Read 117795 Write 79082 Total 196877 MB/s
+Aggregate BW: 494178
+
+Node 0: Read 192719 Write 116246 Total 308965 MB/s
+Node 1: Read 64041 Write 85532 Total 149573 MB/s
+Aggregate BW: 458538
+
+Node 0: Read 220306 Write 160788 Total 381094 MB/s
+Node 1: Read 108361 Write 44626 Total 152987 MB/s
+Aggregate BW: 534081
+
+Node 0: Read 202337 Write 137308 Total 339645 MB/s
+Node 1: Read 144983 Write 55623 Total 200606 MB/s
+Aggregate BW: 540251
+
+Node 0: Read 199013 Write 110937 Total 309950 MB/s
+Node 1: Read 70106 Write 90200 Total 160306 MB/s
+Aggregate BW: 470256
+
+Node 0: Read 197379 Write 144418 Total 341797 MB/s
+Node 1: Read 93422 Write 54967 Total 148389 MB/s
+Aggregate BW: 490186
+
+Node 0: Read 218247 Write 155710 Total 373957 MB/s
+Node 1: Read 143357 Write 40579 Total 183936 MB/s
+Aggregate BW: 557893
+
+Node 0: Read 198616 Write 106039 Total 304655 MB/s
+Node 1: Read 92248 Write 87707 Total 179955 MB/s
+Aggregate BW: 484610
+
+Node 0: Read 190951 Write 131049 Total 322000 MB/s
+Node 1: Read 73568 Write 78639 Total 152207 MB/s
+Aggregate BW: 474207
+
+Node 0: Read 228588 Write 169554 Total 398142 MB/s
+Node 1: Read 126439 Write 36072 Total 162511 MB/s
+Aggregate BW: 560653
+
+Node 0: Read 198016 Write 119375 Total 317391 MB/s
+Node 1: Read 125897 Write 73144 Total 199041 MB/s
+Aggregate BW: 516432
+
+Node 0: Read 188178 Write 106312 Total 294490 MB/s
+Node 1: Read 58443 Write 90433 Total 148876 MB/s
+Aggregate BW: 443366
+
+Node 0: Read 214440 Write 155974 Total 370414 MB/s
+Node 1: Read 108337 Write 45840 Total 154177 MB/s
+Aggregate BW: 524591
+
+Node 0: Read 205114 Write 139556 Total 344670 MB/s
+Node 1: Read 150343 Write 53825 Total 204168 MB/s
+Aggregate BW: 548838
+
+Node 0: Read 200323 Write 107479 Total 307802 MB/s
+Node 1: Read 76446 Write 93093 Total 169539 MB/s
+Aggregate BW: 477341
+
+Node 0: Read 194209 Write 141002 Total 335211 MB/s
+Node 1: Read 95522 Write 57731 Total 153253 MB/s
+Aggregate BW: 488464
+
+Node 0: Read 219165 Write 154434 Total 373599 MB/s
+Node 1: Read 144903 Write 43378 Total 188281 MB/s
+Aggregate BW: 561880
+
+Node 0: Read 193607 Write 102465 Total 296072 MB/s
+Node 1: Read 94655 Write 88663 Total 183318 MB/s
+Aggregate BW: 479390
+
+Node 0: Read 187668 Write 123712 Total 311380 MB/s
+Node 1: Read 74149 Write 80562 Total 154711 MB/s
+Aggregate BW: 466091
+
+Node 0: Read 229818 Write 165428 Total 395246 MB/s
+Node 1: Read 125783 Write 39915 Total 165698 MB/s
+Aggregate BW: 560944
+
+Node 0: Read 183131 Write 104797 Total 287928 MB/s
+Node 1: Read 119157 Write 81932 Total 201089 MB/s
+Aggregate BW: 489017
+
+Node 0: Read 187576 Write 115300 Total 302876 MB/s
+Node 1: Read 66461 Write 88018 Total 154479 MB/s
+Aggregate BW: 457355
+
+Node 0: Read 218136 Write 161967 Total 380103 MB/s
+Node 1: Read 113270 Write 43745 Total 157015 MB/s
+Aggregate BW: 537118
+
+Node 0: Read 201030 Write 132932 Total 333962 MB/s
+Node 1: Read 145152 Write 59349 Total 204501 MB/s
+Aggregate BW: 538463
+
+Node 0: Read 195287 Write 106362 Total 301649 MB/s
+Node 1: Read 65739 Write 96208 Total 161947 MB/s
+Aggregate BW: 463596
+
+Node 0: Read 197695 Write 143948 Total 341643 MB/s
+Node 1: Read 99900 Write 55153 Total 155053 MB/s
+Aggregate BW: 496696
+
+Node 0: Read 211904 Write 147374 Total 359278 MB/s
+Node 1: Read 148122 Write 46380 Total 194502 MB/s
+Aggregate BW: 553780
+
+Node 0: Read 195650 Write 100051 Total 295701 MB/s
+Node 1: Read 88291 Write 92518 Total 180809 MB/s
+Aggregate BW: 476510
+
+Node 0: Read 187900 Write 127387 Total 315287 MB/s
+Node 1: Read 80465 Write 76624 Total 157089 MB/s
+Aggregate BW: 472376
+
+Node 0: Read 224071 Write 163809 Total 387880 MB/s
+Node 1: Read 132405 Write 40644 Total 173049 MB/s
+Aggregate BW: 560929
+
+Node 0: Read 186500 Write 103593 Total 290093 MB/s
+Node 1: Read 116769 Write 82081 Total 198850 MB/s
+Aggregate BW: 488943
+
+Node 0: Read 182769 Write 115664 Total 298433 MB/s
+Node 1: Read 68692 Write 86608 Total 155300 MB/s
+Aggregate BW: 453733
+
+Node 0: Read 221472 Write 164451 Total 385923 MB/s
+Node 1: Read 119990 Write 42672 Total 162662 MB/s
+Aggregate BW: 548585
+
+Node 0: Read 198912 Write 129362 Total 328274 MB/s
+Node 1: Read 141714 Write 62641 Total 204355 MB/s
+Aggregate BW: 532629
+
+Node 0: Read 194575 Write 106026 Total 300601 MB/s
+Node 1: Read 64196 Write 95819 Total 160015 MB/s
+Aggregate BW: 460616
+
+Node 0: Read 200672 Write 145155 Total 345827 MB/s
+Node 1: Read 101258 Write 55128 Total 156386 MB/s
+Aggregate BW: 502213
+
+Node 0: Read 208925 Write 146006 Total 354931 MB/s
+Node 1: Read 149224 Write 47616 Total 196840 MB/s
+Aggregate BW: 551771
+
+Node 0: Read 199990 Write 103378 Total 303368 MB/s
+Node 1: Read 86798 Write 93120 Total 179918 MB/s
+Aggregate BW: 483286
+
+Node 0: Read 188304 Write 130459 Total 318763 MB/s
+Node 1: Read 83115 Write 74419 Total 157534 MB/s
+Aggregate BW: 476297
+
+Node 0: Read 221962 Write 158962 Total 380924 MB/s
+Node 1: Read 140642 Write 40563 Total 181205 MB/s
+Aggregate BW: 562129
+
+Node 0: Read 189638 Write 102917 Total 292555 MB/s
+Node 1: Read 110790 Write 83884 Total 194674 MB/s
+Aggregate BW: 487229
+
+Node 0: Read 184350 Write 116987 Total 301337 MB/s
+Node 1: Read 71331 Write 85784 Total 157115 MB/s
+Aggregate BW: 458452
+
+Node 0: Read 223830 Write 166544 Total 390374 MB/s
+Node 1: Read 117577 Write 40409 Total 157986 MB/s
+Aggregate BW: 548360
+
+Node 0: Read 197279 Write 125534 Total 322813 MB/s
+Node 1: Read 138827 Write 65333 Total 204160 MB/s
+Aggregate BW: 526973
+
+Node 0: Read 192043 Write 107074 Total 299117 MB/s
+Node 1: Read 63213 Write 94876 Total 158089 MB/s
+Aggregate BW: 457206
+
+Node 0: Read 200369 Write 148827 Total 349196 MB/s
+Node 1: Read 101796 Write 53274 Total 155070 MB/s
+Aggregate BW: 504266
+
+Node 0: Read 209903 Write 145498 Total 355401 MB/s
+Node 1: Read 149618 Write 47779 Total 197397 MB/s
+Aggregate BW: 552798
+
+Node 0: Read 185528 Write 92707 Total 278235 MB/s
+Node 1: Read 82573 Write 94850 Total 177423 MB/s
+Aggregate BW: 455658
+
+Node 0: Read 185762 Write 138264 Total 324026 MB/s
+Node 1: Read 101571 Write 65784 Total 167355 MB/s
+Aggregate BW: 491381
+
+Node 0: Read 181352 Write 130645 Total 311997 MB/s
+Node 1: Read 145420 Write 32302 Total 177722 MB/s
+Aggregate BW: 489719
+
+Node 0: Read 3982 Write 478 Total 4460 MB/s
+Node 1: Read 1722 Write 81 Total 1803 MB/s
+Aggregate BW: 6263
+
+Node 0: Read 4025 Write 323 Total 4348 MB/s
+Node 1: Read 2060 Write 19 Total 2079 MB/s
+Aggregate BW: 6427
+
+Node 0: Read 2809 Write 306 Total 3115 MB/s
+Node 1: Read 2909 Write 10 Total 2919 MB/s
+Aggregate BW: 6034
+
+Node 0: Read 3091 Write 291 Total 3382 MB/s
+Node 1: Read 2312 Write 8 Total 2320 MB/s
+Aggregate BW: 5702
+
+Node 0: Read 4483 Write 304 Total 4787 MB/s
+Node 1: Read 1678 Write 7 Total 1685 MB/s
+Aggregate BW: 6472
+
+Node 0: Read 4717 Write 290 Total 5007 MB/s
+Node 1: Read 1218 Write 6 Total 1224 MB/s
+Aggregate BW: 6231
+
+Node 0: Read 2292 Write 293 Total 2585 MB/s
+Node 1: Read 3432 Write 5 Total 3437 MB/s
+Aggregate BW: 6022
+
+Node 0: Read 2627 Write 297 Total 2924 MB/s
+Node 1: Read 2748 Write 4 Total 2752 MB/s
+Aggregate BW: 5676
+
+Node 0: Read 2945 Write 298 Total 3243 MB/s
+Node 1: Read 2713 Write 2 Total 2715 MB/s
+Aggregate BW: 5958
+
+Node 0: Read 2623 Write 295 Total 2918 MB/s
+Node 1: Read 2830 Write 1 Total 2831 MB/s
+Aggregate BW: 5749
+
+Node 0: Read 2385 Write 285 Total 2670 MB/s
+Node 1: Read 3134 Write 2 Total 3136 MB/s
+Aggregate BW: 5806
+
+Node 0: Read 3672 Write 286 Total 3958 MB/s
+Node 1: Read 2109 Write 1 Total 2110 MB/s
+Aggregate BW: 6068
+
+Node 0: Read 3911 Write 292 Total 4203 MB/s
+Node 1: Read 1834 Write 0 Total 1834 MB/s
+Aggregate BW: 6037
+
+Node 0: Read 4211 Write 291 Total 4502 MB/s
+Node 1: Read 1284 Write 1 Total 1285 MB/s
+Aggregate BW: 5787
+
+Node 0: Read 6902 Write 294 Total 7196 MB/s
+Node 1: Read 55 Write 1 Total 56 MB/s
+Aggregate BW: 7252
+
+Node 0: Read 3211 Write 288 Total 3499 MB/s
+Node 1: Read 2223 Write 3 Total 2226 MB/s
+Aggregate BW: 5725
+
+Node 0: Read 3244 Write 292 Total 3536 MB/s
+Node 1: Read 2285 Write 1 Total 2286 MB/s
+Aggregate BW: 5822
+
+Node 0: Read 3963 Write 296 Total 4259 MB/s
+Node 1: Read 1649 Write 1 Total 1650 MB/s
+Aggregate BW: 5909
+
+Node 0: Read 3726 Write 289 Total 4015 MB/s
+Node 1: Read 1583 Write 1 Total 1584 MB/s
+Aggregate BW: 5599
+
+Node 0: Read 4537 Write 294 Total 4831 MB/s
+Node 1: Read 1212 Write 1 Total 1213 MB/s
+Aggregate BW: 6044
+
+Node 0: Read 4610 Write 283 Total 4893 MB/s
+Node 1: Read 1131 Write 1 Total 1132 MB/s
+Aggregate BW: 6025
+
+Node 0: Read 3168 Write 295 Total 3463 MB/s
+Node 1: Read 2078 Write 3 Total 2081 MB/s
+Aggregate BW: 5544
+
+Node 0: Read 3410 Write 449 Total 3859 MB/s
+Node 1: Read 1832 Write 8 Total 1840 MB/s
+Aggregate BW: 5699
+
+Node 0: Read 4123 Write 491 Total 4614 MB/s
+Node 1: Read 1611 Write 21 Total 1632 MB/s
+Aggregate BW: 6246
+
+Node 0: Read 3862 Write 313 Total 4175 MB/s
+Node 1: Read 1546 Write 6 Total 1552 MB/s
+Aggregate BW: 5727
+
+Node 0: Read 3661 Write 300 Total 3961 MB/s
+Node 1: Read 1610 Write 2 Total 1612 MB/s
+Aggregate BW: 5573
+
+Node 0: Read 3735 Write 297 Total 4032 MB/s
+Node 1: Read 1487 Write 0 Total 1487 MB/s
+Aggregate BW: 5519
+
+Node 0: Read 3637 Write 283 Total 3920 MB/s
+Node 1: Read 1499 Write 1 Total 1500 MB/s
+Aggregate BW: 5420
+
+Node 0: Read 3982 Write 301 Total 4283 MB/s
+Node 1: Read 1629 Write 1 Total 1630 MB/s
+Aggregate BW: 5913
+
+Node 0: Read 3667 Write 288 Total 3955 MB/s
+Node 1: Read 1514 Write 1 Total 1515 MB/s
+Aggregate BW: 5470
+
+Node 0: Read 3595 Write 286 Total 3881 MB/s
+Node 1: Read 1578 Write 1 Total 1579 MB/s
+Aggregate BW: 5460
+
+Node 0: Read 4468 Write 295 Total 4763 MB/s
+Node 1: Read 1248 Write 1 Total 1249 MB/s
+Aggregate BW: 6012
+
+Node 0: Read 4872 Write 294 Total 5166 MB/s
+Node 1: Read 936 Write 1 Total 937 MB/s
+Aggregate BW: 6103
+
+Node 0: Read 4681 Write 295 Total 4976 MB/s
+Node 1: Read 1043 Write 1 Total 1044 MB/s
+Aggregate BW: 6020
+
+Node 0: Read 4159 Write 297 Total 4456 MB/s
+Node 1: Read 1350 Write 1 Total 1351 MB/s
+Aggregate BW: 5807
+
+Node 0: Read 3819 Write 296 Total 4115 MB/s
+Node 1: Read 1675 Write 1 Total 1676 MB/s
+Aggregate BW: 5791
+
+Node 0: Read 4095 Write 297 Total 4392 MB/s
+Node 1: Read 1431 Write 1 Total 1432 MB/s
+Aggregate BW: 5824
+
+Node 0: Read 3827 Write 286 Total 4113 MB/s
+Node 1: Read 1417 Write 1 Total 1418 MB/s
+Aggregate BW: 5531
+
+Node 0: Read 3904 Write 299 Total 4203 MB/s
+Node 1: Read 1614 Write 1 Total 1615 MB/s
+Aggregate BW: 5818
+
+Node 0: Read 2928 Write 286 Total 3214 MB/s
+Node 1: Read 2391 Write 2 Total 2393 MB/s
+Aggregate BW: 5607
+
+Node 0: Read 3107 Write 294 Total 3401 MB/s
+Node 1: Read 2160 Write 2 Total 2162 MB/s
+Aggregate BW: 5563
+
+Node 0: Read 5380 Write 3610 Total 8990 MB/s
+Node 1: Read 215 Write 30 Total 245 MB/s
+Aggregate BW: 9235
+
