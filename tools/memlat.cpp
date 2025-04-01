@@ -17,7 +17,7 @@
 #define PAGE_SHIFT 12
 #define MEM_TRANS_RETIRED 0x01CD
 #define MEM_LOAD_AUX 0x8203
-#define SAMPLE_PERIOD 5000
+#define SAMPLE_PERIOD 1000
 #define EWMA_EXP 2
 
 #ifdef GNR
@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
         int lat_fd;
         uint64_t sample_type = PERF_SAMPLE_PHYS_ADDR | PERF_SAMPLE_WEIGHT_STRUCT | PERF_SAMPLE_DATA_SRC;
         // Minimum latency in cycles to sample
-        uint64_t ldlat = 300;
+        uint64_t ldlat = MIN_LOCAL_LAT;
 
 #ifdef SPR
         aux_fd = perf_sample_open(-1, cpu, -1, PERF_TYPE_RAW, MEM_LOAD_AUX, 0, sample_type, SAMPLE_PERIOD);
