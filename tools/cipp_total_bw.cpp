@@ -15,7 +15,7 @@
 constexpr int BW_PERCENTILE = 90;
 constexpr int MAX_STEP = 8;
 constexpr int MIN_STEP = 2;
-constexpr int THROTTLE_THRESHOLD = 80;
+constexpr int THROTTLE_THRESHOLD = 90;
 
 int64_t get_bw(int sample_int, std::vector<int> &rd_fds, std::vector<int> wr_fds)
 {
@@ -135,9 +135,11 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         cur_step = -abs(last_step) / 2;
         correct_count = 0;
     } else if (good_step) {
-        int bw_int_ratio = 3 * abs((bw_change * 100) / interleave_change) / 2;
+        int bw_int_ratio = abs((bw_change * 100) / interleave_change);
         if (bw_int_ratio < THROTTLE_THRESHOLD) {
             cur_step = bw_int_ratio * last_step / 100;
+            if (abs(cur_step) < MIN_STEP)
+                cur_step = (last_step > 0) ? MIN_STEP : -MIN_STEP;
         } else {
             // The last step was good, keep going
             correct_count++;
@@ -152,7 +154,7 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
     // If we've been correct multiple times in a row, we might be far
     // away from the ideal, so pick up the pace!
     if (correct_count >= 3) {
-        cur_step = cur_step * 2;
+//        cur_step = cur_step * 2;
         correct_count = 0;
     }
 
@@ -163,15 +165,16 @@ int adjust_interleave_ratio(std::list<int64_t> &bw_history, int ratio, int64_t b
         cur_step = cur_step < 0 ? -MAX_STEP : MAX_STEP;
     }
 
-    if (last_step != 0 || cur_step != 0)
-        last_bw = cur_bw;
-
     // If this is the first step we've gone to a step size
     // of 0, steady ourselves at the better option
     if (cur_step == 0 && last_bw > cur_bw)
-        ratio = last_ratio;
+        ratio -= last_step;
     else
         ratio += cur_step;
+
+    if (last_step != 0 || cur_step != 0)
+        last_bw = cur_bw;
+
     last_step = cur_step;
 
     if (ratio > 100)
