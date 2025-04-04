@@ -1,0 +1,365 @@
+Running with 
+	Sample interval: 100 ms
+	Adjust interval: 6000 ms
+	Bandwidth saturation cutoff: 200000 MB/s
+0
+92
+8
+Target ratio: 92 BW Change: 1842517296 Int Change: 1600 BW: 245246
+84
+16
+Target ratio: 84 BW Change: -1481 Int Change: 800 BW: 281584
+88
+12
+Target ratio: 88 BW Change: 1257 Int Change: 800 BW: 246177
+86
+14
+Target ratio: 86 BW Change: 238 Int Change: -400 BW: 240303
+84
+16
+Target ratio: 84 BW Change: -970 Int Change: 200 BW: 263632
+82
+18
+Target ratio: 82 BW Change: -28 Int Change: 200 BW: 264390
+84
+16
+Target ratio: 84 BW Change: 293 Int Change: 200 BW: 256625
+84
+16
+Target ratio: 84 BW Change: 367 Int Change: 0 BW: 247205
+84
+16
+Target ratio: 84 BW Change: 150 Int Change: 0 BW: 252764
+84
+16
+Target ratio: 84 BW Change: 423 Int Change: 0 BW: 245763
+84
+16
+Target ratio: 84 BW Change: 121 Int Change: 0 BW: 253519
+84
+16
+Target ratio: 84 BW Change: 224 Int Change: 0 BW: 250870
+80
+20
+Target ratio: 80 BW Change: -795 Int Change: 0 BW: 277036
+82
+18
+Target ratio: 82 BW Change: 1269 Int Change: 400 BW: 241866
+84
+16
+Target ratio: 84 BW Change: -1116 Int Change: -200 BW: 268861
+82
+18
+Target ratio: 82 BW Change: 640 Int Change: -200 BW: 251641
+78
+22
+Target ratio: 78 BW Change: -1177 Int Change: 0 BW: 281270
+80
+20
+Target ratio: 80 BW Change: 1710 Int Change: 400 BW: 233150
+82
+18
+Target ratio: 82 BW Change: -930 Int Change: -200 BW: 254849
+80
+20
+Target ratio: 80 BW Change: 357 Int Change: -200 BW: 245736
+80
+20
+Target ratio: 80 BW Change: -273 Int Change: 0 BW: 252451
+80
+20
+Target ratio: 80 BW Change: 182 Int Change: 0 BW: 241255
+76
+24
+Target ratio: 76 BW Change: -562 Int Change: 0 BW: 259556
+78
+22
+Target ratio: 78 BW Change: 672 Int Change: 400 BW: 242106
+80
+20
+Target ratio: 80 BW Change: -965 Int Change: -200 BW: 265487
+78
+22
+Target ratio: 78 BW Change: 1153 Int Change: -200 BW: 234863
+74
+26
+Target ratio: 74 BW Change: -977 Int Change: 0 BW: 257831
+76
+24
+Target ratio: 76 BW Change: 491 Int Change: 400 BW: 245149
+74
+26
+Target ratio: 74 BW Change: 130 Int Change: -200 BW: 241942
+70
+30
+Target ratio: 70 BW Change: -649 Int Change: 0 BW: 257663
+72
+28
+Target ratio: 72 BW Change: 254 Int Change: 400 BW: 251099
+74
+26
+Target ratio: 74 BW Change: -46 Int Change: -200 BW: 252267
+72
+28
+Target ratio: 72 BW Change: 354 Int Change: -200 BW: 243324
+72
+28
+Target ratio: 72 BW Change: 569 Int Change: 0 BW: 229458
+72
+28
+Target ratio: 72 BW Change: -399 Int Change: 0 BW: 253051
+72
+28
+Target ratio: 72 BW Change: 437 Int Change: 0 BW: 232690
+68
+32
+Target ratio: 68 BW Change: -991 Int Change: 0 BW: 267446
+65
+35
+Target ratio: 65 BW Change: -252 Int Change: 400 BW: 274208
+68
+32
+Target ratio: 68 BW Change: 877 Int Change: 300 BW: 250155
+72
+28
+Target ratio: 72 BW Change: 989 Int Change: 0 BW: 225393
+76
+24
+Target ratio: 76 BW Change: -1409 Int Change: -400 BW: 257156
+74
+26
+Target ratio: 74 BW Change: 24 Int Change: -400 BW: 256518
+72
+28
+Target ratio: 72 BW Change: 1 Int Change: 200 BW: 256486
+74
+26
+Target ratio: 74 BW Change: 253 Int Change: 200 BW: 249994
+70
+30
+Target ratio: 70 BW Change: -1019 Int Change: 0 BW: 275482
+72
+28
+Target ratio: 72 BW Change: 1189 Int Change: 400 BW: 242700
+74
+26
+Target ratio: 74 BW Change: -73 Int Change: -200 BW: 244478
+76
+24
+Target ratio: 76 BW Change: -526 Int Change: -200 BW: 257339
+78
+22
+Target ratio: 78 BW Change: -276 Int Change: -200 BW: 264457
+80
+20
+Target ratio: 80 BW Change: -54 Int Change: -200 BW: 265908
+78
+22
+Target ratio: 78 BW Change: 877 Int Change: -200 BW: 242586
+74
+26
+Target ratio: 74 BW Change: -742 Int Change: 0 BW: 260610
+72
+28
+Target ratio: 72 BW Change: -89 Int Change: 400 BW: 262945
+70
+30
+Target ratio: 70 BW Change: -285 Int Change: 200 BW: 270457
+72
+28
+Target ratio: 72 BW Change: 1374 Int Change: 200 BW: 233295
+68
+32
+Target ratio: 68 BW Change: -1256 Int Change: 0 BW: 262608
+70
+30
+Target ratio: 70 BW Change: 19 Int Change: 400 BW: 262105
+68
+32
+Target ratio: 68 BW Change: 836 Int Change: -200 BW: 240189
+68
+32
+Target ratio: 68 BW Change: -522 Int Change: 0 BW: 252733
+68
+32
+Target ratio: 68 BW Change: -186 Int Change: 0 BW: 244677
+68
+32
+Target ratio: 68 BW Change: -566 Int Change: 0 BW: 253800
+68
+32
+Target ratio: 68 BW Change: -198 Int Change: 0 BW: 244965
+68
+32
+Target ratio: 68 BW Change: 85 Int Change: 0 BW: 238143
+68
+32
+Target ratio: 68 BW Change: 27 Int Change: 0 BW: 239517
+64
+36
+Target ratio: 64 BW Change: -1350 Int Change: 0 BW: 272624
+66
+34
+Target ratio: 66 BW Change: 699 Int Change: 400 BW: 253542
+64
+36
+Target ratio: 64 BW Change: 88 Int Change: -200 BW: 251306
+64
+36
+Target ratio: 64 BW Change: 393 Int Change: 0 BW: 241407
+64
+36
+Target ratio: 64 BW Change: 132 Int Change: 0 BW: 247987
+64
+36
+Target ratio: 64 BW Change: 111 Int Change: 0 BW: 248500
+64
+36
+Target ratio: 64 BW Change: -160 Int Change: 0 BW: 255332
+64
+36
+Target ratio: 64 BW Change: 399 Int Change: 0 BW: 241263
+64
+36
+Target ratio: 64 BW Change: 153 Int Change: 0 BW: 247452
+64
+36
+Target ratio: 64 BW Change: 36 Int Change: 0 BW: 250389
+64
+36
+Target ratio: 64 BW Change: -127 Int Change: 0 BW: 254506
+64
+36
+Target ratio: 64 BW Change: 197 Int Change: 0 BW: 246332
+64
+36
+Target ratio: 64 BW Change: 75 Int Change: 0 BW: 249413
+68
+32
+Target ratio: 68 BW Change: 985 Int Change: 0 BW: 226546
+72
+28
+Target ratio: 72 BW Change: -1214 Int Change: -400 BW: 254049
+70
+30
+Target ratio: 70 BW Change: 377 Int Change: -400 BW: 244459
+68
+32
+Target ratio: 68 BW Change: -236 Int Change: 200 BW: 250246
+70
+30
+Target ratio: 70 BW Change: 109 Int Change: 200 BW: 247502
+70
+30
+Target ratio: 70 BW Change: 30 Int Change: 0 BW: 246758
+70
+30
+Target ratio: 70 BW Change: 474 Int Change: 0 BW: 235748
+70
+30
+Target ratio: 70 BW Change: -408 Int Change: 0 BW: 257608
+70
+30
+Target ratio: 70 BW Change: 60 Int Change: 0 BW: 246006
+70
+30
+Target ratio: 70 BW Change: -125 Int Change: 0 BW: 250599
+74
+26
+Target ratio: 74 BW Change: 670 Int Change: 0 BW: 230897
+78
+22
+Target ratio: 78 BW Change: -622 Int Change: -400 BW: 245269
+80
+20
+Target ratio: 80 BW Change: -128 Int Change: -400 BW: 248412
+82
+18
+Target ratio: 82 BW Change: -46 Int Change: -200 BW: 249563
+84
+16
+Target ratio: 84 BW Change: 49 Int Change: -200 BW: 248319
+82
+18
+Target ratio: 82 BW Change: 249 Int Change: -200 BW: 242117
+82
+18
+Target ratio: 82 BW Change: -479 Int Change: 0 BW: 253734
+82
+18
+Target ratio: 82 BW Change: -58 Int Change: 0 BW: 243525
+82
+18
+Target ratio: 82 BW Change: -415 Int Change: 0 BW: 252186
+82
+18
+Target ratio: 82 BW Change: -96 Int Change: 0 BW: 244461
+78
+22
+Target ratio: 78 BW Change: -1179 Int Change: 0 BW: 270680
+80
+20
+Target ratio: 80 BW Change: 862 Int Change: 400 BW: 247332
+82
+18
+Target ratio: 82 BW Change: -383 Int Change: -200 BW: 256824
+80
+20
+Target ratio: 80 BW Change: 1116 Int Change: -200 BW: 228152
+76
+24
+Target ratio: 76 BW Change: -1674 Int Change: 0 BW: 266360
+78
+22
+Target ratio: 78 BW Change: 825 Int Change: 400 BW: 244377
+80
+20
+Target ratio: 80 BW Change: -350 Int Change: -200 BW: 252950
+78
+22
+Target ratio: 78 BW Change: 620 Int Change: -200 BW: 237247
+74
+26
+Target ratio: 74 BW Change: -1479 Int Change: 0 BW: 272349
+76
+24
+Target ratio: 76 BW Change: 1034 Int Change: 400 BW: 244186
+78
+22
+Target ratio: 78 BW Change: -321 Int Change: -200 BW: 252044
+76
+24
+Target ratio: 76 BW Change: 387 Int Change: -200 BW: 242286
+72
+28
+Target ratio: 72 BW Change: -1142 Int Change: 0 BW: 269972
+74
+26
+Target ratio: 74 BW Change: 750 Int Change: 400 BW: 249717
+72
+28
+Target ratio: 72 BW Change: 88 Int Change: -200 BW: 247499
+72
+28
+Target ratio: 72 BW Change: 202 Int Change: 0 BW: 242486
+72
+28
+Target ratio: 72 BW Change: -464 Int Change: 0 BW: 259003
+68
+32
+Target ratio: 68 BW Change: -622 Int Change: 0 BW: 262901
+70
+30
+Target ratio: 70 BW Change: 443 Int Change: 400 BW: 251232
+68
+32
+Target ratio: 68 BW Change: 106 Int Change: -200 BW: 248546
+68
+32
+Target ratio: 68 BW Change: 219 Int Change: 0 BW: 243083
+68
+32
+Target ratio: 68 BW Change: -361 Int Change: 0 BW: 257523
+68
+32
+Target ratio: 68 BW Change: -97 Int Change: 0 BW: 250963
